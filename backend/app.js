@@ -1,22 +1,27 @@
 require("dotenv").config();
 require("./config/database").connect();
 const express = require("express");
-const bcrypt =  require('bcryptjs')
-const jwt = require('jsonwebtoken')
+// const bcrypt =  require('bcryptjs')
+// const jwt = require('jsonwebtoken')
+const route = require('./routes');
+
 
 const app = express();
 
 app.use(express.json());
 
+/*
 // Logic goes here
 // importing user context
-const User = require("./model/student");
+const User = require("./model/account");
 
 //Test
 app.get('/', (req, res) => {
     res.send("Hello World")
 })
+*/
 
+/*
 // Register
 app.post("/register", async (req, res) => {
   // Our register logic starts here
@@ -67,7 +72,9 @@ app.post("/register", async (req, res) => {
   }
   // Our register logic ends here
 });
+*/
 
+/*
 // Login
 app.post("/login", async (req, res) => {
 
@@ -105,6 +112,9 @@ app.post("/login", async (req, res) => {
   }
   // Our register logic ends here
 });
+*/
 
+// Routes init
+route(app);
 
 module.exports = app;
