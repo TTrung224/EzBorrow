@@ -1,5 +1,3 @@
-
-
 const siteRouter = require('./site');
 
 function route(app) {
