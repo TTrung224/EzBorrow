@@ -1,0 +1,13 @@
+.Main {
+    background: #00875A;
+    display: flex;
+}
+
+.profile{
+    align-self: flex-end;
+    margin-left: auto;
+}
+
+.Search {
+    
+}
