@@ -16,7 +16,7 @@
 
 .search-bar {
     border: black solid;
-    height: 30px;
+    height: 34px;
     width: 40%;
     margin-top: 25px;
     margin-left: auto;
@@ -37,4 +37,12 @@ input[type=text] {
     margin-left: auto;
     background-color: #00875A;
     border: none;
+}
+
+.btn-search:active{
+    background-color: #34d9a2;
+}
+
+.profile-btn {
+    background-color: #00875A;
 }
