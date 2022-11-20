@@ -3,11 +3,12 @@ import './Login.css';
 export const Login = () => {
     return(
         <div className="auth-form-container">
-        <form>
+
+        <form className='login-form'>
                 <label for="username">USERNAME</label>
-                <input type="email" placeholder="your Sid" id="username" name="username"></input>
+                <input value="email" placeholder="your Sid" id="username" name="username"></input>
                 <label for="password">PASSWORD</label>
-                <input type="password" placeholder="********"id="password" name="password"></input>
+                <input value="password" placeholder="********"id="password" name="password"></input>
         </form>
         <button type='submit'>Log In</button>
         </div>
