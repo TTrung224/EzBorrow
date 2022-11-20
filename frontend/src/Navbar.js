@@ -1,9 +1,9 @@
 import React from 'react'
-import {useState} from 'react'
 import './Navbar.css'
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Logout from './Logout'
+import Request from './Request'
 
 const Profile = (
   <img
@@ -33,6 +33,7 @@ function Navbar() {
             </div>
         </div>
         <Logout show={modalShow} onHide={() => setModalShow(false)}></Logout>
+        <Request></Request>
     </div>
   )
 }

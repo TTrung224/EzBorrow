@@ -1,0 +1,29 @@
+.Request {
+    border: solid 1px black;
+    width: 15%;
+    left: 993px;
+    top: 260px;
+    border-radius: 0px;
+    margin-left: auto;
+    background: linear-gradient(0deg, #B3B3B3, #B3B3B3),
+    linear-gradient(0deg, #F3F3F3, #F3F3F3);
+    color: black;
+}
+
+@media only screen and (max-width: 1000px) {
+    .Request {
+        width: 25%;
+    }
+}
+
+.items {
+    padding: 15px;
+}
+
+.buttons {
+    margin-bottom: auto;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding: 5px;
+}
