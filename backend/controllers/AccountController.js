@@ -53,7 +53,7 @@ class AccountController {
         // Our register logic starts here
         try {
             // Get user input
-            const { first_name, last_name, email, password } = req.body;
+            const { first_name, last_name, email, password, type} = req.body;
             // Validate user input
             if (!(email && password && first_name && last_name)) {
             return res.status(400).send("All input is required");
@@ -68,7 +68,7 @@ class AccountController {
             }
 
             //Encrypt user password
-            console.log("password: " + password)
+            // console.log("password: " + password)
             const encryptedPassword = await bcrypt.hash(password, 10);
 
             // Create user in our database
@@ -77,6 +77,7 @@ class AccountController {
                 last_name,
                 email: email.toLowerCase(), // sanitize: convert email to lowercase
                 password: encryptedPassword,
+                type
             });
 
             // Create token

@@ -5,7 +5,7 @@ const accountSchema = new mongoose.Schema({
   last_name: { type: String, default: null },
   email: { type: String, unique: true, require: true },
   password: { type: String, require: true },
-  token: { type: String },
+  // token: { type: String },
   type: { type: String, require: true}
 });
 

@@ -14,6 +14,7 @@ Content-Type: application/json
 {
     "first_name": "Dung",
     "last_name": "Vuong",
-    "email": "s3878281@rmit.edu.vn",
-    "password": "thisisapassword"
+    "email": "s3878283@rmit.edu.vn",
+    "password": "thisisapassword", 
+    "type": "student"
 }
