@@ -4,6 +4,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Logout from './Logout'
 import Request from './Request'
+import {Link} from "react-router-dom";
 
 const Profile = (
   <img
@@ -21,7 +22,7 @@ function Navbar() {
         <div className='Main'>
             <div className='profile'>
               <DropdownButton id="dropdown-item-button" title={Profile} variant="success">
-                <Dropdown.Item as="button">Login</Dropdown.Item>
+                <Dropdown.Item as="button"><Link to="/login" >Login</Link></Dropdown.Item>
                 <Dropdown.Item as="button" onClick={() => setModalShow(true)}>Logout</Dropdown.Item>
               </DropdownButton>
             </div>
@@ -33,7 +34,6 @@ function Navbar() {
             </div>
         </div>
         <Logout show={modalShow} onHide={() => setModalShow(false)}></Logout>
-        <Request></Request>
     </div>
   )
 }
