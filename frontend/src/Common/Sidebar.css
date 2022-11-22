@@ -21,10 +21,7 @@
     border: none;
 }
 
-.sideBaritem:active{
-    background: #00875A;
+.sideBaritem-active{
+    background-color: #00875A !important;
 }
 
-.sideBaritem-active{
-    background: #00875A !important;
-}
