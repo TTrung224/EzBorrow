@@ -3,7 +3,6 @@ import './Navbar.css'
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Logout from './Logout'
-import Request from '../Request';
 import {LinkContainer} from 'react-router-bootstrap';
 
 const Profile = (
