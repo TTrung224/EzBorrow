@@ -1,13 +1,13 @@
-body {
+/* body{
     text-align: center;
     display: flex;
     align-items: center;
     min-height: 100vh;
     justify-content: center;
     background-image: linear-gradient(79deg,#90ee90,#cdffcd 48%, #e6ffe6);
-}
+}  
 
-.auth-form-container, .login-form {
+ .auth-form-container, .login-form {
     display: flex;
     flex-direction: column;
 }
@@ -29,4 +29,4 @@ button{
     background-color: whitesmoke;
     padding: 15px;
     border-radius: 10px ;
-}
+} */
