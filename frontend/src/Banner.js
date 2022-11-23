@@ -1,6 +1,6 @@
 import React from "react";
 import './Banner.css';
-// import paint from './frontpagepic.png'
+
 
 const Banner = () => (
     <div classname="app_banner app_wrapper sextion_padding" id="home">
@@ -12,7 +12,7 @@ const Banner = () => (
             </div>
 
             <h1 classname="app_header-h1">Need something? Borrow now!</h1>
-            {/* <img src={paint} alt="paint" classname="img-fluid"/> */}
+            
             
         </div>
         
