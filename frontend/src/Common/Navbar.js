@@ -24,8 +24,8 @@ function Navbar() {
             <img src={icon} alt="app logo" />
           </div>
           <div className='profile'>
-            <DropdownButton id="dropdown-item-button" title={Profile} variant="success">
-              <LinkContainer to="/login">
+            <DropdownButton id="dropdown-item-button" title={Profile} variant="transparent">
+              <LinkContainer to="/hero">
                 <Dropdown.Item as="button">Login</Dropdown.Item>
               </LinkContainer>
               <Dropdown.Item as="button" onClick={() => setModalShow(true)}>Logout</Dropdown.Item>

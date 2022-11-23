@@ -9,10 +9,12 @@ function Page() {
     return (
         <div className='main-page'>
             <Router>
+                <Routes>
+                    <Route path='/request' element={<RequestCompo/>}/>
+                    <Route path='/dashboard' element={<List/>}/>
+                </Routes>
+                <Sidebar/>
             </Router>
-            <Request/>
-            <Sidebar/>
-            <RequestCompo/>
         </div>
     )
 }

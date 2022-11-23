@@ -21,7 +21,12 @@
     border: none;
 }
 
+.sideBarItem a{
+    text-decoration: none;
+}
+
 .sideBaritem-active{
     background-color: #00875A !important;
 }
+
 

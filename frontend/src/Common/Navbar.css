@@ -1,5 +1,6 @@
 .Main {
     background: #00875A;
+    background-image: linear-gradient(79deg,#cdffcd,#90ee90 20%, #00875A); 
     display: flex;
 }
 

@@ -2,6 +2,8 @@ import React from 'react'
 import './Sidebar.css'
 import {useState} from 'react'
 import classNames from 'classnames'
+import {Link} from "react-router-dom";
+
 
 function Sidebar() {
   const [active1, setActive1] = useState(false)
@@ -10,8 +12,8 @@ function Sidebar() {
 
   return (
       <div className="sideBarContainer">
-          <button className={classNames('sideBaritem', {'sideBarItem-active': active1})} onClick={e => {setActive1(true); setActive2(false)}}>Dashboard</button>
-          <button className={classNames('sideBaritem', {'sideBarItem-active': active2})} onClick={e => {setActive2(true); setActive1(false)}}>Request</button>
+          <button className={classNames('sideBaritem', {'sideBarItem-active': active1})} onClick={e => {setActive1(true); setActive2(false)}}><Link to="/dashboard">Dashboard</Link></button>
+          <button className={classNames('sideBaritem', {'sideBarItem-active': active2})} onClick={e => {setActive2(true); setActive1(false)}}><Link to="/request">Request</Link></button>
       </div>
   )
 }
