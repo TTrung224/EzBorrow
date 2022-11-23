@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import {LinkContainer} from 'react-router-bootstrap';
 
 function Logout(props) {
     return (
@@ -21,7 +22,9 @@ function Logout(props) {
             </p>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={props.onHide} variant = 'success'>Yes</Button>
+            <LinkContainer to={"/hero"}>
+              <Button onClick={props.onHide} variant = 'success'>Yes</Button>
+            </LinkContainer>
           </Modal.Footer>
         </Modal>
     );    

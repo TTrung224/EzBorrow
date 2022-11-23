@@ -8,8 +8,11 @@ function Request() {
 
   return (
     <div className='Request'>
+        <div className='req-title'>
+          <h4>Requests</h4>
+        </div>
         <div className='items'>
-            <div><span>Title</span><span> : </span><span>Number</span></div>
+            <div className='item'><span>Title</span><span> : </span><span>Number</span></div>
             <div><span>Title</span><span> : </span><span>Number</span></div>
             <div><span>Title</span><span> : </span><span>Number</span></div>
             <div><span>Title</span><span> : </span><span>Number</span></div>

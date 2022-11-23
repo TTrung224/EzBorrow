@@ -27,3 +27,10 @@
     margin-top: 10px;
     padding: 5px;
 }
+
+.req-title {
+    padding: 2px;
+    margin-top: 2px;
+    border-bottom: #B3B3B3 1px solid;
+    color: #00875A;
+}

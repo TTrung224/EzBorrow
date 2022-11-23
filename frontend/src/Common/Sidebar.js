@@ -3,6 +3,7 @@ import './Sidebar.css'
 import {useState} from 'react'
 import classNames from 'classnames'
 import {Link} from "react-router-dom";
+import {LinkContainer} from 'react-router-bootstrap';
 
 
 function Sidebar() {
@@ -12,8 +13,12 @@ function Sidebar() {
 
   return (
       <div className="sideBarContainer">
-          <button className={classNames('sideBaritem', {'sideBarItem-active': active1})} onClick={e => {setActive1(true); setActive2(false)}}><Link to="/dashboard">Dashboard</Link></button>
-          <button className={classNames('sideBaritem', {'sideBarItem-active': active2})} onClick={e => {setActive2(true); setActive1(false)}}><Link to="/request">Request</Link></button>
+        <LinkContainer to={"/dashboard"}>
+          <button className={classNames('sideBaritem', {'sideBarItem-active': active1})} onClick={e => {setActive1(true); setActive2(false)}}>Dashboard</button>
+        </LinkContainer>
+        <LinkContainer to={"/request"}>
+          <button className={classNames('sideBaritem', {'sideBarItem-active': active2})} onClick={e => {setActive2(true); setActive1(false)}}>Request</button>
+        </LinkContainer>
       </div>
   )
 }
