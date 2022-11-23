@@ -1,0 +1,17 @@
+.compo-container {
+    width: 50%;
+    position: absolute;
+    margin-left: 28%;
+    margin-top: 0px;
+    display: flex;
+    justify-content: space-around;
+    top: 200px;
+    padding: 5px;
+}
+
+.compo-item {
+    padding: 2px;
+    border: 1px black solid;
+    width: 40%;
+    box-shadow: 2px 1px gray;
+}

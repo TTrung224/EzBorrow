@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://img.freepik.com/premium-photo/school-supplies-green-color-back-school-banner-background-web-design_34050-479.jpg?w=1380');
 .section__padding {
     padding: 4rem 6rem;
   }
@@ -12,7 +12,7 @@ h1.app_header-h1{
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     flex-direction: column;
     
     margin: auto;
@@ -26,8 +26,8 @@ h1.app_header-h1{
 #home{
     display: flex;
     align-items: center;
-    min-height: 100vh;
-    background: url(../src/greenpaintt.jpg) no-repeat;
+    min-height: 75vh;
+    background: url(./banner.webp) no-repeat;
     background-size: cover;
     background-position: center;
 }
