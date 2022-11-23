@@ -9,7 +9,7 @@
 }
 
 .search {
-    border: black solid;
+    border-bottom: black solid;
     height: 100px;
 
 }
