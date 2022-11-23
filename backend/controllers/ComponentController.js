@@ -3,8 +3,29 @@ const Component = require("../model/component");
 
 class AccountController {
     // [GET] /component
-    index(req, res, next) {
-        res.send("component home page");
+    async getAll(req, res, next) {
+        try {
+            const components = await Component.find({});
+
+            // return all components
+            res.status(201).json(components);
+        } catch(err){
+            console.log(err);
+            res.status(500).send();
+        }
+    }    
+    
+    // [GET] /component/:id
+    async getOne(req, res, next) {
+        try {
+            const component = await Component.find({_id: req.params.id});
+
+            // return all components
+            res.status(201).json(component);
+        } catch(err){
+            console.log(err);
+            res.status(500).send();
+        }
     }
 
     // [POST] /component
