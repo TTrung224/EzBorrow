@@ -3,25 +3,34 @@
     display: flex;
 }
 
+.app_navbar-logo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.app_navbar-logo img{
+    width: 50px;
+}
+
 .profile{
     align-self: flex-end;
     margin-left: auto;
 }
 
 .search {
-    border-bottom: black solid;
     height: 100px;
-
 }
 
 .search-bar {
-    border: black solid;
+    border: 1px solid #B3B3B3;
     height: 34px;
     width: 40%;
     margin-top: 25px;
     margin-left: auto;
     margin-right: auto;
     display: flex;
+    box-shadow: 2px 1px gray;
 }
 
 input[type=text] {
@@ -29,11 +38,12 @@ input[type=text] {
     background: none;
     border: none;
     width: 90%;
+    margin-left: 10px;
 }
 
 .btn-search {
-    height: 30px;
-    width: 30px;
+    height: 32px;
+    width: 32px;
     margin-left: auto;
     background-color: #00875A;
     border: none;

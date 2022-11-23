@@ -1,9 +1,12 @@
 import './App.css';
 import Page from './Common/Page'
+import Navbar from './Common/Navbar'
+import Banner from './Banner'
 function App() {
   return (
     <div className="App">
-      <Page/>
+      <Navbar/>
+      <Banner/>
     </div>
   );
 }

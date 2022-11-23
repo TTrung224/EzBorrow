@@ -1,17 +1,15 @@
 import React from 'react'
-import Navbar from './Navbar'
-import Sidebar from './Sidebar'
 import Request from '../Request/Request'
+import Sidebar from './Sidebar'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function Page() {
     return (
-        <div>
+        <div className='main-page'>
             <Router>
-            <Navbar/>
             </Router>
-            <Sidebar/>
             <Request/>
+            <Sidebar/>
         </div>
     )
 }

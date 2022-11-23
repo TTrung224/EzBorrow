@@ -4,6 +4,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Logout from './Logout'
 import {LinkContainer} from 'react-router-bootstrap';
+import icon from './icon.png';
 
 const Profile = (
   <img
@@ -19,14 +20,17 @@ function Navbar() {
   return (
     <div>
         <div className='Main'>
-            <div className='profile'>
-              <DropdownButton id="dropdown-item-button" title={Profile} variant="success">
-                <LinkContainer to="/login">
-                  <Dropdown.Item as="button">Login</Dropdown.Item>
-                </LinkContainer>
-                <Dropdown.Item as="button" onClick={() => setModalShow(true)}>Logout</Dropdown.Item>
-              </DropdownButton>
-            </div>
+          <div className="app_navbar-logo">
+            <img src={icon} alt="app logo" />
+          </div>
+          <div className='profile'>
+            <DropdownButton id="dropdown-item-button" title={Profile} variant="success">
+              <LinkContainer to="/login">
+                <Dropdown.Item as="button">Login</Dropdown.Item>
+              </LinkContainer>
+              <Dropdown.Item as="button" onClick={() => setModalShow(true)}>Logout</Dropdown.Item>
+            </DropdownButton>
+          </div>
         </div>
         <div className='search'>
             <div className='search-bar'>
