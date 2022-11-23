@@ -1,0 +1,55 @@
+.app_navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #90ee90;
+
+}
+
+.app_navbar-logo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.app_navbar-logo img{
+    width: 100px;
+}
+
+.app_navbar-links {
+    list-style: none;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app_navbar-links li {
+
+    margin: 0 1rem;
+    cursor: pointer;
+
+} 
+
+.app_navbar-login{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.app_navbar-login a{
+    margin: 0 1rem;
+    text-decoration: none;
+    font-family: 'Open Sans', sans-serif;
+    font-size: xx-large;
+    color: black;
+    
+}
+
+.app_navbar-login a:hover{
+    border-bottom: 2px solid #00875A;
+    
+}
+
