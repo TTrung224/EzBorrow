@@ -1,0 +1,23 @@
+.dashboard-container {
+    border: 1px solid black;
+    width: 50%;
+    position: absolute;
+    margin-left: 28%;
+    margin-top: 0px;
+    display: flex;
+    top: 200px;
+}
+
+.dashboard-table {
+    width: 100%;
+}
+
+.dashboard-table th{
+    color: white;
+    background-color: #00875A;
+    padding: 2px;
+}
+
+.dashboard-table td {
+    padding: 2px;
+}

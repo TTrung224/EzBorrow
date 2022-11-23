@@ -3,8 +3,8 @@ import './Navbar.css'
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Logout from './Logout'
-import Request from '../Request'
-import {Link} from "react-router-dom";
+import {LinkContainer} from 'react-router-bootstrap';
+import icon from './icon.png';
 
 const Profile = (
   <img
@@ -20,12 +20,17 @@ function Navbar() {
   return (
     <div>
         <div className='Main'>
-            <div className='profile'>
-              <DropdownButton id="dropdown-item-button" title={Profile} variant="success">
-                <Dropdown.Item as="button"><Link to="/login" >Login</Link></Dropdown.Item>
-                <Dropdown.Item as="button" onClick={() => setModalShow(true)}>Logout</Dropdown.Item>
-              </DropdownButton>
-            </div>
+          <div className="app_navbar-logo">
+            <img src={icon} alt="app logo" />
+          </div>
+          <div className='profile'>
+            <DropdownButton id="dropdown-item-button" title={Profile} variant="transparent">
+              <LinkContainer to="/hero">
+                <Dropdown.Item as="button">Login</Dropdown.Item>
+              </LinkContainer>
+              <Dropdown.Item as="button" onClick={() => setModalShow(true)}>Logout</Dropdown.Item>
+            </DropdownButton>
+          </div>
         </div>
         <div className='search'>
             <div className='search-bar'>

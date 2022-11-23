@@ -1,12 +1,12 @@
 .Request {
-    border: solid 1px black;
     width: 15%;
     left: 993px;
-    top: 260px;
+    top: 250px;
     border-radius: 0px;
     margin-left: auto;
-    background: linear-gradient(0deg, #B3B3B3, #B3B3B3),
-    linear-gradient(0deg, #F3F3F3, #F3F3F3);
+    margin-top: 20px;
+    background: #F8F8F8;
+    border: 1px solid #B3B3B3;
     color: black;
 }
 
@@ -26,4 +26,11 @@
     justify-content: space-between;
     margin-top: 10px;
     padding: 5px;
+}
+
+.req-title {
+    padding: 2px;
+    margin-top: 2px;
+    border-bottom: #B3B3B3 1px solid;
+    color: #00875A;
 }

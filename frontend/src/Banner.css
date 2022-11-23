@@ -1,0 +1,33 @@
+@import url('https://img.freepik.com/premium-photo/school-supplies-green-color-back-school-banner-background-web-design_34050-479.jpg?w=1380');
+.section__padding {
+    padding: 4rem 6rem;
+  }
+
+h1.app_header-h1{
+    font-size: small ;
+}
+
+.app_wrapper_info {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+  .app__header-img img {
+    width: 80%;
+}
+
+#home{
+    display: flex;
+    align-items: center;
+    min-height: 75vh;
+    background: url(./banner.webp) no-repeat;
+    background-size: cover;
+    background-position: center;
+}
