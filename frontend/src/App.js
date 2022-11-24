@@ -4,6 +4,7 @@ import Navbar from './Common/Navbar'
 import Banner from './Banner'
 import Request from './Request/CompoRequest'
 import List from './Dashboard/List'
+import Login from './login'
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="dashboard" element={<><Page/><List/></>}/>
             <Route path="request" element={<><Page/><Request/></>}/>
           </Route>
+          <Route path='/login' element={<Login/>}/>
         </Routes>
       </Router>
     </div>

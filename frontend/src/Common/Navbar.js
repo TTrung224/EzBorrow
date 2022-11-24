@@ -25,7 +25,7 @@ function Navbar() {
           </div>
           <div className='profile'>
             <DropdownButton id="dropdown-item-button" title={Profile} variant="transparent">
-              <LinkContainer to="/hero">
+              <LinkContainer to="/login">
                 <Dropdown.Item as="button">Login</Dropdown.Item>
               </LinkContainer>
               <Dropdown.Item as="button" onClick={() => setModalShow(true)}>Logout</Dropdown.Item>
