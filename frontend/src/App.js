@@ -5,12 +5,14 @@ import Banner from './Banner'
 import Request from './Request/CompoRequest'
 import List from './Dashboard/List'
 import Login from './login'
+import SearchBar from './Common/Search Bar/SearchBar';
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 function App() {
   return (
     <div className="App">
       <Router>
         <Navbar/>
+        <SearchBar/>
         <Routes>
           <Route path='/hero' element={<Banner/>}/>
           <Route path="/">
