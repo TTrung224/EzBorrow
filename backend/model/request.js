@@ -8,7 +8,9 @@ const requestSchema = new mongoose.Schema({
   pickup_date: { type: String },
   borrower_id: { type: String, require: true },
   lecturer_id: { type: String },
-  status: { type: String, require: true}, //include (pending, approved, canceled, picked up, returned)
+  student_status: { type: String, require: true }, //include (canceled, picked up, returned),
+  lecturer_status: { type: String, require: true }, //include (pending, approved, canceled),
+  technician_status: { type: String, require: true } //include (pending, approved, canceled)
 });
 
 module.exports = mongoose.model("request", requestSchema);

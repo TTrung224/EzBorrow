@@ -1,6 +1,14 @@
 import React from 'react';
 import './Login.css';
+import {LinkContainer} from 'react-router-bootstrap';
+import { useState, useRef, useEffect } from 'react';
 export const Login = () => {
+    const [user, setUser] = useState('');
+    const [pwd, setPwd] = useState('');
+    const [errMsg, setErrMsg] = useState('');
+    const [success, setSuccess] = useState(false);
+
+
     return(
         <div className='login-body'>
         <div className='MainContainer' >
@@ -14,9 +22,10 @@ export const Login = () => {
                 <input type="email" placeholder="your email" id="username" name="username"></input>
                 <label for="password">PASSWORD</label>
                 <input type="password" placeholder="********" id="password" name="password"></input>
-        </form>
-        <button type='submit' className='btn-login'>Log in</button>
-        
+            </form>
+        <LinkContainer to="/">
+            <button type='submit' className='btn-login' href="/">Log in</button>
+        </LinkContainer>    
         </div>
         </div>
             
