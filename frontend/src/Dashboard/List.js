@@ -7,11 +7,11 @@ function List() {
     <div className='dashboard-container'>
         <table className='dashboard-table'>
             <thead>
-                <th>Request ID</th>
-                <th>Status</th>
-                <th>Pickup Date</th>
-                <th>Item</th>
-                <th>Action</th>
+                <td>Request ID</td>
+                <td>Status</td>
+                <td>Pickup Date</td>
+                <td>Item</td>
+                <td>Action</td>
             </thead>
             <tbody>
                 <tr>
