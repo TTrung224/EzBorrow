@@ -1,5 +1,6 @@
 import React from 'react';
 import './Login.css';
+import {LinkContainer} from 'react-router-bootstrap';
 export const Login = () => {
     return(
         <div className='login-body'>
@@ -15,8 +16,9 @@ export const Login = () => {
                 <label for="password">PASSWORD</label>
                 <input type="password" placeholder="********" id="password" name="password"></input>
         </form>
-        <button type='submit' className='btn-login'>Log in</button>
-        
+        <LinkContainer to="/">
+            <button type='submit' className='btn-login' href="/">Log in</button>
+        </LinkContainer>    
         </div>
         </div>
             

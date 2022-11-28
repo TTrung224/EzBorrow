@@ -21,8 +21,9 @@ input[type=text] {
     background: none;
     border: none;
     width: 90%;
-    margin-left: 10px;
-    margin-top: 1rem;
+    margin-left: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .btn-search {
