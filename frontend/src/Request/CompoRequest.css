@@ -1,5 +1,6 @@
 .compo-container {
-    width: 50%;
+    width: 35%;
+    min-width: 250px;
     position: absolute;
     margin-left: 28%;
     margin-top: 0px;
@@ -7,11 +8,31 @@
     justify-content: space-around;
     top: 200px;
     padding: 5px;
+    
 }
 
 .compo-item {
     padding: 2px;
-    border: 1px black solid;
+    border: 10px solid #00875A;
     width: 40%;
-    box-shadow: 2px 1px gray;
+    /* background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(8.5px);
+    -webkit-backdrop-filter: blur(8.5px); */
+    height:300px;
+    border-radius: 20px;
+}
+
+.compo-img{
+    border-bottom: 1px solid #00875A;
+}
+
+.product-inf{
+    padding: 10px 12px;
+}
+
+.product-des{
+    display: flex;
+    justify-content: space-around;
+    color: #00875A;
 }

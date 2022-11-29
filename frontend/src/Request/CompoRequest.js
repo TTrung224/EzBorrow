@@ -8,20 +8,25 @@ function CompoRequest() {
     return (
         <div className='compo-container'>
             <div className='compo-item'>
-                <img src={img1} width='100'></img>
-                <div>
-                    <h4>Arduino</h4>
-                    <p>Lorem Ipum</p>
-                    <p>Number: {number}</p>
+                <div className='compo-img'>
+                    <img src={img1} width='100' height='150' ></img>
                 </div>
-            </div>
-            <div className='compo-item'>
-                <img src={img1} width='100'></img>
-                <div>
-                    <h4>Arduino</h4>
+                
+                <div className='product-inf'>
+                    <div className='product-namee'>
+                        <h3>Arduino</h3>    
+                    </div>
+                    
+                    
                     <p>Lorem Ipum</p>
-                    <p>Number: {number}</p>
+                    <div className='product-des'>
+                    <h5>Available: {number}</h5>  
+                    <a href='#'> + </a>
+                    </div>
+                    
                 </div>
+        
+
             </div>
         </div>
     )
