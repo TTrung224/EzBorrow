@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const componentController = require('../controllers/componentController');
+const technician_auth = require('../middleware/technician_auth');
+const verifyToken = require('../middleware/verifyToken');
+router.post('/', technician_auth, componentController.create);
+router.put('/:id', technician_auth,componentController.update);
+router.delete('/:id', technician_auth, componentController.delete);
+router.get('/:id', verifyToken, componentController.getOne);
 
-router.post('/', componentController.create);
-router.put('/:id', componentController.update);
-router.delete('/:id', componentController.delete);
-router.get('/:id', componentController.getOne);
-
-router.get('/', componentController.getAll);
+router.get('/', verifyToken, componentController.getAll);
 
 module.exports = router;

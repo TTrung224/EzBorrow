@@ -6,19 +6,38 @@ Content-Type: application/json
     "password":"thisisapassword"
 }
 
+
+###
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "email": "v3878281@rmit.edu.vn",
+    "password":"thisisapassword"
+}
+
 ###
 
 POST http://localhost:3000/register
 Content-Type: application/json
 
 {
-    "first_name": "Dung",
-    "last_name": "Vuong",
-    "email": "s3878271@rmit.edu.vn",
+    "first_name": "Tech",
+    "last_name": "nician",
+    "email": "v3878281@rmit.edu.vn",
     "password": "thisisapassword",
-    "type": "student"
+    "type": "admin"
 }
 
 ###
 
 GET http://localhost:3000/main
+
+
+###
+
+POST http://localhost:3000/logout
+
+
+###
+POST http://localhost:3000/component
