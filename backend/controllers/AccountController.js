@@ -59,7 +59,8 @@ class AccountController {
                 res.cookie('token', token, { httpOnly: true });
 
                 // user
-                return res.status(200).json({success: true, message: "login successfully"});
+                return res.status(200).json(user);
+                // return res.status(200).json({success: true, message: "login successfully"});
             }
             return res.status(400).send("Invalid Credentials");
         } catch (err) {
