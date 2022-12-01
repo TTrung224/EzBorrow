@@ -6,13 +6,18 @@
     margin-top: 0px;
     display: flex;
     top: 200px;
+    
+    box-shadow: 0 10px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(8.5px);
+    -webkit-backdrop-filter: blur(8.5px);
+    border: none;
 }
 
 .dashboard-table {
     width: 100%;
 }
 
-.dashboard-table th{
+.dashboard-table thead td{
     color: white;
     background-color: #00875A;
     padding: 2px;
@@ -20,4 +25,8 @@
 
 .dashboard-table td {
     padding: 2px;
+}
+
+.dashboard-table tr:nth-child(even) {
+    background-color: rgb(221, 220, 220);
 }

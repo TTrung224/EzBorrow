@@ -11,6 +11,7 @@ class AccountController {
         let data = {};
         let user = req.user;
         console.log(typeof(user));
+        console.log(user);
         try {
             //get user info
             let result = await User.findOne({ email: user.email });
@@ -112,6 +113,9 @@ class AccountController {
             // save user token
             user.token = token;
 
+            //save cookie token
+            res.cookie('token', token, { httpOnly: true });
+
             // return new user
             res.status(201).json(user);
         } catch (err) {
@@ -119,7 +123,22 @@ class AccountController {
             res.status(500).send();
         }
         // Our login logic ends here
+        
     }
+    async logout(req, res){
+        try {
+            if (req.user != null){
+                res.clearCookie('token');
+                return res.status(200).json({success: true, message: "logout successfully"});
+                
+            }
+        } catch (error) {
+            console.log("catch")
+            console.log(error);
+            return res.status(500).json({success: false, message: "internal server error"})
+        }
+    }    
+
 }
 
 module.exports = new AccountController();
