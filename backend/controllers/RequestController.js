@@ -2,9 +2,40 @@ const Request = require("../model/request");
 const componentController = require('../controllers/componentController');
 const ComponentController = require("../controllers/componentController");
 const component = require("../model/component");
+const request = require("../model/request");
 
 
 class RequestController {
+    async geByBorrower(req, res, next){
+        let requests = [];
+        if (!req.query.id){
+            res.json(requests);
+        } else {
+            try {
+                let conditions = '/' + req.query.id + '/';
+                let result = await Request.find({borrower_id: conditions});
+                requests = result;
+            } catch (error) {
+                console.log(error);
+                res.status(500).send(error);
+            }
+
+
+        }
+    }
+
+    //get current user's requests
+    async getMyRequest(req, res, next) {
+        try {
+            let user = req.user;
+            const requests = await Request.find({borrower_id: user.id});
+            res.status(201).json(requests);
+        } catch (error) {
+            console.log(err);
+            res.status(500).json({success: false, message: "internal server error"});
+        }
+    }
+
     // [GET] /request
     async getAll(req, res, next) {
         try {
