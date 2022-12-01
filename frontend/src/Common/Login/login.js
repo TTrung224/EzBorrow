@@ -1,20 +1,26 @@
 import React from 'react';
 import './Login.css';
 import {LinkContainer} from 'react-router-bootstrap';
-import { useState, useRef, useEffect } from 'react';
-export const Login = ({f1}) => {
-    const [user, setUser] = useState('');
-    const [pwd, setPwd] = useState('');
-    const serverUser = 'johndoe@gmail.com';
-    const serverPassword = '12345'
+import { useState} from 'react';
+import axios from 'axios'
+import { useSignIn } from 'react-auth-kit'
+import { BrowserRouter as Router, Route, Routes, Navigate} from "react-router-dom";
 
-    const handleSubmit = (pwd, user) => {
-        const auth = false;
-        if (user == serverUser && pwd == serverPassword) {
-            auth = true;
-        }
-        return auth;
+export const Login = () => {
+    const signIn = useSignIn()
+    const [formData, setFormData] = React.useState({email: '', password: ''})
+
+    const onSubmit = (e) => {
+        e.preventDefault()
+        axios.post('http://localhost:4000/account/login', formData)
+            .then((res)=>{
+                console.log(res)
+                return (
+                    <Navigate to="/hero" replace={true} /> //Navigate to components
+                )
+            })
     }
+
 
     return(
         <div className='login-body'>
@@ -24,19 +30,16 @@ export const Login = ({f1}) => {
                         <h2>Welcome!</h2>
                     </div>
                     
-                    <form className='login-form'>
+                    <form className='login-form' onSubmit={onSubmit}>
                         <label for="username">USERNAME</label>
-                        <input type="email" placeholder="your email" id="username" name="username" onChange={(e) => setUser(e.target.value)}></input>
+                        <input type="email" placeholder="your email" id="username" name="username" onChange={(e)=>setFormData({...formData, email: e.target.value})}></input>
                         <label for="password">PASSWORD</label>
-                        <input type="password" placeholder="********" id="password" name="password" onChange={(e) => setUser(e.target.value)}></input>
+                        <input type="password" placeholder="********" id="password" name="password" onChange={(e)=>setFormData({...formData, password: e.target.value})}></input>
+                        <button type='submit' className='btn-login'>Log in</button>
                     </form>
-                    <LinkContainer to="/">
-                        <button type='submit' className='btn-login' href="/" onClick={f1(true)}>Log in</button>
-                    </LinkContainer>    
                 </div>
             </div>  
         </div>
-        
     )
 }
 
