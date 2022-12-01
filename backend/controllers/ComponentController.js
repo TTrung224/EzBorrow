@@ -1,7 +1,6 @@
-// importing user context
 const Component = require("../model/component");
 
-class AccountController {
+class ComponentController {
     // [GET] /component
     async getAll(req, res, next) {
         try {
@@ -11,20 +10,20 @@ class AccountController {
             res.status(201).json(components);
         } catch(err){
             console.log(err);
-            res.status(500).send();
+            res.status(500).send(err);
         }
     }    
     
     // [GET] /component/:id
     async getOne(req, res, next) {
         try {
-            const component = await Component.find({_id: req.params.id});
+            const component = await Component.findOne({_id: req.params.id});
 
-            // return all components
+            // return component
             res.status(201).json(component);
         } catch(err){
             console.log(err);
-            res.status(500).send();
+            res.status(500).send(err);
         }
     }
 
@@ -51,20 +50,47 @@ class AccountController {
             res.status(201).json(component);
         } catch (err) {
             console.log(err);
-            res.status(500).send();
+            res.status(500).send(err);
         }
     }
 
     // [PUT] /component/:id
     async update(req, res, next) {
-        try {
-            const result = await Component.updateOne({_id: req.params.id}, req.body)
+        /*
+        req.body = {
+            "updateBorrowed" : [2, add/minus]]
+            "updateComponent" {
+                "name" : ...,
+                ...
+            }
+        }
+        */
+        if(req.body.hasOwnProperty("updateBorrowed")) {
+            try {
+                const component = await Component.findById(req.params.id);
+                var borrowed;
+                if(req.body.updateBorrowed[1] == "add"){
+                    borrowed = component.borrowed + req.body.updateBorrowed[0];
+                } else if(req.body.updateBorrowed[1] == "minus"){
+                    borrowed = component.borrowed - req.body.updateBorrowed[0];
+                }
+                req.body.updateComponent["borrowed"] = borrowed;
 
-            // return code
-            res.status(200).send(result.acknowledged);
-        } catch (err) {
-            console.log(err);
-            res.status(500).send();
+                const result = await Component.updateOne({_id: req.params.id}, req.body.updateComponent)
+            } catch (err) {
+                console.log(err);
+            }
+        } else {
+
+            try {
+                const result = await Component.updateOne({_id: req.params.id}, req.body.updateComponent)
+
+                // return code
+                res.status(200).send(result.acknowledged);
+            } catch (err) {
+                console.log(err);
+                res.status(500).send(err);
+            }
         }
     }
 
@@ -77,9 +103,34 @@ class AccountController {
             res.status(200).send(result.acknowledged);
         } catch (err) {
             console.log(err);
-            res.status(500).send();
+            res.status(500).send(err);
+        }
+    }
+
+
+// Other methods:
+    async getComponent(id){
+        return await Component.findOne({_id: id});
+    }
+
+    async checkPermission(component){
+        try {
+            return component.permission;
+        } catch(err){
+            console.log(err);
+            return true;
+        }
+    }
+    
+    async checkAvailability(component, amount){
+        try {
+            var result = ((component.quantity - component.borrowed) >= amount);
+            return result;
+        } catch(err){
+            console.log(err);
+            return false;
         }
     }
 }
 
-module.exports = new AccountController();
+module.exports = new ComponentController();

@@ -1,12 +1,12 @@
-const siteRouter = require('./site');
-const componentRouter = require('./component');
+const AccountRouter = require('./account');
+const ComponentRouter = require('./component');
+const RequestRouter = require('./request');
 
 function route(app) {
     
-    app.use('/component', componentRouter);
-    
-    // Always final
-    app.use('/', siteRouter);
+    app.use('/component', ComponentRouter);
+    app.use('/account', AccountRouter);
+    app.use('/request', RequestRouter);
 }
 
 module.exports = route;

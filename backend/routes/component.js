@@ -3,7 +3,7 @@ const router = express.Router();
 const componentController = require('../controllers/componentController');
 
 router.post('/', componentController.create);
-router.put('/:id', componentController.update);
+router.put('/:id', componentController.update); //req.body.updateComponent = { "name" / "description" ...}
 router.delete('/:id', componentController.delete);
 router.get('/:id', componentController.getOne);
 

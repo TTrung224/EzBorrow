@@ -6,22 +6,19 @@ const Components = require('../model/component')
 const { json } = require('body-parser');
 
 class AccountController {
-    // [GET] /
-    async index(req, res, next) {
-        let data = {components: [],
-                    user: {}};
+    // [GET] account/
+    async getUser(req, res, next) {
+        let data = {};
         let user = req.user;
         console.log(typeof(user));
         try {
-            //get all components
-            data.components = await Components.find({});
             //get user info
             let result = await User.findOne({ email: user.email });
             //only return allowed info
-            data.user.first_name = result.first_name;
-            data.user.last_name = result.last_name;
-            data.user.email = result.email;
-            data.user.type = result.type;
+            data.first_name = result.first_name;
+            data.last_name = result.last_name;
+            data.email = result.email;
+            data.type = result.type;
             //return data retrieved from database
             return res.status(200).json(data);
         } catch (error) {
@@ -30,7 +27,7 @@ class AccountController {
         }
     }
 
-    // [POST] /login
+    // [POST] account/login
     async login(req, res, next) {       
         // Our login logic starts here
         try {
@@ -72,7 +69,7 @@ class AccountController {
     }
 
 
-    // [POST] /register
+    // [POST] account/register
     async register(req, res, next) {
         // Our register logic starts here
         try {
