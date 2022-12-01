@@ -77,4 +77,4 @@ GET http://localhost:4000/component
 GET http://localhost:4000/request/myRequest
 
 ###
-GET http://localhost:4000/request/search?id=s3891724
+GET http://localhost:4000/request/search?email=s3891724@

@@ -8,13 +8,16 @@ const request = require("../model/request");
 class RequestController {
     async getByBorrower(req, res, next){
         let requests = [];
-        if (!req.query.id){
+        if (!req.query.email){
+            
             res.json(requests);
         } else {
             try {
-                let conditions = '/' + req.query.id + '/';
-                let result = await Request.find({"borrower_id": conditions});
+                let conditions = req.query.email;
+                console.log(conditions)
+                let result = await Request.find({ borrower_email: {$regex: conditions, $options: 'i'} });
                 requests = result;
+                res.status(200).json(requests);
             } catch (error) {
                 console.log(error);
                 res.status(500).send(error);
@@ -30,8 +33,8 @@ class RequestController {
             let requests = [];
             let user = req.user;
 
-            console.log(user.user_id);
-            requests = await Request.find({borrower_id: user.user_id});
+            console.log(user.email);
+            requests = await Request.find({borrower_email: user.email});
             res.status(201).json(requests);
         } catch (error) {
             console.log(err);

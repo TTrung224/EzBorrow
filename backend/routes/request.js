@@ -5,7 +5,7 @@ const verifyToken = require('../middleware/verifyToken');
 const technician_auth = require('../middleware/technician_auth');
 
 router.get('/myRequest', verifyToken, requestController.getMyRequest);
-router.get('/search', technician_auth, requestController.getByBorrower);
+router.get('/search', technician_auth, requestController.getByBorrower);// ?email=
 router.get('/',technician_auth, requestController.getAll);
 
 router.post('/', verifyToken, requestController.create);
