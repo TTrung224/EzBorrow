@@ -13,7 +13,7 @@ class RequestController {
         } else {
             try {
                 let conditions = '/' + req.query.id + '/';
-                let result = await Request.find({borrower_id: conditions});
+                let result = await Request.find({"borrower_id": conditions});
                 requests = result;
             } catch (error) {
                 console.log(error);
@@ -28,8 +28,9 @@ class RequestController {
     async getMyRequest(req, res, next) {
         try {
             let user = req.user;
-            const requests = await Request.find({borrower_id: user.id});
-            res.status(201).json(requests);
+            console.log(user);
+            const requests = await Request.find({borrower_id: user.user_id});
+            res.status(200).json(requests);
         } catch (error) {
             console.log(err);
             res.status(500).json({success: false, message: "internal server error"});
