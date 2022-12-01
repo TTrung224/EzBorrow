@@ -8,16 +8,12 @@ const technician_auth = (req, res, next) => {
     return res.status(403).send("A token is required for authentication");
   }
   try {
-    console.log(1)
     const decoded = jwt.verify(token, config.TOKEN_KEY);
-    console.log(2)
     req.user = decoded; 
-    console.log(3)
     /*#############
     depends on database user_type
      */
     if (decoded.user_type != "technician") {
-        console.log(4)
       return res.status(401).send("unauthorized request");
     } else {
       next();

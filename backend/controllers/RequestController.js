@@ -27,10 +27,12 @@ class RequestController {
     //get current user's requests
     async getMyRequest(req, res, next) {
         try {
+            let requests = [];
             let user = req.user;
-            console.log(user);
-            const requests = await Request.find({borrower_id: user.user_id});
-            res.status(200).json(requests);
+
+            console.log(user.user_id);
+            requests = await Request.find({borrower_id: user.user_id});
+            res.status(201).json(requests);
         } catch (error) {
             console.log(err);
             res.status(500).json({success: false, message: "internal server error"});
