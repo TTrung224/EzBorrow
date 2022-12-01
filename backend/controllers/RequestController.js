@@ -6,7 +6,7 @@ const request = require("../model/request");
 
 
 class RequestController {
-    async geByBorrower(req, res, next){
+    async getByBorrower(req, res, next){
         let requests = [];
         if (!req.query.id){
             res.json(requests);
