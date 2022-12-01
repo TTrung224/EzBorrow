@@ -1,9 +1,5 @@
 .cart {
     width: 20%;
-    /* left: 993px; */
-    /* top: 250px; */
-    /* border-radius: 0px; */
-    /* border: 1px solid #B3B3B3; */
     margin-top: 20px;
     margin-left: auto;
     display:flex;
@@ -102,4 +98,8 @@
 
 .Summary-header{
     border-top: #B3B3B3 1px solid;
+}
+
+.buttons{
+    padding: 12px 0px;
 }
