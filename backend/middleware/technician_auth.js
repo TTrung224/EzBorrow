@@ -16,7 +16,7 @@ const technician_auth = (req, res, next) => {
     /*#############
     depends on database user_type
      */
-    if (decoded.user_type != "admin") {
+    if (decoded.user_type != "technician") {
         console.log(4)
       return res.status(401).send("unauthorized request");
     } else {
