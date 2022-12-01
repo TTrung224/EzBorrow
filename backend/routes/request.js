@@ -12,8 +12,4 @@ router.post('/', verifyToken, requestController.create);
 router.get('/:id', verifyToken,requestController.getOne);
 router.put('/:id', verifyToken, requestController.update); 
 // req.body.type = "approve" / "cancel" / "pickUp" / "return" & (token to define user type)
-
-router.get('/',technician_auth, requestController.getAll);
-router.get('/myRequest', verifyToken, requestController.getMyRequest);
-routere.get('/search', technician_auth, requestController.getByBorrower);
 module.exports = router;
