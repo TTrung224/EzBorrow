@@ -1,5 +1,5 @@
 .compo-container {
-    width: 35%;
+    width: 30%;
     min-width: 250px;
     position: absolute;
     margin-left: 28%;
@@ -15,10 +15,6 @@
     padding: 2px;
     border: 10px solid #00875A;
     width: 40%;
-    /* background: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 10px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(8.5px);
-    -webkit-backdrop-filter: blur(8.5px); */
     height:300px;
     border-radius: 20px;
 }
