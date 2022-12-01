@@ -5,6 +5,19 @@ const component = require("../model/component");
 
 
 class RequestController {
+    async getMyRequest(req, res, next) {
+        try {
+            let user = req.user;
+            const requests = await Request.find({borrower_id: user.id});
+            res.status(201).json(requests);
+        } catch (error) {
+            console.log(err);
+            res.status(500).json({success: false, message: "internal server error"});
+        }
+        
+
+
+    }
     // [GET] /request
     async getAll(req, res, next) {
         try {
