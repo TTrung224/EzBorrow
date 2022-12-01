@@ -9,7 +9,7 @@ function CompoRequest() {
         <div className='compo-container'>
             <div className='compo-item'>
                 <div className='compo-img'>
-                    <img src={img1} width='100' height='150' ></img>
+                    <img src={img1} width="70%"></img>
                 </div>
                 
                 <div className='product-inf'>
