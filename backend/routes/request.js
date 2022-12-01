@@ -11,5 +11,5 @@ router.put('/:id', verifyToken, requestController.update);
 
 router.get('/',technician_auth, requestController.getAll);
 router.get('/myRequest', verifyToken, requestController.getMyRequest);
-routere.get('/search', technician_auth, requestController.getByBorrower);
+router.get('/search', technician_auth, requestController.getByBorrower);
 module.exports = router;

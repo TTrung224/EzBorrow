@@ -6,7 +6,7 @@ const request = require("../model/request");
 
 
 class RequestController {
-    async geByBorrower(req, res, next){
+    async getByBorrower(req, res, next){
         let requests = [];
         if (!req.query.id){
             res.json(requests);
@@ -27,8 +27,9 @@ class RequestController {
     //get current user's requests
     async getMyRequest(req, res, next) {
         try {
+            let requests = [];
             let user = req.user;
-            const requests = await Request.find({borrower_id: user.id});
+            requests = await Request.find({borrower_id: user.id});
             res.status(201).json(requests);
         } catch (error) {
             console.log(err);
