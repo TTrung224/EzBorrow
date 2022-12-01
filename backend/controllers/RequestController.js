@@ -123,9 +123,9 @@ class RequestController {
 
                 case "cancel": {
                     if(req.user.user_type == "lecturer"){
-                        updateRequest["lecturer_status"] = "canceled";
+                        updateRequest.user_type = "canceled";
                     } else if(req.user["user_type"] == "technician"){
-                        updateRequest["technician_status"] = "canceled";
+                        updateRequest.user_type = "canceled";
                     } else if(req.user["user_type"] == "student"){
                         updateRequest["student_status"] = "canceled";
                     }

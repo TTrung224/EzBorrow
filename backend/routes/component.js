@@ -4,7 +4,7 @@ const componentController = require('../controllers/componentController');
 const technician_auth = require('../middleware/technician_auth');
 const verifyToken = require('../middleware/verifyToken');
 router.post('/', technician_auth, componentController.create);
-router.put('/:id', technician_auth,componentController.update);
+router.put('/:id', technician_auth,componentController.update); // req.body = {updateBorrowed, updateComponent}
 router.delete('/:id', technician_auth, componentController.delete);
 router.get('/:id', verifyToken, componentController.getOne);
 
