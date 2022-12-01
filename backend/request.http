@@ -6,6 +6,24 @@ Content-Type: application/json
     "password":"thisisapassword"
 }
 
+###
+POST http://localhost:4000/account/login
+Content-Type: application/json
+
+{
+    "email": "s3891724@rmit.edu.vn",
+    "password":"test"
+}
+
+###
+POST http://localhost:4000/account/login
+Content-Type: application/json
+
+{
+    "email": "technician@rmit.edu.vn",
+    "password":"test"
+}
+
 ### 
 POST http://localhost:4000/account/login
 Content-Type: application/json
@@ -56,4 +74,7 @@ POST http://localhost:4000/component
 GET http://localhost:4000/component
 
 ###
-GET http://localhost:4000/component/getMyRequest
+GET http://localhost:4000/request/myRequest
+
+###
+GET http://localhost:4000/request/search?id=s3891724

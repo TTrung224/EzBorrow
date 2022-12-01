@@ -29,7 +29,8 @@ class RequestController {
         try {
             let requests = [];
             let user = req.user;
-            requests = await Request.find({borrower_id: user.id});
+            console.log(user.user_id);
+            requests = await Request.find({borrower_id: user.user_id});
             res.status(201).json(requests);
         } catch (error) {
             console.log(err);
