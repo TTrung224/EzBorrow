@@ -51,10 +51,10 @@ class ComponentController {
     async create(req, res, next) {
         try {
             // Get user input
-            const { name, description, permission, quantity} = req.body;
+            const { name, description, img_src, permission, quantity} = req.body;
             
             // Validate user input
-            if (!(name && description && permission && quantity)) {
+            if (!(name && description && img_src && permission && quantity)) {
                 return res.status(400).send("All input is required");
             }
 
@@ -62,6 +62,7 @@ class ComponentController {
             const component = await Component.create({
                 name,
                 description,
+                img_src,
                 permission,
                 quantity,
             });
@@ -100,8 +101,8 @@ class ComponentController {
             } catch (err) {
                 console.log(err);
             }
+            
         } else {
-
             try {
                 const result = await Component.updateOne({_id: req.params.id}, req.body.updateComponent)
 
