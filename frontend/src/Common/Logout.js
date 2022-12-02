@@ -2,8 +2,20 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import {LinkContainer} from 'react-router-bootstrap';
+import {useEffect} from 'react';
 
 function Logout(props) {
+
+  const logOut = () => {
+    localStorage.removeItem('auth');
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+  }
+
+  useEffect(() => {
+
+  }, []);
+
     return (
         <Modal
           {...props}
