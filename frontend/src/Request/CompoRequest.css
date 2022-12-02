@@ -1,5 +1,5 @@
 .compo-container {
-    width: 35%;
+    width: 50%;
     min-width: 250px;
     position: absolute;
     margin-left: 28%;
@@ -14,7 +14,7 @@
 .compo-item {
     padding: 20px;
     border: 10px solid #00875A;
-    width: 40%;
+    width: 30%;
     height:300px;
     border-radius: 20px;
 }

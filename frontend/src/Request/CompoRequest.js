@@ -9,24 +9,57 @@ function CompoRequest() {
         <div className='compo-container'>
             <div className='compo-item'>
                 <div className='compo-img'>
-                    <img src={img1} width='100' ></img>
+                    <img src={img1} width='120' ></img>
                 </div>
                 
                 <div className='product-inf'>
                     <div className='product-namee'>
                         <h3>Arduino</h3>    
-                    </div>
-                    
-                    
-                    <p>Lorem Ipum</p>
+                    </div>                    
+                        <p>Lorem Ipum</p>
                     <div className='product-des'>
-                    <h5>Available: {number}</h5>  
-                    <a href='#'> + </a>
-                    </div>
-                    
+                        <h5>Available: {number}</h5>  
+                        <a href='#'> + </a>
+                    </div>                    
                 </div>
             </div>
+
+            <div className='compo-item'>
+                <div className='compo-img'>
+                    <img src={img1} width='120' ></img>
+                </div>
+                
+                <div className='product-inf'>
+                    <div className='product-namee'>
+                        <h3>Arduino</h3>    
+                    </div>                    
+                        <p>Lorem Ipum</p>
+                    <div className='product-des'>
+                        <h5>Available: {number}</h5>  
+                        <a href='#'> + </a>
+                    </div>                    
+                </div>
+            </div>
+
+            <div className='compo-item'>
+                <div className='compo-img'>
+                    <img src={img1} width='120' ></img>
+                </div>
+                
+                <div className='product-inf'>
+                    <div className='product-namee'>
+                        <h3>Arduino</h3>    
+                    </div>                    
+                        <p>Lorem Ipum</p>
+                    <div className='product-des'>
+                        <h5>Available: {number}</h5>  
+                        <a href='#'> + </a>
+                    </div>                    
+                </div>
+            </div>        
         </div>
+        
+        
     )
 }
 
