@@ -19,14 +19,14 @@ function List() {
                     <td>Pending</td>
                     <td>10/22/2015</td>
                     <td>Arduino x1</td>
-                    <td><Button variant='danger' className='action-btn'>Cancel</Button></td>
+                    <td><Button variant='danger'>Cancel</Button></td>
                 </tr>
                 <tr>
                     <td>123456</td>
                     <td>Pending</td>
                     <td>10/22/2015</td>
                     <td>Arduino x1</td>
-                    <td><Button variant='danger' className='action-btn'>Cancel</Button></td>
+                    <td><Button variant='danger'>Cancel</Button></td>
                 </tr>
             </tbody>
         </table>
