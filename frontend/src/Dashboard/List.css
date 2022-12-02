@@ -12,11 +12,6 @@
     -webkit-backdrop-filter: blur(8.5px);
     border: none;
 }
-.action-btn{
-    padding: 4px 12px;
-    margin: 4px 0;
-
-}
 
 .dashboard-table {
     width: 100%;
