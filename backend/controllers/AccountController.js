@@ -28,8 +28,9 @@ class AccountController {
         }
     }
 
+
     // [POST] account/login
-    async login(req, res, next) {       
+    async login(req, res, next) {
         // Our login logic starts here
         try {
             // Get user input
@@ -126,6 +127,9 @@ class AccountController {
         // Our login logic ends here
         
     }
+
+
+    // [POST] account/logout
     async logout(req, res){
         try {
             if (req.user != null){
