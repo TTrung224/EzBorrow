@@ -1,11 +1,20 @@
 const Component = require("../model/component");
 
+let calAvailability = (componentList) => {
+    if(componentList.length > 0){
+        componentList.forEach(component => {
+            component['available_amount'] = component.quantity - component.borrowed;
+        });
+    }
+    return componentList;
+}
+
 class ComponentController {
     // [GET] /component
     async getAll(req, res, next) {
         try {
             let components = await Component.find({});
-            components = await this.calAvailability(components);
+            components = await calAvailability(components);
             // return all components
             res.status(201).json(components);
         } catch(err){
@@ -151,15 +160,6 @@ class ComponentController {
             console.log(err);
             return false;
         }
-    }
-
-    async calAvailability(componentList){
-        if(componentList.length > 0){
-            componentList.forEach(component => {
-                component['available_amount'] = component.quantity - component.borrowed;
-            });
-        }
-        return componentList;
     }
 
 }
