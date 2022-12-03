@@ -7,6 +7,7 @@ const componentSchema = new mongoose.Schema({
   permission: { type: Boolean, require: true }, // "true" for requiring lecturer approval
   quantity: { type: Number, require: true },
   borrowed: { type: Number, default: 0 },
+  available_amount: { type: String},
 });
 
 module.exports = mongoose.model("component", componentSchema);

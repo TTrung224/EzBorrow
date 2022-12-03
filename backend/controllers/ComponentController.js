@@ -1,6 +1,6 @@
 const Component = require("../model/component");
 
-let calAvailability = (componentList) => {
+function calAvailability(componentList) {
     if(componentList.length > 0){
         componentList.forEach(component => {
             component['available_amount'] = component.quantity - component.borrowed;
@@ -161,7 +161,6 @@ class ComponentController {
             return false;
         }
     }
-
 }
 
 module.exports = new ComponentController();
