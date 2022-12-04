@@ -3,6 +3,8 @@ const config = process.env;
 
 const technician_auth = (req, res, next) => {
 
+  
+
     const token = req.cookies.token;
   if (!token) {
     return res.status(403).send("A token is required for authentication");
