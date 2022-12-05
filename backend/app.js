@@ -7,10 +7,9 @@ const express = require("express");
 const route = require('./routes');
 const cookies = require('cookie-parser')
 const app = express();
-
 app.use(express.json());
 app.use(cookies());
-app.use(cors())
+app.use(cors({origin: 'http://localhost:3000', credentials: true}))
 route(app);
 
 module.exports = app;
