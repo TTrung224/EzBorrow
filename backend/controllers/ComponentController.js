@@ -1,11 +1,20 @@
 const Component = require("../model/component");
 
+function calAvailability(componentList) {
+    if(componentList.length > 0){
+        componentList.forEach(component => {
+            component['available_amount'] = component.quantity - component.borrowed;
+        });
+    }
+    return componentList;
+}
+
 class ComponentController {
     // [GET] /component
     async getAll(req, res, next) {
         try {
-            const components = await Component.find({});
-
+            let components = await Component.find({});
+            components = await calAvailability(components);
             // return all components
             res.status(201).json(components);
         } catch(err){
@@ -17,10 +26,30 @@ class ComponentController {
     // [GET] /component/:id
     async getOne(req, res, next) {
         try {
-            const component = await Component.findOne({_id: req.params.id});
+            let component = await Component.findOne({_id: req.params.id});
+            component['available_amount'] = component.quantity - component.borrowed;
 
             // return component
             res.status(201).json(component);
+        } catch(err){
+            console.log(err);
+            res.status(500).send(err);
+        }
+    }
+    
+    // [GET] /component/search?name=
+    async getByName(req, res, next) {
+        try {
+            let result;
+            if(!req.query.name){
+                result = [];
+            } else{
+                result = await Component.find({name: {$regex: req.query.name, $options: 'i'}});
+                result = await this.calAvailability(result);
+
+                // return component
+                res.status(201).json(result);
+            }
         } catch(err){
             console.log(err);
             res.status(500).send(err);
@@ -31,10 +60,10 @@ class ComponentController {
     async create(req, res, next) {
         try {
             // Get user input
-            const { name, description, permission, quantity} = req.body;
+            const { name, description, img_src, permission, quantity} = req.body;
             
             // Validate user input
-            if (!(name && description && permission && quantity)) {
+            if (!(name && description && img_src && permission && quantity)) {
                 return res.status(400).send("All input is required");
             }
 
@@ -42,6 +71,7 @@ class ComponentController {
             const component = await Component.create({
                 name,
                 description,
+                img_src,
                 permission,
                 quantity,
             });
@@ -80,8 +110,8 @@ class ComponentController {
             } catch (err) {
                 console.log(err);
             }
+            
         } else {
-
             try {
                 const result = await Component.updateOne({_id: req.params.id}, req.body.updateComponent)
 
@@ -108,7 +138,7 @@ class ComponentController {
     }
 
 
-// Other methods:
+// Support methods:
     async getComponent(id){
         return await Component.findOne({_id: id});
     }

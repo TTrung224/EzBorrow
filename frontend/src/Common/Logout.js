@@ -1,9 +1,30 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import {LinkContainer} from 'react-router-bootstrap';
+import { useNavigate } from "react-router-dom";
+import {useState, useEffect} from 'react';
 
 function Logout(props) {
+  const [auth, setAuth] = useState()
+  const navigate = useNavigate();
+
+  function logOut() {
+    localStorage.removeItem('auth');
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+  }
+
+  useEffect(() => {
+    const auth = JSON.parse(localStorage.getItem('auth'));
+    if (auth) {
+     setAuth(auth);
+    }
+    
+    if(!auth) {
+      navigate("/login", { replace: true });
+    }
+  }, []);
+
     return (
         <Modal
           {...props}
@@ -22,9 +43,7 @@ function Logout(props) {
             </p>
           </Modal.Body>
           <Modal.Footer>
-            <LinkContainer to={"/hero"}>
               <Button onClick={props.onHide} variant = 'success'>Yes</Button>
-            </LinkContainer>
           </Modal.Footer>
         </Modal>
     );    

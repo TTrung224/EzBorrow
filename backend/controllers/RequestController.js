@@ -6,6 +6,8 @@ const request = require("../model/request");
 
 
 class RequestController {
+
+    // [GET] /search?email=
     async getByBorrower(req, res, next){
         let requests = [];
         if (!req.query.email){
@@ -22,12 +24,11 @@ class RequestController {
                 console.log(error);
                 res.status(500).send(error);
             }
-
-
         }
     }
 
     //get current user's requests
+    // [GET] /myRequest
     async getMyRequest(req, res, next) {
         try {
             let requests = [];
@@ -73,10 +74,10 @@ class RequestController {
         try {
             // Get user input
             const { component_list, request_date, return_date, 
-                pickup_date, borrower_id, lecturer_id } = req.body;
+                pickup_date, borrower_id, lecturer_email } = req.body;
 
             // Validate user input
-            if (!(component_list && request_date && return_date && pickup_date && borrower_id && lecturer_id)) {
+            if (!(component_list && request_date && return_date && pickup_date && lecturer_email)) {
                 return res.status(400).send("All input is required");
             }
 
@@ -106,14 +107,16 @@ class RequestController {
             }
             const student_status = "waiting";
 
+            const borrower_email = req.user.email;
+
             // Create request in our database
             const request = await Request.create({
                 component_list,
                 request_date,
                 return_date,
                 pickup_date,
-                borrower_id,
-                lecturer_id,
+                borrower_email,
+                lecturer_email,
                 lecturer_status,
                 student_status,
                 technician_status,

@@ -8,9 +8,9 @@ const requestSchema = new mongoose.Schema({
   pickup_date: { type: Date, require: true },
   borrower_email: { type: String, require: true },
   lecturer_email: { type: String, require: true  },
-  student_status: { type: String, require: true }, //include (waiting, ready, picked up, returned, canceled),
-  lecturer_status: { type: String, require: true }, //include (pending, approved, canceled),
-  technician_status: { type: String, require: true }, //include (waiting ,pending, approved, canceled)
+  student_status: { type: String, enum : ['waiting', 'ready', 'picked up', 'returned', 'canceled'], require: true }, //include (waiting, ready, picked up, returned, canceled),
+  lecturer_status: { type: String, enum : ['pending', 'approved', 'canceled'], require: true }, //include (pending, approved, canceled),
+  technician_status: { type: String, enum : ['waiting', 'pending', 'approved', 'canceled'], require: true }, //include (waiting ,pending, approved, canceled)
   note: {type: String},
 });
 
