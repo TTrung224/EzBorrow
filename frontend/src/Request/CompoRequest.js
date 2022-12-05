@@ -22,14 +22,14 @@ function CompoRequest() {
             withCredentials: true,
             headers: {
                 Authorization: `Bearer ${auth}`,
-                Cookie: {myCookie}
+                //Cookie: {myCookie}
             }
         }) 
     
         const load = () => {
             console.log('token:' + auth)
             console.log('cookies: ' + myCookie)
-            authAxios.get('http://localhost:4000/component/')
+            authAxios.get()
             .then(res => console.log(res))
         }
     
