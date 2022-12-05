@@ -41,7 +41,7 @@ function CompoRequest() {
         <div className='compo-container'>
             <div className='compo-item'>
                 <div className='compo-img'>
-                    <img src={img1} width="120"></img>
+                    <img src={img1} width="70%"></img>
                 </div>
                 
                 <div className='product-inf'>
@@ -60,7 +60,7 @@ function CompoRequest() {
             </div>
             <div className='compo-item'>
                 <div className='compo-img'>
-                    <img src={img1} width="120"></img>
+                    <img src={img1} width="70%"></img>
                 </div>
                 
                 <div className='product-inf'>
@@ -80,7 +80,7 @@ function CompoRequest() {
 
             <div className='compo-item'>
                 <div className='compo-img'>
-                    <img src={img1} width="120"></img>
+                    <img src={img1} width="70%"></img>
                 </div>
                 
                 <div className='product-inf'>
