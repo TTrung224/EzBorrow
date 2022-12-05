@@ -2,10 +2,8 @@ import React from 'react';
 import './Login.css';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
-import { useCookies } from 'react-cookie'
 
 export const Login = () => {
-    const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
     const [formData, setFormData] = React.useState({email: '', password: ''})
     const [error, setError] = React.useState("")
     const navigate = useNavigate();
@@ -15,10 +13,6 @@ export const Login = () => {
         .then((res)=>{
             console.log("res:", res)
             if(res.status === 200){
-                localStorage.setItem('user', res.data.email)
-                localStorage.setItem('token', res.data.token)
-                localStorage.setItem('auth', true)
-                setCookie('token', res.data.token)
                 console.log("test")
                 navigate("/", {replace: true});
             }
