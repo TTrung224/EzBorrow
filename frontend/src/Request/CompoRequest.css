@@ -1,23 +1,25 @@
 .compo-container {
     width: 70%;
     position: absolute;
-    margin-left: 25%;
-    margin-top: 0px;
-    display: flex;
-    justify-content: space-between;
+    margin-left: 25%;    
+    display: flex;   
+    padding: 5px;  
     top: 200px;
-    padding: 5px;
-    columns: 2 auto;
-    
-    
+    margin-top: 0px;
 }
 
+.cards{
+    display: flex;
+    flex-wrap: wrap;
+}
 .compo-item {
     padding: 2px;
     border: 10px solid #00875A;
-    width: 50%;
+    width: 40%;
     height:300px;
     border-radius: 20px;
+    margin-left: 40px;
+    margin-bottom: 40px;
     
 }
 

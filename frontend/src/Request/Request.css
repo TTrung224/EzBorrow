@@ -1,10 +1,7 @@
 .cart {
-    display:flex;
     flex-direction: column;
-    justify-content: flex-end;
-        
+    justify-content: flex-end;  
     color: black;
-    
     box-shadow: 0 10px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(8.5px);
     -webkit-backdrop-filter: blur(8.5px);
@@ -12,9 +9,7 @@
     padding: 15px;
     border-radius: 5px;
     margin-right: 10px;
-
-    
-    
+    height: 50%;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -72,7 +67,7 @@
 
 .buttons{
     display: flex;
-   justify-content: space-around;
+    justify-content: space-around;
 }
 
 #clear-btn{

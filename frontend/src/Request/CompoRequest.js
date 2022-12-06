@@ -33,6 +33,7 @@ function CompoRequest() {
   
     return (
         <div className='compo-container'>
+            <div className='cards'>
             {data.map((item, index) => 
                 <div className='compo-item'>
                     <div className='compo-img'>
@@ -50,7 +51,8 @@ function CompoRequest() {
                     </div>
                 </div>
             )}
-            <Request/>   
+            </div>
+            <Request/>  
         </div>
         
     )
