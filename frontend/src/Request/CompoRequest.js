@@ -33,27 +33,22 @@ function CompoRequest() {
   
     return (
         <div className='compo-container'>
-            {data.map((item, index) => {
-                if(index % 2 === 0) {
-                    return (
-                    <div className='compo-item'>
-                        <div className='compo-img'>
-                            <img src={img1} width="120"></img>
-                        </div>
-                        <div className='product-inf'>
-                            <div className='product-namee'>
-                                <h3>{item.name}</h3>    
-                            </div>                    
-                            <p>{item.description}</p>
-                            <div className='product-des'>
-                                <h5>Available: {item.available_amount}</h5>  
-                                <a href='#'> + </a>
-                            </div>
+            {data.map((item, index) => 
+                <div className='compo-item'>
+                    <div className='compo-img'>
+                        <img src={img1} width="120"></img>
+                    </div>
+                    <div className='product-inf'>
+                        <div className='product-namee'>
+                            <h3>{item.name}</h3>    
+                        </div>                    
+                        <p>{item.description}</p>
+                        <div className='product-des'>
+                            <h5>Available: {item.available_amount}</h5>  
+                            <a href='#'> + </a>
                         </div>
                     </div>
-                    )
-                }
-            }
+                </div>
             )}
             <Request/>   
         </div>
