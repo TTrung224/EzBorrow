@@ -4,7 +4,7 @@ const requestController = require('../controllers/requestController');
 const verifyToken = require('../middleware/verifyToken');
 const technician_auth = require('../middleware/technician_auth');
 
-router.get('/myRequest', verifyToken, requestController.getMyRequest);
+router.get('/myrequest', verifyToken, requestController.getMyRequest);
 router.get('/search', technician_auth, requestController.getByBorrower);// ?email=
 router.get('/:id', verifyToken,requestController.getOne);
 router.get('/',technician_auth, requestController.getAll);
