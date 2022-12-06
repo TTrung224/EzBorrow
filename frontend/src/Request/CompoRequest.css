@@ -1,11 +1,10 @@
 .compo-container {
-    width: 30%;
-    min-width: 250px;
+    width: 70%;
     position: absolute;
-    margin-left: 28%;
+    margin-left: 25%;
     margin-top: 0px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     top: 200px;
     padding: 5px;
     columns: 2 auto;
@@ -19,6 +18,7 @@
     width: 50%;
     height:300px;
     border-radius: 20px;
+    
 }
 
 .compo-img{

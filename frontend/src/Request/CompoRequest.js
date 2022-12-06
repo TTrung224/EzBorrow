@@ -50,9 +50,9 @@ function CompoRequest() {
                 </div>
             )}
 
-            {/* <div className='compo-item'>
+            <div className='compo-item'>
                 <div className='compo-img'>
-                    <img src={img1} width="120"></img>
+                    <img src={img1} width="70%"></img>
                 </div>
                 
                 <div className='product-inf'>
@@ -66,10 +66,10 @@ function CompoRequest() {
                     </div>
                     
                 </div>
-        
-
-            </div> */}
+            </div>
+            <Request/>   
         </div>
+        
     )
 }
 
