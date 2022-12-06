@@ -3,6 +3,7 @@ import './CompoRequest.css'
 import axios from 'axios'
 import {useState, useEffect} from 'react'
 import { useCookies } from 'react-cookie';
+import Request from './Request';
 
 function CompoRequest() {
     const img1 = 'http://mlab.vn/image/data/Bai%20viet%20ky%20thuat/Arduino/bai%202%20Nhung%20dieu%20co%20ban/ArduinoUnoR3.jpg'
@@ -94,10 +95,10 @@ function CompoRequest() {
                     </div>
                     
                 </div>
-        
-
             </div>
+            <Request/>   
         </div>
+        
     )
 }
 
