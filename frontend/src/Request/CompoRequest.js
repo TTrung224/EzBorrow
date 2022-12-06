@@ -2,6 +2,7 @@ import React from 'react'
 import './CompoRequest.css'
 import axios from 'axios'
 import { useState, useEffect} from 'react'
+import Request from './Request'
 
 
 function CompoRequest() {
@@ -49,24 +50,6 @@ function CompoRequest() {
                     </div>
                 </div>
             )}
-
-            <div className='compo-item'>
-                <div className='compo-img'>
-                    <img src={img1} width="70%"></img>
-                </div>
-                
-                <div className='product-inf'>
-                    <div className='product-namee'>
-                        <h3>Arduino</h3>    
-                    </div>                   
-                        <p>Lorem Ipum</p>
-                    <div className='product-des'>
-                        <h5>Available: {number}</h5>  
-                        <a href='#'> + </a>
-                    </div>
-                    
-                </div>
-            </div>
             <Request/>   
         </div>
         
