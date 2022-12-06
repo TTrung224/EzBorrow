@@ -36,20 +36,15 @@ function List() {
                 <td>Action</td>
             </thead>
             <tbody>
-                <tr>
-                    <td>123456</td>
-                    <td>Pending</td>
-                    <td>10/22/2015</td>
-                    <td>Arduino x1</td>
-                    <td><Button variant='danger' className='action-btn'>Cancel</Button></td>
-                </tr>
-                <tr>
-                    <td>123456</td>
-                    <td>Pending</td>
-                    <td>10/22/2015</td>
-                    <td>Arduino x1</td>
-                    <td><Button variant='danger' className='action-btn'>Cancel</Button></td>
-                </tr>
+                {data.map(item => 
+                    <tr>
+                        <td>{item._id}</td>
+                        <td>{item.lecturer_status}</td>
+                        <td>{item.pickup_date.slice(0,10)}</td>
+                        <td>Arduino x1</td>
+                        <td><Button variant='danger' className='action-btn'>Cancel</Button></td>
+                    </tr>   
+                )}
             </tbody>
         </table>
     </div>

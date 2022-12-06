@@ -15,3 +15,8 @@ body{
   overflow: hidden;
   margin: 0;
 }
+
+html {
+  overflow: -moz-scrollbars-vertical;
+  overflow-y: scroll;
+}
