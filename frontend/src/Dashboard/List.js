@@ -1,8 +1,30 @@
 import React from 'react'
 import './List.css'
 import Button from 'react-bootstrap/Button';
+import axios from 'axios'
+import { useState, useEffect} from 'react'
 
 function List() {
+
+    const [ data, setData] = useState([])
+
+    const authAxios = axios.create({
+        baseURL: 'http://localhost:4500/',
+        withCredentials: true
+    })
+
+    useEffect(() => {
+        const load = async () => {
+            const response = await authAxios.get('/request');
+            const data = await response.data;
+            console.log(data);
+            setData(data);
+        };
+            load();
+    },[]);
+
+
+
   return (
     <div className='dashboard-container'>
         <table className='dashboard-table'>
