@@ -3,6 +3,7 @@ import './CompoRequest.css'
 import axios from 'axios'
 import { useState, useEffect} from 'react'
 import Request from './Request'
+import {FaPlus} from 'react-icons/fa';
 
 
 function CompoRequest() {
@@ -45,8 +46,10 @@ function CompoRequest() {
                         </div>                    
                         <p>{item.description}</p>
                         <div className='product-des'>
-                            <h5>Available: {item.available_amount}</h5>  
-                            <a href='#'> + </a>
+                            <h5>Available: {item.available_amount}</h5>
+                            <button>
+                                <FaPlus/>                         
+                            </button>                        
                         </div>
                     </div>
                 </div>
