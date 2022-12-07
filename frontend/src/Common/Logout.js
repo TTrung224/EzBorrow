@@ -3,29 +3,21 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from "react-router-dom";
 import {useState, useEffect} from 'react';
+import axios from 'axios';
 
 function Logout(props) {
-  const [auth, setAuth] = useState()
   const navigate = useNavigate();
+  const authAxios = axios.create({
+    baseURL: 'http://localhost:4500/account/',
+    withCredentials: true
+  })
 
-  function logOut() {
-    localStorage.removeItem('auth');
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
-  }
+  const logout = async () => {
+    const response = await authAxios.post('/logout');
+    navigate("/hero", { replace: true });
+};
 
-  useEffect(() => {
-    const auth = JSON.parse(localStorage.getItem('auth'));
-    if (auth) {
-     setAuth(auth);
-    }
-    
-    if(!auth) {
-      navigate("/login", { replace: true });
-    }
-  }, []);
-
-    return (
+  return (
         <Modal
           {...props}
           size="lg"
@@ -43,7 +35,7 @@ function Logout(props) {
             </p>
           </Modal.Body>
           <Modal.Footer>
-              <Button onClick={props.onHide} variant = 'success'>Yes</Button>
+              <Button onClick={(e)  => {props.onHide(e); logout()}} variant = 'success'>Yes</Button>
           </Modal.Footer>
         </Modal>
     );    
