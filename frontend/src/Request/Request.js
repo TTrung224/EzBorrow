@@ -45,9 +45,8 @@ function Request() {
         <div className='buttons'>
             <Button id='clear-btn' variant='danger'>Clear</Button>
             <Button id='request-btn' variant='success' onClick={() => setModalShow(true)}>Request</Button>
-        </div>
-    </div>
-    
+        </div>    
+    </div>  
   )
 }
 
