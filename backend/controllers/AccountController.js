@@ -144,15 +144,31 @@ class AccountController {
         }
     }    
 
-    async setFine(){
+    async setFine(req, res){
         const {fine_message, fine_description, target_email} = req.body;
         if (!(fine_message)) res.status(400).json({success: false, message: "fine cannot be empty"})
-        if (target_email) res.status(400).json({success: false, message: "cannot set to nobody"})
-        fineSet(fine_message, fine_description, target_email);
-        
+        if (!target_email) res.status(400).json({success: false, message: "cannot set to nobody"})
+        try {
+            const set = fineSet(fine_message, fine_description, target_email);
+            if (set === 'success') {
+                res.status(200).json({success: true, message: `fine of user ${userEmail} is set`})
+
+            }
+        } catch (error) {
+            if (error.message === 'userNotFindError'){
+                res.status(400).json({success: false, message: 'cannot find this user'})
+
+            }
+            else if (error.message === 'fineMessageError'){
+                res.status(400).json({success: false, message: 'unallowed fine message'})
+
+            } else {
+                res.status(500).json({success: false, message: 'internal server error'})
+            }
+        }
     }   
 
-    async resetFine(){
+    async resetFine(req, res){
         const {target_email} = req.body;
         if (target_email) res.status(400).json({success: false, message: "cannot set to nobody"});
         fineReset(target_email);
@@ -164,13 +180,17 @@ let fineSet = async (fineMessage, fineDes, userEmail) => {
     try {
         let userFine = await User.findOne({email: userEmail}, 'fine fineDescription');
         if (!userFine) {
-            res.status(400).json({success: false, message: 'cannot find this user'})
+            throw new Error('userNotFindError');
+            // res.status(400).json({success: false, message: 'cannot find this user'})
         }
         userFine.fine = fineMessage;
         userFine.fineDescription = fineDes;
-        res.status(200).json({success: true, message: `fine of user ${userEmail} is set`})
+        return 'success'
+        // res.status(200).json({success: true, message: `fine of user ${userEmail} is set`})
     } catch (error) {
-        res.status(400).json({success: false, message: 'unallowed fine message'})
+        if (error.message === 'userNotFindError') throw error
+        else throw new Error('fineMessageError')
+        // res.status(400).json({success: false, message: 'unallowed fine message'})
     }
 };
 
