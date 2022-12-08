@@ -60,10 +60,10 @@ class ComponentController {
     async create(req, res, next) {
         try {
             // Get user input
-            const { name, description, img_src, permission, quantity} = req.body;
+            const { name, description, img_src, permission, quantity, categories} = req.body;
             
             // Validate user input
-            if (!(name && description && img_src && permission && quantity)) {
+            if (!(name && description && img_src && permission && quantity && categories)) {
                 return res.status(400).send("All input is required");
             }
 
@@ -74,6 +74,7 @@ class ComponentController {
                 img_src,
                 permission,
                 quantity,
+                categories
             });
 
             // return new component

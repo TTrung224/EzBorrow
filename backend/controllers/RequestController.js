@@ -3,7 +3,18 @@ const componentController = require('../controllers/componentController');
 const ComponentController = require("../controllers/componentController");
 const component = require("../model/component");
 const request = require("../model/request");
+const User = require("../model/account");
 
+let checkFine = (userEmail) =>  {
+    try {
+        let userFine = fineOne({email: userEmail}, 'fine fineDescription');
+        return userFine;
+    } catch (error) {
+        console.log(error)
+        return "NO USER"
+    }
+
+}
 
 class RequestController {
 
@@ -74,7 +85,7 @@ class RequestController {
         try {
             // Get user input
             const { component_list, request_date, return_date, 
-                pickup_date, borrower_id, lecturer_email } = req.body;
+                pickup_date, lecturer_email } = req.body;
 
             // Validate user input
             if (!(component_list && request_date && return_date && pickup_date && lecturer_email)) {
@@ -108,7 +119,13 @@ class RequestController {
             const student_status = "waiting";
 
             const borrower_email = req.user.email;
-
+            try {
+                let currentFine = await checkFine(borrower_email);
+                if (currentFine == "NO USER") res.status(204).json({success: false, message: "cannot find user"});
+                else if (currentFine.fine != "NONE") res.status(403).json({success: false, message: `${currentFine.fineDescription}`})
+            } catch (error) {
+                res.status(500).json({success: false, message: 'server cannot connect to database'})
+            }
             // Create request in our database
             const request = await Request.create({
                 component_list,
