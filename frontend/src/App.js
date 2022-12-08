@@ -27,7 +27,11 @@ function App() {
       const response = await authAxios.get('/account/getAccount')
       const auth = response.data;
       setAuth(auth);
-      if(auth !== 'lecturer' || auth !== 'student' || auth !== 'technician'){
+      console.log(auth)
+      if(!(auth.type === 'lecturer' || auth.type === 'student' || auth.type === 'technician')){
+        console.log()
+        console.log(auth.type)
+        console.log(typeof(auth.type))
         navigate("/hero", {replace: true})
       } else {
         navigate("/", {replace: true})
