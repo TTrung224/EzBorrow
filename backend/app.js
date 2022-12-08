@@ -6,6 +6,12 @@ const express = require("express");
 // const jwt = require('jsonwebtoken')
 const route = require('./routes');
 const cookies = require('cookie-parser')
+const schedule = require('node-schedule');
+const DailyService = require('./service/DailyService');
+
+// schedule.scheduleJob("0 8 * * 1-6", function(){DailyService.dailyService()});
+// schedule.scheduleJob("*/20 * * * * *", function(){DailyService.dailyService()});
+
 const app = express();
 app.use(express.json());
 app.use(cookies());

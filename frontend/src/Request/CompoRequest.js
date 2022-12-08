@@ -35,24 +35,29 @@ function CompoRequest() {
     return (
         <div className='compo-container'>
             <div className='cards'>
-            {data.map((item, index) => 
-                <div className='compo-item'>
-                    <div className='compo-img'>
-                        <img src={img1} width="120"></img>
-                    </div>
-                    <div className='product-inf'>
-                        <div className='product-namee'>
-                            <h3>{item.name}</h3>    
-                        </div>                    
-                        <p>{item.description}</p>
-                        <div className='product-des'>
-                            <h5>Available: {item.available_amount}</h5>
-                            <button>
-                                <FaPlus/>                         
-                            </button>                        
+            {data.map((item, index) => {
+                if(item.available_amount > 0) {
+                    return (
+                    <div className='compo-item'>
+                        <div className='compo-img'>
+                            <img src={img1} width="120"></img>
+                        </div>
+                        <div className='product-inf'>
+                            <div className='product-namee'>
+                                <h3>{item.name}</h3>    
+                            </div>                    
+                            <p>{item.description}</p>
+                            <div className='product-des'>
+                                <h5>Available: {item.available_amount}</h5>
+                                <button>
+                                    <FaPlus/>                         
+                                </button>                        
+                            </div>
                         </div>
                     </div>
-                </div>
+                    )
+                }
+            }
             )}
             </div>
             <Request/>  

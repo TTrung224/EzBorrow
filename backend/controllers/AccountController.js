@@ -144,6 +144,70 @@ class AccountController {
         }
     }    
 
+    // Support methods:
+    async getUserNameByEmail(email){
+        try {
+            let result = await User.findOne({ email: email });
+            const name = result.first_name + " " + result.last_name;
+            return name
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    
+    async getFineStatusByEmail(email){
+        try {
+            let result = await User.findOne({ email: email });
+            const name = result.first_name + " " + result.last_name;
+            return name
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async setFine(){
+        const {fine_message, fine_description, target_email} = req.body;
+        if (!(fine_message)) res.status(400).json({success: false, message: "fine cannot be empty"})
+        if (target_email) res.status(400).json({success: false, message: "cannot set to nobody"})
+        fineSet(fine_message, fine_description, target_email);
+        
+    }   
+
+    async resetFine(){
+        const {target_email} = req.body;
+        if (target_email) res.status(400).json({success: false, message: "cannot set to nobody"});
+        fineReset(target_email);
+    }
+
 }
+
+let fineSet = async (fineMessage, fineDes, userEmail) => {
+    try {
+        let userFine = await User.findOne({email: userEmail}, 'fine fineDescription');
+        if (!userFine) {
+            res.status(400).json({success: false, message: 'cannot find this user'})
+        }
+        userFine.fine = fineMessage;
+        userFine.fineDescription = fineDes;
+        res.status(200).json({success: true, message: `fine of user ${userEmail} is set`})
+    } catch (error) {
+        res.status(400).json({success: false, message: 'unallowed fine message'})
+    }
+};
+
+let fineReset = async (userEmail) => {
+    try {
+        
+        let userFine = await User.findOne({email: userEmail}, 'fine fineDescription');
+        if (!userFine) {
+            res.status(400).json({success: false, message: 'cannot find this user'})
+        }
+        userFine.fine = 'NONE';
+        userFine.fineDescription = 'NONE';
+        res.status(200).json({success: true, message: `fine of user ${userEmail} is reset`})
+    } catch (error) {
+        res.status(500).json({success: false, message: 'internal server error'})
+    }
+};
 
 module.exports = new AccountController();

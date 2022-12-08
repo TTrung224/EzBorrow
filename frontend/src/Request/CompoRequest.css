@@ -1,5 +1,5 @@
 .compo-container {
-    width: 70%;
+    width: 75%;
     position: absolute;
     margin-left: 25%;    
     display: flex;   
@@ -12,15 +12,18 @@
     display: flex;
     flex-wrap: wrap;
 }
+
 .compo-item {
     padding: 2px;
     border: 10px solid #00875A;
+    /* width: 40%; */
+    min-width: 225px;
+    max-width: 275px;
     width: 40%;
     height:300px;
     border-radius: 20px;
     margin-left: 40px;
     margin-bottom: 40px;
-    
 }
 
 .compo-img{

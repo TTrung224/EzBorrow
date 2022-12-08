@@ -7,6 +7,7 @@ import { useState, useEffect} from 'react'
 function List() {
 
     const [ data, setData] = useState([])
+    const [ auth, setAuth] = useState('student')
 
     const authAxios = axios.create({
         baseURL: 'http://localhost:4500/',
@@ -29,18 +30,20 @@ function List() {
     <div className='dashboard-container'>
         <table className='dashboard-table'>
             <thead>
-                <td>Request ID</td>
-                <td>Status</td>
+                <td>Request Date</td>
                 <td>Pickup Date</td>
+                <td>Status</td>
+                <td>Return Date</td>
                 <td>Item</td>
                 <td>Action</td>
             </thead>
             <tbody>
                 {data.map(item => 
                     <tr>
-                        <td>{item._id}</td>
-                        <td>{item.lecturer_status}</td>
+                        <td>{item.request_date.slice(0,10)}</td>
                         <td>{item.pickup_date.slice(0,10)}</td>
+                        <td>{item.lecturer_status}</td>
+                        <td>{item.return_date}</td>
                         <td>Arduino x1</td>
                         <td><Button variant='danger' className='action-btn'>Cancel</Button></td>
                     </tr>   
