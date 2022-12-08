@@ -8,6 +8,7 @@ const componentSchema = new mongoose.Schema({
   quantity: { type: Number, require: true },
   borrowed: { type: Number, default: 0 },
   available_amount: { type: Number},
+  categories: { type: String, require: true, enum: ['Arduino','Raspberry Pi','PCB','Motor','Module']}
 });
 
 module.exports = mongoose.model("component", componentSchema);
