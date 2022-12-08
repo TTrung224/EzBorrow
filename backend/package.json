@@ -16,9 +16,16 @@
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
+    "ejs": "^3.1.8",
+    "epoq": "^1.0.4",
     "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "html-to-text": "^9.0.0",
     "jsonwebtoken": "^8.5.1",
+    "juice": "^8.1.0",
     "mongoose": "^6.7.2",
+    "node-schedule": "^2.1.0",
+    "nodemailer": "^6.8.0",
     "nodemon": "^2.0.20"
   }
 }

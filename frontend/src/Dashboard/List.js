@@ -58,7 +58,6 @@ function List() {
             <tbody>
                 {data.map(item => 
                     <tr>
-                        <td>{item.createdAt}</td>
                         <td>{item.pickup_date.slice(0,10)}</td>
                         <td>{item.lecturer_status}</td>
                         <td>{item.return_date}</td>

@@ -145,6 +145,27 @@ class AccountController {
         }
     }    
 
+    // Support methods:
+    async getUserNameByEmail(email){
+        try {
+            let result = await User.findOne({ email: email });
+            const name = result.first_name + " " + result.last_name;
+            return name
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    
+    async getFineStatusByEmail(email){
+        try {
+            let result = await User.findOne({ email: email });
+            const name = result.first_name + " " + result.last_name;
+            return name
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     async setFine(req, res){
         const {fine_message, fine_description, target_email} = req.body;
         if (!(fine_message)) res.status(400).json({success: false, message: "fine cannot be empty"})

@@ -42,7 +42,9 @@
 .request-card{
     border-color: rgba(162, 162, 162, 0.607);
     border-style:solid;
-    width: 700px;
+   
+    max-width: 70%;
+    min-width: 400px;
     display: flex;
     flex-direction: column;
     padding: 20px 20px;
@@ -69,7 +71,9 @@
     
 }
 .card-btns button{
-    padding: 10px 40px;
+    padding: 10px 0px;
+    width: 40%;
+    min-width: 100px;
     border-radius: 8px;
     border-style: none;
 }
@@ -101,4 +105,17 @@
 .pickup-btn:hover ,.return-btn:hover{
     background-color: rgb(175, 175, 175);
 }
+
+@media screen and (max-width: 500px) {
+    .card-container{
+        margin-left: 0px;           
+    }
+    .request-card{
+        width: 100%;
+        max-width: none;
+    }
+    .card-item-info{
+        flex-direction: column;
+    }
+  }
 

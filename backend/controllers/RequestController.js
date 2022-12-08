@@ -1,5 +1,6 @@
 const Request = require("../model/request");
 const componentController = require('../controllers/componentController');
+const EmailService = require("../service/EmailService")
 const ComponentController = require("../controllers/componentController");
 const component = require("../model/component");
 const request = require("../model/request");
@@ -13,7 +14,6 @@ let checkFine = (userEmail) =>  {
         console.log(error)
         return "NO USER"
     }
-
 }
 
 class RequestController {
@@ -84,11 +84,11 @@ class RequestController {
     async create(req, res, next) {
         try {
             // Get user input
-            const { component_list, request_date, return_date, 
-                pickup_date, lecturer_email } = req.body;
+            const { component_list, expected_return_date, 
+                pickup_date, lecturer_email, course } = req.body;
 
             // Validate user input
-            if (!(component_list && request_date && return_date && pickup_date && lecturer_email)) {
+            if (!(component_list && expected_return_date && pickup_date && lecturer_email && course)) {
                 return res.status(400).send("All input is required");
             }
 
@@ -110,7 +110,11 @@ class RequestController {
                 }
             };  
             
-            const lecturer_status = (permission ? "pending" : "approved");
+            var lecturer_status = (permission ? "pending" : "approved");
+            if(req.user.user_type == "lecturer"){
+                lecturer_status = "approved";
+            }
+
             if(lecturer_status == "approved"){
                 var technician_status = "pending";
             } else if(lecturer_status == "pending"){
@@ -129,14 +133,14 @@ class RequestController {
             // Create request in our database
             const request = await Request.create({
                 component_list,
-                request_date,
-                return_date,
+                expected_return_date,
                 pickup_date,
                 borrower_email,
                 lecturer_email,
                 lecturer_status,
                 student_status,
                 technician_status,
+                course,
             });
 
             // Update component borrowed number
@@ -152,6 +156,13 @@ class RequestController {
                 };
                 componentController.update(updateReq);
             }; 
+
+            // Send email to lecturer/technician
+            if(permission){
+                EmailService.emailForLecturerApprove(request);
+            } else {
+                EmailService.emailForTechnicianApprove(request);
+            }
 
             // return new request
             res.status(201).json(request);
@@ -171,19 +182,29 @@ class RequestController {
                     if(req.user.user_type == "lecturer"){
                         updateRequest["lecturer_status"] = "approved";
                         updateRequest["technician_status"] = "pending";
+                        EmailService.emailForTechnicianApprove();
+
                     } else if(req.user.user_type == "technician"){
                         updateRequest["technician_status"] = "approved";
                         updateRequest["student_status"] = "ready";
+                        EmailService.emailForStudentApprovedStatus(req.params.id);
                     }
                     break;
                 };
 
                 case "cancel": {
                     if(req.user.user_type == "lecturer"){
-                        updateRequest.user_type = "canceled";
-                    } else if(req.user["user_type"] == "technician"){
-                        updateRequest.user_type = "canceled";
-                    } else if(req.user["user_type"] == "student"){
+                        updateRequest["lecturer_status"] = "canceled";
+                        updateRequest["technician_status"] = "canceled";
+                        updateRequest["student_status"] = "canceled";
+                        EmailService.emailForStudentCancelStatus(req.params.id, "by your lecturer, please contact with your lecturer for further information or review your course's/school's policy of equipment borrowing");
+
+                    } else if(req.user.user_type == "technician"){
+                        updateRequest["technician_status"] = "canceled";
+                        updateRequest["student_status"] = "canceled";
+                        EmailService.emailForStudentCancelStatus(req.params.id, `by technician, please contact with technician staff [${EmailService.technician_email}] for further information or review your course's/school's policy of equipment borrowing`);
+
+                    } else if(req.user.user_type == "student"){
                         updateRequest["student_status"] = "canceled";
                     }
                     break;
@@ -225,6 +246,25 @@ class RequestController {
         } catch (err) {
             console.log(err);
             res.status(500).send(err);
+        }
+    }
+
+    // Support methods:
+    async getRequestById(id){
+        try {
+            var result = await Request.findById(id);
+            return result;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    
+    async getPickedUp(){
+        try {
+            var result = await Request.find({student_status: "picked up"});
+            return result;
+        } catch (error) {
+            console.log(error);
         }
     }
 }
