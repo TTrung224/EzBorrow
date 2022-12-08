@@ -2,9 +2,11 @@
 const User = require("../model/account");
 const bcrypt =  require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const Components = require('../model/component')
-const { json } = require('body-parser');
-const {fineReset, fineSet} = require('./generalFunction')
+
+// const Components = require('../model/component')
+// const { json } = require('body-parser');
+// const {fineReset, fineSet} = require('./generalFunction')
+
 
 class AccountController {
     // [GET] account/
@@ -159,19 +161,59 @@ class AccountController {
     async getFineStatusByEmail(email){
         try {
             let result = await User.findOne({ email: email });
-            const name = result.first_name + " " + result.last_name;
-            return name
+            const status = result.fine;
+            return status;
         } catch (error) {
             console.log(error);
         }
     }
 
+    async fineSet(fineMessage, fineDes, userEmail){
+        try {
+            let userFine = await User.findOne({email: userEmail}, 'fine fineDescription');
+            if (!userFine) {
+                throw new Error('userNotFindError');
+                // res.status(400).json({success: false, message: 'cannot find this user'})
+            }
+            console.log(userFine);
+
+            userFine.fine = fineMessage;
+            userFine.fineDescription = fineDes;
+            userFine.save();
+            console.log(userFine);
+            return 'success'
+            // res.status(200).json({success: true, message: `fine of user ${userEmail} is set`})
+        } catch (error) {
+            if (error.message === 'userNotFindError') throw error
+            else throw new Error('fineMessageError')
+            // res.status(400).json({success: false, message: 'unallowed fine message'})
+        }
+    }
+
+    async fineReset (userEmail){
+        try {
+            let userFine = await User.findOne({email: userEmail}, 'fine fineDescription');
+            if (!userFine) {
+                throw new Error('userNotFindError');
+            }
+            userFine.fine = 'NONE';
+            userFine.fineDescription = 'NONE';
+            userFine.save();
+            return 'success'
+        } catch (error) {
+            if (error.message === 'userNotFindError') throw error
+            throw error;
+        }
+    }
+
+
+    // Future development
     async setFine(req, res){
         const {fine_message, fine_description, target_email} = req.body;
         if (!(fine_message)) res.status(400).json({success: false, message: "fine cannot be empty"})
         if (!target_email) res.status(400).json({success: false, message: "cannot set to nobody"})
         try {
-            const set = await fineSet(fine_message, fine_description, target_email);
+            const set = await this.fineSet(fine_message, fine_description, target_email);
             if (set === 'success') {
                 res.status(200).json({success: true, message: `fine of user ${target_email} is set`})
 
@@ -195,7 +237,7 @@ class AccountController {
         const {target_email} = req.body;
         if (!(target_email)) res.status(400).json({success: false, message: "cannot set to nobody"});
         try {
-            const reset = await fineReset(target_email);
+            const reset = await this.fineReset(target_email);
             if (reset === 'success') {
                 res.status(200).json({success: true, message: `fine of user ${target_email} is reset`})
             }
@@ -211,7 +253,5 @@ class AccountController {
     }
 
 }
-
-
 
 module.exports = new AccountController();

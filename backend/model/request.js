@@ -13,6 +13,7 @@ const requestSchema = new mongoose.Schema({
   note: {type: String},
   course: {type: String, require: true },
   createdAt: { type: Date},
+  reminded: { type: Boolean, default: false},
   }, {
     timestamps: true,
   }

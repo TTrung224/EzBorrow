@@ -3,7 +3,6 @@ const fs = require('fs');
 const ejs = require("ejs");
 const juice = require("juice");
 const AccountController = require("../controllers/AccountController")
-const RequestController = require("../controllers/RequestController")
 
 const technician_email = "technician@rmit.edu.vn";
 const website_link = "abc.com";
@@ -26,7 +25,7 @@ class EmailService {
 
     async readTemplate(templateName, templateVars){
 
-        const templatePath = `service/templates/${templateName}.html`;
+        const templatePath = `service/emailTemplates/${templateName}.html`;
         if (templateName && fs.existsSync(templatePath)) {
             const template = fs.readFileSync(templatePath, "utf-8");
             const html = ejs.render(template, templateVars);
@@ -84,17 +83,15 @@ class EmailService {
         }
     }
 
-    async emailForStudentApprovedStatus(id){
+    async emailForStudentApprovedStatus(request){
         try{
-            const request = RequestController.getRequestCreatedDateById(id);
-
             // const dateTimeStamp = request.createdAt;
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             // const createdDate  = new Date(dateTimeStamp);
             const createdDateString = request.createdAt.toLocaleDateString("en-US", options);
             const pickupDateString = request.pickup_date.toLocaleDateString("en-US", options);
 
-            const name = AccountController.getUserNameByEmail(request.student_email);
+            const name = await AccountController.getUserNameByEmail(request.borrower_email);
 
             const vars = {
                 "name" : name,
@@ -105,7 +102,7 @@ class EmailService {
             }
             const html = await this.readTemplate("studentApprovedStatus", vars)
 
-            mailOptions['to'] = request.student_email;
+            mailOptions['to'] = request.borrower_email;
             mailOptions['subject'] = "[EzBorrow] Your equipment borrowing request has been approved";
             mailOptions['html'] = html;
             this.sendMail();
@@ -115,26 +112,25 @@ class EmailService {
         }
     }
 
-    async emailForStudentCancelStatus(id, reason){
+    async emailForStudentCancelStatus(request, reason){
         try{
-            const request = RequestController.getRequestCreatedDateById(id);
-
             // const dateTimeStamp = request.createdAt;
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             // const createdDate  = new Date(dateTimeStamp);
             const createdDateString = request.createdAt.toLocaleDateString("en-US", options);
 
-            const name = AccountController.getUserNameByEmail(request.student_email);
+            const name = await AccountController.getUserNameByEmail(request.borrower_email);
 
             const vars = {
                 "name" : name,
                 "createdDate": createdDateString,
+                "reason": reason,
                 "link": "https://www.w3schools.com/nodejs/nodejs_email.asp",
                 "website_link": website_link,
             }
             const html = await this.readTemplate("studentCancelStatus", vars)
 
-            mailOptions['to'] = request.student_email;
+            mailOptions['to'] = request.borrower_email;
             mailOptions['subject'] = "[EzBorrow] Your equipment borrowing request has been canceled";
             mailOptions['html'] = html;
             this.sendMail();
@@ -144,9 +140,8 @@ class EmailService {
         }
     }
     
-    async emailForStudentReturnRemind(id){
+    async emailForStudentReturnRemind(request){
         try{
-            const request = RequestController.getRequestById(id);
 
             // const dateTimeStamp = request.createdAt;
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -157,7 +152,7 @@ class EmailService {
             const expectedReturnDate = new Date(request.expected_return_date);
             const expectedReturnDateString = expectedReturnDate.toLocaleDateString("en-US", options);
 
-            const name = AccountController.getUserNameByEmail(request.student_email);
+            const name = await AccountController.getUserNameByEmail(request.borrower_email);
 
             const vars = {
                 "name" : name,
@@ -168,7 +163,7 @@ class EmailService {
             }
             const html = await this.readTemplate("studentReturnRemind", vars)
 
-            mailOptions['to'] = request.student_email;
+            mailOptions['to'] = request.borrower_email;
             mailOptions['subject'] = "[EzBorrow] Equipment borrowing return reminder";
             mailOptions['html'] = html;
             this.sendMail();
@@ -178,10 +173,8 @@ class EmailService {
         }
     }    
     
-    async emailForStudentFineAnnounce(id){
+    async emailForStudentFineAnnounce(request){
         try{
-            const request = RequestController.getRequestById(id);
-
             // const dateTimeStamp = request.createdAt;
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             // const createdDate  = new Date(dateTimeStamp);
@@ -191,7 +184,7 @@ class EmailService {
             const expectedReturnDate = new Date(request.expected_return_date);
             const expectedReturnDateString = expectedReturnDate.expectedReturnDate("en-US", options);
 
-            const name = AccountController.getUserNameByEmail(request.student_email);
+            const name = await AccountController.getUserNameByEmail(request.borrower_email);
 
             const vars = {
                 "name" : name,
@@ -202,7 +195,7 @@ class EmailService {
             }
             const html = await this.readTemplate("studentFineAnnounce", vars)
 
-            mailOptions['to'] = request.student_email;
+            mailOptions['to'] = request.borrower_email;
             mailOptions['subject'] = "[EzBorrow] Fine announcement due to late";
             mailOptions['html'] = html;
             this.sendMail();
