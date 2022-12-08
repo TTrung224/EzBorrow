@@ -165,18 +165,48 @@ class AccountController {
         }
     }
 
-    async setFine(){
+    async setFine(req, res){
         const {fine_message, fine_description, target_email} = req.body;
         if (!(fine_message)) res.status(400).json({success: false, message: "fine cannot be empty"})
-        if (target_email) res.status(400).json({success: false, message: "cannot set to nobody"})
-        fineSet(fine_message, fine_description, target_email);
-        
+        if (!target_email) res.status(400).json({success: false, message: "cannot set to nobody"})
+        try {
+            const set = await fineSet(fine_message, fine_description, target_email);
+            if (set === 'success') {
+                res.status(200).json({success: true, message: `fine of user ${target_email} is set`})
+
+            }
+        } catch (error) {
+            if (error.message === 'userNotFindError'){
+                res.status(400).json({success: false, message: 'cannot find this user'})
+
+            }
+            else if (error.message === 'fineMessageError'){
+                res.status(400).json({success: false, message: 'unallowed fine message'})
+
+            } else {
+                console.log(error)
+                res.status(500).json({success: false, message: 'internal server error'})
+            }
+        }
     }   
 
-    async resetFine(){
+    async resetFine(req, res){
         const {target_email} = req.body;
-        if (target_email) res.status(400).json({success: false, message: "cannot set to nobody"});
-        fineReset(target_email);
+        if (!(target_email)) res.status(400).json({success: false, message: "cannot set to nobody"});
+        try {
+            const reset = await fineReset(target_email);
+            if (reset === 'success') {
+                res.status(200).json({success: true, message: `fine of user ${target_email} is reset`})
+            }
+        } catch (error) {
+            if (error.message === 'userNotFindError'){
+                res.status(400).json({success: false, message: 'cannot find this user'})
+
+            }else {
+                console.log(error)
+                res.status(500).json({success: false, message: 'internal server error'})
+            }
+        }
     }
 
 }
@@ -185,13 +215,21 @@ let fineSet = async (fineMessage, fineDes, userEmail) => {
     try {
         let userFine = await User.findOne({email: userEmail}, 'fine fineDescription');
         if (!userFine) {
-            res.status(400).json({success: false, message: 'cannot find this user'})
+            throw new Error('userNotFindError');
+            // res.status(400).json({success: false, message: 'cannot find this user'})
         }
+        console.log(userFine);
+
         userFine.fine = fineMessage;
         userFine.fineDescription = fineDes;
-        res.status(200).json({success: true, message: `fine of user ${userEmail} is set`})
+        userFine.save();
+        console.log(userFine);
+        return 'success'
+        // res.status(200).json({success: true, message: `fine of user ${userEmail} is set`})
     } catch (error) {
-        res.status(400).json({success: false, message: 'unallowed fine message'})
+        if (error.message === 'userNotFindError') throw error
+        else throw new Error('fineMessageError')
+        // res.status(400).json({success: false, message: 'unallowed fine message'})
     }
 };
 
@@ -200,13 +238,15 @@ let fineReset = async (userEmail) => {
         
         let userFine = await User.findOne({email: userEmail}, 'fine fineDescription');
         if (!userFine) {
-            res.status(400).json({success: false, message: 'cannot find this user'})
+            throw new Error('userNotFindError');
         }
         userFine.fine = 'NONE';
         userFine.fineDescription = 'NONE';
-        res.status(200).json({success: true, message: `fine of user ${userEmail} is reset`})
+        userFine.save();
+        return 'success'
     } catch (error) {
-        res.status(500).json({success: false, message: 'internal server error'})
+        if (error.message === 'userNotFindError') throw error
+        throw error;
     }
 };
 

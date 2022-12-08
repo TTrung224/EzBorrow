@@ -11,7 +11,7 @@ function List() {
     const [ auth, setAuth] = useState('student')
 
     const authAxios = axios.create({
-        baseURL: 'http://localhost:4500/',
+        baseURL: 'http://localhost:4000/',
         withCredentials: true
     })
 
