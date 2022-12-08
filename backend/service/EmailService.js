@@ -143,6 +143,74 @@ class EmailService {
             console.log(err);
         }
     }
+    
+    async emailForStudentReturnRemind(id){
+        try{
+            const request = RequestController.getRequestById(id);
+
+            // const dateTimeStamp = request.createdAt;
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            // const createdDate  = new Date(dateTimeStamp);
+            const createdDate = new Date(request.createdAt);
+            const createdDateString = createdDate.toLocaleDateString("en-US", options);
+
+            const expectedReturnDate = new Date(request.expected_return_date);
+            const expectedReturnDateString = expectedReturnDate.toLocaleDateString("en-US", options);
+
+            const name = AccountController.getUserNameByEmail(request.student_email);
+
+            const vars = {
+                "name" : name,
+                "createdDate": createdDateString,
+                "expectedReturnDate": expectedReturnDateString,
+                "link": "https://www.w3schools.com/nodejs/nodejs_email.asp",
+                "website_link": website_link,
+            }
+            const html = await this.readTemplate("studentReturnRemind", vars)
+
+            mailOptions['to'] = request.student_email;
+            mailOptions['subject'] = "[EzBorrow] Equipment borrowing return reminder";
+            mailOptions['html'] = html;
+            this.sendMail();
+
+        } catch(err){
+            console.log(err);
+        }
+    }    
+    
+    async emailForStudentFineAnnounce(id){
+        try{
+            const request = RequestController.getRequestById(id);
+
+            // const dateTimeStamp = request.createdAt;
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            // const createdDate  = new Date(dateTimeStamp);
+            const createdDate = new Date(request.createdAt);
+            const createdDateString = createdDate.toLocaleDateString("en-US", options);
+
+            const expectedReturnDate = new Date(request.expected_return_date);
+            const expectedReturnDateString = expectedReturnDate.expectedReturnDate("en-US", options);
+
+            const name = AccountController.getUserNameByEmail(request.student_email);
+
+            const vars = {
+                "name" : name,
+                "createdDate": createdDateString,
+                "expectedReturnDate": expectedReturnDateString,
+                "link": "https://www.w3schools.com/nodejs/nodejs_email.asp",
+                "website_link": website_link,
+            }
+            const html = await this.readTemplate("studentFineAnnounce", vars)
+
+            mailOptions['to'] = request.student_email;
+            mailOptions['subject'] = "[EzBorrow] Fine announcement due to late";
+            mailOptions['html'] = html;
+            this.sendMail();
+
+        } catch(err){
+            console.log(err);
+        }
+    }
 }
 
 module.exports = new EmailService();

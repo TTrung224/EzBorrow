@@ -1,5 +1,6 @@
 const RequestController = require("../controllers/RequestController");
 const AccountController = require("../controllers/AccountController");
+const EmailService = require("./EmailService");
 const epoq = require('epoq');
 
 RequestController
@@ -32,10 +33,11 @@ async function returnRemindAndFine(dateNow){
         console.log(dateNow + " - " + remindDate);
 
         if(dateNow.getTime() <= fineDate.getTime()){
-
             console.log("fine");
+            EmailService.emailForStudentFineAnnounce(request._id);
         } else if(dateNow.getTime() <= remindDate.getTime()){
             console.log("remind");
+            EmailService.emailForStudentReturnRemind(request._id);
         }
     })
 }

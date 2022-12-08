@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title>student return remind</title>
+    </head>
+    <style>
+        img{
+            width: 25%;
+        }
+        footer {
+            margin: 20px 0px;
+        }
+        footer p{
+            text-align: center;
+            font-size: 12;
+            color: rgb(56, 56, 56);
+            padding: 0;
+        }
+    </style>
+    
+    <body>
+        <h2>Hello <%= name %></h2>
+        <p>Your equipment borrowing request on <%= createdDate %> has return date on <%= expectedReturnDate %>. Don't forget to return equipment before this date (except for sunday). Access EzBorrow <a href="<%= link %>">here</a> to view your request</p>
+        <p>Kind regards,</p>
+        <p><strong>EzBorrow website</strong></p>
+        <img  src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/RMIT_University_Logo.svg/2560px-RMIT_University_Logo.svg.png" alt="RMIT logo">
+        
+    </body>
+
+    <footer>
+        <p>You received this email from EzBorrow website</p>   
+        <p>Please do not reply  to this email. Email sent to this address will not be answered.</p>
+        <p>Ezborrow | website: <a href="<%= website_link %>">link</a></p>
+    </footer>
+
+</html>

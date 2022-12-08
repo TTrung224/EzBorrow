@@ -87,7 +87,6 @@ class RequestController {
             const { component_list, expected_return_date, 
                 pickup_date, lecturer_email, course } = req.body;
 
-
             // Validate user input
             if (!(component_list && expected_return_date && pickup_date && lecturer_email && course)) {
                 return res.status(400).send("All input is required");

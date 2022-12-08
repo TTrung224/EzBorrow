@@ -27,9 +27,13 @@ function CompoRequest() {
             load();
     },[]);
 
+    const additem = (name, id) => {
+        sessionStorage.setItem('name', name);
+        sessionStorage.setItem('id', id);
+    }
+
 
     console.log('data2: ', data)
-
       
   
     return (
