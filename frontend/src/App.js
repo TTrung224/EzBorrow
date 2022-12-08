@@ -15,6 +15,9 @@ function App() {
 
   const [auth, setAuth] = useState()
   const navigate = useNavigate();
+  const currentCartItems = (sessionStorage.getItem('cart-items')) ? JSON.parse(sessionStorage.getItem('cart-items')) : [];
+
+
 
 
   const authAxios = axios.create({
