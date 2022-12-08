@@ -8,7 +8,7 @@ import {FaPlus} from 'react-icons/fa';
 
 function CompoRequest() {
     const img1 = 'http://mlab.vn/image/data/Bai%20viet%20ky%20thuat/Arduino/bai%202%20Nhung%20dieu%20co%20ban/ArduinoUnoR3.jpg'
-    const number = 1
+    const itemList = [{name: 'Arduino', id: '1234'}];
 
     const [ data, setData] = useState([])
 
@@ -27,11 +27,16 @@ function CompoRequest() {
             load();
     },[]);
 
-    const additem = (name, id) => {
-        sessionStorage.setItem('name', name);
-        sessionStorage.setItem('id', id);
+    const additem = (e, name, id) => {
+        const item = {
+            name : name,
+            id : id,
+        };
+        itemList.push(item);
+        console.log(item);
+        sessionStorage.setItem('itemList', itemList)
+        console.log(sessionStorage.getItem('itemList'))
     }
-
 
     console.log('data2: ', data)
       
@@ -53,7 +58,7 @@ function CompoRequest() {
                             <p>{item.description}</p>
                             <div className='product-des'>
                                 <h5>Available: {item.available_amount}</h5>
-                                <button>
+                                <button onClick={(e) => additem(e, item.name, item._id)}>
                                     <FaPlus/>                         
                                 </button>                        
                             </div>
