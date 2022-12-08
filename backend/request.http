@@ -16,6 +16,16 @@ Content-Type: application/json
     "target_email": "studenttest2@gmail.com" 
 
 }
+
+### 
+PUT http://localhost:4000/account/resetfine
+Content-Type: application/json
+
+{
+    "target_email": "studenttest2@gmail.com" 
+}
+
+
 ###
 POST http://localhost:4000/account/login
 Content-Type: application/json
