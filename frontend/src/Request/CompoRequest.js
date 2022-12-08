@@ -47,7 +47,7 @@ function CompoRequest() {
                             <img src={img1} width="120"></img>
                         </div>
                         <div className='product-inf'>
-                            <div className='product-namee'>
+                            <div className='product-name'>
                                 <h3>{item.name}</h3>    
                             </div>                    
                             <p>{item.description}</p>
