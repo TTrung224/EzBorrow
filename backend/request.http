@@ -6,6 +6,26 @@ Content-Type: application/json
     "password":"thisisapassword"
 }
 
+### 
+PUT http://localhost:4000/account/setfine
+Content-Type: application/json
+
+{
+    "fine_message": "LATE_RETURN",
+    "fine_description": "someasdfsafd",
+    "target_email": "studenttest2@gmail.com" 
+
+}
+
+### 
+PUT http://localhost:4000/account/resetfine
+Content-Type: application/json
+
+{
+    "target_email": "studenttest2@gmail.com" 
+}
+
+
 ###
 POST http://localhost:4000/account/login
 Content-Type: application/json
@@ -35,12 +55,12 @@ Content-Type: application/json
 
 
 ###
-POST http://localhost:3000/login
+POST http://localhost:4000/account/login
 Content-Type: application/json
 
 {
-    "email": "v3878281@rmit.edu.vn",
-    "password":"thisisapassword"
+    "email": "techtest2@gmail.com",
+    "password": "test"
 }
 
 ###
@@ -50,15 +70,27 @@ Content-Type: application/json
 
 {
     "first_name": "Tech",
-    "last_name": "nician",
-    "email": "v3878281@rmit.edu.vn",
-    "password": "thisisapassword",
-    "type": "admin"
+    "last_name": "nician 22222",
+    "email": "techtest2@gmail.com",
+    "password": "test",
+    "type": "technician"
+}
+
+###
+POST http://localhost:4000/account/register
+Content-Type: application/json
+
+{
+    "first_name": "stu",
+    "last_name": "dent 22222",
+    "email": "studenttest2@gmail.com",
+    "password": "test",
+    "type": "student"
 }
 
 ###
 
-GET http://localhost:4000/account/getAccount
+GET http://localhost:4000/account/getaccount
 
 
 ###

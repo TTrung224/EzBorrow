@@ -3,6 +3,7 @@ import './List.css'
 import Button from 'react-bootstrap/Button';
 import axios from 'axios'
 import { useState, useEffect} from 'react'
+import { FaEnvelopeSquare } from 'react-icons/fa';
 
 function List() {
 
@@ -10,18 +11,35 @@ function List() {
     const [ auth, setAuth] = useState('student')
 
     const authAxios = axios.create({
-        baseURL: 'http://localhost:4500/',
+        baseURL: 'http://localhost:4000/',
         withCredentials: true
     })
 
     useEffect(() => {
+        const check = async () => {
+            const response = await authAxios.get('/account/getAccount')
+            const auth = response.data;
+            console.log('auth:', auth);
+            setAuth(auth);
+
+        }
+
         const load = async () => {
-            const response = await authAxios.get('/request');
-            const data = await response.data;
-            console.log(data);
-            setData(data);
+            if(auth.type === 'technician') {
+                const response = await authAxios.get('/request');
+                const data = await response.data;
+                console.log(data);
+                setData(data);
+            } else{
+                const response = await authAxios.get('/request/myRequest');
+                const data = await response.data;
+                console.log(data);
+                setData(data);
+            }
         };
-            load();
+
+        check();
+        load();
     },[]);
 
 
@@ -40,7 +58,6 @@ function List() {
             <tbody>
                 {data.map(item => 
                     <tr>
-                        <td>{item.request_date.slice(0,10)}</td>
                         <td>{item.pickup_date.slice(0,10)}</td>
                         <td>{item.lecturer_status}</td>
                         <td>{item.return_date}</td>

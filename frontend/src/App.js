@@ -9,25 +9,32 @@ import SearchBar from './Common/Search Bar/SearchBar';
 import React from 'react'
 import {useState, useEffect} from 'react'
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 function App() {
 
   const [auth, setAuth] = useState()
   const navigate = useNavigate();
-  console.log(auth)
-  useEffect(() => {
-    const auth = JSON.parse(localStorage.getItem('auth'));
-    if (auth) {
-     setAuth(auth);
-    }
-    
-    if(!auth) {
-      navigate("/login", { replace: true });
-    } else {
-      navigate("/", {replace: true});
-    }
-  }, []);
 
+
+  const authAxios = axios.create({
+    baseURL: 'http://localhost:4000/',
+    withCredentials: true
+  })
+
+  useEffect(() => {
+    const check = async () => {
+      const response = await authAxios.get('/account/getAccount')
+      const auth = response.data;
+      setAuth(auth);
+      if(auth !== 'lecturer' || auth !== 'student' || auth !== 'technician'){
+        navigate("/hero", {replace: true})
+      } else {
+        navigate("/", {replace: true})
+      }
+    }
+    check();
+  },[]);
 
 
   return (

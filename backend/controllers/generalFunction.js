@@ -1,0 +1,1 @@
+//this file aimed to store common functions
