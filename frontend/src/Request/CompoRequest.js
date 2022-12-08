@@ -13,7 +13,7 @@ function CompoRequest() {
     const [ data, setData] = useState([])
 
     const authAxios = axios.create({
-        baseURL: 'http://localhost:4500/',
+        baseURL: 'http://localhost:4000/',
         withCredentials: true
     })
 
