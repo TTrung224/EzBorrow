@@ -1,14 +1,15 @@
 const Request = require("../model/request");
-const componentController = require('../controllers/componentController');
 const EmailService = require("../service/EmailService")
-const ComponentController = require("../controllers/componentController");
-const component = require("../model/component");
-const request = require("../model/request");
-const User = require("../model/account");
+const ComponentController = require("./ComponentController");
+// const component = require("../model/component");
+// const request = require("../model/request");
+// const User = require("../model/account");
+const Account = require("../model/account");
+const AccountController = require("./AccountController");
 
 let checkFine = (userEmail) =>  {
     try {
-        let userFine = fineOne({email: userEmail}, 'fine fineDescription');
+        let userFine = Account.findOne({email: userEmail}, 'fine fineDescription');
         return userFine;
     } catch (error) {
         console.log(error)
@@ -95,8 +96,8 @@ class RequestController {
             // Check component permission
             var permission = false;
             for (const component of component_list){
-                let componentObject = await componentController.getComponent(component.id);
-                let componentPermission = await componentController.checkPermission(componentObject);
+                let componentObject = await ComponentController.getComponent(component.id);
+                let componentPermission = await ComponentController.checkPermission(componentObject);
                 if(!permission){
                     if(componentPermission){
                         permission = true;
@@ -105,7 +106,7 @@ class RequestController {
                     }
                 }
                 // Check component availability
-                if(!(await componentController.checkAvailability(componentObject, component.amount))){
+                if(!(await ComponentController.checkAvailability(componentObject, component.amount))){
                     throw "Component in list is not available";
                 }
             };  
@@ -154,7 +155,7 @@ class RequestController {
                         "id" : component.id
                     }
                 };
-                componentController.update(updateReq);
+                ComponentController.update(updateReq);
             }; 
 
             // Send email to lecturer/technician
@@ -176,7 +177,7 @@ class RequestController {
     async update(req, res, next) {
         try{
             var updateRequest = {}
-
+            const requestForEmail = await Request.findById(req.params.id);
             switch(req.body.type){
                 case "approve": {
                     if(req.user.user_type == "lecturer"){
@@ -187,7 +188,7 @@ class RequestController {
                     } else if(req.user.user_type == "technician"){
                         updateRequest["technician_status"] = "approved";
                         updateRequest["student_status"] = "ready";
-                        EmailService.emailForStudentApprovedStatus(req.params.id);
+                        EmailService.emailForStudentApprovedStatus(requestForEmail);
                     }
                     break;
                 };
@@ -197,12 +198,12 @@ class RequestController {
                         updateRequest["lecturer_status"] = "canceled";
                         updateRequest["technician_status"] = "canceled";
                         updateRequest["student_status"] = "canceled";
-                        EmailService.emailForStudentCancelStatus(req.params.id, "by your lecturer, please contact with your lecturer for further information or review your course's/school's policy of equipment borrowing");
+                        EmailService.emailForStudentCancelStatus(requestForEmail, "by your lecturer, please contact with your lecturer for further information or review your course's/school's policy of equipment borrowing");
 
                     } else if(req.user.user_type == "technician"){
                         updateRequest["technician_status"] = "canceled";
                         updateRequest["student_status"] = "canceled";
-                        EmailService.emailForStudentCancelStatus(req.params.id, `by technician, please contact with technician staff [${EmailService.technician_email}] for further information or review your course's/school's policy of equipment borrowing`);
+                        EmailService.emailForStudentCancelStatus(requestForEmail, `by technician, please contact with technician staff [${EmailService.technician_email}] for further information or review your course's/school's policy of equipment borrowing`);
 
                     } else if(req.user.user_type == "student"){
                         updateRequest["student_status"] = "canceled";
@@ -218,6 +219,7 @@ class RequestController {
                 case "return": {
                     updateRequest["student_status"] = "returned";
                     updateRequest["actual_return_date"] = Date.now();
+                    AccountController.fineReset(Request.findById(req.params.id, "borrower_email"))
                     break;
                 }
             }
@@ -237,7 +239,7 @@ class RequestController {
                             "id" : component.id
                         }
                     };
-                    componentController.update(updateReq);
+                    ComponentController.update(updateReq);
                 }; 
             }
 
@@ -265,6 +267,47 @@ class RequestController {
             return result;
         } catch (error) {
             console.log(error);
+        }
+    }
+    
+    async getWaiting(){
+        try {
+            var result = await Request.find({student_status: "waiting"});
+            return result;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async autoCancel(requestId){
+        try{
+            var updateRequest = {}
+            updateRequest["lecturer_status"] = "canceled";
+            updateRequest["technician_status"] = "canceled";
+            updateRequest["student_status"] = "canceled";
+            const result = await Request.updateOne({_id: requestId}, updateRequest);
+        
+            // minus the borrowed number of component
+            var request = await Request.findOne({_id: requestId});
+            EmailService.emailForStudentCancelStatus(request, "by the system because it was waiting for approval for more than 3 days, please make a new request");
+
+            for (const component of request.component_list){
+                const updateReq = {
+                    "body": {
+                        "updateBorrowed" : [component.amount, "minus"],
+                        "updateComponent" : {},
+                    },
+                    "params": {
+                        "id" : component.id
+                    }
+                };
+                ComponentController.update(updateReq);
+            };
+
+            // console.log(result.acknowledged);
+
+        }catch(err){
+            console.log(err);
         }
     }
 }
