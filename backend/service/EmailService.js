@@ -5,6 +5,7 @@ const juice = require("juice");
 const AccountController = require("../controllers/AccountController")
 
 const technician_email = "technician@rmit.edu.vn";
+// const technician_email = "s3891724@rmit.edu.vn";
 const website_link = "abc.com";
 
 const transporter = nodemailer.createTransport({

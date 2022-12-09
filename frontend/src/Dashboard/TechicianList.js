@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import axios from 'axios'
 import { useState, useEffect} from 'react'
 
-function List() {
+function TechnicianList() {
 
     const [ data, setData] = useState([])
 
@@ -63,38 +63,31 @@ function List() {
     }
     return(
         <div className="card-container">
-            {data.map(item =>
+            {data.map(request =>
             <div className="request-card">
                 <div className="card-item-info">
                         <div className="card-info">
-                            <p>Request date: {item.createdAt}</p>
-                            <p>Borrower email: {item.borrower_email}</p>
-                            <p>Pickup date: {item.pickup_date}</p>
-                            <p>Expected return day: {item.expected_return_date}</p>
-                            <p>Actual return day: {item.actual_return_date}</p>
-                            <p>Student status: {item.student_status}</p>
-                            <p>Technician stuatus: {item.technician_status}</p>
+                            <p>Request date: {request.createdAt}</p>
+                            <p>Borrower email: {request.borrower_email}</p>
+                            <p>Pickup date: {request.pickup_date}</p>
+                            <p>Expected return day: {request.expected_return_date}</p>
+                            <p>Actual return day: {request.actual_return_date}</p>
+                            <p>Student status: {request.student_status}</p>
+                            <p>Technician stuatus: {request.technician_status}</p>
                         </div>
                         <div className="car-item-list">
                             <p>item list: </p>
-                            {item.component_list.map(component =>
+                            {request.component_list.map(component =>
                                 <ul>
                                     <li>{component.name}</li>
                                     <li>{component.amount}</li>
                                 </ul>)}
                         </div>    
-                </div>
-             
-                    {DisplayBtn(item)}
-                
-                    
-                
-                
-                
-
+                </div>    
+                    {DisplayBtn(request)}
             </div>)}
         </div> 
       
         
 )}
-export default List
+export default TechnicianList

@@ -4,6 +4,7 @@ import Navbar from './Common/Navbar'
 import Banner from './Banner'
 import Request from './Request/CompoRequest'
 import List from './Dashboard/List'
+import TechnicianList from './Dashboard/TechicianList'
 import Login from './Common/Login/login';
 import SearchBar from './Common/Search Bar/SearchBar';
 import React from 'react'
@@ -48,7 +49,8 @@ function App() {
           <Route path='/hero' element={<><Banner/></>}/>
           <Route path="/">
             <Route index={true} element={<><SearchBar/><Page auth={auth}/></>}/>
-            <Route path="dashboard" element={<><SearchBar/><Page/><List/></>}/>
+            {/* <Route path="dashboard" element={<><SearchBar/><Page/><List/></>}/> */}
+            <Route path="dashboard" element={<><SearchBar/><Page/><TechnicianList/></>}/>
             <Route path="request" element={<><SearchBar/><Page/><Request/></>}/>
           </Route>
           <Route path='/login' element={<><Login/></>}/>

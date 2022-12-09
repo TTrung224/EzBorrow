@@ -178,6 +178,7 @@ class RequestController {
         try{
             var updateRequest = {}
             const requestForEmail = await Request.findById(req.params.id);
+            if(!requestForEmail){throw "no record matched";}
             switch(req.body.type){
                 case "approve": {
                     if(req.user.user_type == "lecturer"){
@@ -219,7 +220,7 @@ class RequestController {
                 case "return": {
                     updateRequest["student_status"] = "returned";
                     updateRequest["actual_return_date"] = Date.now();
-                    AccountController.fineReset(Request.findById(req.params.id, "borrower_email"))
+                    AccountController.fineReset(requestForEmail.borrower_email);
                     break;
                 }
             }
