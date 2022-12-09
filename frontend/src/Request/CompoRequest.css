@@ -38,6 +38,11 @@
     display: flex;
     justify-content: space-around;
     color: #00875A;
+    align-items: center;
+}
+
+.product-des h5{
+    margin-bottom: 0;
 }
 
 .product-des button{
