@@ -280,6 +280,15 @@ class RequestController {
         }
     }
 
+    async setReminded(requestId){
+        try{
+            const result = await Request.updateOne({_id: requestId}, {"reminded": true});
+            console.log(result.acknowledged);
+        }catch(err){
+            console.log(err);
+        }
+    }
+
     async autoCancel(requestId){
         try{
             var updateRequest = {}

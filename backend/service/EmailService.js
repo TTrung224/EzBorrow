@@ -183,7 +183,7 @@ class EmailService {
             const createdDateString = createdDate.toLocaleDateString("en-US", options);
 
             const expectedReturnDate = new Date(request.expected_return_date);
-            const expectedReturnDateString = expectedReturnDate.expectedReturnDate("en-US", options);
+            const expectedReturnDateString = expectedReturnDate.toLocaleDateString("en-US", options);
 
             const name = await AccountController.getUserNameByEmail(request.borrower_email);
 

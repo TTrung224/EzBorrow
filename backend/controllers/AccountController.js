@@ -162,6 +162,7 @@ class AccountController {
         try {
             let result = await User.findOne({ email: email });
             const status = result.fine;
+            console.log(status);
             return status;
         } catch (error) {
             console.log(error);
@@ -175,12 +176,12 @@ class AccountController {
                 throw new Error('userNotFindError');
                 // res.status(400).json({success: false, message: 'cannot find this user'})
             }
-            console.log(userFine);
+            // console.log(userFine);
 
             userFine.fine = fineMessage;
             userFine.fineDescription = fineDes;
             userFine.save();
-            console.log(userFine);
+            // console.log(userFine);
             return 'success'
             // res.status(200).json({success: true, message: `fine of user ${userEmail} is set`})
         } catch (error) {

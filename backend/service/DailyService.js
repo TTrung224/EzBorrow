@@ -10,7 +10,7 @@ async function dailyService(){
         var dateNow = new Date();
         // console.log(dateNow);
         dateNow.setUTCHours(0,0,0,0);
-        returnRemind(dateNow);
+        returnRemindAndFine(dateNow);
         autoCancel(dateNow);
     } catch(err){
         console.log(err);
@@ -23,25 +23,32 @@ async function returnRemindAndFine(dateNow){
         const requests = await RequestController.getPickedUp();
         requests.map(function(request){
             var dateExpectToReturn = request.expected_return_date;
-            console.log(dateExpectToReturn)
             dateExpectToReturn.setUTCHours(0,0,0,0);
-            console.log(dateExpectToReturn)
 
-            var remindDate = dateExpectToReturn;
-            remindDate.setUTCDate(dateExpectToReturn.getDate()-1);
-            var fineDate = dateExpectToReturn;
-            fineDate.setUTCDate(dateExpectToReturn.getDate()+2);
+            var remindDate = new Date(dateExpectToReturn);
+            remindDate.setUTCDate(remindDate.getDate()-1);
+            var fineDate = new Date(dateExpectToReturn);
+            fineDate.setUTCDate(fineDate.getDate()+2);
 
-            console.log(dateNow + " - " + remindDate);
+            console.log("remind: " + dateNow + " - " + remindDate);
+            console.log("fine: " + dateNow + " - " + fineDate);
 
             if(dateNow.getTime() >= fineDate.getTime()){
-                if(AccountController.getFineStatusByEmail(request.borrower_email) == "NONE"){
-                    AccountController.fineSet("LATE_RETURN", "overdue of return date", request.borrower_email)
-                    EmailService.emailForStudentFineAnnounce(request._id);
-                }
+                console.log("meet fine condition");
+                AccountController.getFineStatusByEmail(request.borrower_email).then(fineStatus =>{
+                    if(fineStatus == "NONE"){
+                        console.log("start fine");
+                        AccountController.fineSet("LATE_RETURN", "overdue of return date", request.borrower_email)
+                        EmailService.emailForStudentFineAnnounce(request);
+                        console.log("fine")
+                    } 
+                })
+                
             } else if(dateNow.getTime() >= remindDate.getTime()){
                 if(!request.reminded){
-                    EmailService.emailForStudentReturnRemind(request._id);
+                    EmailService.emailForStudentReturnRemind(request);
+                    RequestController.setReminded(request._id);
+                    console.log("remind")
                 }
             }
         });
@@ -55,19 +62,16 @@ async function autoCancel(dateNow){
         const requests = await RequestController.getWaiting();
         requests.map(function(request){
             var createdDate = request.createdAt;
-            console.log(createdDate)
             createdDate.setUTCHours(0,0,0,0);
-            console.log(createdDate)
 
-            var autoCancelDate = createdDate
-            console.log(autoCancelDate)
+            var autoCancelDate = new Date(createdDate);
             autoCancelDate.setUTCDate(createdDate.getDate() + 3);
-            console.log(autoCancelDate)
 
-            console.log(dateNow + " - " + autoCancelDate);
+            console.log("auto cancel: " + dateNow + " - " + autoCancelDate);
 
             if(dateNow.getTime() >= autoCancelDate.getTime()){
                 RequestController.autoCancel(request._id);
+                console.log("auto canceled");
             }
         });
     } catch(err){
