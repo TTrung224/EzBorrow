@@ -38,7 +38,7 @@ function TechnicianList() {
         else if(item.student_status == "ready"){
             return(
                 <div className="card-btns">
-                    <button onClick={() => requestBtnHandler("pickup", item._id)} className="pickup-btn">Pick up</button>
+                    <button onClick={() => requestBtnHandler("pickUp", item._id)} className="pickup-btn">Pick up</button>
                 </div>
             )
         }

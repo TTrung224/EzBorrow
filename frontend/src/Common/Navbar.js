@@ -5,6 +5,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import Logout from './Logout'
 import {LinkContainer} from 'react-router-bootstrap';
 import icon from './icon.png';
+import { useNavigate } from "react-router-dom";
 
 const Profile = (
   <img
@@ -15,6 +16,7 @@ const Profile = (
 )
 
 function Navbar() {
+  const navigate = useNavigate();
   const [modalShow, setModalShow] = React.useState(false);
 
   return (
@@ -25,9 +27,9 @@ function Navbar() {
           </div>
           <div className='profile'>
             <DropdownButton id="dropdown-item-button" title={Profile} variant="transparent">
-              <LinkContainer to="/login">
-                <Dropdown.Item as="button">Login</Dropdown.Item>
-              </LinkContainer>
+              {/* <LinkContainer to="/login"> */}
+                <Dropdown.Item as="button" onClick={() => navigate("/login", {replace: true})}>Login</Dropdown.Item>
+              {/* </LinkContainer> */}
               <Dropdown.Item as="button" onClick={() => setModalShow(true)}>Logout</Dropdown.Item>
             </DropdownButton>
           </div>
