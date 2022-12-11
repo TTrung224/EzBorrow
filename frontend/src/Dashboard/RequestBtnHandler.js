@@ -13,12 +13,12 @@ export function requestBtnHandler(type, id) {
     .then((res)=>{
         console.log("res:", res)
         if(res.status === 200){
-            console.log("test")
-            navigate("/dashboard", {replace: true});
+            console.log("test");
         }
         if(res.status === 500) {
-            console.log("Server error")
-            setError("Server error")
+            console.log("Server error");
+            // setError("Server error");
         }
+        window.location.reload(false);
     })
 }

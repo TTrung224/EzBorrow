@@ -9,7 +9,6 @@ import { requestBtnHandler } from './RequestBtnHandler';
 const format = 'DD MMM, yyyy';
 
 function TechnicianList() {
-
     const [data, setData] = useState([])
 
     const authAxios = axios.create({
