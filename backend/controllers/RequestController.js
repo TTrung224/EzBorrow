@@ -173,12 +173,12 @@ class RequestController {
         }
     }
 
-    // [PUT] /request/:id
+    // [PUT] /request
     async update(req, res, next) {
         try{
             var updateRequest = {}
-            const requestForEmail = await Request.findById(req.params.id);
-            if(!requestForEmail){throw "no record matched";}
+            const request = await Request.findById(req.body.id);
+            if(!request){throw "no record matched";}
             switch(req.body.type){
                 case "approve": {
                     if(req.user.user_type == "lecturer"){
@@ -189,7 +189,7 @@ class RequestController {
                     } else if(req.user.user_type == "technician"){
                         updateRequest["technician_status"] = "approved";
                         updateRequest["student_status"] = "ready";
-                        EmailService.emailForStudentApprovedStatus(requestForEmail);
+                        EmailService.emailForStudentApprovedStatus(request);
                     }
                     break;
                 };
@@ -199,12 +199,12 @@ class RequestController {
                         updateRequest["lecturer_status"] = "canceled";
                         updateRequest["technician_status"] = "canceled";
                         updateRequest["student_status"] = "canceled";
-                        EmailService.emailForStudentCancelStatus(requestForEmail, "by your lecturer, please contact with your lecturer for further information or review your course's/school's policy of equipment borrowing");
+                        EmailService.emailForStudentCancelStatus(request, "by your lecturer, please contact with your lecturer for further information or review your course's/school's policy of equipment borrowing");
 
                     } else if(req.user.user_type == "technician"){
                         updateRequest["technician_status"] = "canceled";
                         updateRequest["student_status"] = "canceled";
-                        EmailService.emailForStudentCancelStatus(requestForEmail, `by technician, please contact with technician staff [${EmailService.technician_email}] for further information or review your course's/school's policy of equipment borrowing`);
+                        EmailService.emailForStudentCancelStatus(request, `by technician, please contact with technician staff [${EmailService.technician_email}] for further information or review your course's/school's policy of equipment borrowing`);
 
                     } else if(req.user.user_type == "student"){
                         updateRequest["student_status"] = "canceled";
@@ -220,16 +220,15 @@ class RequestController {
                 case "return": {
                     updateRequest["student_status"] = "returned";
                     updateRequest["actual_return_date"] = Date.now();
-                    AccountController.fineReset(requestForEmail.borrower_email);
+                    AccountController.fineReset(request.borrower_email);
                     break;
                 }
             }
 
-            const result = await Request.updateOne({_id: req.params.id}, updateRequest);
+            const result = await Request.updateOne({_id: req.body.id}, updateRequest);
 
             // minus the borrowed number of component
             if(req.body.type == "cancel" || req.body.type == "return"){
-                var request = await Request.findOne({_id: req.params.id});
                 for (const component of request.component_list){
                     const updateReq = {
                         "body": {

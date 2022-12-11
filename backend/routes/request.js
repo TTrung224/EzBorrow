@@ -10,7 +10,7 @@ router.get('/:id', verifyToken,requestController.getOne);
 router.get('/',technician_auth, requestController.getAll);
 
 router.post('/', verifyToken, requestController.create);
-router.put('/:id', verifyToken, requestController.update); 
+router.put('/', verifyToken, requestController.update); 
 // req.body.type = "approve" / "cancel" / "pickUp" / "return" & (token to define user type)
 
 module.exports = router;

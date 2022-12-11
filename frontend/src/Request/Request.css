@@ -10,7 +10,7 @@
     border-radius: 5px;
     margin-right: 10px;
     height: 50%;
-    margin-left: 15%;
+    margin-left: 5%;
     position: sticky;
     /* position: -webkit-sticky;
     top: 0; */
@@ -46,6 +46,7 @@
     align-items: center;
     justify-content: center;
 }
+
 .product_qty{
     display: flex;
     align-items: center;    
@@ -53,12 +54,12 @@
     height: 30px;
     min-width: 60px;
     gap:10px;
-
 }
 
 .quantity{
     border-right: 0.5px solid rgba(0,0,0,0.2);
     border-left: 0.5px solid rgba(0,0,0,0.2);
+    padding: 0px 10px;
 }
 
 .close-button{
@@ -89,7 +90,7 @@
 .Total{
     display: flex;
     justify-content: space-around;
-    height: 120px;
+    min-height: 80px;
     font-size: 25px;
 }
 

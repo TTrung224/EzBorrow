@@ -20,7 +20,7 @@ function App() {
 
 
   const authAxios = axios.create({
-    baseURL: 'http://localhost:4000/',
+    baseURL: 'http://localhost:4500/',
     withCredentials: true
   })
 
@@ -51,7 +51,11 @@ function App() {
           <Route path="/">
             <Route index={true} element={<><SearchBar/><Page auth={auth}/></>}/>
             {/* <Route path="dashboard" element={<><SearchBar/><Page/><List/></>}/> */}
+
+            {/* Real request */}
             <Route path="dashboard" element={<><SearchBar/><Page/><TechnicianList/></>}/>
+
+            {/* Real dashboard */}
             <Route path="request" element={<><SearchBar/><Page/><Request/></>}/>
           </Route>
           <Route path='/login' element={<><Login/></>}/>
