@@ -46,8 +46,21 @@ class RequestController {
             let requests = [];
             let user = req.user;
 
-            console.log(user.email);
+            // console.log(user.email);
             requests = await Request.find({borrower_email: user.email});
+            res.status(201).json(requests);
+        } catch (error) {
+            console.log(err);
+            res.status(500).json({success: false, message: "internal server error"});
+        }
+    }
+    
+    // [GET] /request/lecturer/:id
+    async getByLecturer(req, res, next) {
+        try {
+            let requests = [];
+
+            requests = await Request.find({lecturer_email: req.paras.id});
             res.status(201).json(requests);
         } catch (error) {
             console.log(err);
