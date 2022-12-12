@@ -11,14 +11,18 @@ const format = 'DD MMM, yyyy';
 function TeacherList() {
     const [data, setData] = useState([])
 
-    const authAxios = axios.create({
+    const Axios = axios.create({
         baseURL: 'http://localhost:4500/',
         withCredentials: true
     })
 
     useEffect(() => {
         const load = async () => {
-            const response = await authAxios.get('/request');
+            const accountResponse = await Axios.get("/account/getAccount");
+            console.log(accountResponse.data);
+            const userEmail = accountResponse.data.email;
+
+            const response = await Axios.get('request/lecturer/' + userEmail);
             var data = await response.data;
             console.log(data);
             setData(data);
@@ -27,37 +31,11 @@ function TeacherList() {
     },[]);
 
     function DisplayBtn(item){
-        if(item.student_status == "waiting" && item.lecturer_status == "approved"){
+        if(item.lecturer_status == "pending" ){
             return(
                 <div className="card-btns">
                     <button onClick={() => requestBtnHandler("cancel", item._id)} className="cancel-btn">Cancel</button>
                     <button onClick={() => requestBtnHandler("approve", item._id)} className="approve-btn">Approve</button>
-                </div>
-            )
-        }
-        else if(item.student_status == "ready"){
-            return(
-                <div className="card-btns">
-                    <button onClick={() => requestBtnHandler("pickup", item._id)} className="pickup-btn">Pick up</button>
-                </div>
-            )
-        }
-        else if(item.student_status == "picked up"){
-            return(
-                <div className="card-btns">
-                    <button onClick={() => requestBtnHandler("return", item._id)} className="return-btn">Return</button>
-                </div>
-            )
-        }
-        else if(item.student_status == "returned"){
-            return(
-                <div className="card-btns">
-                </div>
-            )
-        }
-        else if(item.student_status == "canceled"){
-            return(
-                <div className="card-btns">
                 </div>
             )
         }

@@ -18,7 +18,7 @@ function Studentist() {
 
     useEffect(() => {
         const load = async () => {
-            const response = await authAxios.get('/request');
+            const response = await authAxios.get('request/myrequest');
             var data = await response.data;
             console.log(data);
             setData(data);
@@ -27,40 +27,13 @@ function Studentist() {
     },[]);
 
     function DisplayBtn(item){
-        if(item.student_status == "waiting" && item.lecturer_status == "approved"){
+        // waiting pending approved cancel
+        if(!(item.technician_status == "approved" || item.technician_status == "canceled")){
             return(
                 <div className="card-btns">
-                    <button onClick={() => requestBtnHandler("cancel", item._id)} className="cancel-btn">Cancel</button>
-                    <button onClick={() => requestBtnHandler("approve", item._id)} className="approve-btn">Approve</button>
+                  <button onClick={() => requestBtnHandler("cancel", item._id)} className="cancel-btn">Cancel</button>
                 </div>
-            )
-        }
-        else if(item.student_status == "ready"){
-            return(
-                <div className="card-btns">
-                    <button onClick={() => requestBtnHandler("pickup", item._id)} className="pickup-btn">Pick up</button>
-                </div>
-            )
-        }
-        else if(item.student_status == "picked up"){
-            return(
-                <div className="card-btns">
-                    <button onClick={() => requestBtnHandler("return", item._id)} className="return-btn">Return</button>
-                </div>
-            )
-        }
-        else if(item.student_status == "returned"){
-            return(
-                <div className="card-btns">
-                </div>
-            )
-        }
-        else if(item.student_status == "canceled"){
-            return(
-                <div className="card-btns">
-                </div>
-            )
-        }
+            )}   
     }
     return(
         <div className="card-container">

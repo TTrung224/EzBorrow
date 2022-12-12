@@ -55,12 +55,12 @@ class RequestController {
         }
     }
     
-    // [GET] /request/lecturer/:id
+    // [GET] /request/lecturer/:email
     async getByLecturer(req, res, next) {
         try {
             let requests = [];
 
-            requests = await Request.find({lecturer_email: req.paras.id});
+            requests = await Request.find({lecturer_email: req.params.email});
             res.status(201).json(requests);
         } catch (error) {
             console.log(err);

@@ -18,7 +18,7 @@ function TechnicianList() {
 
     useEffect(() => {
         const load = async () => {
-            const response = await authAxios.get('/request');
+            const response = await authAxios.get('/request/');
             var data = await response.data;
             console.log(data);
             setData(data);

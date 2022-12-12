@@ -7,7 +7,7 @@ const technician_auth = require('../middleware/technician_auth');
 router.get('/myrequest', verifyToken, requestController.getMyRequest);
 router.get('/search', technician_auth, requestController.getByBorrower);// ?email=
 router.get('/:id', verifyToken,requestController.getOne);
-router.get('/lecturer/:id', verifyToken,requestController.getByLecturer);
+router.get('/lecturer/:email', verifyToken,requestController.getByLecturer);
 router.get('/',technician_auth, requestController.getAll);
 
 router.post('/', verifyToken, requestController.create);

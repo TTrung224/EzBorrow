@@ -5,6 +5,8 @@ import Banner from './Banner'
 import Request from './Request/CompoRequest'
 import List from './Dashboard/List'
 import TechnicianList from './Dashboard/TechicianList'
+import TeacherList from './Dashboard/LecturerList';
+import StudentList from './Dashboard/StudentList';
 import Login from './Common/Login/login';
 import SearchBar from './Common/Search Bar/SearchBar';
 import React from 'react'
@@ -53,7 +55,7 @@ function App() {
             {/* <Route path="dashboard" element={<><SearchBar/><Page/><List/></>}/> */}
 
             {/* Real request */}
-            <Route path="dashboard" element={<><SearchBar/><Page/><TechnicianList/></>}/>
+            <Route path="dashboard" element={<><SearchBar/><Page/><StudentList/></>}/>
 
             {/* Real dashboard */}
             <Route path="request" element={<><SearchBar/><Page/><Request/></>}/>
