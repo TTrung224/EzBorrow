@@ -7,7 +7,6 @@ import {useState, useEffect} from 'react'
 
 import Confirmation from './Confirmation';
 import './Request.css'
-import arduino from './arduino.png'
 
 function Request(props) {
   const {cartItems, onAdd, onDesc, onRemove, sum} = props; 
@@ -43,7 +42,7 @@ function Request(props) {
             </div>
           </div>
         ))}       
-        <Confirmation show={modalShow} onHide={() => setModalShow(false)}/>
+        <Confirmation show={modalShow} onHide={() => setModalShow(false)} cartItems={cartItems} sum={sum}/>
         <h4> Summary </h4>
         <div className='Total'>
               <span>Total</span><span/><span id='total'>{sum}</span>

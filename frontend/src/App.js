@@ -35,6 +35,7 @@ function App() {
       if(!(auth.type === 'lecturer' || auth.type === 'student' || auth.type === 'technician')){
         console.log()
         console.log(auth.type)
+        console.log(auth.name)
         console.log(typeof(auth.type))
         navigate("/hero", {replace: true})
       } else {

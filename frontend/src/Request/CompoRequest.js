@@ -36,7 +36,9 @@ function CompoRequest() {
 
     const onRemove = (Item) => {
         setCartItems(cartItems.filter((item) => item._id !== Item._id));
-        setSum(sum - 1)
+        if(sum > 0) {
+            setSum(sum - 1)
+        }
     }
 
     useEffect(() =>{

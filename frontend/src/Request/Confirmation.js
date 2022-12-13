@@ -2,8 +2,19 @@ import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import {useState} from 'react'
+import axios from 'axios';
+
 
 function Confirmation(props) {
+
+    const authAxios = axios.create({
+        baseURL: 'http://localhost:4500/',
+        withCredentials: true
+    })
+
+    
+    
+
     const sname = "Name"
     const sid = "s1234"
     const cc = "COSC2234"
