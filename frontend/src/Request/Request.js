@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import CloseButton from 'react-bootstrap/CloseButton';
 import {FaPlus} from 'react-icons/fa';
 import {FaMinus} from 'react-icons/fa';
+import {useState} from 'react'
 
 import Confirmation from './Confirmation';
 import './Request.css'
@@ -10,6 +11,7 @@ import arduino from './arduino.png'
 
 function Request(props) {
   const {cartItems, onAdd, onDesc, onRemove} = props; 
+  const [sum, setSum] = useState(0)
   console.log(cartItems.length)
   const [modalShow, setModalShow] = React.useState(false);
   console.log(modalShow)
@@ -34,7 +36,6 @@ function Request(props) {
                     <button id='inscreasebtn' onClick={()=> onAdd(item)}>
                         <FaPlus/>                         
                     </button>
-                    
               </div>
               <span className='close-button'>
                       <CloseButton variant='danger' onClick={() => onRemove(item)}/>
@@ -65,7 +66,7 @@ function Request(props) {
         </div>
         <h4> Summary </h4>
         <div className='Total'>
-              <span>Total</span><span/><span id='total'>2</span>
+              <span>Total</span><span/><span id='total'>{sum}</span>
 
         </div>
         <div className='buttons'>
