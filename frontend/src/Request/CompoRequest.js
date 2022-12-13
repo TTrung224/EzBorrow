@@ -14,13 +14,16 @@ function CompoRequest() {
 */
     const currentItems = (sessionStorage.getItem('cart-items')) ? JSON.parse(sessionStorage.getItem('cart-items')) : []; 
     const [cartItems, setCartItems] = useState(currentItems);
+    const [sum, setSum] = useState(0);
     console.log('000000000000000000000000000000000000000',cartItems)
     const onAdd = (Item) => {
         const exist = cartItems.find(x => x._id === Item._id);
         if(exist) {
             setCartItems(cartItems.map(x => x._id === Item._id ? {...exist, quantity: exist.quantity + 1} : x));
+            setSum(sum + 1)
         } else {
             setCartItems([...cartItems, {...Item, quantity: 1}]);
+            setSum(sum + 1)
         }
     };
 
@@ -33,6 +36,7 @@ function CompoRequest() {
 
     const onRemove = (Item) => {
         setCartItems(cartItems.filter((item) => item._id !== Item._id));
+        setSum(sum - 1)
     }
 
     useEffect(() =>{
@@ -47,7 +51,7 @@ function CompoRequest() {
     //END TEST -------------------------------------------------!>
     const [ data, setData] = useState([])
     const authAxios = axios.create({
-        baseURL: 'http://localhost:4500/',
+        baseURL: 'http://localhost:4000/',
         withCredentials: true
     })
 
@@ -61,18 +65,6 @@ function CompoRequest() {
             load();
     },[]);
 
-    
-
-    const additem = (e, name, id) => {
-        const item = {
-            name : name,
-            id : id,
-        };
-        itemList.push(item);
-        console.log(item);
-        sessionStorage.setItem('itemList', itemList)
-        console.log(sessionStorage.getItem('itemList'))
-    }
 
     console.log('data2 ==== ', data)
       
@@ -106,7 +98,7 @@ function CompoRequest() {
             }
             )}
             </div>
-            <Request cartItems={cartItems} onAdd={onAdd} onDesc={onDesc} onRemove={onRemove}/>  
+            <Request cartItems={cartItems} onAdd={onAdd} onDesc={onDesc} onRemove={onRemove} sum={sum}/>  
         </div>
         
     )
