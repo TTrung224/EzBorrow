@@ -60,3 +60,15 @@
     background: #00875A ;
     color: white;
 }
+
+button:disabled{
+    cursor: pointer;
+    background: #cddbd68c ;
+    color: white;
+}
+
+button:disabled:hover{
+    cursor: default;
+    background: #cddbd68c ;
+    color: white;
+}
