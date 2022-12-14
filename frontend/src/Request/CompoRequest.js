@@ -76,7 +76,6 @@ function CompoRequest() {
             <div className='cards'>
             {data.map((item, index) => {
                 console.log('Itemsdafasdfasd====',item)
-                if(item.available_amount > 0) {
                     return (
                     <div className='compo-item'>
                         <div className='compo-img'>
@@ -89,14 +88,13 @@ function CompoRequest() {
                             <p>{item.description}</p>
                             <div className='product-des'>
                                 <h5>Available: {item.available_amount}</h5>
-                                <button onClick={() => onAdd(item)}>
+                                <button disabled={item.available_amount <= 0} onClick={() => onAdd(item)}>
                                     <FaPlus/>                         
                                 </button>                        
                             </div>
                         </div>
                     </div>
                     )
-                }
             }
             )}
             </div>
