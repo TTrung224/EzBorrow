@@ -45,6 +45,7 @@ function CompoRequest() {
     }
 
     const removeAll = () => {
+        console.log("clearing cart")
         setCartItems([]);
         if(sum > 0) {
             setSum(0)
