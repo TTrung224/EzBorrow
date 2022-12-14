@@ -19,7 +19,6 @@ const Profile = (
 function Navbar() {
   const navigate = useNavigate();
   const [modalShow, setModalShow] = React.useState(false);
-
   return (
     <div>
         <div className='Main'>

@@ -9,7 +9,7 @@ export function requestBtnHandler(type, id) {
         id: id,
     } 
 
-    axios.put('http://localhost:4500/request', data, {withCredentials: true})
+    axios.put('http://localhost:4000/request', data, {withCredentials: true})
     .then((res)=>{
         console.log("res:", res)
         if(res.status === 200){

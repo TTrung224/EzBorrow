@@ -9,10 +9,11 @@ import { requestBtnHandler } from './RequestBtnHandler';
 const format = 'DD MMM, yyyy';
 
 function Studentist() {
+    console.log("this is student list")
     const [data, setData] = useState([])
 
     const authAxios = axios.create({
-        baseURL: 'http://localhost:4500/',
+        baseURL: 'http://localhost:4000/',
         withCredentials: true
     })
 

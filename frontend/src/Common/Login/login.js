@@ -3,7 +3,8 @@ import './Login.css';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
 
-export const Login = () => {
+export const Login = (props) => {
+    const {auth, setAuth} = props
     const [formData, setFormData] = React.useState({email: '', password: ''})
     const [error, setError] = React.useState("")
     const navigate = useNavigate();
@@ -14,6 +15,10 @@ export const Login = () => {
             console.log("res:", res)
             if(res.status === 200){
                 console.log("test")
+                console.log(auth)
+                console.log("dataasfasdfasdf", res.data)
+                setAuth(res.data)
+                console.log(auth)
                 navigate("/", {replace: true});
             }
             if(res.status === 400) {

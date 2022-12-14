@@ -8,10 +8,11 @@ import { requestBtnHandler } from './RequestBtnHandler';
 const format = 'DD MMM, yyyy';
 
 function TeacherList() {
+    console.log("this is lecturer list")
     const [data, setData] = useState([])
 
     const Axios = axios.create({
-        baseURL: 'http://localhost:4500/',
+        baseURL: 'http://localhost:4000/',
         withCredentials: true
     })
 

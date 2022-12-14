@@ -8,13 +8,14 @@ import axios from 'axios';
 function Logout(props) {
   const navigate = useNavigate();
   const authAxios = axios.create({
-    baseURL: 'http://localhost:4500/account/',
+    baseURL: 'http://localhost:4000/account/',
     withCredentials: true
   })
 
   const logout = async () => {
     const response = await authAxios.post('/logout');
     navigate("/hero", { replace: true });
+    
 };
 
   return (
