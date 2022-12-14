@@ -14,7 +14,8 @@ function CompoRequest() {
 */
     const currentItems = (sessionStorage.getItem('cart-items')) ? JSON.parse(sessionStorage.getItem('cart-items')) : []; 
     const [cartItems, setCartItems] = useState(currentItems);
-    const [sum, setSum] = useState(0);
+    const [sum, setSum] = useState(((sessionStorage.getItem('cart-sum')) ? sessionStorage.getItem('cart-sum') : 0)*1);
+    console.log("sum=",sum)
     console.log('000000000000000000000000000000000000000',cartItems)
     const onAdd = (Item) => {
         const exist = cartItems.find(x => x._id === Item._id);
@@ -31,13 +32,22 @@ function CompoRequest() {
         const exist = cartItems.find(x => x._id === Item._id);
         if(exist && exist.quantity !== 1) {
             setCartItems(cartItems.map(x => x._id === Item._id ? {...exist, quantity: exist.quantity - 1} : x));
+            setSum(sum - 1);
         };
     }
 
     const onRemove = (Item) => {
         setCartItems(cartItems.filter((item) => item._id !== Item._id));
         if(sum > 0) {
-            setSum(sum - 1)
+            setSum(sum - Item.quantity)
+        }
+        console.log("sum=",sum)
+    }
+
+    const removeAll = () => {
+        setCartItems([]);
+        if(sum > 0) {
+            setSum(0)
         }
     }
 
@@ -49,6 +59,14 @@ function CompoRequest() {
         updateSessionStorage(cartItems);
     },[cartItems])
 
+    useEffect(() =>{
+        const updateSessionStorage = (sum) => {
+            console.log("summmm", sum)
+            sessionStorage.setItem('cart-sum', sum);
+        }
+        
+        updateSessionStorage(sum);
+    },[sum])
 
     //END TEST -------------------------------------------------!>
     const [ data, setData] = useState([])
@@ -98,7 +116,7 @@ function CompoRequest() {
             }
             )}
             </div>
-            <Request cartItems={cartItems} onAdd={onAdd} onDesc={onDesc} onRemove={onRemove} sum={sum}/>  
+            <Request cartItems={cartItems} onAdd={onAdd} onDesc={onDesc} onRemove={onRemove} sum={sum} removeAll={removeAll}/>  
         </div>
         
     )

@@ -9,10 +9,13 @@ import Confirmation from './Confirmation';
 import './Request.css'
 
 function Request(props) {
-  const {cartItems, onAdd, onDesc, onRemove, sum} = props; 
+  const {cartItems, onAdd, onDesc, onRemove, sum, removeAll} = props; 
   console.log(cartItems.length)
   const [modalShow, setModalShow] = React.useState(false);
   console.log(modalShow)
+
+
+
 
   return (
     <div className='cart'>
@@ -49,7 +52,7 @@ function Request(props) {
 
         </div>
         <div className='buttons'>
-            <Button id='clear-btn' variant='danger'>Clear</Button>
+            <Button id='clear-btn' variant='danger' onclick={() => removeAll()}>Clear</Button>
             <Button id='request-btn' variant='success' onClick={() => setModalShow(true)}>Request</Button>
         </div>    
     </div>  
