@@ -31,7 +31,7 @@ function Request(props) {
                 <h4>{item.name}</h4>
               </div>
               <div className='product_qty'>
-                    <button id='decreasebtn' onClick={()=>onDesc(item)}>
+                    <button id='decreasebtn' disabled={item.quantity <= 1} onClick={()=>onDesc(item)}>
                         <FaMinus/>                         
                     </button>
                     <span className='quantity'>{item.quantity}</span>

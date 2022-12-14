@@ -56,10 +56,11 @@ function App() {
             {/* <Route path="dashboard" element={<><SearchBar/><Page/><List/></>}/> */}
 
             {/* Real request */}
-            <Route path="dashboard" element={<><SearchBar/><Page/><StudentList/></>}/>
+            <Route path="request" element={<><SearchBar/><Page/><StudentList/></>}>
+            </Route>
 
             {/* Real dashboard */}
-            <Route path="request" element={<><SearchBar/><Page/><Request/></>}/>
+            <Route path="dashboard" element={<><SearchBar/><Page/><Request/></>}/>
           </Route>
           <Route path='/login' element={<><Login/></>}/>
         </Routes>
