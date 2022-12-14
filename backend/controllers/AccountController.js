@@ -24,6 +24,7 @@ class AccountController {
             data.email = result.email;
             data.type = result.type;
             //return data retrieved from database
+            console.log("data====",data)
             return res.status(200).json(data);
         } catch (error) {
             console.log(error);
@@ -55,6 +56,11 @@ class AccountController {
                     expiresIn: "2h",
                     }
                 );
+                let data = {};
+                data.first_name = user.first_name;
+                data.last_name = user.last_name;
+                data.email = user.email;
+                data.type = user.type;
 
                 // save user token
                 user.token = token;
@@ -63,7 +69,7 @@ class AccountController {
                 res.cookie('token', token, { httpOnly: true });
 
                 // user
-                return res.status(200).json(user);
+                return res.status(200).json(data);
                 // return res.status(200).json({success: true, message: "login successfully"});
             }
             return res.status(400).send("Invalid Credentials");
