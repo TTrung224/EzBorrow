@@ -10,7 +10,7 @@ export const Login = (props) => {
     const navigate = useNavigate();
     const onSubmit = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:4000/account/login', formData, {withCredentials: true})
+        const res = axios.post('http://localhost:4000/account/login', formData, {withCredentials: true})
         .then((res)=>{
             console.log("res:", res)
             if(res.status === 200){
@@ -21,7 +21,10 @@ export const Login = (props) => {
                 console.log(auth)
                 navigate("/", {replace: true});
             }
-            if(res.status === 400) {
+        }) .catch(err => {
+            console.log(res)
+            console.log(err)
+            if(err.response.status === 400) {
                 console.log("Incorrect password or username")
                 setError("Incorrect name or password")
             }
