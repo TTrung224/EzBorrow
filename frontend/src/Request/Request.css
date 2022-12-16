@@ -12,8 +12,8 @@
     height: 50%;
     margin-left: 5%;
     position: sticky;
-    /* position: -webkit-sticky;
-    top: 0; */
+    position: -webkit-sticky;
+    top: 28%;
     min-width: 350px;
 }
 
