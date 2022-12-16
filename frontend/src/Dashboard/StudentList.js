@@ -37,13 +37,16 @@ function Studentist() {
             )}   
     }
     return(
-        <div className="card-container">
+        <div>
+            {(data.length===0) && <p style={{textAlign: "center"}}>There have not been any requests</p>}
+            <div className="card-container">
             {[...data].reverse().map(request =>
             <div className="request-card">
                 <div className="card-item-info">
                     <div className="card-info">
                         <p>Request date: {Moment(new Date(request.createdAt)).format(format)}</p>
                         <p>Borrower email: {request.borrower_email}</p>
+                        <p>Lecturer email: {request.lecturer_email}</p>
                         <p>Pickup date: {Moment(new Date(request.pickup_date)).format(format)}</p>
                         <p>Expected return day: {Moment(new Date(request.expected_return_date)).format(format)}</p>
                         <p>Actual return day: 
@@ -68,6 +71,9 @@ function Studentist() {
                     {DisplayBtn(request)}
             </div>)}
         </div> 
+        </div>
+        
+        
       
         
 )}

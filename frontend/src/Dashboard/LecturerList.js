@@ -17,7 +17,6 @@ function TeacherList() {
         baseURL: 'http://localhost:4000/',
         withCredentials: true
     })
-
     useEffect(() => {
         console.log(type);
         console.log("useEffect")
@@ -35,7 +34,7 @@ function TeacherList() {
             console.log(data);
             setData(data);
         };
-            load();
+        load();
     },[type]);
 
     function DisplayOtherBtn(item){
@@ -55,15 +54,18 @@ function TeacherList() {
                 <div className="card-btns">
                   <button onClick={() => requestBtnHandler("cancel", item._id)} className="cancel-btn">Cancel</button>
                 </div>
-            )}   
+            )
+        }   
     }
 
+  
     return(
         <div>
             <div>
-                <button className='type-btn my-requests' onClick={()=>setType("lecturer")}>My Request</button>
-                <button className='type-btn others-requests' onClick={()=>setType("other")}>Others' Request</button>
+                <button className={(type=="lecturer")?"type-btn my-requests lec-active":"type-btn my-requests"} onClick={()=>setType("lecturer")}>My Request</button>
+                <button className={(type=="other")?"type-btn others-requests lec-active":"type-btn others-requests"} onClick={()=>setType("other")}>Others' Request</button>
             </div>
+            {(data.length===0) && <p style={{textAlign: "center"}}>There have not been any requests</p>}
 
             <div className="card-container">
                 {[...data].reverse().map(request =>
@@ -72,6 +74,7 @@ function TeacherList() {
                         <div className="card-info">
                             <p>Request date: {Moment(new Date(request.createdAt)).format(format)}</p>
                             <p>Borrower email: {request.borrower_email}</p>
+                            <p>Lecturer email: {request.lecturer_email}</p>
                             <p>Pickup date: {Moment(new Date(request.pickup_date)).format(format)}</p>
                             <p>Expected return day: {Moment(new Date(request.expected_return_date)).format(format)}</p>
                             <p>Actual return day: 
