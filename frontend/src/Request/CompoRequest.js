@@ -83,7 +83,19 @@ function CompoRequest() {
             console.log(data);
             setData(data);
         };
-            load();
+
+        const check = async () => {
+            const response = await authAxios.get('/account/getAccount')
+            console.log(response.data)
+            const auth = response.data
+            sessionStorage.setItem('fname', auth.first_name)
+            sessionStorage.setItem('lname', auth.last_name)
+            sessionStorage.setItem('email', auth.email)
+            console.log("auth===============", auth)
+        }
+
+        load();
+        check();
     },[]);
 
 
@@ -117,7 +129,7 @@ function CompoRequest() {
             }
             )}
             </div>
-            <Request cartItems={cartItems} onAdd={onAdd} onDesc={onDesc} onRemove={onRemove} sum={sum} removeAll={removeAll}/>  
+            <Request cartItems={cartItems} onAdd={onAdd} onDesc={onDesc} onRemove={onRemove} sum={sum} removeAll={removeAll} />  
         </div>
         
     )
