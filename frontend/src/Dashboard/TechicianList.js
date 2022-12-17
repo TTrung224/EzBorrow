@@ -26,6 +26,8 @@ function TechnicianList() {
         load();
 
         const searchInput = document.getElementById("search-input");
+        searchInput.value = "";
+        searchInput.placeholder = "borrower or lecturer email"
         const handleInputChange = async (event) => {
             if(searchInput.value != ""){
                 const response = await Axios.get('request/technician-search?email='+searchInput.value);

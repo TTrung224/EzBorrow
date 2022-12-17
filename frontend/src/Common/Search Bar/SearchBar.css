@@ -27,9 +27,13 @@
 
 .search-bar input {
     outline: none;
-    
-    
 }
+
+.search-bar input::placeholder {
+    color: rgba(35, 35, 35, 0.5);
+    font-weight: 500;
+}
+
 input[type=text] {
     height: 30px;
     background: none;

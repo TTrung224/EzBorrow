@@ -87,7 +87,7 @@ function CompoRequest() {
             console.log("load")
             setData(data);
         };
-        
+
         const check = async () => {
             const response = await authAxios.get('/account/getAccount')
             console.log(response.data)
@@ -102,6 +102,8 @@ function CompoRequest() {
         check();
        
         const searchInput = document.getElementById("search-input");
+        searchInput.value = "";
+        searchInput.placeholder = "name keyword"
         const handleInputChange = async (event) => {
             if(searchInput.value != ""){
                 const response = await authAxios.get('/component/search?name='+searchInput.value);

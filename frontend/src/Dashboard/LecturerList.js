@@ -44,6 +44,8 @@ function TeacherList() {
 
         if(type == "other"){
             const searchInput = document.getElementById("search-input");
+            searchInput.value = "";
+            searchInput.placeholder = "borrower email"
             const handleInputChange = async (event) => {
                 if(searchInput.value != ""){
                     const response = await Axios.get('request/lecturer-search/'+userEmail+'?email='+searchInput.value);
