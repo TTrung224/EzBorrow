@@ -35,7 +35,7 @@ function TeacherList() {
             console.log(data);
             setData(data);
         };
-            load();
+        load();
     },[type]);
 
     function DisplayOtherBtn(item){

@@ -24,7 +24,7 @@ function TechnicianList() {
             console.log(data);
             setData(data);
         };
-            load();
+        load();
     },[]);
 
     function DisplayBtn(item){
