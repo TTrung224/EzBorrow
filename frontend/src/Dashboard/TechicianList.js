@@ -11,19 +11,36 @@ const format = 'DD MMM, yyyy';
 function TechnicianList() {
     const [data, setData] = useState([])
 
-    const authAxios = axios.create({
+    const Axios = axios.create({
         baseURL: 'http://localhost:4000/',
         withCredentials: true
     })
 
     useEffect(() => {
         const load = async () => {
-            const response = await authAxios.get('/request/');
+            const response = await Axios.get('/request/');
             var data = await response.data;
-            // console.log(data);
+            console.log(data);
             setData(data);
         };
         load();
+
+        const searchInput = document.getElementById("search-input");
+        const handleInputChange = async (event) => {
+            if(searchInput.value != ""){
+                const response = await Axios.get('request/technician-search?email='+searchInput.value);
+                const data = await response.data;
+                console.log(data);
+                setData(data);
+            }else{
+                load();
+            }
+        }
+        searchInput.addEventListener("keyup", handleInputChange)
+
+        return () => {
+            searchInput.removeEventListener('keyup', handleInputChange);
+        };
     },[]);
 
     function DisplayBtn(item){

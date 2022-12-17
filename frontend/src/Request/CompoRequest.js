@@ -84,12 +84,25 @@ function CompoRequest() {
             const response = await authAxios.get('/component');
             const data = await response.data;
             console.log(data);
+            console.log("load")
             setData(data);
         };
-        load();
+        
+        const check = async () => {
+            const response = await authAxios.get('/account/getAccount')
+            console.log(response.data)
+            const auth = response.data
+            sessionStorage.setItem('fname', auth.first_name)
+            sessionStorage.setItem('lname', auth.last_name)
+            sessionStorage.setItem('email', auth.email)
+            console.log("auth===============", auth)
+        }
 
+        load();
+        check();
+       
         const searchInput = document.getElementById("search-input");
-        searchInput.addEventListener("keyup", async (event) => {
+        const handleInputChange = async (event) => {
             if(searchInput.value != ""){
                 const response = await authAxios.get('/component/search?name='+searchInput.value);
                 const data = await response.data;
@@ -98,7 +111,13 @@ function CompoRequest() {
             }else{
                 load();
             }
-        })
+        }
+        searchInput.addEventListener("keyup", handleInputChange)
+
+        return () => {
+            searchInput.removeEventListener('keyup', handleInputChange);
+        };
+
     },[]);
 
 
@@ -135,7 +154,7 @@ function CompoRequest() {
             }
             )}
             </div>
-            <Request cartItems={cartItems} onAdd={onAdd} onDesc={onDesc} onRemove={onRemove} sum={sum} removeAll={removeAll}/>  
+            <Request cartItems={cartItems} onAdd={onAdd} onDesc={onDesc} onRemove={onRemove} sum={sum} removeAll={removeAll} />  
         </div>
         
     )

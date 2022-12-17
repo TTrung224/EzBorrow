@@ -44,7 +44,7 @@ function TeacherList() {
 
         if(type == "other"){
             const searchInput = document.getElementById("search-input");
-            searchInput.addEventListener("keyup", async (event) => {
+            const handleInputChange = async (event) => {
                 if(searchInput.value != ""){
                     const response = await Axios.get('request/lecturer-search/'+userEmail+'?email='+searchInput.value);
                     const data = await response.data;
@@ -53,8 +53,14 @@ function TeacherList() {
                 }else{
                     load();
                 }
-            })
+            }
+            searchInput.addEventListener("keyup", handleInputChange)
+
+            return () => {
+                searchInput.removeEventListener('keyup', handleInputChange);
+            };
         }
+
     },[type]);
 
     // useEffect(() => {
