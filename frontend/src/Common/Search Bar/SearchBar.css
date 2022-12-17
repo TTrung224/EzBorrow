@@ -1,6 +1,7 @@
 .search {
-    
+    margin-top: 25px;
     width: 100%;
+    height: 80px;
 }
 
 .search-bar {
@@ -8,7 +9,6 @@
     height: 40px;
     width:30%;
     border-radius: 8px;
-    margin-top: 25px;
     margin-left: auto;
     margin-right: auto;
     display: flex;
@@ -18,9 +18,13 @@
     box-shadow: 0 10px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(8.5px);
     -webkit-backdrop-filter: blur(8.5px);
-    border: none;
-    
+    border: none;  
 }
+
+.search .hidden {
+    display: none;
+}
+
 .search-bar input {
     outline: none;
     

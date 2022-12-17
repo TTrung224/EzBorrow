@@ -2,8 +2,7 @@ import React from 'react';
 import axios from 'axios'
 
 export function requestBtnHandler(type, id) {
-    // const [error, setError] = React.useState("")
-
+    
     var data = {
         type: type,
         id: id,
@@ -11,10 +10,10 @@ export function requestBtnHandler(type, id) {
 
     axios.put('http://localhost:4000/request', data, {withCredentials: true})
     .then((res)=>{
-        console.log("res:", res)
-        if(res.status === 200){
-            console.log("test");
-        }
+        // console.log("res:", res)
+        // if(res.status === 200){
+        //     console.log("test");
+        // }
         if(res.status === 500) {
             console.log("Server error");
             // setError("Server error");

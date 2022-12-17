@@ -5,7 +5,8 @@ const verifyToken = require('../middleware/verifyToken');
 const technician_auth = require('../middleware/technician_auth');
 
 router.get('/myrequest', verifyToken, requestController.getMyRequest);
-router.get('/search', technician_auth, requestController.getByBorrower);// ?email=
+router.get('/technician-search', technician_auth, requestController.technicianSearch);// ?email=
+router.get('/lecturer-search/:email', verifyToken, requestController.lecturerSearch);// ?email=
 router.get('/:id', verifyToken,requestController.getOne);
 router.get('/lecturer/:email', verifyToken,requestController.getByLecturer);
 router.get('/',technician_auth, requestController.getAll);

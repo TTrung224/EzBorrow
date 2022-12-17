@@ -10,10 +10,11 @@ import './Request.css'
 
 function Request(props) {
   const {cartItems, onAdd, onDesc, onRemove, sum, removeAll} = props; 
-  console.log(cartItems.length)
+  // console.log(cartItems.length)
   const [modalShow, setModalShow] = React.useState(false);
-  console.log(modalShow)
+  // console.log(modalShow)
 
+  
 
 
 

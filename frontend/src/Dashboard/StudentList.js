@@ -9,7 +9,6 @@ import { requestBtnHandler } from './RequestBtnHandler';
 const format = 'DD MMM, yyyy';
 
 function Studentist() {
-    console.log("this is student list")
     const [data, setData] = useState([])
 
     const authAxios = axios.create({
@@ -18,10 +17,13 @@ function Studentist() {
     })
 
     useEffect(() => {
+        const searchDiv = document.querySelector('.search .search-bar');
+        searchDiv.classList.add("hidden");
+
         const load = async () => {
             const response = await authAxios.get('request/myrequest');
             var data = await response.data;
-            console.log(data);
+            // console.log(data);
             setData(data);
         };
         load();

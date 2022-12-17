@@ -8,7 +8,6 @@ import { requestBtnHandler } from './RequestBtnHandler';
 const format = 'DD MMM, yyyy';
 
 function TeacherList() {
-    console.log("this is lecturer list")
     const [data, setData] = useState([])
     const [type, setType] = useState("lecturer") 
     // type: "other" "lecturer"
@@ -17,13 +16,20 @@ function TeacherList() {
         baseURL: 'http://localhost:4000/',
         withCredentials: true
     })
+
     useEffect(() => {
-        console.log(type);
-        console.log("useEffect")
+        var userEmail;
+
+        const searchDiv = document.querySelector('.search .search-bar');
+        if(type == "lecturer"){
+            searchDiv.classList.add("hidden");
+        }else{
+            searchDiv.classList.remove("hidden");
+        }
+
         const load = async () => {
             const accountResponse = await Axios.get("/account/getAccount");
-            console.log(accountResponse.data);
-            const userEmail = accountResponse.data.email;
+            userEmail = accountResponse.data.email;
             var response;
             if(type == "lecturer"){
                 response = await Axios.get('request/myrequest');
@@ -31,11 +37,41 @@ function TeacherList() {
                 response = await Axios.get('request/lecturer/' + userEmail);
             }
             var data = await response.data;
-            console.log(data);
+            // console.log(data);
             setData(data);
         };
         load();
+
+        if(type == "other"){
+            const searchInput = document.getElementById("search-input");
+            searchInput.addEventListener("keyup", async (event) => {
+                if(searchInput.value != ""){
+                    const response = await Axios.get('request/lecturer-search/'+userEmail+'?email='+searchInput.value);
+                    const data = await response.data;
+                    console.log(data);
+                    setData(data);
+                }else{
+                    load();
+                }
+            })
+        }
     },[type]);
+
+    // useEffect(() => {
+    //     if(type == "other"){
+    //         const searchInput = document.getElementById("search-input");
+    //         searchInput.addEventListener("keyup", async (event) => {
+    //             if(searchInput.value != ""){
+    //                 const response = await Axios.get('/request/search?email='+searchInput.value);
+    //                 const data = await response.data;
+    //                 console.log(data);
+    //                 setData(data);
+    //             }else{
+    //                 load();
+    //             }
+    //         })
+    //     }
+    // }, [])
 
     function DisplayOtherBtn(item){
         if(item.lecturer_status == "pending" ){
@@ -74,6 +110,7 @@ function TeacherList() {
                         <div className="card-info">
                             <p>Request date: {Moment(new Date(request.createdAt)).format(format)}</p>
                             <p>Borrower email: {request.borrower_email}</p>
+                            <p>Course: {request.course}</p>
                             <p>Lecturer email: {request.lecturer_email}</p>
                             <p>Pickup date: {Moment(new Date(request.pickup_date)).format(format)}</p>
                             <p>Expected return day: {Moment(new Date(request.expected_return_date)).format(format)}</p>

@@ -9,7 +9,6 @@ import { requestBtnHandler } from './RequestBtnHandler';
 const format = 'DD MMM, yyyy';
 
 function TechnicianList() {
-    console.log("this is technician list")
     const [data, setData] = useState([])
 
     const authAxios = axios.create({
@@ -21,7 +20,7 @@ function TechnicianList() {
         const load = async () => {
             const response = await authAxios.get('/request/');
             var data = await response.data;
-            console.log(data);
+            // console.log(data);
             setData(data);
         };
         load();
@@ -74,6 +73,7 @@ function TechnicianList() {
                         <p>Request date: {Moment(new Date(request.createdAt)).format(format)}</p>
                         <p>Borrower email: {request.borrower_email}</p>
                         <p>Lecturer email: {request.lecturer_email}</p>
+                        <p>Course: {request.course}</p>
                         <p>Pickup date: {Moment(new Date(request.pickup_date)).format(format)}</p>
                         <p>Expected return day: {Moment(new Date(request.expected_return_date)).format(format)}</p>
                         <p>Actual return day: 

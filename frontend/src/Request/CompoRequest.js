@@ -15,8 +15,8 @@ function CompoRequest() {
     const currentItems = (sessionStorage.getItem('cart-items')) ? JSON.parse(sessionStorage.getItem('cart-items')) : []; 
     const [cartItems, setCartItems] = useState(currentItems);
     const [sum, setSum] = useState(((sessionStorage.getItem('cart-sum')) ? sessionStorage.getItem('cart-sum') : 0)*1);
-    console.log("sum=",sum)
-    console.log('000000000000000000000000000000000000000',cartItems)
+    // console.log("sum=",sum)
+    // console.log('000000000000000000000000000000000000000',cartItems)
     const onAdd = (Item) => {
         const exist = cartItems.find(x => x._id === Item._id);
         if(exist) {
@@ -41,11 +41,11 @@ function CompoRequest() {
         if(sum > 0) {
             setSum(sum - Item.quantity)
         }
-        console.log("sum=",sum)
+        // console.log("sum=",sum)
     }
 
     const removeAll = () => {
-        console.log("clearing cart")
+        // console.log("clearing cart")
         setCartItems([]);
         if(sum > 0) {
             setSum(0)
@@ -62,7 +62,7 @@ function CompoRequest() {
 
     useEffect(() =>{
         const updateSessionStorage = (sum) => {
-            console.log("summmm", sum)
+            // console.log("summmm", sum)
             sessionStorage.setItem('cart-sum', sum);
         }
         
@@ -70,31 +70,47 @@ function CompoRequest() {
     },[sum])
 
     //END TEST -------------------------------------------------!>
-    const [ data, setData] = useState([])
+    const [data, setData] = useState([])
     const authAxios = axios.create({
         baseURL: 'http://localhost:4000/',
         withCredentials: true
     })
 
     useEffect(() => {
+        const searchDiv = document.querySelector('.search .search-bar');
+        searchDiv.classList.remove("hidden")
+
         const load = async () => {
             const response = await authAxios.get('/component');
             const data = await response.data;
             console.log(data);
             setData(data);
         };
-            load();
+        load();
+
+        const searchInput = document.getElementById("search-input");
+        searchInput.addEventListener("keyup", async (event) => {
+            if(searchInput.value != ""){
+                const response = await authAxios.get('/component/search?name='+searchInput.value);
+                const data = await response.data;
+                console.log(data);
+                setData(data);
+            }else{
+                load();
+            }
+        })
     },[]);
 
 
-    console.log('data2 ==== ', data)
+    // console.log('data2 ==== ', data)
       
   
     return (
         <div className='compo-container'>
             <div className='cards'>
+            {(data.length===0) && <p style={{textAlign: "center", width: "100%"}}>There are no matched equipment</p>}
             {data.map((item, index) => {
-                console.log('Itemsdafasdfasd====',item)
+                // console.log('Itemsdafasdfasd====',item)
                     return (
                     <div className='compo-item'>
                         <div className='compo-img'>
@@ -104,7 +120,9 @@ function CompoRequest() {
                             <div className='product-name'>
                                 <h3>{item.name}</h3>    
                             </div>                    
-                            <p>{item.description}</p>
+                            <p>{(item.description.length > 25) ? 
+                                (item.description.slice(0,(item.description.slice(0,25)).lastIndexOf(" ")) + "...") : 
+                                item.description}</p>
                             <div className='product-des'>
                                 <h5>Available: {item.available_amount}</h5>
                                 <button disabled={item.available_amount <= 0} onClick={() => onAdd(item)}>

@@ -11,13 +11,14 @@
 .cards{
     display: flex;
     flex-wrap: wrap;
+    width: 100%
 }
 
 .compo-item {
     padding: 2px;
     border: 10px solid #00875A;
     /* width: 40%; */
-    min-width: 225px;
+    min-width: 250px;
     max-width: 275px;
     width: 40%;
     height:300px;

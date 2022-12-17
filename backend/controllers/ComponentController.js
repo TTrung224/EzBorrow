@@ -45,7 +45,7 @@ class ComponentController {
                 result = [];
             } else{
                 result = await Component.find({name: {$regex: req.query.name, $options: 'i'}});
-                result = await this.calAvailability(result);
+                result = await calAvailability(result);
 
                 // return component
                 res.status(201).json(result);

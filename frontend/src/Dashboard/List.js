@@ -9,7 +9,6 @@ import TeacherList from './LecturerList';
 import StudentList from './StudentList';
 
 function List(props) {
-    console.log("this is general list");
     const {auth} = props;
     console.log("list auth ==== ", auth);
     // console.log(auth.type);

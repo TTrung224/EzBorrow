@@ -19,8 +19,9 @@ let checkFine = (userEmail) =>  {
 
 class RequestController {
 
-    // [GET] /search?email=
-    async getByBorrower(req, res, next){
+    // [GET] /technician-search?email=
+    // search by borrower email or supervisor email
+    async technicianSearch(req, res, next){
         let requests = [];
         if (!req.query.email){
             
@@ -29,7 +30,33 @@ class RequestController {
             try {
                 let conditions = req.query.email;
                 console.log(conditions)
-                let result = await Request.find({ borrower_email: {$regex: conditions, $options: 'i'} });
+                let result = await Request.find({ $or: [
+                    { borrower_email: {$regex: conditions, $options: 'i' }}, 
+                    { lecturer_email: {$regex: conditions, $options: 'i' }}
+                ]});
+                requests = result;
+                res.status(200).json(requests);
+            } catch (error) {
+                console.log(error);
+                res.status(500).send(error);
+            }
+        }
+    }
+    
+    // [GET] /lecturer-search/:email?email=
+    // search by borrower email
+    async lecturerSearch(req, res, next){
+        let requests = [];
+        if (!req.query.email){
+            res.json(requests);
+        } else {
+            try {
+                let conditions = req.query.email;
+                console.log(conditions)
+                let result = await Request.find({
+                    borrower_email: { $regex: conditions, $options: 'i' }, 
+                    lecturer_email: req.params.email
+                });
                 requests = result;
                 res.status(200).json(requests);
             } catch (error) {
