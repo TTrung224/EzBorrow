@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken');
 
 
 class AccountController {
-    // [GET] account/
+    // [GET] account/getaccount
     async getUser(req, res, next) {
         let data = {};
         let user = req.user;
@@ -26,6 +26,22 @@ class AccountController {
             //return data retrieved from database
             console.log("data====",data)
             return res.status(200).json(data);
+        } catch (error) {
+            console.log(error);
+            return res.status(500).json({success: false, message: "server error"});
+        }
+    }
+    
+    // [GET] account/lecturers
+    async getAllLecturer(req, res, next) {
+        let data = {};
+        let user = req.user;
+        console.log(typeof(user));
+        console.log(user);
+        try {
+            let result = await User.find({ type: "lecturer" }, 'first_name last_name email');
+            return res.status(200).json(result);
+
         } catch (error) {
             console.log(error);
             return res.status(500).json({success: false, message: "server error"});
