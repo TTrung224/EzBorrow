@@ -1,5 +1,6 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button';
+import Dropdown from 'react-bootstrap/Dropdown';
 import Modal from 'react-bootstrap/Modal';
 import {useState} from 'react'
 import axios from 'axios';
@@ -7,11 +8,10 @@ import axios from 'axios';
 
 function Confirmation(props) {
 
-    const [sum, setSum] = useState(((sessionStorage.getItem('cart-sum')) ? sessionStorage.getItem('cart-sum') : 0)*1);
-    const currentItems = (sessionStorage.getItem('cart-items')) ? JSON.parse(sessionStorage.getItem('cart-items')) : []; 
-    const [cartItems, setCartItems] = useState(currentItems);
-    const [fname, setFname] = useState(sessionStorage.getItem('fname'))
-    const [lname, setLname] = useState(sessionStorage.getItem('lname'))
+    const cartItems = props.cartItems;
+    const [sname, setSname] = useState(sessionStorage.getItem('sname'))
+    const [lname, setLname] = useState(JSON.parse(sessionStorage.getItem('lname')))
+    const [chosenLecturer, setChosenLecturer] = useState('')
     const [email, setEmail] = useState(sessionStorage.getItem('email'))
     const [cc, setCC] = useState('')
 
@@ -36,14 +36,23 @@ function Confirmation(props) {
                 <Modal.Body>
                     <h4>Student Information</h4>
                     <p>
-                        Student Name: {fname} {lname} <br></br>
+                        Student Name: {sname}<br></br>
                         Sid: {sid} <br></br>
                     </p>
                     <h4>Course Information</h4>
                     <p>
+                        <label for="lecturer">Lecturer:</label>
+                        <select id="lecturer" onChange={(e) => setChosenLecturer(e.target.value)}>
+                            {lname.map((item) => (
+                                <option>{item.first_name}</option>
+                            ))}
+                        </select> <br/>
+                        Lecturer email: {lname.map((item) => {
+                            if(item.first_name === chosenLecturer) {
+                                return(<span>{item.email}</span>)
+                            }
+                        })}<br/>
                         Course Code: <input onChange={e=>setCC(e.target.value)}></input><br/>
-                        Lecturer Name: {lname} <br></br>
-                        Lecturer Email: {email} <br></br>
                     </p>
                     <h4>Request Information</h4>
                     <ul>

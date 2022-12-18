@@ -92,14 +92,22 @@ function CompoRequest() {
             const response = await authAxios.get('/account/getAccount')
             console.log(response.data)
             const auth = response.data
-            sessionStorage.setItem('fname', auth.first_name)
-            sessionStorage.setItem('lname', auth.last_name)
+            sessionStorage.setItem('sname', auth.first_name + ' ' + auth.last_name)
             sessionStorage.setItem('email', auth.email)
             console.log("auth===============", auth)
         }
 
+        const lecturer = async () => {
+            const response = await authAxios.get('/account/lecturers')
+            console.log(response.data)
+            const lecturer = response.data
+            sessionStorage.setItem('lname', JSON.stringify(lecturer))
+            console.log("lecturer===============", lecturer)
+        }
+
         load();
         check();
+        lecturer();
        
         const searchInput = document.getElementById("search-input");
         searchInput.value = "";
