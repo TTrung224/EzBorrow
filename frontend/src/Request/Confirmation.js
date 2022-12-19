@@ -10,7 +10,7 @@ function Confirmation(props) {
 
     const cartItems = props.cartItems;
     const [sname, setSname] = useState(sessionStorage.getItem('sname'))
-    const [lname, setLname] = useState(JSON.parse(sessionStorage.getItem('lname')))
+    const [lname, setLname] = useState(JSON.parse(sessionStorage.getItem('lname')) ? JSON.parse(sessionStorage.getItem('lname')) : [])
     const [chosenLecturer, setChosenLecturer] = useState('')
     const [email, setEmail] = useState(sessionStorage.getItem('email'))
     const [cc, setCC] = useState('')
