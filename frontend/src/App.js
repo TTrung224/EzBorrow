@@ -55,7 +55,7 @@ function App() {
             {/* <Route path="dashboard" element={<><SearchBar/><Page/><List/></>}/> */}
 
             {/* Real request */}
-            <Route path="request" element={<><Page/><List auth={auth}/></>}>
+            <Route path="request" element={<><SearchBar/><Page/><List auth={auth}/></>}>
             </Route>
 
             {/* Real dashboard */}
