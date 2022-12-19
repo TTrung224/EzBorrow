@@ -2,6 +2,7 @@
     box-sizing: border-box;
     position: absolute;
     width: 20%;
+    min-width: 120px;
     height: 72%;
     left: 0px;
     top: 200px;
@@ -34,5 +35,51 @@
     padding-top: 21px;
     border: none;
 }
+.sideBarCloseOpentBtn{
+    display:none; 
+}
+
+@media screen and (max-width: 500px){
+    .sideBarContainer .dashboardClose,.requestClose{
+        display: none;
+    }
+    .sideBarContainer{
+        position:relative;
+        top: 5%;
+        left: 35%;
+        border-style:hidden;
+        z-index: 10;
+    }
+    .sideBarCloseOpentBtn{
+        display:block;
+        background-color: #4FBF78;
+        color: white;
+        padding: 5px 20px;
+        border-radius: 8px;
+        border-style: none;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+        width: 100%;
+    }
+    .sideBarCloseOpentBtn:active{
+        background-color: #00875A;
+       
+    }
+   .dashboardOpen, .requestOpen{
+        display:block;
+        background-color: #4FBF78;
+        color: white;
+        padding: 5px 20px;
+        border-style: none;
+        font-size:large;
+        width: 100%;
+   }
+   .dashboardOpen:active, .requestOpen:active{
+    background-color: #00875A;
+   
+   }
+   
+}
+
 
 

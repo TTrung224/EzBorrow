@@ -112,8 +112,8 @@
         margin-left: 0px;           
     }
     .request-card{
-        width: 100%;
-        max-width: none;
+        max-width: 100%;
+        min-width: 320px;
     }
     .card-item-info{
         flex-direction: column;
