@@ -65,7 +65,7 @@
         background-color: #00875A;
        
     }
-   .dashboardOpen, .requestOpen{
+    .sideBarContainer .dashboardOpen,.sideBarContainer .requestOpen{
         display:block;
         background-color: #4FBF78;
         color: white;
@@ -73,6 +73,8 @@
         border-style: none;
         font-size:large;
         width: 100%;
+        height: 40px;
+        margin:0;
    }
    .dashboardOpen:active, .requestOpen:active{
     background-color: #00875A;
