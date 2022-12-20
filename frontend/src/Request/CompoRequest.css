@@ -104,3 +104,9 @@ button:disabled:hover{
     font-weight: 700;
     background-color: #e9ecef !important;
 }
+
+@media screen and (max-width: 500px){
+    .compo-container{
+        margin-left: 15%;
+    }
+}

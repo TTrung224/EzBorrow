@@ -42,24 +42,36 @@
 @media screen and (max-width: 500px){
     .sideBarContainer .dashboardClose,.requestClose{
         display: none;
+
     }
     .sideBarContainer{
-        position:relative;
+        position:relative;  
         top: 5%;
-        left: 35%;
+        left: 5px;
         border-style:hidden;
+        z-index: 10;
+        min-width: 20px;
+        border-top-right-radius: 8px;
+        border-top-left-radius: 8px;
+        background-color: rgba(0, 0, 0, 0);
+    }
+    .sideBarContainerOpen{
+       width: fit-content;
+    }
+    .main-page{
+        position: fixed;  
         z-index: 10;
     }
     .sideBarCloseOpentBtn{
         display:block;
         background-color: #4FBF78;
         color: white;
-        padding: 5px 20px;
+        padding: 5px 5px;
         border-radius: 8px;
         border-style: none;
         border-bottom-right-radius: 0;
         border-bottom-left-radius: 0;
-        width: 100%;
+        /* width: 100%; */
     }
     .sideBarCloseOpentBtn:active{
         background-color: #00875A;
@@ -80,6 +92,7 @@
     background-color: #00875A;
    
    }
+   
    
 }
 
