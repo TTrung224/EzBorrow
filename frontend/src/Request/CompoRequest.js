@@ -4,6 +4,7 @@ import axios from 'axios'
 import { useState, useEffect} from 'react'
 import Request from './Request'
 import {FaPlus} from 'react-icons/fa';
+import ReactPaginate from 'react-paginate';
 
 
 function CompoRequest() {
@@ -130,40 +131,94 @@ function CompoRequest() {
 
     },[]);
 
+    function Items({ currentItems }) {
+        return (
+            currentItems.map((item, index) =>
+                // console.log('Itemsdafasdfasd====',item)
+                <div className='compo-item'>
+                    <div className='compo-img'>
+                        <img src={img1} width="120"></img>
+                    </div>
+                    <div className='product-inf'>
+                        <div className='product-name'>
+                            <h3>{item.name}</h3>    
+                        </div>                    
+                        <p>{(item.description.length > 25) ? 
+                            (item.description.slice(0,(item.description.slice(0,25)).lastIndexOf(" ")) + "...") : 
+                            item.description}</p>
+                        <div className='product-des'>
+                            <h5>Available: {item.available_amount}</h5>
+                            <button disabled={item.available_amount <= 0} onClick={() => onAdd(item)}>
+                                <FaPlus/>                         
+                            </button>                        
+                        </div>
+                    </div>
+                </div>
+            )
+        );
+      }
 
     // console.log('data2 ==== ', data)
       
-  
+    function PaginatedItems({ itemsPerPage }) {    
+        const [itemOffset, setItemOffset] = useState(0);
+        const endOffset = itemOffset + itemsPerPage;
+
+        console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+        const currentItems = data.slice(itemOffset, endOffset);
+        const pageCount = Math.ceil(data.length / itemsPerPage);
+      
+        const handlePageClick = (event) => {
+          const newOffset = (event.selected * itemsPerPage) % data.length;
+          console.log(
+            `User requested page number ${event.selected}, which is offset ${newOffset}`
+          );
+          setItemOffset(newOffset);
+        };
+      
+        return (
+          <div className='cards-panigation'>
+            <div className='cards'>
+                <Items currentItems={currentItems} />
+            </div>
+            <nav aria-label="Page navigation comments" className="pagination-container">
+                <ReactPaginate
+                    previousLabel="previous"
+                    nextLabel="next"
+                    breakLabel="..."
+                    breakClassName="page-item"
+                    breakLinkClassName="page-link"
+                    pageCount={pageCount}
+                    pageRangeDisplayed={4}
+                    marginPagesDisplayed={2}
+                    onPageChange={handlePageClick}
+                    containerClassName="pagination justify-content-center"
+                    pageClassName="page-item"
+                    pageLinkClassName="page-link"
+                    previousClassName="page-item"
+                    previousLinkClassName="page-link"
+                    nextClassName="page-item"
+                    nextLinkClassName="page-link"
+                    activeClassName="page-active"
+                    // eslint-disable-next-line no-unused-vars
+                    hrefBuilder={(page, pageCount, selected) =>
+                    page >= 1 && page <= pageCount ? `/page/${page}` : '#'
+                    }
+                    hrefAllControls
+                    onClick={(clickEvent) => {
+                    console.log('onClick', clickEvent);
+
+                    }}
+                />
+            </nav>
+          </div>
+        );
+    }
+
     return (
         <div className='compo-container'>
-            <div className='cards'>
             {(data.length===0) && <p style={{textAlign: "center", width: "100%"}}>There are no matched equipment</p>}
-            {data.map((item, index) => {
-                // console.log('Itemsdafasdfasd====',item)
-                    return (
-                    <div className='compo-item'>
-                        <div className='compo-img'>
-                            <img src={img1} width="120"></img>
-                        </div>
-                        <div className='product-inf'>
-                            <div className='product-name'>
-                                <h3>{item.name}</h3>    
-                            </div>                    
-                            <p>{(item.description.length > 25) ? 
-                                (item.description.slice(0,(item.description.slice(0,25)).lastIndexOf(" ")) + "...") : 
-                                item.description}</p>
-                            <div className='product-des'>
-                                <h5>Available: {item.available_amount}</h5>
-                                <button disabled={item.available_amount <= 0} onClick={() => onAdd(item)}>
-                                    <FaPlus/>                         
-                                </button>                        
-                            </div>
-                        </div>
-                    </div>
-                    )
-            }
-            )}
-            </div>
+            { <><PaginatedItems itemsPerPage={4} /></>}
             <Request cartItems={cartItems} onAdd={onAdd} onDesc={onDesc} onRemove={onRemove} sum={sum} removeAll={removeAll} />  
         </div>
         

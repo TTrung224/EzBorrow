@@ -8,6 +8,10 @@
     margin-top: 0px;
 }
 
+.cards-panigation{
+    width: 100%;
+}
+
 .cards{
     display: flex;
     flex-wrap: wrap;
@@ -72,4 +76,31 @@ button:disabled:hover{
     cursor: default;
     background: #cddbd68c ;
     color: white;
+}
+
+.pagination a{
+    font-size: 18px;
+    font-weight: 500;
+    color: #00875A;
+}
+
+.pagination a:hover{
+    color: #00875A;
+    font-weight: 700;
+}
+
+.pagination a:focus{
+    outline: none;
+    box-shadow: none;
+    color: #00875A;
+}
+
+.pagination li:focus{
+    outline: none;
+}
+
+.pagination .page-active a{
+    color: #00875A;
+    font-weight: 700;
+    background-color: #e9ecef !important;
 }

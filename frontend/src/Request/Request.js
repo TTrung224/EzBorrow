@@ -15,9 +15,6 @@ function Request(props) {
   // console.log(modalShow)
 
   
-
-
-
   return (
     <div className='cart'>
       <div className='cart-item-box'></div>
