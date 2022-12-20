@@ -216,11 +216,14 @@ function CompoRequest() {
     }
 
     return (
-        <div className='compo-container'>
+        <div>
+            <div className='compo-container'>
             {(data.length===0) && <p style={{textAlign: "center", width: "100%"}}>There are no matched equipment</p>}
             { <><PaginatedItems itemsPerPage={4} /></>}
             <Request cartItems={cartItems} onAdd={onAdd} onDesc={onDesc} onRemove={onRemove} sum={sum} removeAll={removeAll} />  
         </div>
+        </div>
+        
         
     )
 }

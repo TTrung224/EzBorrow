@@ -7,10 +7,12 @@ function openClose(){
   if(isClose){
     document.querySelector(".dashboardClose").classList.add("dashboardOpen") ;
     document.querySelector(".requestClose").classList.add("requestOpen");
+    document.querySelector(".sideBarContainer").classList.add("sideBarContainerOpen")
     isClose = false;
   }else if(!isClose){
     document.querySelector(".dashboardClose").classList.remove("dashboardOpen") ;
     document.querySelector(".requestClose").classList.remove("requestOpen") ;
+    document.querySelector(".sideBarContainer").classList.remove("sideBarContainerOpen")
     isClose =true;
   }
 }
@@ -18,7 +20,7 @@ function openClose(){
 function Sidebar() {
   return (
       <div className="sideBarContainer" onClick={openClose}>
-        <button className='sideBarCloseOpentBtn' >sidebar</button>
+        <img className='sideBarCloseOpentBtn' src="https://assets.stickpng.com/images/588a6507d06f6719692a2d15.png" height="35" width="35"/>
         <LinkContainer to={"/dashboard"}>
           <div className='nonActive dashboardClose'>Dashboard</div>
         </LinkContainer>
