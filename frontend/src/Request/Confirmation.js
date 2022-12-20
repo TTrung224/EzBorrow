@@ -14,7 +14,8 @@ function Confirmation(props) {
     const [chosenLecturer, setChosenLecturer] = useState('')
     const [email, setEmail] = useState(sessionStorage.getItem('email'))
     const [cc, setCC] = useState('')
-
+    const [pickupdate,setPickupdate] = useState()
+    const [returndate, setReturndate] = useState()
     const sid = "s1234"
     const cname = "BITS"
     const comp = "Arduino"
@@ -60,6 +61,13 @@ function Confirmation(props) {
                             <li>{item.name} x {item.quantity}</li>
                         ))}
                     </ul>
+                    <div>                        
+                        <p>Select pick up date</p>
+                        <input type="date" onChange={e=>setPickupdate(e.target.value)}></input>
+                        <p>Select return up date</p>
+                        <input type="date" onChange={e=>setReturndate(e.target.value)}></input>
+                        <p>Note: <input onChange={e=>setCC(e.target.value)}></input></p>
+                    </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={props.onHide} variant='danger'>Cancel</Button>

@@ -19,7 +19,7 @@ function Request(props) {
     <div className='cart'>
       <div className='cart-item-box'></div>
         <div className='req-title'>
-          <h4>Requests</h4>
+          <h2>Requests</h2>
         </div>
         {cartItems.length === 0 && <div className='empty-cart'>Cart is empty</div>}
         {cartItems.map((item) => (
