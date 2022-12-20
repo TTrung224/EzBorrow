@@ -175,11 +175,12 @@ function CompoRequest() {
           );
           setItemOffset(newOffset);
         };
-      
+    
         return (
           <div className='cards-panigation'>
             <div className='cards'>
                 <Items currentItems={currentItems} />
+                {(data.length===0) && <p style={{textAlign: "center", width: "100%"}}>There are no matched equipment</p>}
             </div>
             <nav aria-label="Page navigation comments" className="pagination-container">
                 <ReactPaginate
@@ -216,12 +217,12 @@ function CompoRequest() {
     }
 
     return (
-        <div className='compo-container'>
-            {(data.length===0) && <p style={{textAlign: "center", width: "100%"}}>There are no matched equipment</p>}
-            { <><PaginatedItems itemsPerPage={4} /></>}
-            <Request cartItems={cartItems} onAdd={onAdd} onDesc={onDesc} onRemove={onRemove} sum={sum} removeAll={removeAll} />  
+        <div>
+            <div className='compo-container'>
+                { <><PaginatedItems itemsPerPage={4} /></>}
+                <Request cartItems={cartItems} onAdd={onAdd} onDesc={onDesc} onRemove={onRemove} sum={sum} removeAll={removeAll} />  
+            </div>
         </div>
-        
     )
 }
 

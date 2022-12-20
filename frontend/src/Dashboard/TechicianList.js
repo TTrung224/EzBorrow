@@ -84,7 +84,7 @@ function TechnicianList() {
     return(
         <div>
             {(data.length===0) && <p style={{textAlign: "center"}}>There have not been any requests</p>}
-             <div className="card-container">
+            <div className="card-container">
             {[...data].reverse().map(request =>
             <div className="request-card">
                 <div className="card-item-info">
@@ -116,7 +116,7 @@ function TechnicianList() {
                 </div>    
                     {DisplayBtn(request)}
             </div>)}
-        </div> 
+            </div> 
         </div>
        
       
