@@ -4,7 +4,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Modal from 'react-bootstrap/Modal';
 import {useState} from 'react'
 import axios from 'axios';
-
+import './Confirmation.css'
 
 function Confirmation(props) {
 
@@ -31,7 +31,9 @@ function Confirmation(props) {
                 >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                    Information
+                    <div>
+                    INFORMATION
+                    </div> 
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
