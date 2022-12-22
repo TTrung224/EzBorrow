@@ -5,6 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 import {useState} from 'react'
 import axios from 'axios';
 import './Confirmation.css'
+import { PromiseProvider } from 'mongoose';
 
 function Confirmation(props) {
 
@@ -30,8 +31,11 @@ function Confirmation(props) {
             component_list: cartItems,
             lecturer_email: email,
             course: cc,
+        }).catch((error) => {
+            console.log(error.response)
         })
     }
+
 
     return (
         <div>
@@ -69,6 +73,7 @@ function Confirmation(props) {
                            
                         <p><span className='bold-words' >Lecturer email :&emsp;</span>{lname.map((item) => {
                             if(item.first_name === chosenLecturer) {
+                                setEmail(item.email);
                                 return(<span>{item.email}</span>)
                             }
                         })}</p>
@@ -88,10 +93,19 @@ function Confirmation(props) {
                         <p><span className='bold-words' >Note :&emsp;</span></p>
                         <input onChange={e=>setCC(e.target.value)} className='input-box'></input>
                     </div>
+                    <div>
+                        result
+                        {pickupdate}
+                        {returndate}
+                        {cartItems}
+                        {email}
+                        {cc}
+                    </div>        
+
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={props.onHide} variant='danger'>Cancel</Button>
-                    <Button onClick={props.onHide} variant='success'>Send</Button>
+                    <Button onClick={request()} variant='success'>Send</Button>
                 </Modal.Footer>
             </Modal>
         </div>
