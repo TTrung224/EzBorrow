@@ -17,9 +17,21 @@ function Confirmation(props) {
     const [pickupdate,setPickupdate] = useState()
     const [returndate, setReturndate] = useState()
     const sid = "s1234"
-    const cname = "BITS"
-    const comp = "Arduino"
-    const compNum = 1
+
+    const authAxios = axios.create({
+        baseURL: 'http://localhost:4500/',
+        withCredentials: true
+    })
+
+    const request = async () => {
+        await authAxios.post('/request/', {
+            pickup_date: pickupdate,
+            expected_return_date: returndate,
+            component_list: cartItems,
+            lecturer_email: email,
+            course: cc,
+        })
+    }
 
     return (
         <div>
