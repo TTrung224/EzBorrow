@@ -9,6 +9,12 @@
     font-weight: bold;
 }
 
-.Student-info{
-    margin-top: 20px;
+
+.input-box{
+    width: 60%;
+}
+
+.confirm-header{
+    margin-bottom:1.5rem;
+    margin-top: 1.5rem;
 }

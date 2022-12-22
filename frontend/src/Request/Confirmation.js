@@ -43,20 +43,24 @@ function Confirmation(props) {
                 >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                    <div>
-                    INFORMATION
+                    <div className='confirm-top-header'>
+                    <h2>INFORMATION</h2>
                     </div> 
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className='Student-info'>
-                    <h4>Student Information</h4>
+                    <div className='confirm-header'>
+                    <h2>Student Information</h2>
+                    </div>
                     <p>
                         <p><span className='bold-words' >Name :&emsp;</span>{sname}</p>
                         <p><span className='bold-words'>Student ID :&emsp;</span>{sid}</p>
                     </p>
                     </div>
-                    <h4>Course Information</h4>
+                    <div className='confirm-header'>
+                    <h3>Course Information</h3>
+                    </div>
                     <p>
                         <p><span className='bold-words' >Lecturer :&emsp;</span><select id="lecturer" onChange={(e) => setChosenLecturer(e.target.value)} required > {lname.map((item) => (
                                 <option>{item.first_name}</option>
@@ -70,7 +74,9 @@ function Confirmation(props) {
                         })}</p>
                         <p><span className='bold-words' > Course Code :&emsp;</span><input onChange={e=>setCC(e.target.value)} required ></input></p>
                     </p>
-                    <h4>Request Information</h4>
+                    <div className='confirm-header'>
+                    <h3>Request Information</h3>
+                    </div>
                     <ul>
                         {cartItems.map( (item) => (
                             <li>{item.name} x {item.quantity}</li>
@@ -79,7 +85,8 @@ function Confirmation(props) {
                     <div className='request-info'>                    
                         <p><span className='bold-words' >Select pickup date&emsp;</span><input type="date" onChange={e=>setPickupdate(e.target.value)} required ></input>
                         <span className='bold-words' >&emsp; Select return date&emsp;</span><input type="date" onChange={e=>setReturndate(e.target.value)} required ></input></p>
-                        <p><span className='bold-words' >Note :&emsp;</span><input onChange={e=>setCC(e.target.value)}></input></p>
+                        <p><span className='bold-words' >Note :&emsp;</span></p>
+                        <input onChange={e=>setCC(e.target.value)} className='input-box'></input>
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
