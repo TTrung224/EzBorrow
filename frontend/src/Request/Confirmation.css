@@ -4,3 +4,11 @@
     display: flex;
     justify-content: center;
 }
+
+.bold-words{
+    font-weight: bold;
+}
+
+.Student-info{
+    margin-top: 20px;
+}

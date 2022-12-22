@@ -37,25 +37,31 @@ function Confirmation(props) {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+                    <div className='Student-info'>
                     <h4>Student Information</h4>
                     <p>
-                        Student Name: {sname}<br></br>
-                        Sid: {sid} <br></br>
+                        <p><span className='bold-words' >Name :&emsp;</span>{sname}</p>
+                        <p><span className='bold-words'>Student ID :&emsp;</span>{sid}</p>
                     </p>
+                    </div>
                     <h4>Course Information</h4>
                     <p>
-                        <label for="lecturer">Lecturer:</label>
-                        <select id="lecturer" onChange={(e) => setChosenLecturer(e.target.value)}>
+                        <p><span className='bold-words' >Lecturer :&emsp;</span><select id="lecturer" onChange={(e) => setChosenLecturer(e.target.value)} required ></select></p>
+                        
                             {lname.map((item) => (
                                 <option>{item.first_name}</option>
                             ))}
-                        </select> <br/>
-                        Lecturer email: {lname.map((item) => {
+                        <p><span className='bold-words' >Lecturer email :&emsp;</span>{lname.map((item) => {
                             if(item.first_name === chosenLecturer) {
                                 return(<span>{item.email}</span>)
                             }
-                        })}<br/>
-                        Course Code: <input onChange={e=>setCC(e.target.value)}></input><br/>
+                        })}</p>
+                        {/* Lecturer email: {lname.map((item) => {
+                            if(item.first_name === chosenLecturer) {
+                                return(<span>{item.email}</span>)
+                            }
+                        })} */}
+                        <p><span className='bold-words' > Course Code :&emsp;</span><input onChange={e=>setCC(e.target.value)} required ></input></p>
                     </p>
                     <h4>Request Information</h4>
                     <ul>
@@ -63,12 +69,10 @@ function Confirmation(props) {
                             <li>{item.name} x {item.quantity}</li>
                         ))}
                     </ul>
-                    <div>                        
-                        <p>Select pick up date</p>
-                        <input type="date" onChange={e=>setPickupdate(e.target.value)}></input>
-                        <p>Select return up date</p>
-                        <input type="date" onChange={e=>setReturndate(e.target.value)}></input>
-                        <p>Note: <input onChange={e=>setCC(e.target.value)}></input></p>
+                    <div className='request-info'>                    
+                        <p><span className='bold-words' >Select pickup date&emsp;</span><input type="date" onChange={e=>setPickupdate(e.target.value)} required ></input>
+                        <span className='bold-words' >&emsp; Select return date&emsp;</span><input type="date" onChange={e=>setReturndate(e.target.value)} required ></input></p>
+                        <p><span className='bold-words' >Note :&emsp;</span><input onChange={e=>setCC(e.target.value)}></input></p>
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
