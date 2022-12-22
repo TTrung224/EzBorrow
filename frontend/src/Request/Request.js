@@ -14,9 +14,24 @@ function Request(props) {
   const [modalShow, setModalShow] = React.useState(false);
   // console.log(modalShow)
 
-  
+  var requestDisplay = false;
+  function openCloseRequest(){
+    if(!requestDisplay){
+      document.querySelector(".cart").classList.remove("nonactive") ;
+      requestDisplay = true;
+    } else {
+      document.querySelector(".cart").classList.add("nonactive") ;
+      requestDisplay = false;
+    }
+  }
+
   return (
-    <div className='cart'>
+    <>
+    <div className='cartCloseOpentBtn' onClick={openCloseRequest}>
+      <img src="/clipboard.png"/>
+    </div>
+    <div className='cart nonactive'>
+      <img className='cartCloseBtn' src="/close.png" onClick={openCloseRequest}/>
       <div className='cart-item-box'></div>
         <div className='req-title'>
           <h2>Requests</h2>
@@ -54,6 +69,8 @@ function Request(props) {
             <Button id='request-btn' variant='success' onClick={() => setModalShow(true)}>Request</Button>
         </div>    
     </div>  
+    </>
+
   )
 }
 
