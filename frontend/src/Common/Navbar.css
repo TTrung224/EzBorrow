@@ -16,6 +16,8 @@
     width: 50px;
 }
 
+
+
 .profile{
     align-self: flex-end;
     margin-left: auto;
@@ -35,6 +37,7 @@
     display: flex;
     box-shadow: 2px 1px gray;
 }
+
 
 input[type=text] {
     height: 30px;
@@ -59,7 +62,6 @@ input[type=text] {
 .profile-btn {
     background-color: #00875A;
 }
-
 @media screen and (max-width: 500px){
     .app_navbar-logo {
         margin-left: 45%;

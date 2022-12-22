@@ -1,6 +1,7 @@
 import React from 'react'
 import './CompoRequest.css'
 import axios from 'axios'
+import {axiosSetting} from '../Context/serverURLContext'
 import { useState, useEffect} from 'react'
 import Request from './Request'
 import {FaPlus} from 'react-icons/fa';
@@ -9,15 +10,14 @@ import ReactPaginate from 'react-paginate';
 
 function CompoRequest() {
     const img1 = 'http://mlab.vn/image/data/Bai%20viet%20ky%20thuat/Arduino/bai%202%20Nhung%20dieu%20co%20ban/ArduinoUnoR3.jpg'
-    const itemList = [];
   /**TEST CARTTTTTTT
    * NEEDDDDD TOOO CHANGEEEEE STRUCCCTTTTUREEEE
 */
     const currentItems = (sessionStorage.getItem('cart-items')) ? JSON.parse(sessionStorage.getItem('cart-items')) : []; 
     const [cartItems, setCartItems] = useState(currentItems);
     const [sum, setSum] = useState(((sessionStorage.getItem('cart-sum')) ? sessionStorage.getItem('cart-sum') : 0)*1);
-    // console.log("sum=",sum)
-    // console.log('000000000000000000000000000000000000000',cartItems)
+    
+    //add quantity
     const onAdd = (Item) => {
         const exist = cartItems.find(x => x._id === Item._id);
         if(exist) {
@@ -29,6 +29,7 @@ function CompoRequest() {
         }
     };
 
+    //desc quantity
     const onDesc = (Item) => {
         const exist = cartItems.find(x => x._id === Item._id);
         if(exist && exist.quantity !== 1) {
@@ -37,6 +38,7 @@ function CompoRequest() {
         };
     }
 
+    //rmv component from cart
     const onRemove = (Item) => {
         setCartItems(cartItems.filter((item) => item._id !== Item._id));
         if(sum > 0) {
@@ -45,6 +47,7 @@ function CompoRequest() {
         // console.log("sum=",sum)
     }
 
+    //rmv all component from cart
     const removeAll = () => {
         // console.log("clearing cart")
         setCartItems([]);
@@ -52,6 +55,8 @@ function CompoRequest() {
             setSum(0)
         }
     }
+
+    //this is for debugging
     useEffect(() =>{
         const sth = () => {
             console.log("this is dashboard");
@@ -78,17 +83,13 @@ function CompoRequest() {
 
     //END TEST -------------------------------------------------!>
     const [data, setData] = useState([])
-    const authAxios = axios.create({
-        baseURL: 'http://localhost:4500/',
-        withCredentials: true
-    })
 
     useEffect(() => {
         const searchDiv = document.querySelector('.search .search-bar');
         searchDiv.classList.remove("hidden")
 
         const load = async () => {
-            const response = await authAxios.get('/component');
+            const response = await axiosSetting.get('/component');
             const data = await response.data;
             console.log(data);
             console.log("load")
@@ -96,7 +97,7 @@ function CompoRequest() {
         };
 
         const check = async () => {
-            const response = await authAxios.get('/account/getAccount')
+            const response = await axiosSetting.get('/account/getAccount')
             console.log(response.data)
             const auth = response.data
             sessionStorage.setItem('sname', auth.first_name + ' ' + auth.last_name)
@@ -105,7 +106,7 @@ function CompoRequest() {
         }
 
         const lecturer = async () => {
-            const response = await authAxios.get('/account/lecturers')
+            const response = await axiosSetting.get('/account/lecturers')
             console.log(response.data)
             const lecturer = response.data
             sessionStorage.setItem('lname', JSON.stringify(lecturer))
@@ -121,7 +122,7 @@ function CompoRequest() {
         searchInput.placeholder = "name keyword"
         const handleInputChange = async (event) => {
             if(searchInput.value != ""){
-                const response = await authAxios.get('/component/search?name='+searchInput.value);
+                const response = await axiosSetting.get('/component/search?name='+searchInput.value);
                 const data = await response.data;
                 console.log(data);
                 setData(data);

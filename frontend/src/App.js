@@ -8,15 +8,9 @@ import Login from './Common/Login/login';
 import Loading from './Common/Login/Loading';
 import SearchBar from './Common/Search Bar/SearchBar';
 import React from 'react'
-import {useState, useEffect} from 'react'
 import AuthContextProvider from './Context/loginSessionContext'
-import { useNavigate } from "react-router-dom";
-import axios from 'axios';
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 function App() {
-
-  const [auth, setAuth] = useState({})
-  const navigate = useNavigate();
 
   return (
     <div className="App">

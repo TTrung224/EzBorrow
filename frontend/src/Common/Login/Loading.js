@@ -1,14 +1,12 @@
 import './Login.css';
-import { useNavigate, Navigate, Outlet} from "react-router-dom";
-import {useState, useContext, useEffect} from 'react'
-import axios from 'axios'
-import Login from './login'
+import { Navigate, Outlet} from "react-router-dom";
+import {useContext} from 'react'
+
 import {AuthContext} from '../../Context/loginSessionContext'
-import Spinner from 'react-bootstrap/Spinner'
 
 const Loading = () => {
     const { authState: {isAuthenticated}} = useContext(AuthContext)
-    const navigate = useNavigate()
+
 
     if (isAuthenticated) {
         console.log("you are in")
