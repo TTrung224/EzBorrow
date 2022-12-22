@@ -106,7 +106,25 @@ button:disabled:hover{
 }
 
 @media screen and (max-width: 500px){
+    .dashboard{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
     .compo-container{
-        margin-left: 15%;
+        margin-left: 0;
+        justify-content: center;
+    }
+    .cards-panigation{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .cards-panigation .cards{
+        justify-content: center;
+    }
+    
+    .cards .compo-item{
+        margin-left: 0;
     }
 }
