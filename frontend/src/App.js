@@ -2,7 +2,7 @@ import './App.css';
 import Page from './Common/Page'
 import Navbar from './Common/Navbar'
 import Banner from './Banner'
-import Request from './Request/CompoRequest'
+import Components from './Request/Components'
 import List from './Dashboard/List'
 import Login from './Common/Login/login';
 import Loading from './Common/Login/Loading';
@@ -36,7 +36,7 @@ function App() {
               <Route path="request" element={<><SearchBar/><Page/><List/></>}/>
 
               {/* Real dashboard */}
-              <Route path="dashboard" element={<><SearchBar/><Page/><Request/></>}/>
+              <Route path="dashboard" element={<><SearchBar/><Page/><Components/></>}/>
             </Route>
             <Route path='/login' element={<Login/>}/>
           </Routes>

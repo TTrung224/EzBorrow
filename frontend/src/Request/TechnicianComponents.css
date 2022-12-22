@@ -1,0 +1,130 @@
+.compo-container {
+    width: 75%;
+    position: absolute;
+    margin-left: 25%;    
+    display: flex;   
+    padding: 5px;  
+    top: 200px;
+    margin-top: 0px;
+}
+
+.cards-panigation{
+    width: 100%;
+}
+
+.cards{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.compo-item {
+    padding: 2px;
+    border: 10px solid #00875A;
+    /* width: 40%; */
+    min-width: 250px;
+    max-width: 275px;
+    width: 40%;
+    height:300px;
+    border-radius: 20px;
+    margin-left: 40px;
+    margin-bottom: 40px;
+}
+
+.compo-img{
+    border-bottom: 1px solid #00875A;
+}
+
+.product-inf{
+    padding: 10px 12px;
+}
+
+.product-des{
+    display: flex;
+    justify-content: space-around;
+    color: #00875A;
+    align-items: center;
+}
+
+.product-des h5{
+    margin-bottom: 0;
+}
+
+.product-des button{
+    background: white ;
+    color: #00875A ;
+    font-size: 20px;
+    border: 1px solid  ;
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+}
+
+.product-des button:hover{
+    cursor: pointer;
+    background: #00875A ;
+    color: white;
+}
+
+button:disabled{
+    cursor: pointer;
+    background: #cddbd68c ;
+    color: white;
+}
+
+button:disabled:hover{
+    cursor: default;
+    background: #cddbd68c ;
+    color: white;
+}
+
+.pagination a{
+    font-size: 18px;
+    font-weight: 500;
+    color: #00875A;
+}
+
+.pagination a:hover{
+    color: #00875A;
+    font-weight: 700;
+}
+
+.pagination a:focus{
+    outline: none;
+    box-shadow: none;
+    color: #00875A;
+}
+
+.pagination li:focus{
+    outline: none;
+}
+
+.pagination .page-active a{
+    color: #00875A;
+    font-weight: 700;
+    background-color: #e9ecef !important;
+}
+
+@media screen and (max-width: 500px){
+    .dashboard{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .compo-container{
+        margin-left: 0;
+        justify-content: center;
+    }
+    .cards-panigation{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .cards-panigation .cards{
+        justify-content: center;
+    }
+    
+    .cards .compo-item{
+        margin-left: 0;
+    }
+}
