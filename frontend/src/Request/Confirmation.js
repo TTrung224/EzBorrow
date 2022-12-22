@@ -58,21 +58,16 @@ function Confirmation(props) {
                     </div>
                     <h4>Course Information</h4>
                     <p>
-                        <p><span className='bold-words' >Lecturer :&emsp;</span><select id="lecturer" onChange={(e) => setChosenLecturer(e.target.value)} required ></select></p>
-                        
-                            {lname.map((item) => (
+                        <p><span className='bold-words' >Lecturer :&emsp;</span><select id="lecturer" onChange={(e) => setChosenLecturer(e.target.value)} required > {lname.map((item) => (
                                 <option>{item.first_name}</option>
-                            ))}
+                            ))}</select></p>
+                        
+                           
                         <p><span className='bold-words' >Lecturer email :&emsp;</span>{lname.map((item) => {
                             if(item.first_name === chosenLecturer) {
                                 return(<span>{item.email}</span>)
                             }
                         })}</p>
-                        {/* Lecturer email: {lname.map((item) => {
-                            if(item.first_name === chosenLecturer) {
-                                return(<span>{item.email}</span>)
-                            }
-                        })} */}
                         <p><span className='bold-words' > Course Code :&emsp;</span><input onChange={e=>setCC(e.target.value)} required ></input></p>
                     </p>
                     <h4>Request Information</h4>
