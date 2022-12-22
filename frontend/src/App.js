@@ -24,13 +24,18 @@ function App() {
 
   useEffect(() => {
     const check = async () => {
-      const response = await authAxios.get('/account/getAccount')
+      const response = await authAxios.get('/account/getAccount').then((response) => {
+        //success
+        navigate("/", {replace: true})
+      }).catch((error) => {
+        navigate("/hero", {replace: true})
+      })
       console.log(response.data)
       const auth = response.data
-      setAuth(auth);
       console.log("auth===============", auth)
       if(!(auth.type === 'lecturer' || auth.type === 'student' || auth.type === 'technician')){
         console.log()
+        console.log('hello world')
         console.log(auth.type)
         console.log(auth.name)
         console.log(typeof(auth.type))
