@@ -1,37 +1,35 @@
-import React from 'react';
 import './Login.css';
-import { useNavigate } from "react-router-dom";
-import axios from 'axios'
+import { Navigate, useNavigate, redirect} from "react-router-dom";
+import {useState, useContext, useEffect} from 'react'
+import {AuthContext} from '../../Context/loginSessionContext'
+
 
 export const Login = (props) => {
-    const {auth, setAuth} = props
-    const [formData, setFormData] = React.useState({email: '', password: ''})
-    const [error, setError] = React.useState("")
-    const navigate = useNavigate();
-    const onSubmit = (e) => {
-        e.preventDefault()
-        const res = axios.post('http://localhost:4500/account/login', formData, {withCredentials: true})
-        .then((res)=>{
-            console.log("res:", res)
-            if(res.status === 200){
-                console.log("test")
-                console.log(auth)
-                console.log("dataasfasdfasdf", res.data)
-                setAuth(res.data)
-                console.log(auth)
-                navigate("/", {replace: true});
+    const {LoginContext, authState: {isAuthenticated}} = useContext(AuthContext)
+    const [formData, setFormData] = useState({email: '', password: ''})
+    const [error, setError] = useState("")
+    const navigate = useNavigate()
+
+    const onSubmit = async event => {
+        event.preventDefault();
+        try {
+            const loginData = await LoginContext(formData)
+            if (loginData.success){
+                console.log(loginData.data)
+                console.log("loginnnnn")
+                navigate("/dashboard");
+            } else {
+                console.log('err')
+                setError('Invalid Credentials')
             }
-        }) .catch(err => {
-            console.log(res)
-            console.log(err)
-            if(err.response.status === 400) {
-                console.log("Incorrect password or username")
-                setError("Incorrect name or password")
-            }
-        })
+        } catch (error) {
+            console.log(error)
+        }
+
     }
 
-
+    if (isAuthenticated) navigate("/dashboard")
+    
     return(
         <div className='login-body'>
             <div className='MainContainer' >

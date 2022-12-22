@@ -52,6 +52,12 @@ function CompoRequest() {
             setSum(0)
         }
     }
+    useEffect(() =>{
+        const sth = () => {
+            console.log("this is dashboard");
+        }
+        sth()
+    },[])
 
     useEffect(() =>{
         const updateSessionStorage = (cartItems) => {

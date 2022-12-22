@@ -2,19 +2,28 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from "react-router-dom";
-import {useState, useEffect} from 'react';
+import {useState, useContext} from 'react'
+import {AuthContext} from '../Context/loginSessionContext'
 import axios from 'axios';
 
 function Logout(props) {
   const navigate = useNavigate();
-  const authAxios = axios.create({
-    baseURL: 'http://localhost:4500/account/',
-    withCredentials: true
-  })
+  const {Logout} = useContext(AuthContext);
 
   const logout = async () => {
-    const response = await authAxios.post('/logout');
-    navigate("/hero", { replace: true });
+    try {
+      const logoutresponse = await Logout();
+      if (logoutresponse.success) {
+        console.log("success")
+        navigate("/hero", { replace: true });
+      } else {
+        console.log(logoutresponse)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+
+    
     
 };
 
