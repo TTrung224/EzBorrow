@@ -20,7 +20,7 @@ function openClose(){
 function Sidebar() {
   return (
       <div className="sideBarContainer" onClick={openClose}>
-        <img className='sideBarCloseOpentBtn' src="https://assets.stickpng.com/images/588a6507d06f6719692a2d15.png" height="35" width="35"/>
+        <img className='sideBarCloseOpentBtn' src="/menu.2048x1366.png"/>
         <LinkContainer to={"/dashboard"}>
           <div className='nonActive dashboardClose'>Dashboard</div>
         </LinkContainer>

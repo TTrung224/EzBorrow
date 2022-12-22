@@ -17,11 +17,14 @@
     min-width: 350px;
 }
 
-@media only screen and (max-width: 1000px) {
-    .Request {
-        width: 25%;
-    }
+.cart .cartCloseBtn{
+    display: none;
 }
+
+.cartCloseOpentBtn{
+    display: none;
+}
+
 .detail{
     display: flex;
     justify-content: space-around;
@@ -128,4 +131,93 @@
     cursor: pointer;
     background: #00875A ;
     color: white;
+}
+
+@media only screen and (max-width: 1000px) {
+    .Request {
+        width: 25%;
+    }
+    .cartCloseOpentBtn{
+        display: block;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        border-radius: 90px;
+        background-color: #4FBF78;
+    }
+    .cartCloseOpentBtn:hover{
+        background-color: #00875A ;
+
+    }
+    .cartCloseOpentBtn img{
+        height: 50px;
+        width: 50px;
+        padding: 10px;
+        z-index: 10;
+    }
+    .nonactive {
+        display: none;
+    }
+    .cart{
+        position: fixed;
+        top: 25%;
+        margin: 0;
+        background-color: white;
+    }
+    .cart .cartCloseBtn{
+        height: 40px;
+        width: 40px;
+        padding: 10px;
+        display: block;
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        border-radius: 8px;
+    }
+    .cart .cartCloseBtn:hover{
+        background-color: rgb(188, 188, 188);
+    }
+}
+
+@media screen and (max-width: 500px){
+    .cartCloseOpentBtn{
+        display: block;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        border-radius: 90px;
+        background-color: #4FBF78;
+    }
+    .cartCloseOpentBtn:hover{
+        background-color: #00875A ;
+
+    }
+    .cartCloseOpentBtn img{
+        height: 50px;
+        width: 50px;
+        padding: 10px;
+        z-index: 10;
+    }
+    .nonactive {
+        display: none;
+    }
+    .cart{
+        position: fixed;
+        top: 25%;
+        margin: 0;
+        background-color: white;
+    }
+    .cart .cartCloseBtn{
+        height: 40px;
+        width: 40px;
+        padding: 10px;
+        display: block;
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        border-radius: 8px;
+    }
+    .cart .cartCloseBtn:hover{
+        background-color: rgb(188, 188, 188);
+    }
 }

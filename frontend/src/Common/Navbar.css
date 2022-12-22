@@ -59,3 +59,9 @@ input[type=text] {
 .profile-btn {
     background-color: #00875A;
 }
+
+@media screen and (max-width: 500px){
+    .app_navbar-logo {
+        margin-left: 45%;
+    }
+}
