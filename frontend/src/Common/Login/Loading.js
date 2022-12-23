@@ -11,6 +11,8 @@ const Loading = () => {
     if (isAuthenticated) {
         console.log("you are in")
         return <Outlet/>
+    } else if (window.location.pathname === '/') {
+        return <Navigate to="hero"/>
     }
     else {
         console.log("navigating") 
