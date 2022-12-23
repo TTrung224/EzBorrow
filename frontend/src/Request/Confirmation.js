@@ -24,14 +24,16 @@ function Confirmation(props) {
         withCredentials: true
     })
 
+    console.log("cart:", cartItems)
+
     const request = async () => {
         await authAxios.post('/request/', {
             pickup_date: pickupdate,
             expected_return_date: returndate,
             component_list: cartItems,
-            lecturer_email: email,
+            lecturer_email: 'email',
             course: cc,
-        }).catch((error) => {
+        }, {withCredentials: true}).catch((error) => {
             console.log(error.response)
         })
     }
@@ -57,15 +59,12 @@ function Confirmation(props) {
                     <div className='confirm-header'>
                     <h2>Student Information</h2>
                     </div>
-                    <p>
                         <p><span className='bold-words' >Name :&emsp;</span>{sname}</p>
                         <p><span className='bold-words'>Student ID :&emsp;</span>{sid}</p>
-                    </p>
                     </div>
                     <div className='confirm-header'>
-                    <h3>Course Information</h3>
+                        <h3>Course Information</h3>
                     </div>
-                    <p>
                         <p><span className='bold-words' >Lecturer :&emsp;</span><select id="lecturer" onChange={(e) => setChosenLecturer(e.target.value)} required > {lname.map((item) => (
                                 <option>{item.first_name}</option>
                             ))}</select></p>
@@ -73,12 +72,10 @@ function Confirmation(props) {
                            
                         <p><span className='bold-words' >Lecturer email :&emsp;</span>{lname.map((item) => {
                             if(item.first_name === chosenLecturer) {
-                                setEmail(item.email);
                                 return(<span>{item.email}</span>)
                             }
                         })}</p>
                         <p><span className='bold-words' > Course Code :&emsp;</span><input onChange={e=>setCC(e.target.value)} required ></input></p>
-                    </p>
                     <div className='confirm-header'>
                     <h3>Request Information</h3>
                     </div>
@@ -92,20 +89,11 @@ function Confirmation(props) {
                         <span className='bold-words' >&emsp; Select return date&emsp;</span><input type="date" onChange={e=>setReturndate(e.target.value)} required ></input></p>
                         <p><span className='bold-words' >Note :&emsp;</span></p>
                         <input onChange={e=>setCC(e.target.value)} className='input-box'></input>
-                    </div>
-                    <div>
-                        result
-                        {pickupdate}
-                        {returndate}
-                        {cartItems}
-                        {email}
-                        {cc}
-                    </div>        
-
+                    </div>     
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={props.onHide} variant='danger'>Cancel</Button>
-                    <Button onClick={request()} variant='success'>Send</Button>
+                    <Button onClick={() => request()} variant='success'>Send</Button>
                 </Modal.Footer>
             </Modal>
         </div>
