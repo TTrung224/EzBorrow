@@ -36,28 +36,30 @@ function Cart(props) {
         <div className='req-title'>
           <h2>Requests</h2>
         </div>
-        {cartItems.length === 0 && <div className='empty-cart'>Cart is empty</div>}
-        {cartItems.map((item) => (
-          <div key={item._id} className='product-cart'>
-            <div className='detail'>
-              <div className='product_title'>
-                <h4>{item.name}</h4>
+        <div className='cart-item-container'>
+          {cartItems.length === 0 && <div className='empty-cart'>Cart is empty</div>}
+          {cartItems.map((item) => (
+            <div key={item._id} className='product-cart'>
+              <div className='detail'>
+                <div className='product_title'>
+                  <h4>{item.name}</h4>
+                </div>
+                <div className='product_qty'>
+                      <button id='decreasebtn' disabled={item.quantity <= 1} onClick={()=>onDesc(item)}>
+                          <FaMinus/>                         
+                      </button>
+                      <span className='quantity'>{item.quantity}</span>
+                      <button id='inscreasebtn' onClick={()=> onAdd(item)}>
+                          <FaPlus/>                         
+                      </button>
+                </div>
+                <span className='close-button'>
+                        <CloseButton variant='danger' onClick={() => onRemove(item)}/>
+                </span>
               </div>
-              <div className='product_qty'>
-                    <button id='decreasebtn' disabled={item.quantity <= 1} onClick={()=>onDesc(item)}>
-                        <FaMinus/>                         
-                    </button>
-                    <span className='quantity'>{item.quantity}</span>
-                    <button id='inscreasebtn' onClick={()=> onAdd(item)}>
-                        <FaPlus/>                         
-                    </button>
-              </div>
-              <span className='close-button'>
-                      <CloseButton variant='danger' onClick={() => onRemove(item)}/>
-              </span>
             </div>
-          </div>
-        ))}       
+          ))}
+        </div>
         <Confirmation show={modalShow} onHide={() => setModalShow(false)} cartItems={cartItems} sum={sum}/>
         <h4> Summary </h4>
         <div className='Total'>

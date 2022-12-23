@@ -20,7 +20,7 @@ export const Login = (props) => {
                 navigate("/dashboard");
             } else {
                 console.log('err')
-                setError('Invalid Credentials')
+                setError('Wrong email or password')
             }
         } catch (error) {
             console.log(error)

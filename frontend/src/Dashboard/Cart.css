@@ -33,6 +33,11 @@
     align-items: center;
 }
 
+.cart-item-container{
+    max-height: 200px;
+    overflow-y:auto
+}
+
 .product-cart {
     margin-bottom: 20px;
     border-bottom: #B3B3B3 1px solid;
@@ -206,6 +211,7 @@
         top: 25%;
         margin: 0;
         background-color: white;
+        height: auto;
     }
     .cart .cartCloseBtn{
         height: 40px;
