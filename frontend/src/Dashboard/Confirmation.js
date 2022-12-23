@@ -10,6 +10,7 @@ import './Confirmation.css'
 function Confirmation(props) {
 
     const cartItems = props.cartItems;
+    const [newItem, setItem] = useState('')
     const [sname, setSname] = useState(sessionStorage.getItem('sname'))
     const [lname, setLname] = useState(JSON.parse(sessionStorage.getItem('lname')) ? JSON.parse(sessionStorage.getItem('lname')) : [])
     const [chosenLecturer, setChosenLecturer] = useState('')
@@ -24,13 +25,24 @@ function Confirmation(props) {
         withCredentials: true
     })
 
+
     console.log("cart:", cartItems)
 
     const request = async () => {
+        const transformedList = [];
+        for(let  i = 0; i < cartItems.length; i++) {
+            const item = {
+                id: cartItems[i]._id,
+                name: cartItems[i].name,
+                amount: cartItems[i].quantity,
+            }
+            console.log("item:", item)
+            transformedList.push(item)
+        }
         await authAxios.post('/request/', {
             pickup_date: pickupdate,
             expected_return_date: returndate,
-            component_list: cartItems,
+            component_list: transformedList,
             lecturer_email: 'email',
             course: cc,
         }, {withCredentials: true}).catch((error) => {
