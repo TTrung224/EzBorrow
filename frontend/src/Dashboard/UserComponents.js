@@ -1,14 +1,14 @@
 import React from 'react'
-import './CompoRequest.css'
-import axios from 'axios'
+import './UserComponents.css'
+// import axios from 'axios'
 import {axiosSetting} from '../Context/serverURLContext'
 import { useState, useEffect} from 'react'
-import Request from './Request'
+import Cart from './Cart'
 import {FaPlus} from 'react-icons/fa';
 import ReactPaginate from 'react-paginate';
 
 
-function CompoRequest() {
+function UserComponents() {
     const img1 = 'http://mlab.vn/image/data/Bai%20viet%20ky%20thuat/Arduino/bai%202%20Nhung%20dieu%20co%20ban/ArduinoUnoR3.jpg'
   /**TEST CARTTTTTTT
    * NEEDDDDD TOOO CHANGEEEEE STRUCCCTTTTUREEEE
@@ -227,10 +227,10 @@ function CompoRequest() {
         <div className='dashboard'>
             <div className='compo-container'>
                 { <><PaginatedItems itemsPerPage={4} /></>}
-                <Request cartItems={cartItems} onAdd={onAdd} onDesc={onDesc} onRemove={onRemove} sum={sum} removeAll={removeAll} />  
+                <Cart cartItems={cartItems} onAdd={onAdd} onDesc={onDesc} onRemove={onRemove} sum={sum} removeAll={removeAll} />  
             </div>
         </div>
     )
 }
 
-export default CompoRequest
+export default UserComponents

@@ -6,9 +6,9 @@ import {FaMinus} from 'react-icons/fa';
 import {useState, useEffect} from 'react'
 
 import Confirmation from './Confirmation';
-import './Request.css'
+import './Cart.css'
 
-function Request(props) {
+function Cart(props) {
   const {cartItems, onAdd, onDesc, onRemove, sum, removeAll} = props; 
   // console.log(cartItems.length)
   const [modalShow, setModalShow] = React.useState(false);
@@ -74,4 +74,4 @@ function Request(props) {
   )
 }
 
-export default Request
+export default Cart

@@ -2,8 +2,8 @@ import './App.css';
 import Page from './Common/Page'
 import Navbar from './Common/Navbar'
 import Banner from './Banner'
-import Components from './Request/Components'
-import List from './Dashboard/List'
+import Components from './Dashboard/Components'
+import List from './Request/List'
 import Login from './Common/Login/login';
 import Loading from './Common/Login/Loading';
 import SearchBar from './Common/Search Bar/SearchBar';

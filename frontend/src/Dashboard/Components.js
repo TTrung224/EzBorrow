@@ -1,7 +1,7 @@
 import {useContext} from 'react'
 import {AuthContext} from '../Context/loginSessionContext'
-import CompoRequest from './CompoRequest';
-// import UserComponents from './UserComponents';
+// import CompoRequest from './CompoRequest';
+import UserComponents from './UserComponents';
 import TechnicianComponents from './TechnicianComponents';
 
 function Components(props) {
@@ -10,8 +10,7 @@ function Components(props) {
     // console.log(auth.type);
 
   if(authState.user.type === "lecturer" || authState.user.type === "student") {
-    // return <UserComponents/>
-    return <CompoRequest/>
+    return <UserComponents/>
   } else if (authState.user.type === "technician") 
     return <TechnicianComponents/>
   else return <div>ERROR</div>
