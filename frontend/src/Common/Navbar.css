@@ -17,7 +17,9 @@
 }
 
 .profile{
-    align-self: flex-end;
+    /* align-self: flex-end; */
+    position: absolute;
+    right: 0;
     margin-left: auto;
 }
 
@@ -61,7 +63,15 @@ input[type=text] {
 }
 
 @media screen and (max-width: 500px){
-    .app_navbar-logo {
-        margin-left: 45%;
+    .Main {
+        align-items: center;
+        justify-content: center;
+        justify-items: center;
     }
+    .app_navbar-logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
 }
