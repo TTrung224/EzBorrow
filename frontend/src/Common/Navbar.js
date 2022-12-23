@@ -40,7 +40,7 @@ function Navbar() {
               </DropdownButton>
 
             }
-            {(!isAuthenticated && (window.location.pathname!== '/login')) && <button type="button" class="btn btn-primary" onClick={() => navigate("/login", {replace: true})}>Login</button>}
+            {(!isAuthenticated && (window.location.pathname !== '/login') && (window.location.pathname !== "/hero")) && <button type="button" class="btn btn-primary" onClick={() => navigate("/login", {replace: true})}>Login</button>}
           </div>
         </div>
         <Logout show={modalShow} onHide={() => setModalShow(false)}></Logout>
