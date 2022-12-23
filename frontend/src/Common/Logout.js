@@ -2,9 +2,8 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from "react-router-dom";
-import {useState, useContext} from 'react'
+import {useContext} from 'react'
 import {AuthContext} from '../Context/loginSessionContext'
-import axios from 'axios';
 
 function Logout(props) {
   const navigate = useNavigate();
