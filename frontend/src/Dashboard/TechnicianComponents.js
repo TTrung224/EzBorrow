@@ -2,8 +2,21 @@ import React from 'react'
 import './TechnicianComponents.css'
 import axios from 'axios'
 import { useState, useEffect} from 'react'
-import {FaPlus} from 'react-icons/fa';
+import {FaEdit} from 'react-icons/fa';
 import ReactPaginate from 'react-paginate';
+import {FaPlus} from 'react-icons/fa';
+
+function TechnicianComponentsAdd(){
+    return(
+        <div className='compo-item'>
+            <button className='full-width-button'>
+                <FaPlus size={70} />
+            </button>
+        </div>
+
+    );
+}
+
 
 
 function TechnicianComponents() {
@@ -71,9 +84,12 @@ function TechnicianComponents() {
 
     function Items({ currentItems }) {
         return (
+            
             currentItems.map((item, index) =>
+                
                 // console.log('Itemsdafasdfasd====',item)
                 <div className='compo-item'>
+
                     <div className='compo-img'>
                         <img src={img1} width="120"></img>
                     </div>
@@ -86,14 +102,16 @@ function TechnicianComponents() {
                             item.description}</p>
                         <div className='product-des'>
                             <h5>Available: {item.available_amount}</h5>
-                            <button disabled={item.available_amount <= 0} 
-                                // onClick={() => onAdd(item)}
-                                >
-                                <FaPlus/>                         
+                            <button  href='#'>
+                                {/* disabled={item.available_amount <= 0}
+                                onClick={() => onAdd(item) */}
+                                
+                                <FaEdit/>                         
                             </button>                        
                         </div>
                     </div>
                 </div>
+            
             )
         );
       }
@@ -159,6 +177,7 @@ function TechnicianComponents() {
     return (
         <div className='dashboard'>
             <div className='compo-container'>
+                <TechnicianComponentsAdd/>
                 { <><PaginatedItems itemsPerPage={4} /></>}
             </div>
         </div>

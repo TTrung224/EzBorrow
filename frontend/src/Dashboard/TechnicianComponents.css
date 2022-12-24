@@ -72,6 +72,25 @@ button:disabled{
     color: white;
 }
 
+.full-width-button{
+    display: block;
+    width: 100%;
+    border: none;
+    background-color: white;
+    color: #00875A ;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    height: 100%;
+}
+.full-width-button:hover{
+    cursor: pointer;
+    background: #00875A ;
+    color: white;
+}
+
+
 button:disabled:hover{
     cursor: default;
     background: #cddbd68c ;

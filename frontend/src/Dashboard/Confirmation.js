@@ -97,8 +97,8 @@ function Confirmation(props) {
                         ))}
                     </ul>
                     <div className='request-info'>                    
-                        <p><span className='bold-words' >Select pickup date&emsp;</span><input type="date" onChange={e=>setPickupdate(e.target.value)} required ></input>
-                        <span className='bold-words' >&emsp; Select return date&emsp;</span><input type="date" onChange={e=>setReturndate(e.target.value)} required ></input></p>
+                        <p><span className='bold-words' >Select pickup date&emsp;</span><input type="datetime-local" onChange={e=>setPickupdate(e.target.value)} required ></input>
+                        <span className='bold-words' >&emsp; Select return date&emsp;</span><input type="datetime-local" onChange={e=>setReturndate(e.target.value)} required ></input></p>
                         <p><span className='bold-words' >Note :&emsp;</span></p>
                         <input onChange={e=>setCC(e.target.value)} className='input-box'></input>
                     </div>     
