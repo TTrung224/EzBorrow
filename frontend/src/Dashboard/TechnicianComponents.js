@@ -6,16 +6,16 @@ import {FaEdit} from 'react-icons/fa';
 import ReactPaginate from 'react-paginate';
 import {FaPlus} from 'react-icons/fa';
 
-function TechnicianComponentsAdd(){
-    return(
-        <div className='compo-item'>
-            <button className='full-width-button'>
-                <FaPlus size={70} />
-            </button>
-        </div>
+// function TechnicianComponentsAdd(){
+//     return(
+//         <div className='compo-item'>
+//             <button className='full-width-button'>
+//                 <FaPlus size={70} />
+//             </button>
+//         </div>
 
-    );
-}
+//     );
+// }
 
 
 
@@ -84,7 +84,6 @@ function TechnicianComponents() {
 
     function Items({ currentItems }) {
         return (
-            
             currentItems.map((item, index) =>
                 
                 // console.log('Itemsdafasdfasd====',item)
@@ -102,7 +101,7 @@ function TechnicianComponents() {
                             item.description}</p>
                         <div className='product-des'>
                             <h5>Available: {item.available_amount}</h5>
-                            <button  href='#'>
+                            <button className='edit-btn' href='#'>
                                 {/* disabled={item.available_amount <= 0}
                                 onClick={() => onAdd(item) */}
                                 
@@ -137,6 +136,11 @@ function TechnicianComponents() {
         return (
           <div className='cards-panigation'>
             <div className='cards'>
+                <div className='compo-item'>
+                    <button className='full-width-button'>
+                        <FaPlus size={70} />
+                    </button>
+                </div>
                 <Items currentItems={currentItems} />
                 {(data.length===0) && <p style={{textAlign: "center", width: "100%"}}>There are no matched equipment</p>}
             </div>
@@ -177,7 +181,7 @@ function TechnicianComponents() {
     return (
         <div className='dashboard'>
             <div className='compo-container'>
-                <TechnicianComponentsAdd/>
+                {/* <TechnicianComponentsAdd/> */}
                 { <><PaginatedItems itemsPerPage={4} /></>}
             </div>
         </div>

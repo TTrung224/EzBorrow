@@ -55,9 +55,10 @@
     color: #00875A ;
     font-size: 20px;
     border: 1px solid  ;
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     border-radius: 5px;
+    padding: 0 0 6px 4px;
 }
 
 .product-des button:hover{
@@ -83,13 +84,15 @@ button:disabled{
     cursor: pointer;
     text-align: center;
     height: 100%;
+    border-radius: 8px;
 }
+
 .full-width-button:hover{
     cursor: pointer;
     background: #00875A ;
     color: white;
+    border-radius: 8px;
 }
-
 
 button:disabled:hover{
     cursor: default;
