@@ -68,7 +68,7 @@ function Cart(props) {
         </div>
         <div className='buttons'>
             <Button id='clear-btn' variant='danger' onClick={removeAll}>Clear</Button>
-            <Button id='request-btn' variant='success' onClick={() => setModalShow(true)}>Request</Button>
+            <Button disabled={cartItems.length <= 0} id='request-btn' variant='success' onClick={() => setModalShow(true)}>Request</Button>
         </div>    
     </div>  
     </>
