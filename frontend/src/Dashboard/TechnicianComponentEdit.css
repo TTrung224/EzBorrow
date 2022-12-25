@@ -1,0 +1,31 @@
+.bold-words-header{
+    font-weight: bold;
+    text-transform: uppercase;
+    /* background-image: linear-gradient(to bottom right, #00875A, #90ee90); */
+    color: white;
+}
+
+.modal-header{
+    background-image: linear-gradient(to bottom right, #00875A, #90ee90);
+}
+.bold-words{
+    font-weight: bold;
+    font-size:x-large
+}
+
+.modal{
+    margin-top: 10%;
+}
+
+.Edit-info ::placeholder{
+    color: black;
+    font-size: large;
+}
+
+#update-btn{
+    background-color: #00875A;
+}
+
+.Edit-info input{
+    font-size: large;
+}

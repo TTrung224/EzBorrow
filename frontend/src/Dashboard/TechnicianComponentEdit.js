@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import {FaEdit} from 'react-icons/fa';
-import './TechnicianComponents.css'
+import './TechnicianComponentEdit.css'
 import axios from 'axios'
 
 function TechnicianComponentEdit(props) {
@@ -13,6 +13,7 @@ function TechnicianComponentEdit(props) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [data, setData] = useState([])
+    const [quantity, setQuantity] = useState('');
 
     const authAxios = axios.create({
         baseURL: 'http://localhost:4500/',
@@ -50,21 +51,24 @@ function TechnicianComponentEdit(props) {
 
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-            <Modal.Title>{data.name}</Modal.Title>
+            <Modal.Title className='edit-header' >
+                <div className='bold-words-header'>{data.name}</div>               
+            </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <div>
-                    <div>ID : {data._id}</div>
-                    <div>Name: <input type="text" placeholder={data.name} onChange={(e) => {setName(e.target.value)}}></input></div>
-                    <div>Description: <input type="text" placeholder={data.description} onChange={(e) => {setDesc(e.target.value)}}></input></div>
+                <div className='Edit-info'>
+                    <p><span className='bold-words' >Product ID :&emsp;</span>{data._id}</p>
+                    <p><span className='bold-words' >Name :&emsp;</span><input type="text" placeholder={data.name} onChange={(e) => {setName(e.target.value)}}></input></p>                
+                    <p><span className='bold-words' >Description :&emsp;</span><input type="text" placeholder={data.description} onChange={(e) => {setDesc(e.target.value)}}></input></p>
+                    <p><span className='bold-words' >Quantity :&emsp;</span><input type="text" placeholder={data.quantity} onChange={(e) => {setQuantity(e.target.value)}}></input></p>
                 </div>
             </Modal.Body>
             <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
+            <Button id='close-btn' variant="danger" onClick={handleClose}>
                 Close
             </Button>
-            <Button variant="primary" onClick={() => edit()}>
-                Save Changes
+            <Button id='update-btn' variant="primary" onClick={() => edit()}>
+                Update
             </Button>
             </Modal.Footer>
         </Modal>

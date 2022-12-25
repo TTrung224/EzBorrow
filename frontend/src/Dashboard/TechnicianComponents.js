@@ -90,7 +90,7 @@ function TechnicianComponents() {
                 // console.log('Itemsdafasdfasd====',item)
                 <div className='compo-item'>
 
-                    <div className='compo-img'>
+                    <div className='compo-img'> 
                         <img src={img1} width="120"></img>
                     </div>
                     <div className='product-inf'>

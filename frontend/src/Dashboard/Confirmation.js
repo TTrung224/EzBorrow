@@ -19,7 +19,8 @@ function Confirmation(props) {
     const [pickupdate,setPickupdate] = useState()
     const [returndate, setReturndate] = useState()
     const sid = "s1234"
-
+    
+    
     const authAxios = axios.create({
         baseURL: 'http://localhost:4500/',
         withCredentials: true
