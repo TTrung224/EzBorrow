@@ -5,6 +5,7 @@ import { useState, useEffect} from 'react'
 import {FaEdit} from 'react-icons/fa';
 import ReactPaginate from 'react-paginate';
 import {FaPlus} from 'react-icons/fa';
+import TechnicianComponentEdit from './TechnicianComponentEdit';
 
 // function TechnicianComponentsAdd(){
 //     return(
@@ -101,12 +102,7 @@ function TechnicianComponents() {
                             item.description}</p>
                         <div className='product-des'>
                             <h5>Available: {item.available_amount}</h5>
-                            <button className='edit-btn' href='#'>
-                                {/* disabled={item.available_amount <= 0}
-                                onClick={() => onAdd(item) */}
-                                
-                                <FaEdit/>                         
-                            </button>                        
+                            <TechnicianComponentEdit id = {item._id}/>               
                         </div>
                     </div>
                 </div>
