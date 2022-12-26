@@ -29,3 +29,7 @@
 .Edit-info input{
     font-size: large;
 }
+
+.modal-content{
+    border-radius: 20px;
+}
