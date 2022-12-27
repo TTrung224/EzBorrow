@@ -8,7 +8,7 @@ import {FaPlus} from 'react-icons/fa';
 import TechnicianComponentEdit from './TechnicianComponentEdit';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-
+import TechnicianComponentAdd from './TechnicianComponentCreate';
 
 // function TechnicianComponentsAdd(){
 //     return(
@@ -139,35 +139,9 @@ function TechnicianComponents() {
     
         return (
           <div className='cards-panigation'>
-            <div className='cards'>
-                <div className='compo-item'>
-                    <button className='full-width-button' onClick={handleShow}>
-                        <FaPlus size={70} />
-                    </button>
-                    <Modal show={show} onHide={handleClose}>
-                            <Modal.Header closeButton>
-                                <Modal.Title className='edit-header' >
-                            <div className='bold-words-header'>NEW COMPONENT</div>               
-                                </Modal.Title>
-                            </Modal.Header>
-                        <Modal.Body>
-                            <div className='Edit-info'>
-                                <p><span className='bold-words' >Product ID :&emsp;</span></p>
-                                <p><span className='bold-words' >Name :&emsp;</span></p>                
-                                <p><span className='bold-words' >Description :&emsp;</span></p>
-                                <p><span className='bold-words' >Quantity :&emsp;</span></p>
-                            </div>
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button id='close-btn' variant="danger" onClick={handleClose}>
-                                Close
-                            </Button>
-                            <Button id='update-btn'>
-                                Update
-                            </Button>
-                        </Modal.Footer>
-                    </Modal>
-                </div>
+            <div className='cards'>            
+            <TechnicianComponentAdd/>
+               
                 
                 <Items currentItems={currentItems} />
                 {(data.length===0) && <p style={{textAlign: "center", width: "100%"}}>There are no matched equipment</p>}
