@@ -13,7 +13,7 @@ function TechnicianComponentEdit(props) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [data, setData] = useState([])
-    const [quantity, setQuantity] = useState('');
+    const [quantity, setQuantity] = useState(0);
 
     const authAxios = axios.create({
         baseURL: 'http://localhost:4500/',
@@ -26,6 +26,9 @@ function TechnicianComponentEdit(props) {
         console.log(data);
         console.log("load")
         setData(data);
+        setName(data.name);
+        setDesc(data.description);
+        setQuantity(data.quantity);
     };
 
     useEffect(() => {
@@ -38,6 +41,7 @@ function TechnicianComponentEdit(props) {
             updateComponent: {
                 name: name,
                 description: desc,
+                quantity: quantity,
             }
         }, {withCredentials: true}).catch((error) => {
             console.log(error.response)
