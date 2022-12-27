@@ -35,12 +35,13 @@ function TechnicianComponentEdit(props) {
 
     const edit = async () => {
         await authAxios.put('/component/' + id, {
-            name: name,
-            description: desc,
+            updateComponent: {
+                name: name,
+                description: desc,
+            }
         }, {withCredentials: true}).catch((error) => {
             console.log(error.response)
         })
-        load();
     }
 
   return (
