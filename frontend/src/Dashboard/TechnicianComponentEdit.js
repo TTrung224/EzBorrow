@@ -46,6 +46,8 @@ function TechnicianComponentEdit(props) {
         }, {withCredentials: true}).catch((error) => {
             console.log(error.response)
         })
+        alert("Component updated successfully")
+        return(handleClose())
     }
 
   return (
@@ -69,12 +71,12 @@ function TechnicianComponentEdit(props) {
                 </div>
             </Modal.Body>
             <Modal.Footer>
-            <Button id='close-btn' variant="danger" onClick={handleClose}>
-                Close
-            </Button>
-            <Button id='update-btn' variant="primary" onClick={() => edit()}>
-                Update
-            </Button>
+                <Button id='close-btn' variant="danger" onClick={handleClose}>
+                    Close
+                </Button>
+                <Button id='update-btn' variant="primary" onClick={() => edit()}>
+                    Update
+                </Button>
             </Modal.Footer>
         </Modal>
     </div>

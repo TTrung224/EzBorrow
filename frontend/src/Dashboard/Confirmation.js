@@ -49,6 +49,8 @@ function Confirmation(props) {
         }, {withCredentials: true}).catch((error) => {
             console.log(error.response)
         })
+        alert("Request sent successfully")
+        return (props.onHide)
     }
 
 
@@ -105,7 +107,7 @@ function Confirmation(props) {
                     </div>     
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={props.onHide} variant='danger'>Cancel</Button>
+                    <Button onClick={props.onHide} variant='danger'>Close</Button>
                     <Button onClick={() => request()} variant='success'>Send</Button>
                 </Modal.Footer>
             </Modal>
