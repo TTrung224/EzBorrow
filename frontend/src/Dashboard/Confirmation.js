@@ -14,14 +14,13 @@ function Confirmation(props) {
     
     const cartItems = props.cartItems;
     const sname = user.first_name + ' ' + user.last_name;
+    const email = user.email;
     const [newItem, setItem] = useState('')
     const [chosenLecturerEmail, setChosenLecturerEmail] = useState('')
-    const [chosenLecturer, setChosenLecturer] = useState(lecturer.length > 0 ? lecturer[0].first_name : '')
-    const [email, setEmail] = useState(sessionStorage.getItem('email'))
+    const [chosenLecturer, setChosenLecturer] = useState('')
     const [cc, setCC] = useState('')
     const [pickupdate,setPickupdate] = useState()
     const [returndate, setReturndate] = useState()
-    const sid = "s1234"
     const lname = lecturer.length > 0 ? lecturer : ['error'];
 
 
@@ -86,7 +85,9 @@ function Confirmation(props) {
                         <h3>Course Information</h3>
                     </div>
                         <p><span className='bold-words' >Lecturer :&emsp;</span><select id="lecturer" 
-                        onChange={(e) => setChosenLecturer(e.target.value)} required > {lname.map((item) => {return (<option>{item.first_name}</option>)})}</select></p>
+                        onChange={(e) => setChosenLecturer(e.target.value)} required > 
+                        <option selected="true" disabled="disabled">-choose lecturer-</option>
+                        {lname.map((item) => {return (<option>{item.first_name}</option>)})}</select></p>
                         
                            
                         <p><span className='bold-words' >Lecturer email :&emsp;</span>{lname.map((item) => {
@@ -112,7 +113,7 @@ function Confirmation(props) {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={props.onHide} variant='danger'>Close</Button>
-                    <Button disabled={!cc || !pickupdate || !returndate} onClick={(e) => request(e)} variant='success'>Send</Button>
+                    <Button disabled={!cc || !pickupdate || !returndate || chosenLecturer===''} onClick={(e) => request(e)} variant='success'>Send</Button>
                 </Modal.Footer>
             </Modal>
         </div>
