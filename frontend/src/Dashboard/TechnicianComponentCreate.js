@@ -50,43 +50,43 @@ function TechnicianComponentAdd(props) {
     }
 
   return (
-                <div className='compo-item'>
-                    <button className='full-width-button' onClick={handleShow}>
-                        <FaPlus size={70} />
-                    </button>
-                    <Modal className='form-modal' show={show} onHide={handleClose}>
-                            <Modal.Header closeButton>
-                                <Modal.Title className='edit-header' >
-                            <div className='bold-words-header'>NEW COMPONENT</div>               
-                                </Modal.Title>
-                            </Modal.Header>
-                        <Modal.Body>
-                            <div className='Edit-info'>
-                                <p><span className='bold-words' >Name :&emsp;</span><input type="text" placeholder='Enter name' onChange={(e) => {setName(e.target.value)}}></input></p>                
-                                <p><span className='bold-words' >Description :&emsp;</span><input type="text" placeholder='Enter Description' onChange={(e) => {setDesc(e.target.value)}}></input></p>
-                                <p><span className='bold-words' >Quantity :&emsp;</span><input type="text" placeholder='Enter Quantity' onChange={(e) => {setQuantity(e.target.value)}}></input></p>
-                                <p><span className='bold-words' >Image :&emsp;</span><input type="text" placeholder='Enter image URL' onChange={(e) => {setImg(e.target.value)}}></input></p>
-                                <span className='bold-words' >Required lecturer approval :&emsp;</span>
-                                <select 
-                                    onChange={(e) => {setPermission(e.target.value)}}>
-                                    
-                                    <option value={false}>No</option>
-                                    <option value={true}>Yes</option>
-                                </select>
-                                
-                                
-                            </div>
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button id='close-btn' variant="danger" onClick={handleClose}>
-                                Close
-                            </Button>
-                            <Button id='update-btn' onClick={() => create()}>
-                                Create
-                            </Button>
-                        </Modal.Footer>
-                    </Modal>
+    <div className='compo-item'>
+        <button className='full-width-button' onClick={handleShow}>
+            <FaPlus size={70} />
+        </button>
+        <Modal className='form-modal' show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title className='edit-header' >
+                <div className='bold-words-header'>NEW COMPONENT</div>               
+                    </Modal.Title>
+                </Modal.Header>
+            <Modal.Body>
+                <div className='Edit-info'>
+                    <p><span className='bold-words' >Name :&emsp;</span><input type="text" placeholder='Enter name' onChange={(e) => {setName(e.target.value)}}></input></p>                
+                    <p><span className='bold-words' >Description :&emsp;</span><input type="text" placeholder='Enter Description' onChange={(e) => {setDesc(e.target.value)}}></input></p>
+                    <p><span className='bold-words' >Quantity :&emsp;</span><input type="number" placeholder='Enter Quantity' onChange={(e) => {setQuantity(e.target.value)}}></input></p>
+                    <p><span className='bold-words' >Image :&emsp;</span><input type="text" placeholder='Enter image URL' onChange={(e) => {setImg(e.target.value)}}></input></p>
+                    <span className='bold-words' >Required lecturer approval :&emsp;</span>
+                    <select 
+                        onChange={(e) => {setPermission(e.target.value)}}>
+                        
+                        <option value={false}>No</option>
+                        <option value={true}>Yes</option>
+                    </select>
+                    
+                    
                 </div>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button id='close-btn' variant="danger" onClick={handleClose}>
+                    Close
+                </Button>
+                <Button disabled={!name || !desc || !img || !permission} id='update-btn' onClick={() => create()}>
+                    Create
+                </Button>
+            </Modal.Footer>
+        </Modal>
+    </div>
 )
 }
 

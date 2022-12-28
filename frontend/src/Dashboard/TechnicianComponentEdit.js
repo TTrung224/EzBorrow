@@ -54,7 +54,7 @@ function TechnicianComponentEdit(props) {
 
   return (
     <div>
-        <Button variant="primary" onClick={handleShow}>
+        <Button className='edit-component-btn' variant="primary" onClick={handleShow}>
             <FaEdit/>
         </Button>
 

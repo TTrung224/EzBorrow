@@ -19,7 +19,46 @@
     margin-top: 1.5rem;
 }
 
+.request-form-modal{
+    padding-right: 0 !important;
+}
+
 .request-form-modal-body{
     overflow-y:auto;
     height: 70vh;
 }
+
+.request-form-modal-body input{
+    font-size: large;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 8px;
+    border-color: rgba(0, 135, 90, 0.3);
+    padding: 20px 10px;
+    outline-color: #00875a;
+    height: 30px;
+}
+
+.request-form-modal-body #lecturer{
+    width: 40%;
+    min-width: 200px;
+    padding: 10px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 8px;
+    border-color: rgba(0, 135, 90, 0.3);
+    outline-color: #00875a;
+}
+.request-form-modal-body textarea{
+    font-size: large;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 8px;
+    border-color: rgba(0, 135, 90, 0.3);
+    padding: 10px 10px;
+    outline-color: #00875a;
+    width: 99%;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+}
+

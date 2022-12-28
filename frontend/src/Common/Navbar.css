@@ -41,13 +41,13 @@
 }
 
 
-input[type=text] {
+/* input[type=text] {
     height: 30px;
     background: none;
     border: none;
     width: 90%;
     margin-left: 10px;
-}
+} */
 
 .btn-search {
     height: 32px;
@@ -64,7 +64,7 @@ input[type=text] {
 .profile-btn {
     background-color: #00875A;
 }
-@media screen and (max-width: 500px){
+@media screen and (max-width: 1000px){
     .Main {
         align-items: center;
         justify-content: center;

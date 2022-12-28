@@ -35,7 +35,7 @@
     font-weight: 500;
 }
 
-input[type=text] {
+.search-bar input[type=text] {
     height: 30px;
     background: none;
     border: none;
@@ -58,7 +58,7 @@ input[type=text] {
 .btn-search:active{
     background-color: #90ee90;
 }
-@media screen and (max-width: 500px){
+@media screen and (max-width: 750px){
     .search-bar{
         width:80%;
     }

@@ -61,6 +61,7 @@ function Confirmation(props) {
     return (
         <div>
             <Modal
+                className='request-form-modal'
                 {...props}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
@@ -105,8 +106,8 @@ function Confirmation(props) {
                         ))}
                     </ul>
                     <div className='request-info'>                    
-                        <p><span className='bold-words' >Select pickup date&emsp;</span><input type="datetime-local" onChange={e=>setPickupdate(e.target.value)} required ></input></p>
-                        <p><span className='bold-words' >Select return date&emsp;</span><input type="datetime-local" onChange={e=>setReturndate(e.target.value)} required ></input></p>
+                        <p><span className='bold-words' >Select pickup date&emsp;</span><input type="date" onChange={e=>setPickupdate(e.target.value + "T00:00:00+07:00")} required ></input></p>
+                        <p><span className='bold-words' >Select return date&emsp;</span><input type="date" onChange={e=>setReturndate(e.target.value + "T00:00:00+07:00")} required ></input></p>
                         <p><span className='bold-words' >Note :&emsp;</span></p>
                         <textarea rows="4" onChange={e=>setCC(e.target.value)} className='input-box'></textarea>
                     </div>     

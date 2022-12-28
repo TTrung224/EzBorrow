@@ -21,11 +21,11 @@
 
 .bold-words{
     font-weight: bold;
-    font-size:x-large
+    font-size:x-large;
 }
 
 .form-modal{
-    margin-top: 10%;
+    margin-top: 6vh;
 }
 
 .Edit-info ::placeholder{
@@ -34,11 +34,30 @@
 }
 
 #update-btn{
-    background-color: #00875A;
+    background-color: #00875a;
 }
 
 .Edit-info input{
     font-size: large;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 8px;
+    border-color: rgba(0, 135, 90, 0.3);
+    padding: 20px 10px;
+    outline-color: #00875a;
+    height: 30px;
+    width: 96%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.Edit-info select{
+    padding: 10px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 8px;
+    border-color: rgba(0, 135, 90, 0.3);
+    outline-color: #00875a;
 }
 
 .modal-content{

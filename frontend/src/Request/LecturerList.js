@@ -45,16 +45,22 @@ function TeacherList() {
         if(type == "other"){
             const searchInput = document.getElementById("search-input");
             searchInput.value = "";
-            searchInput.placeholder = "borrower email"
-            const handleInputChange = async (event) => {
-                if(searchInput.value != ""){
-                    const response = await Axios.get('request/lecturer-search/'+userEmail+'?email='+searchInput.value);
-                    const data = await response.data;
-                    console.log(data);
-                    setData(data);
-                }else{
-                    load();
-                }
+            searchInput.placeholder = "borrower email";
+
+            let timeout = null;
+            const handleInputChange = (event) => {
+                clearTimeout(timeout);
+
+                timeout = setTimeout(async function(){
+                    if(searchInput.value != ""){
+                        const response = await Axios.get('request/lecturer-search/'+userEmail+'?email='+searchInput.value);
+                        const data = await response.data;
+                        console.log(data);
+                        setData(data);
+                    }else{
+                        load();
+                    }
+                }, 800);
             }
             searchInput.addEventListener("keyup", handleInputChange)
 

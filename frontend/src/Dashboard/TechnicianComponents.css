@@ -50,7 +50,7 @@
     margin-bottom: 0;
 }
 
-.product-des button{
+.product-des .edit-component-btn{
     background: white ;
     color: #00875A ;
     font-size: 20px;

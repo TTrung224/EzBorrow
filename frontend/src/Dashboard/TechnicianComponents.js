@@ -49,15 +49,21 @@ function TechnicianComponents() {
         const searchInput = document.getElementById("search-input");
         searchInput.value = "";
         searchInput.placeholder = "name keyword"
-        const handleInputChange = async (event) => {
-            if(searchInput.value != ""){
-                const response = await axiosSetting.get('/component/search?name='+searchInput.value);
-                const data = await response.data;
-                console.log(data);
-                setData(data);
-            }else{
-                load();
-            }
+
+        let timeout = null;
+        const handleInputChange = (event) => {
+            clearTimeout(timeout);
+
+            timeout = setTimeout(async function(){
+                if(searchInput.value != ""){
+                    const response = await axiosSetting.get('/component/search?name='+searchInput.value);
+                    const data = await response.data;
+                    console.log(data);
+                    setData(data);
+                }else{
+                    load();
+                }
+            }, 200);
         }
         searchInput.addEventListener("keyup", handleInputChange)
 

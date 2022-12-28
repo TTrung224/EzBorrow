@@ -138,10 +138,18 @@
     min-width: 140px;
 }
 
+.my-requests{
+    margin-left: 5%;
+}
 
-@media screen and (max-width: 500px) {
+.current-requests{
+    margin-left: 6%;
+}
+
+@media screen and (max-width: 1000px) {
     .card-container{
-        margin-left: 0px;           
+        margin-left: 20px;           
+        margin-right: 20px;           
     }
     .request-card{
         max-width: 100%;
@@ -150,4 +158,25 @@
     .card-item-info{
         flex-direction: column;
     }
+    .current-requests{
+        margin-left: 0;
+    }
   }
+
+@media screen and (max-width: 500px) {
+    .card-container{
+        margin-left: 0px;  
+        margin-right: 0px;                    
+    }
+    .request-card{
+        max-width: 100%;
+        min-width: 320px;
+    }
+    .card-item-info{
+        flex-direction: column;
+    }
+    .current-requests{
+        margin-left: 0;
+    }
+  }
+  

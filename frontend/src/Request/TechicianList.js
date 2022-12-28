@@ -38,6 +38,7 @@ function TechnicianList() {
             })
         }
         setData(data);
+        console.log(data);
     }
 
     const Axios = axios.create({
@@ -52,26 +53,29 @@ function TechnicianList() {
             console.log("firstload:")
             console.log(rawData)
             dataCategorise(rawData)
-            console.log(data);
         };
         load();
 
         const searchInput = document.getElementById("search-input");
         searchInput.value = "";
         searchInput.placeholder = "borrower or lecturer email"
-        const handleInputChange = async (event) => {
-            if(searchInput.value != ""){
-                const response = await Axios.get('request/technician-search?email='+searchInput.value);
-                const rawData = await response.data;
-                console.log("searchload:")
-                console.log(rawData);
-                dataCategorise(rawData);
-                console.log(data);
-            }else{
-                load();
-            }
+
+        let timeout = null;
+        const handleInputChange = (event) => {
+            clearTimeout(timeout);
+            timeout = setTimeout(async function(){
+                if(searchInput.value != ""){
+                    const response = await Axios.get('request/technician-search?email='+searchInput.value);
+                    const rawData = await response.data;
+                    console.log("searchload:")
+                    console.log(rawData);
+                    dataCategorise(rawData);
+                }else{
+                    load();
+                }
+            }, 800);
         }
-        searchInput.addEventListener("keyup", handleInputChange)
+        searchInput.addEventListener("keyup", handleInputChange);
 
         return () => {
             searchInput.removeEventListener('keyup', handleInputChange);
