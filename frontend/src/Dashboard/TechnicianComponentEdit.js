@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import {FaEdit} from 'react-icons/fa';
 import './TechnicianComponentEdit.css'
-import axios from 'axios'
+import {axiosSetting} from '../Context/serverURLContext'
 
 function TechnicianComponentEdit(props) {
     const [show, setShow] = useState(false);
@@ -17,13 +17,9 @@ function TechnicianComponentEdit(props) {
     const [img, setImg] = useState('');
     const [permission,setPermission] = useState(true);
     
-    const authAxios = axios.create({
-        baseURL: 'http://localhost:4500/',
-        withCredentials: true
-    })
 
     const load = async () => {
-        const response = await authAxios.get('/component/' + id);
+        const response = await axiosSetting.get('/component/' + id);
         const data = await response.data;
         console.log(data);
         console.log("load")
@@ -41,7 +37,7 @@ function TechnicianComponentEdit(props) {
     }, [])
 
     const edit = async () => {
-        await authAxios.put('/component/' + id, {
+        await axiosSetting.put('/component/' + id, {
             updateComponent: {
                 name: name,
                 description: desc,

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import './TechnicianComponentCreate.css'
-import axios from 'axios'
 import {FaPlus} from 'react-icons/fa';
+import {axiosSetting} from '../Context/serverURLContext'
 
 function TechnicianComponentAdd(props) {
     const [show, setShow] = useState(false);
@@ -17,10 +17,6 @@ function TechnicianComponentAdd(props) {
     // const [data, setData] = useState([])
     const [quantity, setQuantity] = useState(0);
 
-    const authAxios = axios.create({
-        baseURL: 'http://localhost:4500/',
-        withCredentials: true
-    })
 
     // const load = async () => {
     //     const response = await authAxios.get('/component/' + id);
@@ -40,7 +36,7 @@ function TechnicianComponentAdd(props) {
 
     const create = async () => {
         console.log('test')
-        await authAxios.post('/component/', {
+        await axiosSetting.post('/component/', {
             name: name,
             description: desc,
             img_src: img,
