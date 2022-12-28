@@ -9,6 +9,9 @@ function TechnicianComponentAdd(props) {
     const [show, setShow] = useState(false);
     const [name, setName] = useState('');
     const [desc, setDesc] = useState('');
+    const [img, setImg] = useState('');
+    const [permission,setPermission] = useState(true);
+    
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     // const [data, setData] = useState([])
@@ -36,12 +39,13 @@ function TechnicianComponentAdd(props) {
     // }, [])
 
     const create = async () => {
+        console.log('test')
         await authAxios.post('/component/', {
-            
-                name: name,
-                description: desc,
-                quantity: quantity,
-            
+            name: name,
+            description: desc,
+            img_src: img,
+            permission: permission,
+            quantity: quantity,
         }, {withCredentials: true}).catch((error) => {
             console.log(error.response)
         })
@@ -62,10 +66,19 @@ function TechnicianComponentAdd(props) {
                             </Modal.Header>
                         <Modal.Body>
                             <div className='Edit-info'>
-                                <p><span className='bold-words' >Product ID :&emsp;</span></p>
                                 <p><span className='bold-words' >Name :&emsp;</span><input type="text" placeholder='Enter name' onChange={(e) => {setName(e.target.value)}}></input></p>                
                                 <p><span className='bold-words' >Description :&emsp;</span><input type="text" placeholder='Enter Description' onChange={(e) => {setDesc(e.target.value)}}></input></p>
                                 <p><span className='bold-words' >Quantity :&emsp;</span><input type="text" placeholder='Enter Quantity' onChange={(e) => {setQuantity(e.target.value)}}></input></p>
+                                <p><span className='bold-words' >Image :&emsp;</span><input type="text" placeholder='Enter image URL' onChange={(e) => {setImg(e.target.value)}}></input></p>
+                                <span className='bold-words' >Required lecturer approval :&emsp;</span>
+                                <select 
+                                    onChange={(e) => {setPermission(e.target.value)}}>
+                                    
+                                    <option value={false}>No</option>
+                                    <option value={true}>Yes</option>
+                                </select>
+                                
+                                
                             </div>
                         </Modal.Body>
                         <Modal.Footer>
@@ -73,7 +86,7 @@ function TechnicianComponentAdd(props) {
                                 Close
                             </Button>
                             <Button id='update-btn' onClick={() => create()}>
-                                Update
+                                Create
                             </Button>
                         </Modal.Footer>
                     </Modal>
