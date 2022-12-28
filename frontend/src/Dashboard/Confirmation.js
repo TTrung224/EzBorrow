@@ -27,7 +27,8 @@ function Confirmation(props) {
 
     console.log("cart:", cartItems)
 
-    const request = async () => {
+    const request = async (e) => {
+        e.preventDefault();
         console.log("lname jeheskfsjkdfskfjd", lname)
         const transformedList = [];
         for(let  i = 0; i < cartItems.length; i++) {
@@ -106,7 +107,7 @@ function Confirmation(props) {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={props.onHide} variant='danger'>Close</Button>
-                    <Button onClick={() => request()} variant='success'>Send</Button>
+                    <Button disabled={!cc || !pickupdate || !returndate} onClick={(e) => request(e)} variant='success'>Send</Button>
                 </Modal.Footer>
             </Modal>
         </div>
