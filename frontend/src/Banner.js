@@ -11,7 +11,7 @@ function Banner() {
                 </div>
                 <h1 className="app_header-h1">Need something?</h1>
                 <div>
-                    <button type="button" class="btn btn-primary" onClick={() => navigate("/login", {replace: true})}>Borrow Now!</button>
+                    <button type="button" class="btn btn-primary access-btn" onClick={() => navigate("/login", {replace: true})}>Borrow Now!</button>
                 </div>
             </div>
         </div>

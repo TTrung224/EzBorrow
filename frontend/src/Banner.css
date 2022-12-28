@@ -4,7 +4,7 @@
   }
 
 h1.app_header-h1{
-    font-size: small ;
+    font-size: 20px;
 }
 
 .app_wrapper_info {
@@ -29,4 +29,31 @@ h1.app_header-h1{
     background: url(./banner.webp) no-repeat;
     background-size: cover;
     background-position: center;
+}
+.app_wrapper_info p{
+  font-size: 32px;
+}
+.access-btn{
+  color:white;
+  background-color: #4FBF78;
+  border-style: none;
+  font-size: 20px;
+  font-weight: 600;
+}
+.access-btn:hover{
+  background-color: #00875A;
+}
+
+@media screen and (max-width: 500px){
+  #home{
+    background: url(./banner_phone.webp) no-repeat;
+    display: flex;
+    align-items: center;
+    min-height: 95vh;
+    background-size: cover;
+    background-position: center;
+  } 
+  .app_wrapper_info p{
+    font-size: 30px;
+  }
 }
