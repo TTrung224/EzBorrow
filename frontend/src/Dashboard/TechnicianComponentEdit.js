@@ -14,7 +14,9 @@ function TechnicianComponentEdit(props) {
     const handleShow = () => setShow(true);
     const [data, setData] = useState([])
     const [quantity, setQuantity] = useState(0);
-
+    const [img, setImg] = useState('');
+    const [permission,setPermission] = useState(true);
+    
     const authAxios = axios.create({
         baseURL: 'http://localhost:4500/',
         withCredentials: true
@@ -29,6 +31,8 @@ function TechnicianComponentEdit(props) {
         setName(data.name);
         setDesc(data.description);
         setQuantity(data.quantity);
+        setPermission(data.permission);
+        setImg(data.img_src);
     };
 
     useEffect(() => {
@@ -42,6 +46,8 @@ function TechnicianComponentEdit(props) {
                 name: name,
                 description: desc,
                 quantity: quantity,
+                permission: permission,
+                img_src: img,
             }
         }, {withCredentials: true}).catch((error) => {
             console.log(error.response)
@@ -65,9 +71,17 @@ function TechnicianComponentEdit(props) {
             <Modal.Body>
                 <div className='Edit-info'>
                     <p><span className='bold-words' >Product ID :&emsp;</span>{data._id}</p>
-                    <p><span className='bold-words' >Name :&emsp;</span><input type="text" placeholder={data.name} onChange={(e) => {setName(e.target.value)}}></input></p>                
-                    <p><span className='bold-words' >Description :&emsp;</span><input type="text" placeholder={data.description} onChange={(e) => {setDesc(e.target.value)}}></input></p>
-                    <p><span className='bold-words' >Quantity :&emsp;</span><input type="text" placeholder={data.quantity} onChange={(e) => {setQuantity(e.target.value)}}></input></p>
+                    <p><span className='bold-words' >Name :&emsp;</span><input type="text" value={name} onChange={(e) => {setName(e.target.value)}}></input></p>                
+                    <p><span className='bold-words' >Description :&emsp;</span><input type="text" value={desc} onChange={(e) => {setDesc(e.target.value)}}></input></p>
+                    <p><span className='bold-words' >Quantity :&emsp;</span><input type="text" value={quantity} onChange={(e) => {setQuantity(e.target.value)}}></input></p>
+                    <p><span className='bold-words' >Image :&emsp;</span><input type="text" placeholder='Enter image URL' onChange={(e) => {setImg(e.target.value)}}></input></p>
+                    <span className='bold-words' >Permission :&emsp;</span>
+                        <select 
+                            onChange={(e) => {setPermission(e.target.value)}}>                                
+                            <option value={false}>No</option>
+                            <option value= {true}>Yes</option>
+                        </select>
+                       
                 </div>
             </Modal.Body>
             <Modal.Footer>
