@@ -226,7 +226,7 @@ function UserComponents() {
     return (
         <div className='dashboard'>
             <div className='compo-container'>
-                { <><PaginatedItems itemsPerPage={4} /></>}
+                { <><PaginatedItems itemsPerPage={10} /></>}
                 <Cart cartItems={cartItems} onAdd={onAdd} onDesc={onDesc} onRemove={onRemove} sum={sum} removeAll={removeAll} />  
             </div>
         </div>

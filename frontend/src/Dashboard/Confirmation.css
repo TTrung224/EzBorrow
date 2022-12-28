@@ -6,7 +6,7 @@
 }
 
 .bold-words{
-    font-weight: bold;
+    font-weight: 400;
 }
 
 
@@ -17,4 +17,9 @@
 .confirm-header{
     margin-bottom:1.5rem;
     margin-top: 1.5rem;
+}
+
+.request-form-modal-body{
+    overflow-y:auto;
+    height: 70vh;
 }

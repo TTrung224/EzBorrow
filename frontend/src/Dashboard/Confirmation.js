@@ -14,6 +14,7 @@ function Confirmation(props) {
     const [sname, setSname] = useState(sessionStorage.getItem('sname'))
     const [lname, setLname] = useState(JSON.parse(sessionStorage.getItem('lname')) ? JSON.parse(sessionStorage.getItem('lname')) : [])
     const [chosenLecturer, setChosenLecturer] = useState('')
+    const [chosenLecturerEmail, setChosenLecturerEmail] = useState('')
     const [email, setEmail] = useState(sessionStorage.getItem('email'))
     const [cc, setCC] = useState('')
     const [pickupdate,setPickupdate] = useState()
@@ -40,11 +41,15 @@ function Confirmation(props) {
             console.log("item:", item)
             transformedList.push(item)
         }
+
+        setChosenLecturerEmail(document.querySelector(".lecturer-email").innerHTML);
+
+        console.log("chosenLecturerEmail: " + chosenLecturerEmail);
         await authAxios.post('/request/', {
             pickup_date: pickupdate,
             expected_return_date: returndate,
             component_list: transformedList,
-            lecturer_email: 'email',
+            lecturer_email: chosenLecturerEmail,
             course: cc,
         }, {withCredentials: true}).catch((error) => {
             console.log(error.response)
@@ -69,13 +74,13 @@ function Confirmation(props) {
                     </div> 
                     </Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body className='request-form-modal-body'>
                     <div className='Student-info'>
                     <div className='confirm-header'>
                     <h2>Student Information</h2>
                     </div>
                         <p><span className='bold-words' >Name :&emsp;</span>{sname}</p>
-                        <p><span className='bold-words'>Student ID :&emsp;</span>{sid}</p>
+                        <p><span className='bold-words'>Student email :&emsp;</span>{email}</p>
                     </div>
                     <div className='confirm-header'>
                         <h3>Course Information</h3>
@@ -87,7 +92,7 @@ function Confirmation(props) {
                            
                         <p><span className='bold-words' >Lecturer email :&emsp;</span>{lname.map((item) => {
                             if(item.first_name === chosenLecturer) {
-                                return(<span>{item.email}</span>)
+                                return(<span className='lecturer-email'>{item.email}</span>);
                             }
                         })}</p>
                         <p><span className='bold-words' > Course Code :&emsp;</span><input onChange={e=>setCC(e.target.value)} required ></input></p>
@@ -100,10 +105,10 @@ function Confirmation(props) {
                         ))}
                     </ul>
                     <div className='request-info'>                    
-                        <p><span className='bold-words' >Select pickup date&emsp;</span><input type="datetime-local" onChange={e=>setPickupdate(e.target.value)} required ></input>
-                        <span className='bold-words' >&emsp; Select return date&emsp;</span><input type="datetime-local" onChange={e=>setReturndate(e.target.value)} required ></input></p>
+                        <p><span className='bold-words' >Select pickup date&emsp;</span><input type="datetime-local" onChange={e=>setPickupdate(e.target.value)} required ></input></p>
+                        <p><span className='bold-words' >Select return date&emsp;</span><input type="datetime-local" onChange={e=>setReturndate(e.target.value)} required ></input></p>
                         <p><span className='bold-words' >Note :&emsp;</span></p>
-                        <input onChange={e=>setCC(e.target.value)} className='input-box'></input>
+                        <textarea rows="4" onChange={e=>setCC(e.target.value)} className='input-box'></textarea>
                     </div>     
                 </Modal.Body>
                 <Modal.Footer>

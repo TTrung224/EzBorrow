@@ -14,6 +14,32 @@ function TechnicianList() {
     // type: "canceled" "current" "returned"
 
 
+    function dataCategorise(rawData){
+        var data = [];
+        // console.log(data);
+
+        if(type == "canceled"){
+            rawData.map(request => {
+                if(request.student_status == "canceled"){
+                    data.push(request);
+                }
+            })
+        } else if(type == "current"){
+            rawData.map(request => {
+                if(request.student_status != "canceled" && request.student_status != "returned"){
+                    data.push(request);
+                }
+            })
+        } else if(type == "returned"){
+            rawData.map(request => {
+                if(request.student_status == "returned"){
+                    data.push(request);
+                }
+            })
+        }
+        setData(data);
+    }
+
     const Axios = axios.create({
         baseURL: 'http://localhost:4500/',
         withCredentials: true
@@ -23,29 +49,10 @@ function TechnicianList() {
         const load = async () => {
             const response = await Axios.get('/request/');
             var rawData = await response.data;
-            var data = [];
-            // console.log(data);
-
-            if(type == "canceled"){
-                rawData.map(request => {
-                    if(request.student_status == "canceled"){
-                        data.push(request);
-                    }
-                })
-            } else if(type == "current"){
-                rawData.map(request => {
-                    if(request.student_status != "canceled" && request.student_status != "returned"){
-                        data.push(request);
-                    }
-                })
-            } else if(type == "returned"){
-                rawData.map(request => {
-                    if(request.student_status == "returned"){
-                        data.push(request);
-                    }
-                })
-            }
-            setData(data);
+            console.log("firstload:")
+            console.log(rawData)
+            dataCategorise(rawData)
+            console.log(data);
         };
         load();
 
@@ -55,9 +62,11 @@ function TechnicianList() {
         const handleInputChange = async (event) => {
             if(searchInput.value != ""){
                 const response = await Axios.get('request/technician-search?email='+searchInput.value);
-                const data = await response.data;
+                const rawData = await response.data;
+                console.log("searchload:")
+                console.log(rawData);
+                dataCategorise(rawData);
                 console.log(data);
-                setData(data);
             }else{
                 load();
             }
@@ -68,6 +77,7 @@ function TechnicianList() {
             searchInput.removeEventListener('keyup', handleInputChange);
         };
     },[type]);
+
 
     function DisplayBtn(item){
         if(item.student_status == "waiting" && item.lecturer_status == "approved"){

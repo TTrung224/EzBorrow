@@ -184,7 +184,7 @@ function TechnicianComponents() {
         <div className='dashboard'>
             <div className='compo-container'>
                 {/* <TechnicianComponentsAdd/> */}
-                { <><PaginatedItems itemsPerPage={4} /></>}
+                { <><PaginatedItems itemsPerPage={10} /></>}
             </div>
         </div>
     )
