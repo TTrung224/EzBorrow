@@ -24,10 +24,12 @@ function Navbar() {
   return (
     <div>
         <div className='Main'>
-          <div className="app_navbar-logo">
-            <img src={icon} alt="app logo" />
-            
-          </div>
+          <a href="/dashboard">
+            <div className="app_navbar-logo">
+              <img src={icon} alt="app logo" />
+            </div>
+          </a>
+
           <div className='profile'>
             {isAuthenticated &&
 

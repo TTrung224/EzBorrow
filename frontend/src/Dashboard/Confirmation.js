@@ -1,36 +1,36 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Button from 'react-bootstrap/Button';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Modal from 'react-bootstrap/Modal';
-import {useState} from 'react'
-import axios from 'axios';
+import {useState, useContext} from 'react'
+import {AuthContext} from '../Context/loginSessionContext'
+import {axiosSetting} from '../Context/serverURLContext'
 import './Confirmation.css'
 // import { PromiseProvider } from 'mongoose';
 
 function Confirmation(props) {
 
+    const {authState: {user}, lecturer} = useContext(AuthContext)
+    
     const cartItems = props.cartItems;
+    const sname = user.first_name + ' ' + user.last_name;
     const [newItem, setItem] = useState('')
-    const [sname, setSname] = useState(sessionStorage.getItem('sname'))
-    const [lname, setLname] = useState(JSON.parse(sessionStorage.getItem('lname')) ? JSON.parse(sessionStorage.getItem('lname')) : [])
-    const [chosenLecturer, setChosenLecturer] = useState('')
     const [chosenLecturerEmail, setChosenLecturerEmail] = useState('')
+    const [chosenLecturer, setChosenLecturer] = useState(lecturer.length > 0 ? lecturer[0].first_name : '')
     const [email, setEmail] = useState(sessionStorage.getItem('email'))
     const [cc, setCC] = useState('')
     const [pickupdate,setPickupdate] = useState()
     const [returndate, setReturndate] = useState()
     const sid = "s1234"
-    
-    
-    const authAxios = axios.create({
-        baseURL: 'http://localhost:4500/',
-        withCredentials: true
-    })
+    const lname = lecturer.length > 0 ? lecturer : ['error'];
+
 
 
     console.log("cart:", cartItems)
 
-    const request = async () => {
+    const request = async (e) => {
+        e.preventDefault();
+        console.log("lname jeheskfsjkdfskfjd", lname)
         const transformedList = [];
         for(let  i = 0; i < cartItems.length; i++) {
             const item = {
@@ -45,7 +45,7 @@ function Confirmation(props) {
         setChosenLecturerEmail(document.querySelector(".lecturer-email").innerHTML);
 
         console.log("chosenLecturerEmail: " + chosenLecturerEmail);
-        await authAxios.post('/request/', {
+        await axiosSetting.post('/request/', {
             pickup_date: pickupdate,
             expected_return_date: returndate,
             component_list: transformedList,
@@ -85,9 +85,8 @@ function Confirmation(props) {
                     <div className='confirm-header'>
                         <h3>Course Information</h3>
                     </div>
-                        <p><span className='bold-words' >Lecturer :&emsp;</span><select id="lecturer" onChange={(e) => setChosenLecturer(e.target.value)} required > {lname.map((item) => (
-                                <option>{item.first_name}</option>
-                            ))}</select></p>
+                        <p><span className='bold-words' >Lecturer :&emsp;</span><select id="lecturer" 
+                        onChange={(e) => setChosenLecturer(e.target.value)} required > {lname.map((item) => {return (<option>{item.first_name}</option>)})}</select></p>
                         
                            
                         <p><span className='bold-words' >Lecturer email :&emsp;</span>{lname.map((item) => {
@@ -113,7 +112,7 @@ function Confirmation(props) {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={props.onHide} variant='danger'>Close</Button>
-                    <Button onClick={() => request()} variant='success'>Send</Button>
+                    <Button disabled={!cc || !pickupdate || !returndate} onClick={(e) => request(e)} variant='success'>Send</Button>
                 </Modal.Footer>
             </Modal>
         </div>

@@ -1,6 +1,5 @@
 import React from 'react'
 import './TechnicianComponents.css'
-import axios from 'axios'
 import { useState, useEffect} from 'react'
 import {FaEdit} from 'react-icons/fa';
 import ReactPaginate from 'react-paginate';
@@ -9,6 +8,7 @@ import TechnicianComponentEdit from './TechnicianComponentEdit';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import TechnicianComponentAdd from './TechnicianComponentCreate';
+import {axiosSetting} from '../Context/serverURLContext'
 
 // function TechnicianComponentsAdd(){
 //     return(
@@ -30,52 +30,28 @@ function TechnicianComponents() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const authAxios = axios.create({
-        baseURL: 'http://localhost:4500/',
-        withCredentials: true
-
-    
-    })
 
     useEffect(() => {
         const searchDiv = document.querySelector('.search .search-bar');
         searchDiv.classList.remove("hidden")
 
         const load = async () => {
-            const response = await authAxios.get('/component');
+            const response = await axiosSetting.get('/component');
             const data = await response.data;
             console.log(data);
             console.log("load")
             setData(data);
         };
 
-        const check = async () => {
-            const response = await authAxios.get('/account/getAccount')
-            console.log(response.data)
-            const auth = response.data
-            sessionStorage.setItem('sname', auth.first_name + ' ' + auth.last_name)
-            sessionStorage.setItem('email', auth.email)
-            console.log("auth===============", auth)
-        }
-
-        const lecturer = async () => {
-            const response = await authAxios.get('/account/lecturers')
-            console.log(response.data)
-            const lecturer = response.data
-            sessionStorage.setItem('lname', JSON.stringify(lecturer))
-            console.log("lecturer===============", lecturer)
-        }
 
         load();
-        check();
-        lecturer();
        
         const searchInput = document.getElementById("search-input");
         searchInput.value = "";
         searchInput.placeholder = "name keyword"
         const handleInputChange = async (event) => {
             if(searchInput.value != ""){
-                const response = await authAxios.get('/component/search?name='+searchInput.value);
+                const response = await axiosSetting.get('/component/search?name='+searchInput.value);
                 const data = await response.data;
                 console.log(data);
                 setData(data);
