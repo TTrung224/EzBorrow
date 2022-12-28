@@ -54,7 +54,7 @@ function TechnicianComponentAdd(props) {
                     <button className='full-width-button' onClick={handleShow}>
                         <FaPlus size={70} />
                     </button>
-                    <Modal show={show} onHide={handleClose}>
+                    <Modal className='form-modal' show={show} onHide={handleClose}>
                             <Modal.Header closeButton>
                                 <Modal.Title className='edit-header' >
                             <div className='bold-words-header'>NEW COMPONENT</div>               

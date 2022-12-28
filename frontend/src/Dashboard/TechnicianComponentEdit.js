@@ -56,7 +56,7 @@ function TechnicianComponentEdit(props) {
             <FaEdit/>
         </Button>
 
-        <Modal show={show} onHide={handleClose}>
+        <Modal className='form-modal' show={show} onHide={handleClose}>
             <Modal.Header closeButton>
             <Modal.Title className='edit-header' >
                 <div className='bold-words-header'>{data.name}</div>               

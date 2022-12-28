@@ -82,7 +82,7 @@ function TeacherList() {
     // }, [])
 
     function DisplayOtherBtn(item){
-        if(item.lecturer_status == "pending" ){
+        if(item.lecturer_status == "pending" && item.student_status != "canceled"){
             return(
                 <div className="card-btns">
                     <button onClick={() => requestBtnHandler("cancel", item._id)} className="cancel-btn">Cancel</button>
@@ -93,7 +93,7 @@ function TeacherList() {
     }
 
     function DisplayLecturerBtn(item){
-        if(!(item.technician_status == "approved" || item.technician_status == "canceled")){
+        if(!(item.technician_status == "approved" || item.technician_status == "canceled" || item.student_status == "canceled")){
             return(
                 <div className="card-btns">
                   <button onClick={() => requestBtnHandler("cancel", item._id)} className="cancel-btn">Cancel</button>
@@ -101,7 +101,6 @@ function TeacherList() {
             )
         }   
     }
-
   
     return(
         <div>
@@ -110,7 +109,6 @@ function TeacherList() {
                 <button className={(type=="other")?"type-btn others-requests lec-active":"type-btn others-requests"} onClick={()=>setType("other")}>Others' Request</button>
             </div>
             {(data.length===0) && <p style={{textAlign: "center"}}>There have not been any requests</p>}
-
             <div className="card-container">
                 {[...data].reverse().map(request =>
                 <div className="request-card">

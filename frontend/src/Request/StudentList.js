@@ -31,13 +31,14 @@ function Studentist() {
 
     function DisplayBtn(item){
         // waiting pending approved cancel
-        if(!(item.technician_status == "approved" || item.technician_status == "canceled")){
+        if(!(item.technician_status == "approved" || item.technician_status == "canceled" || item.student_status == "canceled")){
             return(
                 <div className="card-btns">
                   <button onClick={() => requestBtnHandler("cancel", item._id)} className="cancel-btn">Cancel</button>
                 </div>
             )}   
     }
+
     return(
         <div>
             {(data.length===0) && <p style={{textAlign: "center"}}>There have not been any requests</p>}

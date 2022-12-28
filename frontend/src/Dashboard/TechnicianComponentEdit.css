@@ -7,13 +7,24 @@
 
 .modal-header{
     background-image: linear-gradient(to bottom right, #00875A, #90ee90);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
+
+.modal-title{
+    color: white !important;
+}
+
+.modal-open{
+    padding-right: 0 !important;
+}
+
 .bold-words{
     font-weight: bold;
     font-size:x-large
 }
 
-.modal{
+.form-modal{
     margin-top: 10%;
 }
 

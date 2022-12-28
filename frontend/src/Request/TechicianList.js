@@ -10,6 +10,9 @@ const format = 'DD MMM, yyyy';
 
 function TechnicianList() {
     const [data, setData] = useState([])
+    const [type, setType] = useState("returned") 
+    // type: "canceled" "current" "returned"
+
 
     const Axios = axios.create({
         baseURL: 'http://localhost:4500/',
@@ -19,8 +22,29 @@ function TechnicianList() {
     useEffect(() => {
         const load = async () => {
             const response = await Axios.get('/request/');
-            var data = await response.data;
-            console.log(data);
+            var rawData = await response.data;
+            var data = [];
+            // console.log(data);
+
+            if(type == "canceled"){
+                rawData.map(request => {
+                    if(request.student_status == "canceled"){
+                        data.push(request);
+                    }
+                })
+            } else if(type == "current"){
+                rawData.map(request => {
+                    if(request.student_status != "canceled" && request.student_status != "returned"){
+                        data.push(request);
+                    }
+                })
+            } else if(type == "returned"){
+                rawData.map(request => {
+                    if(request.student_status == "returned"){
+                        data.push(request);
+                    }
+                })
+            }
             setData(data);
         };
         load();
@@ -43,7 +67,7 @@ function TechnicianList() {
         return () => {
             searchInput.removeEventListener('keyup', handleInputChange);
         };
-    },[]);
+    },[type]);
 
     function DisplayBtn(item){
         if(item.student_status == "waiting" && item.lecturer_status == "approved"){
@@ -81,8 +105,16 @@ function TechnicianList() {
             )
         }
     }
+
+
     return(
         <div>
+            <div>
+                <button className={(type=="current")?"type-btn current-requests lec-active":"type-btn current-requests"} onClick={()=>setType("current")}>Current</button>
+                <button className={(type=="returned")?"type-btn returned-requests lec-active":"type-btn returned-requests"} onClick={()=>setType("returned")}>Returned</button>
+                <button className={(type=="canceled")?"type-btn canceled-requests lec-active":"type-btn canceled-requests"} onClick={()=>setType("canceled")}>Canceled</button>
+            </div>
+
             {(data.length===0) && <p style={{textAlign: "center"}}>There have not been any requests</p>}
             <div className="card-container">
             {[...data].reverse().map(request =>
