@@ -14,6 +14,7 @@ function Logout(props) {
       const logoutresponse = await Logout();
       if (logoutresponse.success) {
         console.log("success")
+        sessionStorage.clear();
         navigate("/hero", { replace: true });
       } else {
         console.log(logoutresponse)

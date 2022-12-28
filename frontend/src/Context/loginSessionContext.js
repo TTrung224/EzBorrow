@@ -2,6 +2,7 @@
 import {createContext, useEffect, useState} from 'react'
 import axios from 'axios'
 import {backendUrl} from './serverURLContext' 
+import {axiosSetting} from './serverURLContext'
 
 export const AuthContext = createContext();
 
@@ -11,6 +12,8 @@ const AuthContextProvider = ({children}) => {
         isAuthenticated: false,
         user: null
     })
+
+    const [lecturer, setLect] = useState([]);
 
 
     // check Auth from server
@@ -34,6 +37,21 @@ const AuthContextProvider = ({children}) => {
                 })
             }
         }
+
+        const loadLecturer = async () => {
+            try {
+                console.log("loading lecturers");
+                const response = await axiosSetting.get('/account/lecturers')
+                if(response.status === 200){
+                    setLect(response.data)
+                }
+            } catch (error) {
+                setLect([]);
+                console.log(error)
+            }
+            
+        }
+        loadLecturer();
         loadUser();
     },[])
 
@@ -46,7 +64,10 @@ const AuthContextProvider = ({children}) => {
                     isAuthenticated: true,
                     user: res.data
                 })
-                
+                const response = await axiosSetting.get('/account/lecturers')
+                if(response.status === 200){
+                    setLect(response.data)
+                }
             }
             return {success: true, data: res.data}
         } catch (error) {
@@ -54,6 +75,7 @@ const AuthContextProvider = ({children}) => {
             else return {status: false, message: error.message}
         }
     }
+
     
     const Logout = async () => {
         try {
@@ -62,6 +84,7 @@ const AuthContextProvider = ({children}) => {
             if (res.status === 200) {
                 console.log("logout succcess")
                 setAuth({isAuthenticated: false, user: null})
+                setLect([]);
             }
             return {success: true, message: "you are logged out"}
         } catch (error) {
@@ -70,7 +93,7 @@ const AuthContextProvider = ({children}) => {
         }
     }
 
-    const authContextData = { LoginContext, authState, Logout };
+    const authContextData = { LoginContext, authState, Logout, lecturer };
     
     return (
         <AuthContext.Provider value={authContextData}>

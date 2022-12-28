@@ -95,16 +95,6 @@ function UserComponents() {
             console.log("load")
             setData(data);
         };
-
-        const check = async () => {
-            const response = await axiosSetting.get('/account/getAccount')
-            console.log(response.data)
-            const auth = response.data
-            sessionStorage.setItem('sname', auth.first_name + ' ' + auth.last_name)
-            sessionStorage.setItem('email', auth.email)
-            console.log("auth===============", auth)
-        }
-
         const lecturer = async () => {
             const response = await axiosSetting.get('/account/lecturers')
             console.log(response.data)
@@ -114,7 +104,6 @@ function UserComponents() {
         }
 
         load();
-        check();
         lecturer();
        
         const searchInput = document.getElementById("search-input");
