@@ -1,5 +1,6 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button';
+import CloseButton from 'react-bootstrap/CloseButton';
 // import Dropdown from 'react-bootstrap/Dropdown';
 import Modal from 'react-bootstrap/Modal';
 import {useState, useContext} from 'react'
@@ -72,12 +73,13 @@ function Confirmation(props) {
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
                 >
-                <Modal.Header closeButton>
+                <Modal.Header>
                     <Modal.Title id="contained-modal-title-vcenter">
                     <div className='confirm-top-header'>
                     <h2>INFORMATION</h2>
                     </div> 
                     </Modal.Title>
+                    <CloseButton onClick={()=>{props.onHide(); setChosenLecturer('')}}/>
                 </Modal.Header>
                 <Modal.Body className='request-form-modal-body'>
                     <div className='Student-info'>
@@ -99,7 +101,7 @@ function Confirmation(props) {
                         <p><span className='bold-words' >Lecturer email :&emsp;</span>{lname.map((item) => {
                             if(item.first_name === chosenLecturer) {
                                 return(<span className='lecturer-email'>{item.email}</span>);
-                            } else { return null; }
+                            } else { return null;}
                         })}</p>
                         <p><span className='bold-words' > Course Code :&emsp;</span><input onChange={e=>setCC(e.target.value)} required ></input></p>
                     <div className='confirm-header'>
@@ -118,9 +120,9 @@ function Confirmation(props) {
                     </div>     
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={props.onHide} variant='danger'>Close</Button>
+                    <Button onClick={()=>{props.onHide(); setChosenLecturer('')}} variant='danger'>Close</Button>
                     <div>
-                    <Button disabled={!cc || !pickupdate || !returndate || chosenLecturer===''} onClick={(e) =>{request(e);notify(e)} } variant='success'>Send</Button>
+                    <Button disabled={!cc || !pickupdate || !returndate || chosenLecturer===''} onClick={(e) =>{request(e);notify(e);setChosenLecturer('')} } variant='success'>Send</Button>
                     <ToastContainer />
                     </div>
                 </Modal.Footer>
