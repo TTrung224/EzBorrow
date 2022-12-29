@@ -1,6 +1,7 @@
-import React, { useLayoutEffect } from 'react'
+import React from 'react'
+// import { useLayoutEffect } from 'react'
 import './List.css'
-import Button from 'react-bootstrap/Button';
+// import Button from 'react-bootstrap/Button';
 import axios from 'axios'
 import Moment from 'moment';
 import { useState, useEffect} from 'react'
@@ -31,7 +32,7 @@ function Studentist() {
 
     function DisplayBtn(item){
         // waiting pending approved cancel
-        if(!(item.technician_status == "approved" || item.technician_status == "canceled" || item.student_status == "canceled")){
+        if(!(item.technician_status === "approved" || item.technician_status === "canceled" || item.student_status === "canceled")){
             return(
                 <div className="card-btns">
                   <button onClick={() => requestBtnHandler("cancel", item._id)} className="cancel-btn">Cancel</button>

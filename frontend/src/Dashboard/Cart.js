@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import CloseButton from 'react-bootstrap/CloseButton';
 import {FaPlus} from 'react-icons/fa';
 import {FaMinus} from 'react-icons/fa';
-import {useState, useEffect} from 'react'
+// import {useState, useEffect} from 'react'
 
 import Confirmation from './Confirmation';
 import './Cart.css'
@@ -28,10 +28,10 @@ function Cart(props) {
   return (
     <>
     <div className='cartCloseOpentBtn' onClick={openCloseRequest}>
-      <img src="/clipboard.png"/>
+      <img src="/clipboard.png" alt='close open button'/>
     </div>
     <div className='cart nonactive'>
-      <img className='cartCloseBtn' src="/close.png" onClick={openCloseRequest}/>
+      <img className='cartCloseBtn' src="/close.png" onClick={openCloseRequest} alt='close button'/>
       <div className='cart-item-box'></div>
         <div className='req-title'>
           <h2>Requests</h2>

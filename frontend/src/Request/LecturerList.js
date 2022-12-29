@@ -1,4 +1,5 @@
-import React, { useLayoutEffect } from 'react'
+import React from 'react'
+// import { useLayoutEffect } from 'react'
 import './List.css'
 import axios from 'axios'
 import Moment from 'moment';
@@ -21,7 +22,7 @@ function TeacherList() {
         var userEmail;
 
         const searchDiv = document.querySelector('.search .search-bar');
-        if(type == "lecturer"){
+        if(type === "lecturer"){
             searchDiv.classList.add("hidden");
         }else{
             searchDiv.classList.remove("hidden");
@@ -31,9 +32,9 @@ function TeacherList() {
             const accountResponse = await Axios.get("/account/getAccount");
             userEmail = accountResponse.data.email;
             var response;
-            if(type == "lecturer"){
+            if(type === "lecturer"){
                 response = await Axios.get('request/myrequest');
-            } else if(type == "other"){
+            } else if(type === "other"){
                 response = await Axios.get('request/lecturer/' + userEmail);
             }
             var data = await response.data;
@@ -42,7 +43,7 @@ function TeacherList() {
         };
         load();
 
-        if(type == "other"){
+        if(type === "other"){
             const searchInput = document.getElementById("search-input");
             searchInput.value = "";
             searchInput.placeholder = "borrower email";
@@ -52,7 +53,7 @@ function TeacherList() {
                 clearTimeout(timeout);
 
                 timeout = setTimeout(async function(){
-                    if(searchInput.value != ""){
+                    if(searchInput.value !== ""){
                         const response = await Axios.get('request/lecturer-search/'+userEmail+'?email='+searchInput.value);
                         const data = await response.data;
                         console.log(data);
@@ -88,7 +89,7 @@ function TeacherList() {
     // }, [])
 
     function DisplayOtherBtn(item){
-        if(item.lecturer_status == "pending" && item.student_status != "canceled"){
+        if(item.lecturer_status === "pending" && item.student_status !== "canceled"){
             return(
                 <div className="card-btns">
                     <button onClick={() => requestBtnHandler("cancel", item._id)} className="cancel-btn">Cancel</button>
@@ -99,7 +100,7 @@ function TeacherList() {
     }
 
     function DisplayLecturerBtn(item){
-        if(!(item.technician_status == "approved" || item.technician_status == "canceled" || item.student_status == "canceled")){
+        if(!(item.technician_status === "approved" || item.technician_status === "canceled" || item.student_status === "canceled")){
             return(
                 <div className="card-btns">
                   <button onClick={() => requestBtnHandler("cancel", item._id)} className="cancel-btn">Cancel</button>
@@ -111,8 +112,8 @@ function TeacherList() {
     return(
         <div>
             <div>
-                <button className={(type=="lecturer")?"type-btn my-requests lec-active":"type-btn my-requests"} onClick={()=>setType("lecturer")}>My Request</button>
-                <button className={(type=="other")?"type-btn others-requests lec-active":"type-btn others-requests"} onClick={()=>setType("other")}>Others' Request</button>
+                <button className={(type==="lecturer")?"type-btn my-requests lec-active":"type-btn my-requests"} onClick={()=>setType("lecturer")}>My Request</button>
+                <button className={(type==="other")?"type-btn others-requests lec-active":"type-btn others-requests"} onClick={()=>setType("other")}>Others' Request</button>
             </div>
             {(data.length===0) && <p style={{textAlign: "center"}}>There have not been any requests</p>}
             <div className="card-container">
@@ -145,8 +146,8 @@ function TeacherList() {
                             <p>{request.note}</p>
                         </div>    
                     </div>    
-                        {(type=="other") && DisplayOtherBtn(request)}
-                        {(type=="lecturer") && DisplayLecturerBtn(request)}
+                        {(type==="other") && DisplayOtherBtn(request)}
+                        {(type==="lecturer") && DisplayLecturerBtn(request)}
                 </div>)}
             </div> 
         </div>

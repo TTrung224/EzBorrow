@@ -1,6 +1,7 @@
-import React, { useLayoutEffect } from 'react'
+import React from 'react'
+// import { useLayoutEffect } from 'react'
 import './List.css'
-import Button from 'react-bootstrap/Button';
+// import Button from 'react-bootstrap/Button';
 import axios from 'axios'
 import Moment from 'moment';
 import { useState, useEffect} from 'react'
@@ -18,21 +19,21 @@ function TechnicianList() {
         var data = [];
         // console.log(data);
 
-        if(type == "canceled"){
-            rawData.map(request => {
-                if(request.student_status == "canceled"){
+        if(type === "canceled"){
+            rawData.forEach(request => {
+                if(request.student_status === "canceled"){
                     data.push(request);
                 }
             })
-        } else if(type == "current"){
-            rawData.map(request => {
-                if(request.student_status != "canceled" && request.student_status != "returned"){
+        } else if(type === "current"){
+            rawData.forEach(request => {
+                if(request.student_status !== "canceled" && request.student_status !== "returned"){
                     data.push(request);
                 }
             })
-        } else if(type == "returned"){
-            rawData.map(request => {
-                if(request.student_status == "returned"){
+        } else if(type === "returned"){
+            rawData.forEach(request => {
+                if(request.student_status === "returned"){
                     data.push(request);
                 }
             })
@@ -64,7 +65,7 @@ function TechnicianList() {
         const handleInputChange = (event) => {
             clearTimeout(timeout);
             timeout = setTimeout(async function(){
-                if(searchInput.value != ""){
+                if(searchInput.value !== ""){
                     const response = await Axios.get('request/technician-search?email='+searchInput.value);
                     const rawData = await response.data;
                     console.log("searchload:")
@@ -84,7 +85,7 @@ function TechnicianList() {
 
 
     function DisplayBtn(item){
-        if(item.student_status == "waiting" && item.lecturer_status == "approved"){
+        if(item.student_status === "waiting" && item.lecturer_status === "approved"){
             return(
                 <div className="card-btns">
                     <button onClick={() => requestBtnHandler("cancel", item._id)} className="cancel-btn">Cancel</button>
@@ -92,27 +93,27 @@ function TechnicianList() {
                 </div>
             )
         }
-        else if(item.student_status == "ready"){
+        else if(item.student_status === "ready"){
             return(
                 <div className="card-btns">
                     <button onClick={() => requestBtnHandler("pickUp", item._id)} className="pickup-btn">Pick up</button>
                 </div>
             )
         }
-        else if(item.student_status == "picked up"){
+        else if(item.student_status === "picked up"){
             return(
                 <div className="card-btns">
                     <button onClick={() => requestBtnHandler("return", item._id)} className="return-btn">Return</button>
                 </div>
             )
         }
-        else if(item.student_status == "returned"){
+        else if(item.student_status === "returned"){
             return(
                 <div className="card-btns">
                 </div>
             )
         }
-        else if(item.student_status == "canceled"){
+        else if(item.student_status === "canceled"){
             return(
                 <div className="card-btns">
                 </div>
@@ -124,9 +125,9 @@ function TechnicianList() {
     return(
         <div>
             <div>
-                <button className={(type=="current")?"type-btn current-requests lec-active":"type-btn current-requests"} onClick={()=>setType("current")}>Current</button>
-                <button className={(type=="returned")?"type-btn returned-requests lec-active":"type-btn returned-requests"} onClick={()=>setType("returned")}>Returned</button>
-                <button className={(type=="canceled")?"type-btn canceled-requests lec-active":"type-btn canceled-requests"} onClick={()=>setType("canceled")}>Canceled</button>
+                <button className={(type==="current")?"type-btn current-requests lec-active":"type-btn current-requests"} onClick={()=>setType("current")}>Current</button>
+                <button className={(type==="returned")?"type-btn returned-requests lec-active":"type-btn returned-requests"} onClick={()=>setType("returned")}>Returned</button>
+                <button className={(type==="canceled")?"type-btn canceled-requests lec-active":"type-btn canceled-requests"} onClick={()=>setType("canceled")}>Canceled</button>
             </div>
 
             {(data.length===0) && <p style={{textAlign: "center"}}>There have not been any requests</p>}

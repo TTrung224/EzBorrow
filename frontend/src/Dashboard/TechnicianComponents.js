@@ -1,12 +1,12 @@
 import React from 'react'
 import './TechnicianComponents.css'
 import { useState, useEffect} from 'react'
-import {FaEdit} from 'react-icons/fa';
+// import {FaEdit} from 'react-icons/fa';
 import ReactPaginate from 'react-paginate';
-import {FaPlus} from 'react-icons/fa';
+// import {FaPlus} from 'react-icons/fa';
 import TechnicianComponentEdit from './TechnicianComponentEdit';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
+// import Modal from 'react-bootstrap/Modal';
+// import Button from 'react-bootstrap/Button';
 import TechnicianComponentAdd from './TechnicianComponentCreate';
 import {axiosSetting} from '../Context/serverURLContext'
 
@@ -25,10 +25,10 @@ import {axiosSetting} from '../Context/serverURLContext'
 
 function TechnicianComponents() {
     const img1 = 'http://mlab.vn/image/data/Bai%20viet%20ky%20thuat/Arduino/bai%202%20Nhung%20dieu%20co%20ban/ArduinoUnoR3.jpg'
-    const [show, setShow] = useState(false);
+    // const [show, setShow] = useState(false);
     const [data, setData] = useState([])
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    // const handleClose = () => setShow(false);
+    // const handleShow = () => setShow(true);
 
 
     useEffect(() => {
@@ -55,7 +55,7 @@ function TechnicianComponents() {
             clearTimeout(timeout);
 
             timeout = setTimeout(async function(){
-                if(searchInput.value != ""){
+                if(searchInput.value !== ""){
                     const response = await axiosSetting.get('/component/search?name='+searchInput.value);
                     const data = await response.data;
                     console.log(data);
@@ -81,7 +81,7 @@ function TechnicianComponents() {
                 <div className='compo-item'>
 
                     <div className='compo-img'> 
-                        <img src={img1} width="120"></img>
+                        <img src={img1} width="120" alt='equipment'></img>
                     </div>
                     <div className='product-inf'>
                         <div className='product-name'>

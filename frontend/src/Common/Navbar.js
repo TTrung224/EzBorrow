@@ -3,7 +3,6 @@ import './Navbar.css'
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Logout from './Logout'
-import {LinkContainer, Button} from 'react-router-bootstrap';
 import icon from './icon.png';
 import { useNavigate } from "react-router-dom";
 import {useContext} from 'react'
@@ -12,7 +11,7 @@ import {AuthContext} from '../Context/loginSessionContext'
 const Profile = (
   <img
     src={'https://pub-static.fotor.com/assets/projects/pages/d5bdd0513a0740a8a38752dbc32586d0/fotor-03d1a91a0cec4542927f53c87e0599f6.jpg'}
-    alt="UserName profile image"
+    alt="UserName profile"
     style={{ width: '40px' }}
   />
 )

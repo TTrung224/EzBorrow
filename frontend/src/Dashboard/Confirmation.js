@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Button from 'react-bootstrap/Button';
-import Dropdown from 'react-bootstrap/Dropdown';
+// import Dropdown from 'react-bootstrap/Dropdown';
 import Modal from 'react-bootstrap/Modal';
 import {useState, useContext} from 'react'
 import {AuthContext} from '../Context/loginSessionContext'
@@ -15,7 +15,7 @@ function Confirmation(props) {
     const cartItems = props.cartItems;
     const sname = user.first_name + ' ' + user.last_name;
     const email = user.email;
-    const [newItem, setItem] = useState('')
+    // const [newItem, setItem] = useState('')
     const [chosenLecturerEmail, setChosenLecturerEmail] = useState('')
     const [chosenLecturer, setChosenLecturer] = useState('')
     const [cc, setCC] = useState('')
@@ -94,7 +94,7 @@ function Confirmation(props) {
                         <p><span className='bold-words' >Lecturer email :&emsp;</span>{lname.map((item) => {
                             if(item.first_name === chosenLecturer) {
                                 return(<span className='lecturer-email'>{item.email}</span>);
-                            }
+                            } else { return null; }
                         })}</p>
                         <p><span className='bold-words' > Course Code :&emsp;</span><input onChange={e=>setCC(e.target.value)} required ></input></p>
                     <div className='confirm-header'>

@@ -115,7 +115,7 @@ function UserComponents() {
             clearTimeout(timeout);
 
             timeout = setTimeout(async function(){
-                if(searchInput.value != ""){
+                if(searchInput.value !== ""){
                     const response = await axiosSetting.get('/component/search?name='+searchInput.value);
                     const data = await response.data;
                     console.log(data);
@@ -139,7 +139,7 @@ function UserComponents() {
                 // console.log('Itemsdafasdfasd====',item)
                 <div className='compo-item'>
                     <div className='compo-img'>
-                        <img src={img1} width="120"></img>
+                        <img src={img1} width="120" alt='add button'></img>
                     </div>
                     <div className='product-inf'>
                         <div className='product-name'>
