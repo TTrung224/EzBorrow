@@ -6,7 +6,9 @@ import {useState, useContext} from 'react'
 import {AuthContext} from '../Context/loginSessionContext'
 import {axiosSetting} from '../Context/serverURLContext'
 import './Confirmation.css'
-// import { PromiseProvider } from 'mongoose';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function Confirmation(props) {
 
@@ -24,6 +26,7 @@ function Confirmation(props) {
     const lname = lecturer.length > 0 ? lecturer : ['error'];
 
 
+    const notify = () => toast.success("Sent successfully!");
 
     console.log("cart:", cartItems)
 
@@ -53,8 +56,10 @@ function Confirmation(props) {
         }, {withCredentials: true}).catch((error) => {
             console.log(error.response)
         })
-        alert("Request sent successfully")
-        return (props.onHide)
+        
+        // return (props.onHide)
+        setTimeout(() => {
+            props.onHide();}, 3000);
     }
 
 
@@ -114,7 +119,10 @@ function Confirmation(props) {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={props.onHide} variant='danger'>Close</Button>
-                    <Button disabled={!cc || !pickupdate || !returndate || chosenLecturer===''} onClick={(e) => request(e)} variant='success'>Send</Button>
+                    <div>
+                    <Button disabled={!cc || !pickupdate || !returndate || chosenLecturer===''} onClick={(e) =>{request(e);notify(e)} } variant='success'>Send</Button>
+                    <ToastContainer />
+                    </div>
                 </Modal.Footer>
             </Modal>
         </div>

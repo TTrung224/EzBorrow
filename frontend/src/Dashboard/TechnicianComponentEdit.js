@@ -19,7 +19,7 @@ function TechnicianComponentEdit(props) {
     const [img, setImg] = useState('');
     const [permission,setPermission] = useState(true);
     
-    const notify = () => toast.success("Succesfully update!");
+    const notify = () => toast.success("Updated successfully!");
 
     const load = async () => {
         const response = await axiosSetting.get('/component/' + id);
