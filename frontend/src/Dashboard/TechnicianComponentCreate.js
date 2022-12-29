@@ -4,6 +4,8 @@ import Modal from 'react-bootstrap/Modal';
 import './TechnicianComponentCreate.css'
 import {FaPlus} from 'react-icons/fa';
 import {axiosSetting} from '../Context/serverURLContext'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function TechnicianComponentAdd(props) {
     const [show, setShow] = useState(false);
@@ -34,6 +36,8 @@ function TechnicianComponentAdd(props) {
     //     load();
     // }, [])
 
+    const notify = () => toast.success("Succesfully update!");
+
     const create = async () => {
         console.log('test')
         await axiosSetting.post('/component/', {
@@ -45,8 +49,8 @@ function TechnicianComponentAdd(props) {
         }, {withCredentials: true}).catch((error) => {
             console.log(error.response)
         })
-        alert("Component updated successfully")
-        return(handleClose())
+        setTimeout(() => {
+            handleClose();}, 3000);
     }
 
   return (
@@ -81,9 +85,12 @@ function TechnicianComponentAdd(props) {
                 <Button id='close-btn' variant="danger" onClick={handleClose}>
                     Close
                 </Button>
-                <Button disabled={!name || !desc || !img || !permission} id='update-btn' onClick={() => create()}>
+                <div>
+                <Button disabled={!name || !desc || !img || !permission} id='update-btn' onClick={() =>{create();notify()}} >
                     Create
                 </Button>
+                <ToastContainer />
+                </div>
             </Modal.Footer>
         </Modal>
     </div>

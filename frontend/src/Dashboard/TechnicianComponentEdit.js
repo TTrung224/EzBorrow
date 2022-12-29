@@ -4,6 +4,8 @@ import Modal from 'react-bootstrap/Modal';
 import {FaEdit} from 'react-icons/fa';
 import './TechnicianComponentEdit.css'
 import {axiosSetting} from '../Context/serverURLContext'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function TechnicianComponentEdit(props) {
     const [show, setShow] = useState(false);
@@ -17,6 +19,7 @@ function TechnicianComponentEdit(props) {
     const [img, setImg] = useState('');
     const [permission,setPermission] = useState(true);
     
+    const notify = () => toast.success("Succesfully update!");
 
     const load = async () => {
         const response = await axiosSetting.get('/component/' + id);
@@ -47,9 +50,10 @@ function TechnicianComponentEdit(props) {
             }
         }, {withCredentials: true}).catch((error) => {
             console.log(error.response)
+            notify()
         })
-        alert("Component updated successfully")
-        return(handleClose())
+        setTimeout(() => {
+            handleClose();}, 3000);
     }
 
   return (
@@ -84,9 +88,12 @@ function TechnicianComponentEdit(props) {
                 <Button id='close-btn' variant="danger" onClick={handleClose}>
                     Close
                 </Button>
-                <Button id='update-btn' variant="primary" onClick={() => edit()}>
-                    Update
-                </Button>
+                <div>
+                    <Button id='update-btn' variant="primary" onClick={() =>{edit();notify()}  }>
+                        Update
+                    </Button>
+                    <ToastContainer />
+                </div>
             </Modal.Footer>
         </Modal>
     </div>
