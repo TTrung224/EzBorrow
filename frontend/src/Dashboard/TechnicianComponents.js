@@ -10,18 +10,6 @@ import TechnicianComponentEdit from './TechnicianComponentEdit';
 import TechnicianComponentAdd from './TechnicianComponentCreate';
 import {axiosSetting} from '../Context/serverURLContext'
 
-// function TechnicianComponentsAdd(){
-//     return(
-//         <div className='compo-item'>
-//             <button className='full-width-button'>
-//                 <FaPlus size={70} />
-//             </button>
-//         </div>
-
-//     );
-// }
-
-
 
 function TechnicianComponents() {
     const img1 = 'http://mlab.vn/image/data/Bai%20viet%20ky%20thuat/Arduino/bai%202%20Nhung%20dieu%20co%20ban/ArduinoUnoR3.jpg'
@@ -38,8 +26,6 @@ function TechnicianComponents() {
         const load = async () => {
             const response = await axiosSetting.get('/component');
             const data = await response.data;
-            console.log(data);
-            console.log("load")
             setData(data);
         };
 
