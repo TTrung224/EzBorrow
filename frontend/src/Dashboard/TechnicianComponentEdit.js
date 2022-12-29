@@ -59,6 +59,10 @@ function TechnicianComponentEdit(props) {
             handleClose();}, 3000);
     }
 
+    const deleteComponent = async () => {
+        await axiosSetting.delete('/component/' + id)
+    }
+
   return (
     <div>
         <Button className='edit-component-btn' variant="primary" onClick={handleShow}>
