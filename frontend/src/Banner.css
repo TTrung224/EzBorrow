@@ -40,8 +40,9 @@ h1.app_header-h1{
   font-size: 20px;
   font-weight: 600;
 }
-.access-btn:hover{
-  background-color: #00875A;
+.access-btn:hover, .access-btn:active{
+  background-color: #00875A !important;
+  border-style: none !important;
 }
 
 @media screen and (max-width: 500px){
