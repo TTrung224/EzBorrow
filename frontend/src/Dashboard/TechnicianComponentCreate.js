@@ -36,7 +36,7 @@ function TechnicianComponentAdd(props) {
     //     load();
     // }, [])
 
-    const notify = () => toast.success("Succesfully update!");
+    const notify = () => toast.success("Created successfully!");
 
     const create = async () => {
         console.log('test')
