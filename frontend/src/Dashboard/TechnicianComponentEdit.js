@@ -73,7 +73,7 @@ function TechnicianComponentEdit(props) {
                     <p><span className='bold-words' >Product ID :&emsp;</span>{data._id}</p>
                     <p><span className='bold-words' >Name :&emsp;</span><input type="text" value={name} onChange={(e) => {setName(e.target.value)}}></input></p>                
                     <p><span className='bold-words' >Description :&emsp;</span><input type="text" value={desc} onChange={(e) => {setDesc(e.target.value)}}></input></p>
-                    <p><span className='bold-words' >Quantity :&emsp;</span><input type="text" value={quantity} onChange={(e) => {setQuantity(e.target.value)}}></input></p>
+                    <p><span className='bold-words' >Quantity :&emsp;</span><input type="number" value={quantity} onChange={(e) => {setQuantity(e.target.value)}}></input></p>
                     <p><span className='bold-words' >Image :&emsp;</span><input type="text" placeholder='Enter image URL' onChange={(e) => {setImg(e.target.value)}}></input></p>
                     <span className='bold-words' >Permission :&emsp;</span>
                         <select 
