@@ -105,7 +105,7 @@ button:disabled:hover{
     background-color: #e9ecef !important;
 }
 
-@media screen and (max-width: 500px){
+@media screen and (max-width: 1000px){
     .dashboard{
         width: 100%;
         display: flex;
@@ -114,6 +114,7 @@ button:disabled:hover{
     .compo-container{
         margin-left: 0;
         justify-content: center;
+        width: 95%;
     }
     .cards-panigation{
         display: flex;
@@ -125,6 +126,7 @@ button:disabled:hover{
     }
     
     .cards .compo-item{
-        margin-left: 0;
+        margin-left: 10px;
+        margin-right: 10px;
     }
 }

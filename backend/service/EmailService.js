@@ -3,6 +3,7 @@ const fs = require('fs');
 const ejs = require("ejs");
 const juice = require("juice");
 const AccountController = require("../controllers/AccountController")
+const { HOSTING_URL_BASE } = process.env 
 
 const technician_email = "technician@rmit.edu.vn";
 // const technician_email = "s3891724@rmit.edu.vn";
@@ -51,7 +52,7 @@ class EmailService {
             const name = await AccountController.getUserNameByEmail(request.lecturer_email);
             const vars = {
                 "name": name,
-                "link": "https://www.w3schools.com/nodejs/nodejs_email.asp",
+                "link": HOSTING_URL_BASE+"request",
                 "website_link": website_link,
             }
             const html = await this.readTemplate("lecturerApprove", vars)
@@ -69,7 +70,7 @@ class EmailService {
     async emailForTechnicianApprove(request){
         try{
             const vars = {
-                "link": "https://www.w3schools.com/nodejs/nodejs_email.asp",
+                "link": HOSTING_URL_BASE+"request",
                 "website_link": website_link,
             }
             const html = await this.readTemplate("technicianApprove", vars)
