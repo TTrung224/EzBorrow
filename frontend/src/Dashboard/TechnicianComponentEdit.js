@@ -22,6 +22,8 @@ function TechnicianComponentEdit(props) {
     
     const notify = () => toast.success("Updated successfully!");
 
+    const notify1 = () => toast.success("Deleted successfully!");
+
     const load = async () => {
         const response = await axiosSetting.get('/component/' + id);
         const data = await response.data;
@@ -60,8 +62,14 @@ function TechnicianComponentEdit(props) {
     }
 
     const deleteComponent = async () => {
-        await axiosSetting.delete('/component/' + id)
+        await axiosSetting.delete('/component/' + id,
+        {withCredentials: true}).catch((error) => {
+        console.log(error.response)})
+        console.log('delete')
+        setTimeout(() => {
+            handleClose();}, 3000);  
     }
+    
 
   return (
     <div>
@@ -93,13 +101,14 @@ function TechnicianComponentEdit(props) {
                 </div>
             </Modal.Body>
             <Modal.Footer>
-                <Button id='close-btn' variant="danger" onClick={handleClose}>
-                    Close
-                </Button>
                 <div>
                     <Button id='update-btn' variant="primary" onClick={() =>{edit();notify()}  }>
                         Update
                     </Button>
+                    <ToastContainer />
+                </div>
+                <div>
+                    <Button onClick={()=>{deleteComponent();notify1()}} variant='danger'>Delete</Button>
                     <ToastContainer />
                 </div>
             </Modal.Footer>

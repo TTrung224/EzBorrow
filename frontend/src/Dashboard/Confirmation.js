@@ -14,7 +14,6 @@ import 'react-toastify/dist/ReactToastify.css';
 function Confirmation(props) {
 
     const {authState: {user}, lecturer} = useContext(AuthContext)
-    
     const cartItems = props.cartItems;
     const sname = user.first_name + ' ' + user.last_name;
     const email = user.email;
@@ -46,7 +45,9 @@ function Confirmation(props) {
         }
 
         setChosenLecturerEmail(document.querySelector(".lecturer-email").innerHTML);
-
+    
+        
+        
         console.log("chosenLecturerEmail: " + chosenLecturerEmail);
         await axiosSetting.post('/request/', {
             pickup_date: pickupdate,
@@ -123,8 +124,10 @@ function Confirmation(props) {
                     <Button onClick={()=>{props.onHide(); setChosenLecturer('')}} variant='danger'>Close</Button>
                     <div>
                     <Button disabled={!cc || !pickupdate || !returndate || chosenLecturer===''} onClick={(e) =>{request(e);notify(e);setChosenLecturer('')} } variant='success'>Send</Button>
+                    <Button onClick={()=>{props.onHide(); setChosenLecturer('')}} variant='danger'>Close</Button>
                     <ToastContainer />
                     </div>
+                    
                 </Modal.Footer>
             </Modal>
         </div>
