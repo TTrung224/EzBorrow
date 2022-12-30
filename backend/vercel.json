@@ -2,7 +2,7 @@
    "version": 1,
    "name": "easy-borrow",
    "builds": [
-      { "src": "app.js", "use": "@vercel/node" }
+      { "src": "index.js", "use": "@vercel/node" }
    ],
    "routes": [
       { "src": "/(.*)", "dest": "/app.js" }
