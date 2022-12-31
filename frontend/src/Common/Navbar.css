@@ -16,13 +16,25 @@
     width: 50px;
 }
 
-
-
 .profile{
     /* align-self: flex-end; */
     position: absolute;
     right: 0;
     margin-left: auto;
+    height: 56.25px;
+    display: flex;
+    align-items: center;
+}
+
+.profile #dropdown-button{
+    border-style: none !important;
+    height: 52px;
+    margin-bottom: 0;
+}
+
+.profile .dropdown-menu{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 .search {
@@ -64,6 +76,7 @@
 .profile-btn {
     background-color: #00875A;
 }
+
 @media screen and (max-width: 1000px){
     .Main {
         align-items: center;

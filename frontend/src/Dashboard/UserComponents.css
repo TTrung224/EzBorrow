@@ -33,6 +33,13 @@
 
 .compo-img{
     border-bottom: 1px solid #00875A;
+    height: 125px;
+}
+
+.compo-img img{
+    margin-top: auto;
+    margin-bottom: auto;
+    max-height: 124px;
 }
 
 .product-inf{

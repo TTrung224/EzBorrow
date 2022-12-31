@@ -67,7 +67,7 @@ function TechnicianComponents() {
                 <div className='compo-item'>
 
                     <div className='compo-img'> 
-                        <img src={img1} width="120" alt='equipment'></img>
+                        <img src={item.img_src} alt={item.name}></img>
                     </div>
                     <div className='product-inf'>
                         <div className='product-name'>

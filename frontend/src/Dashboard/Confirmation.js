@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import CloseButton from 'react-bootstrap/CloseButton';
 // import Dropdown from 'react-bootstrap/Dropdown';
 import Modal from 'react-bootstrap/Modal';
-import {useState, useContext} from 'react'
+import {useState, useContext, useEffect} from 'react'
 import {AuthContext} from '../Context/loginSessionContext'
 import {axiosSetting} from '../Context/serverURLContext'
 import './Confirmation.css'
@@ -26,6 +26,12 @@ function Confirmation(props) {
     const [returndate, setReturndate] = useState()
     const lname = lecturer.length > 0 ? lecturer : ['error'];
 
+    useEffect(()=>{
+        const changeChosenLec = () => {
+            setChosenLecturer('');
+        };
+        changeChosenLec();
+    },[props.onHide]);
 
     const notify = () => toast.success("Sent successfully!");
 
@@ -79,7 +85,7 @@ function Confirmation(props) {
                     <h2>INFORMATION</h2>
                     </div> 
                     </Modal.Title>
-                    <CloseButton onClick={()=>{props.onHide(); setChosenLecturer('')}}/>
+                    <CloseButton onClick={()=>{props.onHide();}}/>
                 </Modal.Header>
                 <Modal.Body className='request-form-modal-body'>
                     <div className='Student-info'>
@@ -120,7 +126,7 @@ function Confirmation(props) {
                     </div>     
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={()=>{props.onHide(); setChosenLecturer('')}} variant='danger'>Close</Button>
+                    <Button onClick={()=>{props.onHide();}} variant='danger'>Close</Button>
                     <div>
                     <Button disabled={!cc || !pickupdate || !returndate || chosenLecturer===''} onClick={(e) =>{request(e);notify(e);setChosenLecturer('')} } variant='success'>Send</Button>
                     <ToastContainer />
