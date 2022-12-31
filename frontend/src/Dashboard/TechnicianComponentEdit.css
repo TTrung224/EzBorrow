@@ -63,3 +63,11 @@
 .modal-content{
     border-radius: 20px;
 }
+
+#modal-popup{
+    margin-top: 20%;
+}
+
+.wordss{
+    font-size: larger;
+}

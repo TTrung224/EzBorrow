@@ -113,25 +113,34 @@ function TechnicianComponentEdit(props) {
                     <ToastContainer />
                 </div>
                 <div>
-                    <Button onClick={()=>{handleShow2()}} variant='danger'>Delete</Button>
-                    <ToastContainer />
+                    <Button onClick={()=>{handleShow2();handleClose()}} variant='danger'>Delete</Button>
+                    
                 </div>
             </Modal.Footer>
         </Modal>
 
-
-        <Modal show={show2} onHide={handleClose2}>
+        
+        <Modal show={show2} onHide={handleClose2} id='modal-popup'>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Are you sure?</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Body>
+        <p><span className='wordss'>Deleting will permanently remove this file from the system.</span><span className='bold-words'>This cannot be undone</span></p>
+        </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={() => {deleteComponent();notify1();}}>
-            Save Changes
-          </Button>
+            <Button variant="danger" onClick={handleClose2}>
+                Cancel
+            </Button>
+            <div>
+            <Button variant="primary" onClick={() => {deleteComponent();notify1();}}>
+                Confirm
+            </Button>
+            <ToastContainer/>
+            </div>
         </Modal.Footer>
-      </Modal>
-    </div>
+        </Modal>
+        </div>
+   
   )
 }
 
