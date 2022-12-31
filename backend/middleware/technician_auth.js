@@ -22,6 +22,11 @@ const technician_auth = (req, res, next) => {
     }
   
   } catch (err) {
+    res.clearCookie("token");
+    console.log("cookie clear")
+    if (err.name === 'TokenExpiredError') {
+      return res.status(401).send("Token Expired")
+    }
     return res.status(401).send("Invalid Token"); //can redirect here
   }
   }
