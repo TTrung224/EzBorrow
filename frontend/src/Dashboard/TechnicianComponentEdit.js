@@ -72,7 +72,7 @@ function TechnicianComponentEdit(props) {
         console.log(error.response)})
         console.log('delete')
         setTimeout(() => {
-            handleClose();}, 3000);  
+            handleClose2();}, 3000);  
     }
     
 
@@ -124,7 +124,7 @@ function TechnicianComponentEdit(props) {
         <Modal.Header closeButton>
           <Modal.Title>Are you sure?</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body id='modal-popup-body'>
         <p><span className='wordss'>Deleting will permanently remove this file from the system.</span><span className='bold-words'>This cannot be undone</span></p>
         </Modal.Body>
         <Modal.Footer>
