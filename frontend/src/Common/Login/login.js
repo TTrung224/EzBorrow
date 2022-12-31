@@ -15,8 +15,8 @@ export const Login = (props) => {
         try {
             const loginData = await LoginContext(formData)
             if (loginData.success){
-                console.log(loginData.data)
-                console.log("loginnnnn")
+                // console.log(loginData.data)
+                console.log("logined")
                 navigate("/dashboard");
             } else {
                 console.log('err')

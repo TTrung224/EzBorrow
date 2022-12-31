@@ -77,12 +77,13 @@ class AccountController {
                 data.last_name = user.last_name;
                 data.email = user.email;
                 data.type = user.type;
+                data.token = token
 
-                // save user token
-                user.token = token;
+                // // save user token
+                // user.token = token;
 
-                // save the token to cookie that send back in response
-                res.cookie('token', token, { httpOnly: true });
+                // // save the token to cookie that send back in response
+                // res.cookie('token', token, { httpOnly: true });
 
                 // user
                 return res.status(200).json(data);

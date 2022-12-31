@@ -59,14 +59,12 @@ const AuthContextProvider = ({children}) => {
     //login
     const LoginContext = async userForm => {
         try {
-            const cookies = new Cookies();
-
             const res = await axios.post(`${backendUrl}/account/login`, userForm,{withCredentials: true})
             
 
             if(res.status === 200){
                 const token = res.data.token;
-                cookies.set('token', token);
+                document.cookie = 'token=' + token;
                 setAuth({
                     isAuthenticated: true,
                     user: res.data
@@ -89,6 +87,7 @@ const AuthContextProvider = ({children}) => {
             console.log("logging out")
             const res = await axios.post(`${backendUrl}/account/logout`,{},{withCredentials: true})
             if (res.status === 200) {
+                document.cookie = "token=";
                 console.log("logout succcess")
                 setAuth({isAuthenticated: false, user: null})
                 setLect([]);

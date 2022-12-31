@@ -16,6 +16,7 @@ const app = express();
 app.use(express.json());
 app.use(cookies());
 app.use(cors({origin: 'https://ezborrow.netlify.app', credentials: true}))
+// app.use(cors({origin: 'http://localhost:3000', credentials: true}))
 route(app);
 
 module.exports = app;
