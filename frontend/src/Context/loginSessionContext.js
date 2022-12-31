@@ -24,9 +24,9 @@ const AuthContextProvider = ({children}) => {
     useEffect(() =>  {
         const loadUser = async () => {
             try {console.log("this is load user")
-                const res = await axios.get(`${backendUrl}/account/getAccount`, {withCredentials: true})
+                const res = await axiosSetting.get('/account/getAccount')
                 if (res.status === 200) {
-                    
+                    /account/getAccount
                     setAuth({
                         isAuthenticated: true,
                         user: res.data
