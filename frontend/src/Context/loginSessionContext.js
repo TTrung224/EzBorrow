@@ -4,6 +4,7 @@ import axios from 'axios'
 import {backendUrl} from './serverURLContext' 
 import {axiosSetting} from './serverURLContext'
 import Cookies from 'js-cookie'
+import CookiesSet from 'universal-cookie';
 
 export const AuthContext = createContext();
 
@@ -65,7 +66,7 @@ const AuthContextProvider = ({children}) => {
 
             if(res.status === 200){
                 const token = res.data.token;
-                Cookies.set('token', token, { path: '/', maxAge: 7200 });
+                CookiesSet.set('token', token, { path: '/', maxAge: 7200 });
                 setAuth({
                     isAuthenticated: true,
                     user: res.data
