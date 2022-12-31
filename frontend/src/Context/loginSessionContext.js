@@ -4,7 +4,6 @@ import axios from 'axios'
 import {backendUrl} from './serverURLContext' 
 import {axiosSetting} from './serverURLContext'
 import Cookies from 'js-cookie'
-import CookiesParse from 'cookie'
 
 export const AuthContext = createContext();
 
@@ -89,7 +88,7 @@ const AuthContextProvider = ({children}) => {
             console.log("logging out")
             const res = await axios.post(`${backendUrl}/account/logout`,{},{withCredentials: true})
             if (res.status === 200) {
-                CookiesParse.remove("token", { path: '/' });
+                Cookies.remove("token", { path: '/' });
                 console.log("logout succcess")
                 setAuth({isAuthenticated: false, user: null})
                 setLect([]);

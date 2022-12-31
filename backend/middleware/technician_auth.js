@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const config = process.env;
+var Cookie = require('cookie');
 
 function getTokenCookie(request){
   console.log(request.headers['set-cookie']);
