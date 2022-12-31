@@ -12,7 +12,7 @@ export const AuthContext = createContext();
 const AuthContextProvider = ({children}) => {
     function refreshPage() {
         window.location.reload(false);
-      }
+    }
     // auth state
     const [authState, setAuth] = useState({
         isAuthenticated: false,
@@ -28,9 +28,8 @@ const AuthContextProvider = ({children}) => {
 
     const loadUser = async () => {
         try {console.log("this is load user")
-            const res = await axiosSetting.get(`account/getAccount`)
+            const res = await axiosSetting.get('account/getAccount')
             if (res.status === 200) {
-                
                 setAuth({
                     isAuthenticated: true,
                     user: res.data
@@ -88,12 +87,12 @@ const AuthContextProvider = ({children}) => {
 
             if(res.status === 200){
                 const token = res.data.token;
-                cookies.set('token', token);
+                cookies.set('token', token, { path: '/' });
                 setAuth({
                     isAuthenticated: true,
                     user: res.data
                 })
-                const response = await axiosSetting.get('/account/lecturers')
+                const response = await axiosSetting.get('account/lecturers')
                 if(response.status === 200){
                     setLect(response.data)
                 }
@@ -109,7 +108,7 @@ const AuthContextProvider = ({children}) => {
     const Logout = async () => {
         try {
             console.log("logging out")
-            const res = await axios.post(`${backendUrl}/account/logout`,{},{withCredentials: true})
+            const res = await axiosSetting.post('account/logout')
             if (res.status === 200) {
                 Cookies.remove("token");
                 console.log("logout succcess")
