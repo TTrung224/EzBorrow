@@ -4,17 +4,13 @@ var Cookie = require('cookie');
 
 function getTokenCookie(request){
   console.log(request.headers['donut']);
-  var rawcookies = request.headers['donut'];
-  console.log(rawcookies);
-  for (var i in rawcookies) {
-    const cookie = Cookie.parse(rawcookies[i]);
+  const cookie = Cookie.parse(request.headers['donut']);
+  if(cookie.token != undefined){
     console.log(cookie);
-    if(cookie.token != undefined){
-      return cookie.token;
-    }
+    return cookie.token;
   }
   return undefined;
-}
+} 
 
 const technician_auth = (req, res, next) => {
 

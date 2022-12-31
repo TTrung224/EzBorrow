@@ -4,14 +4,10 @@ var Cookie = require('cookie');
 
 function getTokenCookie(request){
   console.log(request.headers['donut']);
-  var rawcookies = request.headers['donut'];
-  console.log(rawcookies);
-  for (var i in rawcookies) {
-    const cookie = Cookie.parse(rawcookies[i]);
-    if(cookie.token != undefined){
-      console.log(cookie);
-      return cookie.token;
-    }
+  const cookie = Cookie.parse(request.headers['donut']);
+  if(cookie.token != undefined){
+    console.log(cookie);
+    return cookie.token;
   }
   return undefined;
 } 
