@@ -107,10 +107,12 @@ const AuthContextProvider = ({children}) => {
     
     const Logout = async () => {
         try {
+            const cookies = new Cookies()
+
             console.log("logging out")
             const res = await axiosSetting.post('account/logout')
             if (res.status === 200) {
-                Cookies.remove("token");
+                cookies.remove("token");
                 console.log("logout succcess")
                 setAuth({isAuthenticated: false, user: null})
                 setLect([]);
