@@ -1,24 +1,24 @@
 const jwt = require("jsonwebtoken");
-var Cookie = require('request-cookies').Cookie;
+var Cookie = require('cookie');
 
 const config = process.env;
 
-function getCookies(request){
-  var cookies = null;
-  var rawcookies = request.headers['Set-Cookie'];
+function getTokenCookie(request){
+  console.log(request.headers['set-cookie']);
+  var rawcookies = request.headers['set-cookie'];
   for (var i in rawcookies) {
-    const cookie = new Cookie(rawcookies[i])
-    cookies[cookie.key] = cookie.value;
-    console.log(cookie.key + ": " + cookie.value);
+    const cookie = Cookie.parse(rawcookies[i]);
+    console.log(cookie);
+    if(cookie.token != undefined){
+      return cookie.token;
+    }
   }
-  return cookies;
+  return undefined;
 }
 
 const verifyToken = (req, res, next) => {
-  const cookies = getCookies(req);
-  if(cookies != null){
-    const token = cookies.token;
-  }
+  const token = getTokenCookie(req);
+  
   // const token = req.cookies.token;
   console.log("token=", token);
   if (!token) {
