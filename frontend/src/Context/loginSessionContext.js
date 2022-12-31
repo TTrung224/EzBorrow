@@ -3,6 +3,7 @@ import {createContext, useEffect, useState} from 'react'
 import axios from 'axios'
 import {backendUrl} from './serverURLContext' 
 import {axiosSetting} from './serverURLContext'
+import { Cookies } from 'react-cookie';
 
 export const AuthContext = createContext();
 
@@ -58,8 +59,14 @@ const AuthContextProvider = ({children}) => {
     //login
     const LoginContext = async userForm => {
         try {
+            const cookies = new Cookies();
+
             const res = await axios.post(`${backendUrl}/account/login`, userForm,{withCredentials: true})
+            
+
             if(res.status === 200){
+                const token = res.data.token;
+                cookies.set('token', token);
                 setAuth({
                     isAuthenticated: true,
                     user: res.data
