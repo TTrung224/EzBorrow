@@ -5,6 +5,7 @@ import {backendUrl} from './serverURLContext'
 import {axiosSetting} from './serverURLContext'
 import { useNavigate } from "react-router-dom";
 import { Navigate, resolvePath } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
 export const AuthContext = createContext();
 
@@ -80,8 +81,13 @@ const AuthContextProvider = ({children}) => {
     //login
     const LoginContext = async userForm => {
         try {
+            const cookies = new Cookies();
+
             const res = await axios.post(`${backendUrl}/account/login`, userForm,{withCredentials: true})
+
             if(res.status === 200){
+                const token = res.data.token;
+                cookies.set('token', token, { path: '/', maxAge: 7200 });
                 setAuth({
                     isAuthenticated: true,
                     user: res.data
@@ -104,6 +110,7 @@ const AuthContextProvider = ({children}) => {
             console.log("logging out")
             const res = await axios.post(`${backendUrl}/account/logout`,{},{withCredentials: true})
             if (res.status === 200) {
+                Cookies.remove("token");
                 console.log("logout succcess")
                 setAuth({isAuthenticated: false, user: null})
                 setLect([]);

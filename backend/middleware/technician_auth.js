@@ -1,11 +1,22 @@
 const jwt = require("jsonwebtoken");
 const config = process.env;
 
+function getTokenCookie(request){
+  console.log(request.headers['set-cookie']);
+  var rawcookies = request.headers['set-cookie'];
+  for (var i in rawcookies) {
+    const cookie = Cookie.parse(rawcookies[i]);
+    console.log(cookie);
+    if(cookie.token != undefined){
+      return cookie.token;
+    }
+  }
+  return undefined;
+}
+
 const technician_auth = (req, res, next) => {
 
-  
-
-    const token = req.cookies.token;
+  const token = getTokenCookie(req);
   if (!token) {
     return res.status(403).send("A token is required for authentication");
   }
