@@ -4,8 +4,8 @@ var Cookie = require('cookie');
 const config = process.env;
 
 function getTokenCookie(request){
-  console.log(request.headers['set-cookie']);
-  var rawcookies = request.headers['set-cookie'];
+  console.log(request.headers['donut']);
+  var rawcookies = request.headers['donut'];
   for (var i in rawcookies) {
     const cookie = Cookie.parse(rawcookies[i]);
     console.log(cookie);
