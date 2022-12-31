@@ -3,8 +3,8 @@ import {createContext, useEffect, useState} from 'react'
 import axios from 'axios'
 import {backendUrl} from './serverURLContext' 
 import {axiosSetting} from './serverURLContext'
-import Cookies from 'js-cookie'
-const CookieSet = require('universal-cookie');
+import Cookies from 'universal-cookie'
+const CookieRemove = require('js-cookie');
 
 export const AuthContext = createContext();
 
@@ -66,7 +66,7 @@ const AuthContextProvider = ({children}) => {
 
             if(res.status === 200){
                 const token = res.data.token;
-                CookieSet.set('token', token, { path: '/', maxAge: 7200 });
+                Cookies.set('token', token, { path: '/', maxAge: 7200 });
                 setAuth({
                     isAuthenticated: true,
                     user: res.data
@@ -89,7 +89,7 @@ const AuthContextProvider = ({children}) => {
             console.log("logging out")
             const res = await axios.post(`${backendUrl}/account/logout`,{},{withCredentials: true})
             if (res.status === 200) {
-                Cookies.remove("token", { path: '/' });
+                CookieRemove.remove("token", { path: '/' });
                 console.log("logout succcess")
                 setAuth({isAuthenticated: false, user: null})
                 setLect([]);
