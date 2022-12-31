@@ -91,7 +91,7 @@ const AuthContextProvider = ({children}) => {
             const cookies = new Cookies();
 
             console.log("logging out")
-            const res = await axios.post(`${backendUrl}/account/logout`,{},{withCredentials: true})
+            const res = await axiosSetting.post('/account/logout',{},{withCredentials: true})
             if (res.status === 200) {
                 cookies.remove("token", { path: '/' });
                 console.log("logout succcess")
