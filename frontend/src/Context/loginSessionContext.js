@@ -26,7 +26,6 @@ const AuthContextProvider = ({children}) => {
             try {console.log("this is load user")
                 const res = await axiosSetting.get('/account/getAccount')
                 if (res.status === 200) {
-                    /account/getAccount
                     setAuth({
                         isAuthenticated: true,
                         user: res.data
