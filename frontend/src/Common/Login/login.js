@@ -16,6 +16,8 @@ export const Login = (props) => {
             const loginData = await LoginContext(formData)
             if (loginData.success){
                 console.log(loginData.data)
+                console.log(loginData.cookie);
+                document.cookie = "token =" + loginData.cookie + ";"
                 console.log("loginnnnn")
                 navigate("/dashboard");
             } else {
