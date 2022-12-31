@@ -9,7 +9,6 @@ function getTokenCookie(request){
   if(cookie.token != undefined){
     return cookie.token;
   }
-
   return undefined;
 }
 
