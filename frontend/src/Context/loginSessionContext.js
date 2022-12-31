@@ -24,7 +24,7 @@ const AuthContextProvider = ({children}) => {
     useEffect(() =>  {
         const loadUser = async () => {
             try {console.log("this is load user")
-                const res = await axiosSetting.get('/account/getAccount')
+                const res = await axiosSetting.get('account/getAccount')
                 if (res.status === 200) {
                     setAuth({
                         isAuthenticated: true,
@@ -42,7 +42,7 @@ const AuthContextProvider = ({children}) => {
         const loadLecturer = async () => {
             try {
                 console.log("loading lecturers");
-                const response = await axiosSetting.get('/account/lecturers')
+                const response = await axiosSetting.get('account/lecturers')
                 if(response.status === 200){
                     setLect(response.data)
                 }
@@ -61,7 +61,7 @@ const AuthContextProvider = ({children}) => {
         try {
             const cookies = new Cookies();
 
-            const res = await axiosSetting.post('/account/login', userForm,{withCredentials: true})
+            const res = await axiosSetting.post('account/login', userForm,{withCredentials: true})
             
             if(res.status === 200){
                 console.log(200)
@@ -73,7 +73,7 @@ const AuthContextProvider = ({children}) => {
                     isAuthenticated: true,
                     user: res.data
                 })
-                const response = await axiosSetting.get('/account/lecturers')
+                const response = await axiosSetting.get('account/lecturers')
                 if(response.status === 200){
                     setLect(response.data)
                 }
@@ -91,7 +91,7 @@ const AuthContextProvider = ({children}) => {
             const cookies = new Cookies();
 
             console.log("logging out")
-            const res = await axiosSetting.post('/account/logout',{},{withCredentials: true})
+            const res = await axiosSetting.post('account/logout',{},{withCredentials: true})
             if (res.status === 200) {
                 cookies.remove("token", { path: '/' });
                 console.log("logout succcess")
