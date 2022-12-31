@@ -1,5 +1,6 @@
 // import React from 'react';
-import axios from 'axios'
+import {axiosSetting} from '../Context/serverURLContext'
+
 
 export function requestBtnHandler(type, id) {
     
@@ -8,7 +9,7 @@ export function requestBtnHandler(type, id) {
         id: id,
     } 
 
-    axios.put('http://localhost:4500/request', data, {withCredentials: true})
+    axiosSetting.put('request', data, {withCredentials: true})
     .then((res)=>{
         // console.log("res:", res)
         // if(res.status === 200){

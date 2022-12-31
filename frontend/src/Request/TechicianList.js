@@ -2,7 +2,7 @@ import React from 'react'
 // import { useLayoutEffect } from 'react'
 import './List.css'
 // import Button from 'react-bootstrap/Button';
-import axios from 'axios'
+import {axiosSetting} from '../Context/serverURLContext'
 import Moment from 'moment';
 import { useState, useEffect} from 'react'
 import { requestBtnHandler } from './RequestBtnHandler';
@@ -42,14 +42,9 @@ function TechnicianList() {
         console.log(data);
     }
 
-    const Axios = axios.create({
-        baseURL: 'http://localhost:4500/',
-        withCredentials: true
-    })
-
     useEffect(() => {
         const load = async () => {
-            const response = await Axios.get('/request/');
+            const response = await axiosSetting.get('request/');
             var rawData = await response.data;
             console.log("firstload:")
             console.log(rawData)
@@ -66,7 +61,7 @@ function TechnicianList() {
             clearTimeout(timeout);
             timeout = setTimeout(async function(){
                 if(searchInput.value !== ""){
-                    const response = await Axios.get('request/technician-search?email='+searchInput.value);
+                    const response = await axiosSetting.get('request/technician-search?email='+searchInput.value);
                     const rawData = await response.data;
                     console.log("searchload:")
                     console.log(rawData);

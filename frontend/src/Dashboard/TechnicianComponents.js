@@ -1,6 +1,7 @@
 import React from 'react'
+import { AuthContext } from '../Context/loginSessionContext';
 import './TechnicianComponents.css'
-import { useState, useEffect} from 'react'
+import { useState, useEffect, useContext} from 'react'
 // import {FaEdit} from 'react-icons/fa';
 import ReactPaginate from 'react-paginate';
 // import {FaPlus} from 'react-icons/fa';
@@ -12,12 +13,12 @@ import {axiosSetting} from '../Context/serverURLContext'
 
 
 function TechnicianComponents() {
-    const img1 = 'http://mlab.vn/image/data/Bai%20viet%20ky%20thuat/Arduino/bai%202%20Nhung%20dieu%20co%20ban/ArduinoUnoR3.jpg'
     // const [show, setShow] = useState(false);
     const [data, setData] = useState([])
     // const handleClose = () => setShow(false);
     // const handleShow = () => setShow(true);
 
+    const {loadUser, loadLecturer} = useContext(AuthContext);
 
     useEffect(() => {
         const searchDiv = document.querySelector('.search .search-bar');
@@ -52,7 +53,8 @@ function TechnicianComponents() {
             }, 200);
         }
         searchInput.addEventListener("keyup", handleInputChange)
-
+        loadUser();
+        loadLecturer();
         return () => {
             searchInput.removeEventListener('keyup', handleInputChange);
         };

@@ -1,13 +1,16 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect,useContext} from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import './TechnicianComponentCreate.css'
 import {FaPlus} from 'react-icons/fa';
 import {axiosSetting} from '../Context/serverURLContext'
+import { AuthContext } from '../Context/loginSessionContext';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function TechnicianComponentAdd(props) {
+    const {loadUser, loadLecturer} = useContext(AuthContext);
+
     const [show, setShow] = useState(false);
     const [name, setName] = useState('');
     const [desc, setDesc] = useState('');
@@ -31,10 +34,11 @@ function TechnicianComponentAdd(props) {
     //     setQuantity(data.quantity);
     // };
 
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     load();
-    // }, [])
+        loadUser();
+        loadLecturer();
+    }, [])
 
     const notify = () => toast.success("Created successfully!");
 

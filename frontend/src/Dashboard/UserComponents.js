@@ -2,14 +2,14 @@ import React from 'react'
 import './UserComponents.css'
 // import axios from 'axios'
 import {axiosSetting} from '../Context/serverURLContext'
-import { useState, useEffect} from 'react'
+import {AuthContext} from '../Context/loginSessionContext'
+import { useState, useEffect, useContext} from 'react'
 import Cart from './Cart'
 import {FaPlus} from 'react-icons/fa';
 import ReactPaginate from 'react-paginate';
 
 
 function UserComponents() {
-    const img1 = 'http://mlab.vn/image/data/Bai%20viet%20ky%20thuat/Arduino/bai%202%20Nhung%20dieu%20co%20ban/ArduinoUnoR3.jpg'
   /**TEST CARTTTTTTT
    * NEEDDDDD TOOO CHANGEEEEE STRUCCCTTTTUREEEE
 */
@@ -17,6 +17,10 @@ function UserComponents() {
     const [cartItems, setCartItems] = useState(currentItems);
     const [sum, setSum] = useState(((sessionStorage.getItem('cart-sum')) ? sessionStorage.getItem('cart-sum') : 0)*1);
     
+
+    const {loadUser, loadLecturer} = useContext(AuthContext);
+
+
     //add quantity
     const onAdd = (Item) => {
         const exist = cartItems.find(x => x._id === Item._id);
@@ -102,7 +106,8 @@ function UserComponents() {
             sessionStorage.setItem('lname', JSON.stringify(lecturer))
             console.log("lecturer===============", lecturer)
         }
-
+        loadUser();
+        loadLecturer();
         load();
         lecturer();
        

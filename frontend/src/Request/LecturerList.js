@@ -1,22 +1,18 @@
 import React from 'react'
 // import { useLayoutEffect } from 'react'
 import './List.css'
-import axios from 'axios'
 import Moment from 'moment';
-import { useState, useEffect} from 'react'
+import { useState, useEffect, useContext} from 'react'
 import { requestBtnHandler } from './RequestBtnHandler';
+import {axiosSetting} from '../Context/serverURLContext'
 
 const format = 'DD MMM, yyyy';
 
 function TeacherList() {
+    
     const [data, setData] = useState([])
     const [type, setType] = useState("lecturer") 
     // type: "other" "lecturer"
-
-    const Axios = axios.create({
-        baseURL: 'http://localhost:4500/',
-        withCredentials: true
-    })
 
     useEffect(() => {
         var userEmail;
@@ -29,13 +25,13 @@ function TeacherList() {
         }
 
         const load = async () => {
-            const accountResponse = await Axios.get("/account/getAccount");
+            const accountResponse = await axiosSetting.get("/account/getAccount");
             userEmail = accountResponse.data.email;
             var response;
             if(type === "lecturer"){
-                response = await Axios.get('request/myrequest');
+                response = await axiosSetting.get('request/myrequest');
             } else if(type === "other"){
-                response = await Axios.get('request/lecturer/' + userEmail);
+                response = await axiosSetting.get('request/lecturer/' + userEmail);
             }
             var data = await response.data;
             // console.log(data);
@@ -54,7 +50,7 @@ function TeacherList() {
 
                 timeout = setTimeout(async function(){
                     if(searchInput.value !== ""){
-                        const response = await Axios.get('request/lecturer-search/'+userEmail+'?email='+searchInput.value);
+                        const response = await axiosSetting.get('request/lecturer-search/'+userEmail+'?email='+searchInput.value);
                         const data = await response.data;
                         console.log(data);
                         setData(data);
@@ -72,21 +68,6 @@ function TeacherList() {
 
     },[type]);
 
-    // useEffect(() => {
-    //     if(type == "other"){
-    //         const searchInput = document.getElementById("search-input");
-    //         searchInput.addEventListener("keyup", async (event) => {
-    //             if(searchInput.value != ""){
-    //                 const response = await Axios.get('/request/search?email='+searchInput.value);
-    //                 const data = await response.data;
-    //                 console.log(data);
-    //                 setData(data);
-    //             }else{
-    //                 load();
-    //             }
-    //         })
-    //     }
-    // }, [])
 
     function DisplayOtherBtn(item){
         if(item.lecturer_status === "pending" && item.student_status !== "canceled"){

@@ -9,6 +9,9 @@ import { Navigate, resolvePath } from 'react-router-dom';
 export const AuthContext = createContext();
 
 const AuthContextProvider = ({children}) => {
+    function refreshPage() {
+        window.location.reload(false);
+      }
     // auth state
     const [authState, setAuth] = useState({
         isAuthenticated: false,
@@ -22,46 +25,54 @@ const AuthContextProvider = ({children}) => {
     // check Auth from server
 
 
-    useEffect(() =>  {
-        const loadUser = async () => {
-            try {console.log("this is load user")
-                const res = await axios.get(`${backendUrl}/account/getAccount`, {withCredentials: true})
-                if (res.status === 200) {
-                    
-                    setAuth({
-                        isAuthenticated: true,
-                        user: res.data
-                    })
-                } else if (res.status === 205) {
-                    sessionStorage.clear();
-                    console.log("token expired");
-                    navigate("/hero", {replace: true});
-                }
-            } catch (error) {
+    const loadUser = async () => {
+        try {console.log("this is load user")
+            const res = await axios.get(`${backendUrl}/account/getAccount`, {withCredentials: true})
+            if (res.status === 200) {
+                
+                setAuth({
+                    isAuthenticated: true,
+                    user: res.data
+                })
+            } else if (res.status === 205) {
+                sessionStorage.clear();
+                console.log("token expired");
                 setAuth({
                     isAuthenticated: false,
                     user: null
-                })
-            }
-        }
-
-        const loadLecturer = async () => {
-            try {
-                console.log("loading lecturers");
-                const response = await axiosSetting.get('/account/lecturers')
-                if(response.status === 200){
-                    setLect(response.data)
-                } else if (response.status === 205) {
-                    sessionStorage.clear();
-                    console.log("token expired");
-                    navigate("/hero", {replace: true});
-                }
-            } catch (error) {
-                setLect([]);
-                console.log(error)
-            }
+                }, () => {refreshPage();});
             
+            }
+        } catch (error) {
+            setAuth({
+                isAuthenticated: false,
+                user: null
+            })
         }
+    }
+
+    const loadLecturer = async () => {
+        try {
+            console.log("loading lecturers");
+            const response = await axiosSetting.get('/account/lecturers')
+            if(response.status === 200){
+                setLect(response.data)
+            } else if (response.status === 205) {
+                sessionStorage.clear();
+                console.log("token expired");
+                setAuth({
+                    isAuthenticated: false,
+                    user: null
+                }, () => {refreshPage();});
+            }
+        } catch (error) {
+            setLect([]);
+            console.log(error)
+        }
+        
+    }
+
+    useEffect(() =>  {
         loadLecturer();
         loadUser();
     },[])
@@ -104,7 +115,7 @@ const AuthContextProvider = ({children}) => {
         }
     }
 
-    const authContextData = { LoginContext, authState, Logout, lecturer };
+    const authContextData = { LoginContext, authState, Logout, lecturer, loadUser, loadLecturer };
     
     return (
         <AuthContext.Provider value={authContextData}>

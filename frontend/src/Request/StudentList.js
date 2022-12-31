@@ -2,7 +2,7 @@ import React from 'react'
 // import { useLayoutEffect } from 'react'
 import './List.css'
 // import Button from 'react-bootstrap/Button';
-import axios from 'axios'
+import {axiosSetting} from '../Context/serverURLContext';
 import Moment from 'moment';
 import { useState, useEffect} from 'react'
 import { requestBtnHandler } from './RequestBtnHandler';
@@ -12,17 +12,12 @@ const format = 'DD MMM, yyyy';
 function Studentist() {
     const [data, setData] = useState([])
 
-    const authAxios = axios.create({
-        baseURL: 'http://localhost:4500/',
-        withCredentials: true
-    })
-
     useEffect(() => {
         const searchDiv = document.querySelector('.search .search-bar');
         searchDiv.classList.add("hidden");
 
         const load = async () => {
-            const response = await authAxios.get('request/myrequest');
+            const response = await axiosSetting.get('request/myrequest');
             var data = await response.data;
             // console.log(data);
             setData(data);

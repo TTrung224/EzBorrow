@@ -1,14 +1,15 @@
-import { useContext} from 'react'
+import { useContext, useEffect} from 'react'
 import './List.css'
 import {AuthContext} from '../Context/loginSessionContext'
 import TechnicianList from './TechicianList';
 import TeacherList from './LecturerList';
 import StudentList from './StudentList';
-
 function List(props) {
-  const {authState} = useContext(AuthContext)
+  const {authState, loadUser} = useContext(AuthContext)
   console.log("list auth ==== ", authState);
-
+  useEffect(()=>{
+    loadUser();
+  },[])
   if(authState.user.type === "lecturer") {
     return <TeacherList/>
   } else if (authState.user.type === "student"){
