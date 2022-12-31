@@ -19,6 +19,11 @@ function TechnicianComponentEdit(props) {
     const [quantity, setQuantity] = useState(0);
     const [img, setImg] = useState('');
     const [permission,setPermission] = useState(true);
+
+    const [show2, setShow2] = useState(false);
+
+    const handleClose2 = () => setShow2(false);
+    const handleShow2 = () => setShow2(true);
     
     const notify = () => toast.success("Updated successfully!");
 
@@ -108,11 +113,24 @@ function TechnicianComponentEdit(props) {
                     <ToastContainer />
                 </div>
                 <div>
-                    <Button onClick={()=>{deleteComponent();notify1()}} variant='danger'>Delete</Button>
+                    <Button onClick={()=>{handleShow2()}} variant='danger'>Delete</Button>
                     <ToastContainer />
                 </div>
             </Modal.Footer>
         </Modal>
+
+
+        <Modal show={show2} onHide={handleClose2}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={() => {deleteComponent();notify1();}}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   )
 }
