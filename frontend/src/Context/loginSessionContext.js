@@ -61,7 +61,7 @@ const AuthContextProvider = ({children}) => {
         try {
             const cookies = new Cookies();
 
-            const res = await axios.post(`${backendUrl}/account/login`, userForm,{withCredentials: true})
+            const res = await axiosSetting.post('/account/login', userForm,{withCredentials: true})
             
             if(res.status === 200){
                 console.log(200)
