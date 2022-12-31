@@ -3,6 +3,8 @@ import {createContext, useEffect, useState} from 'react'
 import axios from 'axios'
 import {backendUrl} from './serverURLContext' 
 import {axiosSetting} from './serverURLContext'
+import { useNavigate } from "react-router-dom";
+import { Navigate, resolvePath } from 'react-router-dom';
 
 export const AuthContext = createContext();
 
@@ -12,6 +14,7 @@ const AuthContextProvider = ({children}) => {
         isAuthenticated: false,
         user: null
     })
+    const navigate = useNavigate();
 
     const [lecturer, setLect] = useState([]);
 
@@ -29,6 +32,10 @@ const AuthContextProvider = ({children}) => {
                         isAuthenticated: true,
                         user: res.data
                     })
+                } else if (res.status === 205) {
+                    sessionStorage.clear();
+                    console.log("token expired");
+                    navigate("/hero", {replace: true});
                 }
             } catch (error) {
                 setAuth({
@@ -44,6 +51,10 @@ const AuthContextProvider = ({children}) => {
                 const response = await axiosSetting.get('/account/lecturers')
                 if(response.status === 200){
                     setLect(response.data)
+                } else if (response.status === 205) {
+                    sessionStorage.clear();
+                    console.log("token expired");
+                    navigate("/hero", {replace: true});
                 }
             } catch (error) {
                 setLect([]);
