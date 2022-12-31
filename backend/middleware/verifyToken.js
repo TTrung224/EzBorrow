@@ -1,16 +1,23 @@
 const jwt = require("jsonwebtoken");
-
 const config = process.env;
 
 function getTokenCookie(request){
-  console.log(request.headers['set-cookie']);
-  var rawcookies = request.headers['set-cookie'];
-  for (var i in rawcookies) {
-    const cookie = Cookie.parse(rawcookies[i]);
-    console.log(cookie);
-    if(cookie.token != undefined){
-      return cookie.token;
+  console.log(request.headers['cookie']);
+  let rawcookies = request.headers['cookie'];
+  rawcookies = rawcookies.split(';');
+  console.log("raw===", rawcookies);
+  for (let i in rawcookies) {
+    console.log("adfsadfs===", rawcookies[i])
+    const cookie = rawcookies[i].split('=');
+    cookie[0] = cookie[0].trim();
+    cookie[1] = cookie[1].trim();
+    console.log(cookie[0]);
+    console.log(cookie[1]);
+    if(cookie[0] == "token" && cookie[1]){
+      console.log("123")
+      return cookie[1];
     }
+
   }
   return undefined;
 }
@@ -18,7 +25,7 @@ function getTokenCookie(request){
 const verifyToken = (req, res, next) => {
 
   const token = getTokenCookie(req);
-  console.log("token=", token);
+
   if (!token) {
     return res.status(403).send("A token is required for authentication");
   }

@@ -8,7 +8,8 @@ const accountSchema = new mongoose.Schema({
   token: { type: String },
   type: { type: String, enum: ['student', 'lecturer', 'technician'], require: true}, // (lecturer / student / technician)
   fine: {type: String, enum: ['NONE', 'LATE_RETURN', 'BREAK_ITEM'], default: 'NONE'}, // decide the fine code: hasn't returned, damaged components
-  fineDescription: {type: String, default: 'NONE'}
+  fineDescription: {type: String, default: 'NONE'},
+  avatar : {type: String}
 });
 
 module.exports = mongoose.model("account", accountSchema);
