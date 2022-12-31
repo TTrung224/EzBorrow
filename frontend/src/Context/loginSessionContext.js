@@ -28,7 +28,7 @@ const AuthContextProvider = ({children}) => {
 
     const loadUser = async () => {
         try {console.log("this is load user")
-            const res = await axios.get(`${backendUrl}/account/getAccount`, {withCredentials: true})
+            const res = await axiosSetting.get(`account/getAccount`)
             if (res.status === 200) {
                 
                 setAuth({
@@ -55,7 +55,8 @@ const AuthContextProvider = ({children}) => {
     const loadLecturer = async () => {
         try {
             console.log("loading lecturers");
-            const response = await axiosSetting.get('/account/lecturers')
+            const response = await axiosSetting.get(`account/lecturers`)
+
             if(response.status === 200){
                 setLect(response.data)
             } else if (response.status === 205) {
@@ -83,11 +84,11 @@ const AuthContextProvider = ({children}) => {
         try {
             const cookies = new Cookies();
 
-            const res = await axios.post(`${backendUrl}/account/login`, userForm,{withCredentials: true})
+            const res = await axiosSetting.post(`account/login`, userForm,{withCredentials: true})
 
             if(res.status === 200){
                 const token = res.data.token;
-                cookies.set('token', token, { path: '/', maxAge: 7200 });
+                cookies.set('token', token);
                 setAuth({
                     isAuthenticated: true,
                     user: res.data

@@ -8,17 +8,19 @@ import { useNavigate } from "react-router-dom";
 import {useContext} from 'react'
 import {AuthContext} from '../Context/loginSessionContext'
 
-const Profile = (
-  <img
-    src={'https://pub-static.fotor.com/assets/projects/pages/d5bdd0513a0740a8a38752dbc32586d0/fotor-03d1a91a0cec4542927f53c87e0599f6.jpg'}
-    alt="UserName profile"
-    style={{ width: '40px' }}
-  />
-)
+
 
 function Navbar() {
-  const { authState: {isAuthenticated}} = useContext(AuthContext)
+  const { authState: {isAuthenticated, user}} = useContext(AuthContext)
   const navigate = useNavigate();
+  const avatar = (user == null || user.avatar == null) ? "." : user.avatar;
+  const Profile = (
+    <img
+      src={avatar}
+      alt="UserName profile"
+      style={{ width: '40px' }}
+    />
+  )
   const [modalShow, setModalShow] = React.useState(false);
   return (
     <div>
