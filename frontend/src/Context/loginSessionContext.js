@@ -89,7 +89,7 @@ const AuthContextProvider = ({children}) => {
             console.log("logging out")
             const res = await axios.post(`${backendUrl}/account/logout`,{},{withCredentials: true})
             if (res.status === 200) {
-                Cookies.remove("token");
+                Cookies.remove("token", { path: '/' });
                 console.log("logout succcess")
                 setAuth({isAuthenticated: false, user: null})
                 setLect([]);
