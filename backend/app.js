@@ -15,8 +15,8 @@ schedule.scheduleJob("0 8 * * 1-6", function(){DailyService.dailyService()});
 const app = express();
 app.use(express.json());
 app.use(cookies());
-app.use(cors({origin: 'http://localhost:3000', credentials: true}))
-// app.use(cors({origin: 'https://ezborrow.netlify.app', credentials: true}))
+// app.use(cors({origin: 'http://localhost:3000', credentials: true}))
+app.use(cors({origin: 'https://ezborrow.netlify.app', credentials: true}))
 route(app);
 
 module.exports = app;

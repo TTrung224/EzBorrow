@@ -3,7 +3,7 @@ import {createContext, useEffect, useState} from 'react'
 // import axios from 'axios'
 // import {backendUrl} from './serverURLContext' 
 import {axiosSetting} from './serverURLContext'
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 // import { Navigate, resolvePath } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
@@ -85,7 +85,7 @@ const AuthContextProvider = ({children}) => {
             if(res.status === 200){
                 console.log("login success")
                 const token = res.data.token;
-                cookies.set('token', token, { path: '/', /*secure: true*/ });
+                cookies.set('token', token, { path: '/', secure: true });
                 setAuth({
                     isAuthenticated: true,
                     user: res.data
