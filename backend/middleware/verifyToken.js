@@ -3,7 +3,6 @@ const config = process.env;
 var Cookie = require('cookie');
 
 function getTokenCookie(request){
-  console.log(request.headers['donut']);
   const cookie = Cookie.parse(request.headers['donut']);
   if(cookie.token != undefined){
     console.log(cookie);
