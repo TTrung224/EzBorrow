@@ -3,10 +3,8 @@ import {createContext, useEffect, useState} from 'react'
 import axios from 'axios'
 import {backendUrl} from './serverURLContext' 
 import {axiosSetting} from './serverURLContext'
-import Cookies from 'universal-cookie'
-// const CookieRemove = require('js-cookie');
-
-export const AuthContext = createContext();
+// import Cookies from 'universal-cookie'
+import Cookies from 'js-cookie'
 
 const AuthContextProvider = ({children}) => {
     // auth state
@@ -59,14 +57,14 @@ const AuthContextProvider = ({children}) => {
     //login
     const LoginContext = async userForm => {
         try {
-            const cookies = new Cookies();
+            // const cookies = new Cookies();
 
             const res = await axiosSetting.post('account/login', userForm,{withCredentials: true})
             
             if(res.status === 200){
                 console.log(200)
                 const token = res.data.token;
-                cookies.set('token', token, { path: '/', maxAge: 7200 })
+                Cookies.set('token', token, { path: '/', maxAge: 7200 })
                 setAuth({
                     isAuthenticated: true,
                     user: res.data
@@ -88,12 +86,12 @@ const AuthContextProvider = ({children}) => {
     
     const Logout = async () => {
         try {
-            const cookies = new Cookies();
+            // const cookies = new Cookies();
 
             console.log("logging out")
             const res = await axiosSetting.post('account/logout',{},{withCredentials: true})
             if (res.status === 200) {
-                cookies.remove("token", { path: '/' });
+                Cookies.remove("token", { path: '/' });
                 console.log("logout succcess")
                 setAuth({isAuthenticated: false, user: null})
                 setLect([]);
