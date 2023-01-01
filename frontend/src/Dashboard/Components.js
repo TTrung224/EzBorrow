@@ -9,10 +9,12 @@ function Components(props) {
 
   const [cookieState, setCookieState] = useState(cookie);
 
-  if(cookieState==undefined){
-    setCookieState("set");
-    window.location.reload(false);
-  }
+  useEffect(() =>  {
+    if(cookieState==undefined){
+      setCookieState("set");
+      window.location.reload(false);
+    }
+  }, [])
 
   const {authState} = useContext(AuthContext)
   console.log("list auth ==== ", authState);
