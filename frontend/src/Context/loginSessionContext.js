@@ -64,7 +64,7 @@ const AuthContextProvider = ({children}) => {
             if(res.status === 200){
                 console.log(200)
                 const token = res.data.token;
-                cookies.set('token', token, { path: 'https://ezborrow.netlify.app/', maxAge: 7200, secure: true, sameSite: 'None'})
+                cookies.set('token', token, { path: '/', domain: `${backendUrl}`, maxAge: 7200, secure: true, sameSite: 'None'})
                 console.log("cookie from context: " + cookie)
                 setAuth({
                     isAuthenticated: true,
