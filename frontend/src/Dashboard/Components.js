@@ -10,7 +10,9 @@ function Components(props) {
   const [cookieState, setCookieState] = useState(cookie);
 
   useEffect(() =>  {
+    console.log("fix bug")
     if(cookieState==undefined){
+      console.log("fix bug2")
       setCookieState("set");
       window.location.reload(false);
     }
