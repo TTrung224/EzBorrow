@@ -9,6 +9,8 @@ import TechnicianComponentEdit from './TechnicianComponentEdit';
 // import Button from 'react-bootstrap/Button';
 import TechnicianComponentAdd from './TechnicianComponentCreate';
 import {axiosSetting} from '../Context/serverURLContext'
+import Cookies from 'js-cookie'
+const {cookie} = require('../Context/serverURLContext')
 
 
 function TechnicianComponents() {
@@ -24,7 +26,7 @@ function TechnicianComponents() {
         searchDiv.classList.remove("hidden")
 
         const load = async () => {
-            const response = await axiosSetting.get('/component');
+            const response = await axiosSetting.get('/component',{headers: {"Donut": "token="+(Cookies.get("token"))}});
             const data = await response.data;
             setData(data);
         };

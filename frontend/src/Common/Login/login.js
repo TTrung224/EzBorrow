@@ -28,10 +28,8 @@ export const Login = (props) => {
 
     }
 
-    if (isAuthenticated){
-        navigate("/dashboard")
-        window.location.reload(false);
-    }
+    if (isAuthenticated) navigate("/dashboard")
+
     
     return(
         <div className='login-body'>

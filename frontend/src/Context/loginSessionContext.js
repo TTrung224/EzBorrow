@@ -3,6 +3,7 @@ import {createContext, useEffect, useState} from 'react'
 import axios from 'axios'
 import {backendUrl} from './serverURLContext' 
 import {axiosSetting} from './serverURLContext'
+import {cookie} from './serverURLContext'
 import Cookies from 'universal-cookie'
 export const AuthContext = createContext();
 
@@ -58,22 +59,23 @@ const AuthContextProvider = ({children}) => {
     const LoginContext = async userForm => {
         try {
             const cookies = new Cookies();
-
+            console.log("cookie from context: " + cookie)
             const res = await axiosSetting.post('account/login', userForm,{withCredentials: true})
             if(res.status === 200){
                 console.log(200)
                 const token = res.data.token;
                 cookies.set('token', token, { path: '/', maxAge: 7200 })
+                console.log("cookie from context: " + cookie)
                 setAuth({
                     isAuthenticated: true,
                     user: res.data
                 });
                 console.log("set")
-
                 const response = await axiosSetting.get('account/lecturers')
                 if(response.status === 200){
                     setLect(response.data)
-                }  
+                }
+                console.log("cookie from context: " + cookie)
             }
             return {success: true, data: res.data}
         } catch (error) {
