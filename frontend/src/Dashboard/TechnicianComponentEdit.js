@@ -10,7 +10,6 @@ import 'react-toastify/dist/ReactToastify.css';
 function TechnicianComponentEdit(props) {
     const [show, setShow] = useState(false);
     const id = props.id;
-    const [borrow, setBorrow] = useState(0);
     const [name, setName] = useState('');
     const [desc, setDesc] = useState('');
     const handleClose = () => setShow(false);
@@ -40,7 +39,6 @@ function TechnicianComponentEdit(props) {
         setQuantity(data.quantity);
         setPermission(data.permission);
         setImg(data.img_src);
-        setBorrow(data.borrowed);
     };
 
     useEffect(() => {
@@ -56,7 +54,6 @@ function TechnicianComponentEdit(props) {
                 quantity: quantity,
                 permission: permission,
                 img_src: img,
-                borrowed: borrow,
             },
         }, {withCredentials: true}).catch((error) => {
             console.log(error.response)
@@ -94,7 +91,6 @@ function TechnicianComponentEdit(props) {
                     <p><span className='bold-words' >Name :&emsp;</span><input type="text" value={name} onChange={(e) => {setName(e.target.value)}}></input></p>                
                     <p><span className='bold-words' >Description :&emsp;</span><input type="text" value={desc} onChange={(e) => {setDesc(e.target.value)}}></input></p>
                     <p><span className='bold-words' >Quantity :&emsp;</span><input type="number" value={quantity} onChange={(e) => {setQuantity(e.target.value)}}></input></p>
-                    <p><span className='bold-words' >Borrowed :&emsp;</span><input type="number" value={borrow} onChange={(e) => {setBorrow(e.target.value)}}></input></p>
                     <p><span className='bold-words' >Image :&emsp;</span><input type="text" value={img} onChange={(e) => {setImg(e.target.value)}}></input></p>
                     <span className='bold-words' >Permission :&emsp;</span>
                         <select 
