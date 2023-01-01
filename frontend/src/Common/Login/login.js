@@ -28,7 +28,7 @@ export const Login = (props) => {
 
     }
 
-    if (isAuthenticated) navigate("/dashboard")
+    if (isAuthenticated) navigate("/dashboard").then(window.location.reload(false))
 
     
     return(
