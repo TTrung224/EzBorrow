@@ -26,7 +26,8 @@ function TechnicianComponents() {
         searchDiv.classList.remove("hidden")
 
         const load = async () => {
-            const response = await axiosSetting.get('/component',{headers: {"Donut": "token="+(Cookies.get("token"))}});
+            const response = await axiosSetting.get('/component');
+            // const response = await axiosSetting.get('/component',{headers: {"Donut": "token="+(Cookies.get("token"))}});
             const data = await response.data;
             setData(data);
         };
