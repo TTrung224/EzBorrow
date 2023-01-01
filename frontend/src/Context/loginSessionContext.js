@@ -109,6 +109,8 @@ const AuthContextProvider = ({children}) => {
     
     const Logout = async () => {
         try {
+            const cookies = new Cookies()
+
             console.log("logging out")
             const cookies = new Cookies();
             const res = await axiosSetting.post('account/logout')
