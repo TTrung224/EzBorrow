@@ -5,6 +5,7 @@ import {backendUrl} from './serverURLContext'
 import {axiosSetting} from './serverURLContext'
 // import Cookies from 'universal-cookie'
 import Cookies from 'js-cookie'
+export const AuthContext = createContext();
 
 const AuthContextProvider = ({children}) => {
     // auth state
