@@ -1,20 +1,17 @@
-import {useContext, useEffect} from 'react'
+import {useContext, useEffect, useState} from 'react'
 import {AuthContext} from '../Context/loginSessionContext'
 // import CompoRequest from './CompoRequest';
 import UserComponents from './UserComponents';
 import TechnicianComponents from './TechnicianComponents';
-import {cookie} from './serverURLContext'
+import {cookie} from '../Context/serverURLContext'
 
 function Components(props) {
 
   const [cookieState, setCookieState] = useState(cookie);
 
   useEffect(() =>  {
-    console.log("fix bug")
     if(cookieState==undefined){
-      console.log("fix bug2")
-      setCookieState("set");
-      window.location.reload(false);
+      window.location.reload()
     }
   }, [])
 
