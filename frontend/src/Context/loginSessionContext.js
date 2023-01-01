@@ -66,13 +66,13 @@ const AuthContextProvider = ({children}) => {
             if(res.status === 200){
                 console.log(200)
                 const token = res.data.token;
-                cookies.set('token', token, { path: '/', maxAge: 7200 }).then(
+                cookies.set('token', token, { path: '/', maxAge: 7200 }).then(() =>
                     setAuth({
                         isAuthenticated: true,
                         user: res.data
                 }));
                 console.log("set")
-                
+
                 const response = await axiosSetting.get('account/lecturers')
                 if(response.status === 200){
                     setLect(response.data)
