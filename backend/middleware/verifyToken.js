@@ -28,7 +28,7 @@ const verifyToken = (req, res, next) => {
     res.clearCookie("token");
     console.log("cookie clear")
     if (err.name === 'TokenExpiredError') {
-      return res.status(401).send("Token Expired").redirect('https://ezborrow.netlify.app/hero');
+      return res.status(401).redirect('https://ezborrow.netlify.app/hero').send("Token Expired");
     }
     return res.status(401).send("Invalid Token"); //can redirect here
   }
