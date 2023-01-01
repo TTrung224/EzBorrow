@@ -69,7 +69,7 @@ class AccountController {
                     { user_id: user._id, email, user_type: user.type},
                     process.env.TOKEN_KEY,
                     {
-                    expiresIn: "45s",
+                    expiresIn: "45",
                     }
                 );
                 let data = {};
