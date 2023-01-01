@@ -61,11 +61,13 @@ const AuthContextProvider = ({children}) => {
             // const cookies = new Cookies();
 
             const res = await axiosSetting.post('account/login', userForm,{withCredentials: true})
-            
+            const cookies = Cookies();
+
             if(res.status === 200){
                 console.log(200)
                 const token = res.data.token;
-                Cookies.set('token', token, { path: '/', maxAge: 7200 })
+                cookies.set('token', token, { path: '/', maxAge: 7200 })
+
                 setAuth({
                     isAuthenticated: true,
                     user: res.data
