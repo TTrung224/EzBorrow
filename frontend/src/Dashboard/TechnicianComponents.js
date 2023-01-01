@@ -26,6 +26,7 @@ function TechnicianComponents() {
         searchDiv.classList.remove("hidden")
 
         const load = async () => {
+            console.log("cookie from context: " + cookie)
             const response = await axiosSetting.get('/component');
             // const response = await axiosSetting.get('/component',{headers: {"Donut": "token="+(Cookies.get("token"))}});
             const data = await response.data;
