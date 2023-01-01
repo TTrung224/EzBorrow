@@ -4,13 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
-import Cookies from 'universal-cookie'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-
-const cookies = new Cookies();
-cookies.set('token', null, { path: '/', maxAge: 7200 })
-
 root.render(
   // <React.StrictMode>
     <BrowserRouter>
