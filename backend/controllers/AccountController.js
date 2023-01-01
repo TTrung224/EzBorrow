@@ -83,7 +83,7 @@ class AccountController {
                 // user.token = token;
 
                 // // save the token to cookie that send back in response
-                res.cookie('token-test', token, { httpOnly: true, sameSite: "none", secure: true });
+                // res.cookie('token', token, { httpOnly: true });
 
                 // user
                 return res.status(200).json(data);
