@@ -8,7 +8,7 @@ function List(props) {
   const {authState, loadUser} = useContext(AuthContext)
   console.log("list auth ==== ", authState);
   useEffect(()=>{
-    loadUser();
+    // loadUser();
   },[])
   if(authState.user.type === "lecturer") {
     return <TeacherList/>

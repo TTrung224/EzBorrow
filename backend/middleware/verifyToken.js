@@ -15,7 +15,7 @@ function getTokenCookie(request){
 const verifyToken = (req, res, next) => {
 
   const token = getTokenCookie(req);
-  // console.log("token: " + token);
+  console.log("token: " + token);
 
   if (!token) {
     return res.status(403).send("A token is required for authentication");
@@ -27,6 +27,7 @@ const verifyToken = (req, res, next) => {
     res.clearCookie("token");
     console.log("cookie clear")
     if (err.name === 'TokenExpiredError') {
+      res.redirect('/hero')
       return res.status(205).send("Token Expired")
     }
     return res.status(401).send("Invalid Token"); //can redirect here

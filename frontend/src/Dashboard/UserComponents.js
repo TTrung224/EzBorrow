@@ -106,8 +106,8 @@ function UserComponents() {
             sessionStorage.setItem('lname', JSON.stringify(lecturer))
             console.log("lecturer===============", lecturer)
         }
-        loadUser();
-        loadLecturer();
+        // loadUser();
+        // loadLecturer();
         load();
         lecturer();
        

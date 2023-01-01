@@ -86,19 +86,21 @@ const AuthContextProvider = ({children}) => {
             const res = await axiosSetting.post(`account/login`, userForm,{withCredentials: true})
 
             if(res.status === 200){
+                console.log("loginsuccess")
                 const token = res.data.token;
                 cookies.set('token', token, { path: '/' });
                 setAuth({
                     isAuthenticated: true,
                     user: res.data
                 })
-                const response = await axiosSetting.get('account/lecturers')
-                if(response.status === 200){
-                    setLect(response.data)
-                }
+                // const response = await axiosSetting.get('account/lecturers')
+                // if(response.status === 200){
+                //     setLect(response.data)
+                // }
             }
             return {success: true, data: res.data}
         } catch (error) {
+            console.log(error)
             if (error.response.data) return error.response.data
             else return {status: false, message: error.message}
         }
@@ -108,15 +110,17 @@ const AuthContextProvider = ({children}) => {
     const Logout = async () => {
         try {
             console.log("logging out")
+            const cookies = new Cookies();
             const res = await axiosSetting.post('account/logout')
             if (res.status === 200) {
-                Cookies.remove("token");
+                cookies.remove("token");
                 console.log("logout succcess")
                 setAuth({isAuthenticated: false, user: null})
                 setLect([]);
             }
             return {success: true, message: "you are logged out"}
         } catch (error) {
+            console.log('logouterror',error)
             if (error.response.data) return error.response.data
             else return {status: false, message: error.message}
         }

@@ -34,11 +34,11 @@ function TechnicianComponentAdd(props) {
     //     setQuantity(data.quantity);
     // };
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        loadUser();
-        loadLecturer();
-    }, [])
+    //     loadUser();
+    //     loadLecturer();
+    // }, [])
 
     const notify = () => toast.success("Created successfully!");
 
