@@ -148,7 +148,7 @@ function UserComponents() {
                     </div>
                     <div className='product-inf'>
                         <div className='product-name'>
-                            <h3>{item.name}</h3>    
+                            <h3>{(item.name.length > 15)? (item.name.slice(0,15) + "..."): item.name}</h3>      
                         </div>                    
                         <p>{(item.description.length > 25) ? 
                             (item.description.slice(0,(item.description.slice(0,25)).lastIndexOf(" ")) + "...") : 

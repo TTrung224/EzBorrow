@@ -18,6 +18,7 @@ function Confirmation(props) {
     const cartItems = props.cartItems;
     const sname = user.first_name + ' ' + user.last_name;
     const email = user.email;
+    const minPickupDate = new Date(new Date().setDate(new Date().getDate() + 5 /* ensure 3 working day */)).toISOString().split("T")[0];
     // const [newItem, setItem] = useState('')
     const [chosenLecturerEmail, setChosenLecturerEmail] = useState('')
     const [chosenLecturer, setChosenLecturer] = useState('')
@@ -36,6 +37,12 @@ function Confirmation(props) {
     const notify = () => toast.success("Sent successfully!");
 
     console.log("cart:", cartItems)
+
+    const calMinReturn = (pickupStr) => {
+        var pickupDate = new Date(pickupStr);
+        const MinReturnDate = new Date(pickupDate.setDate(pickupDate.getDate() + 2 /* due to UTC and GMT+7 */));
+        return MinReturnDate.toISOString().split("T")[0]
+    }
 
     const request = async (e) => {
         e.preventDefault();
@@ -119,8 +126,8 @@ function Confirmation(props) {
                         ))}
                     </ul>
                     <div className='request-info'>                    
-                        <p><span className='bold-words' >Select pickup date&emsp;</span><input type="date" onChange={e=>setPickupdate(e.target.value + "T00:00:00+07:00")} required ></input></p>
-                        <p><span className='bold-words' >Select return date&emsp;</span><input type="date" onChange={e=>setReturndate(e.target.value + "T00:00:00+07:00")} required ></input></p>
+                        <p><span className='bold-words' >Select pickup date&emsp;</span><input type="date" onChange={e=>setPickupdate(e.target.value + "T00:00:00+07:00")} min={minPickupDate} required ></input></p>
+                        <p><span className='bold-words' >Select return date&emsp;</span><input type="date" onChange={e=>setReturndate(e.target.value + "T00:00:00+07:00")} min={(!pickupdate)? calMinReturn(minPickupDate) : calMinReturn(pickupdate)} required ></input></p>
                         <p><span className='bold-words' >Note :&emsp;</span></p>
                         <textarea rows="4" onChange={e=>setCC(e.target.value)} className='input-box'></textarea>
                     </div>     

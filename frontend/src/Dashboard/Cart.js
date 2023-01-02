@@ -37,7 +37,7 @@ function Cart(props) {
           <h2>Requests</h2>
         </div>
         <div className='cart-item-container'>
-          {cartItems.length === 0 && <div className='empty-cart'>Cart is empty</div>}
+          {cartItems.length === 0 && <div className='empty-cart'><p>--Cart is empty--</p></div>}
           {cartItems.map((item) => (
             <div key={item._id} className='product-cart'>
               <div className='detail'>

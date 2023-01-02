@@ -38,6 +38,13 @@
     overflow-y:auto
 }
 
+.cart-item-container .empty-cart{
+    padding: 20px 0px;
+    display: flex;
+    justify-content: center;
+    border-bottom: #B3B3B3 1px solid;
+}
+
 .product-cart {
     margin-bottom: 20px;
     border-bottom: #B3B3B3 1px solid;

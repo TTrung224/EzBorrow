@@ -85,7 +85,8 @@ const AuthContextProvider = ({children}) => {
             if(res.status === 200){
                 console.log("login success")
                 const token = res.data.token;
-                cookies.set('token', token, { path: '/', secure: true });
+                cookies.set('token', token, { path: '/' ,secure: true });
+                // cookies.set('token', token, { path: '/' /*,secure: true */});
                 setAuth({
                     isAuthenticated: true,
                     user: res.data
