@@ -13,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function Confirmation(props) {
 
-    const {authState: {user}, lecturer} = useContext(AuthContext)
+    const {authState: {user}, lecturer, ignored} = useContext(AuthContext)
     
     const cartItems = props.cartItems;
     const sname = user.first_name + ' ' + user.last_name;
@@ -32,7 +32,7 @@ function Confirmation(props) {
             setChosenLecturer('');
         };
         changeChosenLec();
-    },[props.onHide]);
+    },[props.onHide, ignored]);
 
     const notify = () => toast.success("Sent successfully!");
 
@@ -94,7 +94,9 @@ function Confirmation(props) {
                     </Modal.Title>
                     <CloseButton onClick={()=>{props.onHide();}}/>
                 </Modal.Header>
-                <Modal.Body className='request-form-modal-body'>
+                {user.fine == "NONE" ? (
+                    <>
+                    <Modal.Body className='request-form-modal-body'>
                     <div className='Student-info'>
                     <div className='confirm-header'>
                     <h2>Student Information</h2>
@@ -139,8 +141,15 @@ function Confirmation(props) {
                     <ToastContainer />
                     </div>
                 </Modal.Footer>
-            </Modal>
+                </>
+                ) : (
+                    <Modal.Body className="request-form-modal-body">
+                        <div style={{color:"red", textAlign:"center"}}>You have an active penalty! please contact admin to pay your fine before make another request</div>
+                    </Modal.Body>
+                )}
+                </Modal>
         </div>
+                
     )
 }
 

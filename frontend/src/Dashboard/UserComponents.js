@@ -18,7 +18,7 @@ function UserComponents() {
     const [sum, setSum] = useState(((sessionStorage.getItem('cart-sum')) ? sessionStorage.getItem('cart-sum') : 0)*1);
     
 
-    const {loadUser, loadLecturer} = useContext(AuthContext);
+    const {loadUser, loadLecturer, ignored} = useContext(AuthContext);
 
 
     //add quantity
@@ -106,7 +106,7 @@ function UserComponents() {
             sessionStorage.setItem('lname', JSON.stringify(lecturer))
             console.log("lecturer===============", lecturer)
         }
-        // loadUser();
+        loadUser();
         // loadLecturer();
         load();
         lecturer();
@@ -137,6 +137,8 @@ function UserComponents() {
         };
 
     },[]);
+
+
 
     function Items({ currentItems }) {
         return (
