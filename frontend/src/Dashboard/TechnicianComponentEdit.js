@@ -7,7 +7,8 @@ import {axiosSetting} from '../Context/serverURLContext'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function TechnicianComponentEdit(props) {
+const TechnicianComponentEdit = React.forwardRef((props, ref) => {
+
     const [show, setShow] = useState(false);
     const id = props.id;
     const [name, setName] = useState('');
@@ -27,6 +28,18 @@ function TechnicianComponentEdit(props) {
     const notify = () => toast.success("Updated successfully!");
 
     const notify1 = () => toast.success("Deleted successfully!");
+
+
+    const reload = () =>{
+        load();
+        console.log("reloaded:", data);
+        console.log(data.name)
+     }
+     React.useImperativeHandle(ref, () => ({
+       reload: reload
+     }));
+   
+
 
     const load = async () => {
         const response = await axiosSetting.get('/component/' + id);
@@ -138,6 +151,6 @@ function TechnicianComponentEdit(props) {
         </div>
    
   )
-}
+})
 
 export default TechnicianComponentEdit
