@@ -34,6 +34,7 @@ const TechnicianComponentEdit = React.forwardRef((props, ref) => {
         load();
         console.log("reloaded:", data);
         console.log(data.name)
+        console.log(data.permission)
      }
      React.useImperativeHandle(ref, () => ({
        reload: reload
@@ -106,7 +107,7 @@ const TechnicianComponentEdit = React.forwardRef((props, ref) => {
                     <p><span className='bold-words' >Quantity :&emsp;</span><input type="number" value={quantity} onChange={(e) => {setQuantity(e.target.value)}}></input></p>
                     <p><span className='bold-words' >Image :&emsp;</span><input type="text" value={img} onChange={(e) => {setImg(e.target.value)}}></input></p>
                     <span className='bold-words' >Permission :&emsp;</span>
-                        <select 
+                        <select value={permission}
                             onChange={(e) => {setPermission(e.target.value)}}>                                
                             <option value={false}>No</option>
                             <option value= {true}>Yes</option>
