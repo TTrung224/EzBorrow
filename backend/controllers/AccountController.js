@@ -23,6 +23,7 @@ class AccountController {
             data.last_name = result.last_name;
             data.email = result.email;
             data.type = result.type;
+            data.fine = result.fine;
             data.avatar = user.avatar != null ? user.avatar : 'https://pub-static.fotor.com/assets/projects/pages/d5bdd0513a0740a8a38752dbc32586d0/fotor-03d1a91a0cec4542927f53c87e0599f6.jpg'
 
             //return data retrieved from database
@@ -79,6 +80,7 @@ class AccountController {
                 data.last_name = user.last_name;
                 data.email = user.email;
                 data.type = user.type;
+                data.fine = user.fine;
                 data.token = token;
                 data.avatar = user.avatar != null ? user.avatar : 'https://pub-static.fotor.com/assets/projects/pages/d5bdd0513a0740a8a38752dbc32586d0/fotor-03d1a91a0cec4542927f53c87e0599f6.jpg'
 
