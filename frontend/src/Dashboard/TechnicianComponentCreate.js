@@ -40,7 +40,12 @@ function TechnicianComponentAdd(props) {
     //     loadLecturer();
     // }, [])
 
-    const notify = () => toast.success("Created successfully!");
+    const notify = () => {
+        toast.success("Created successfully!");
+        setTimeout(()=>{
+            (window.location.reload(false));
+        }, 4000)
+    }
 
     const create = async () => {
         console.log('test')
@@ -59,10 +64,10 @@ function TechnicianComponentAdd(props) {
 
   return (
     <div className='compo-item'>
-        <button className='full-width-button' onClick={handleShow}>
+        <button className='full-width-button add-component-btn' onClick={handleShow}>
             <FaPlus size={70} />
         </button>
-        <Modal className='form-modal' show={show} onHide={handleClose}>
+        <Modal className='form-modal' id="create-compo-form" show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title className='edit-header' >
                 <div className='bold-words-header'>NEW COMPONENT</div>               

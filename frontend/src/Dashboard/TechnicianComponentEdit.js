@@ -24,9 +24,19 @@ const TechnicianComponentEdit = React.forwardRef((props, ref) => {
     const handleClose2 = () => setShow2(false);
     const handleShow2 = () => setShow2(true);
     
-    const notify = () => toast.success("Updated successfully!");
+    const notify = () => {
+        toast.success("Updated successfully!");
+        setTimeout(()=>{
+            (window.location.reload(false));
+        }, 4000)
+    }
 
-    const notify1 = () => toast.success("Deleted successfully!");
+    const notify1 = () => {
+        toast.success("Deleted successfully!");
+        setTimeout(()=>{
+            (window.location.reload(false));
+        }, 4000)
+    }
 
     const reload = () =>{
         load();

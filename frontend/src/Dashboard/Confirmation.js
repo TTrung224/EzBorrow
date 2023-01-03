@@ -109,7 +109,7 @@ function Confirmation(props) {
                         <p><span className='bold-words' >Lecturer :&emsp;</span><select id="lecturer" 
                         onChange={(e) => setChosenLecturer(e.target.value)} required > 
                         <option selected="true" disabled="disabled">-choose lecturer-</option>
-                        {lname.map((item) => {return (<option>{item.first_name}</option>)})}</select></p>
+                        {lname.map((item) => {return (<option>{item.first_name + " " + item.last_name}</option>)})}</select></p>
                         
                            
                         <p><span className='bold-words' >Lecturer email :&emsp;</span>{lname.map((item) => {

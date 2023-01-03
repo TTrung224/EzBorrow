@@ -11,6 +11,7 @@ const format = 'DD MMM, yyyy';
 
 function Studentist() {
     const [data, setData] = useState([])
+    const [btnPress, setBtnPress] = useState(" ")
 
     useEffect(() => {
         const searchDiv = document.querySelector('.search .search-bar');
@@ -22,15 +23,19 @@ function Studentist() {
             // console.log(data);
             setData(data);
         };
-        load();
-    },[]);
+        
+        setTimeout(()=>{
+            load();
+        }, 500)
+    
+    },[btnPress]);
 
     function DisplayBtn(item){
         // waiting pending approved cancel
         if(!(item.technician_status === "approved" || item.technician_status === "canceled" || item.student_status === "canceled")){
             return(
                 <div className="card-btns">
-                  <button onClick={() => requestBtnHandler("cancel", item._id)} className="cancel-btn">Cancel</button>
+                  <button onClick={() => {requestBtnHandler("cancel", item._id); setBtnPress("cancel"+item._id)}} className="cancel-btn">Cancel</button>
                 </div>
             )}   
     }

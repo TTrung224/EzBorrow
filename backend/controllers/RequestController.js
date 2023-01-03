@@ -18,7 +18,6 @@ let checkFine = (userEmail) =>  {
 }
 
 class RequestController {
-
     // [GET] /technician-search?email=
     // search by borrower email or supervisor email
     async technicianSearch(req, res, next){
@@ -200,7 +199,7 @@ class RequestController {
             }; 
 
             // Send email to lecturer/technician
-            if(permission){
+            if(permission && borrower_email != lecturer_email){
                 EmailService.emailForLecturerApprove(request);
             } else {
                 EmailService.emailForTechnicianApprove(request);

@@ -5,7 +5,6 @@ const juice = require("juice");
 const AccountController = require("../controllers/AccountController")
 const { HOSTING_URL_BASE } = process.env 
 
-const technician_emails = AccountController.getAllTechnicians();
 const website_link = HOSTING_URL_BASE;
 
 const transporter = nodemailer.createTransport({
@@ -65,15 +64,17 @@ class EmailService {
     }
     
     async emailForTechnicianApprove(request){
+        const technician_emails = await AccountController.getAllTechnicians();
+        console.log(technician_emails);
         try{
-            technician_emails.array.forEach(async email => {
+            technician_emails.forEach(async technician => {
                 const vars = {
                     "link": HOSTING_URL_BASE+"request",
                     "website_link": website_link,
                 }
                 const html = await this.readTemplate("technicianApprove", vars)
     
-                mailOptions['to'] = email;
+                mailOptions['to'] = technician.email;
                 mailOptions['subject'] = "[EzBorrow] New equipment borrowing request";
                 mailOptions['html'] = html;
                 this.sendMail();

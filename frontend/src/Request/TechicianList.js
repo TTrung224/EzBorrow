@@ -11,8 +11,8 @@ const format = 'DD MMM, yyyy';
 
 function TechnicianList() {
     const [data, setData] = useState([])
-    const [type, setType] = useState("current") 
     const [btnPress, setBtnPress] = useState(" ")
+    const [type, setType] = useState("current") 
     // type: "canceled" "current" "returned"
 
 
@@ -48,7 +48,7 @@ function TechnicianList() {
             const response = await axiosSetting.get('request/');
             var rawData = await response.data;
             console.log("firstload:")
-            console.log(rawData)
+            // console.log(rawData)
             dataCategorise(rawData)
         };
         load();
@@ -73,7 +73,7 @@ function TechnicianList() {
             }, 800);
         }
         searchInput.addEventListener("keyup", handleInputChange);
-        console.log(btnPress)
+        // console.log(btnPress)
 
         return () => {
             searchInput.removeEventListener('keyup', handleInputChange);
