@@ -59,7 +59,7 @@
 }
 .car-item-list{
     background-color: white;
-    min-width: 50%;
+    width: 50%;
     border-radius: 8px;
     padding: 0px 10px;
 }
@@ -154,9 +154,13 @@
     .request-card{
         max-width: 100%;
         min-width: 320px;
+        margin: 0 10px;
     }
     .card-item-info{
         flex-direction: column;
+    }
+    .car-item-list{
+        width: 100%;
     }
     .current-requests{
         margin-left: 0;
