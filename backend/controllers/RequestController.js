@@ -245,7 +245,7 @@ class RequestController {
                     } else if(req.user.user_type == "technician"){
                         updateRequest["technician_status"] = "canceled";
                         updateRequest["student_status"] = "canceled";
-                        EmailService.emailForStudentCancelStatus(request, `by technician, please contact with technician staff [${EmailService.technician_email}] for further information or review your course's/school's policy of equipment borrowing`);
+                        EmailService.emailForStudentCancelStatus(request, `by technician, please contact with technician staff [${req.user.email}] for further information or review your course's/school's policy of equipment borrowing`);
 
                     } else if(req.user.user_type == "student"){
                         updateRequest["student_status"] = "canceled";

@@ -235,6 +235,17 @@ class AccountController {
         }
     }
 
+    async getAllTechnicians() {
+        let data = {};
+        try {
+            let result = await User.find({ type: "technician" }, 'email');
+            return result;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    }
+
 
     // Future development
     async setFine(req, res){
