@@ -53,7 +53,7 @@ function TechnicianComponents() {
             }, 200);
         }
         searchInput.addEventListener("keyup", handleInputChange)
-        // loadUser();
+        loadUser();
         // loadLecturer();
         return () => {
             searchInput.removeEventListener('keyup', handleInputChange);

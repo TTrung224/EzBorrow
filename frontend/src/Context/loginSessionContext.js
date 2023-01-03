@@ -1,5 +1,5 @@
 //do not mind this file
-import {createContext, useEffect, useState} from 'react'
+import {createContext, useEffect, useState, useReducer} from 'react'
 // import axios from 'axios'
 // import {backendUrl} from './serverURLContext' 
 import {axiosSetting} from './serverURLContext'
@@ -13,6 +13,7 @@ const AuthContextProvider = ({children}) => {
     function refreshPage() {
         window.location.reload(false);
     }
+    const [ignored, forceUpdate] = useReducer(x=>x+1, 0)
     // auth state
     const [authState, setAuth] = useState({
         isAuthenticated: false,
@@ -37,9 +38,10 @@ const AuthContextProvider = ({children}) => {
                 setAuth({
                     isAuthenticated: false,
                     user: null
-                }, () => {refreshPage();});
+                });
             
             }
+        forceUpdate();
         } catch (error) {
             setAuth({
                 isAuthenticated: false,
@@ -125,7 +127,7 @@ const AuthContextProvider = ({children}) => {
         }
     }
 
-    const authContextData = { LoginContext, authState, Logout, lecturer, loadUser, loadLecturer };
+    const authContextData = { LoginContext, authState, Logout, lecturer, loadUser, loadLecturer, ignored };
     
     return (
         <AuthContext.Provider value={authContextData}>
