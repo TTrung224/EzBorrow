@@ -51,7 +51,11 @@ function TechnicianList() {
             // console.log(rawData)
             dataCategorise(rawData)
         };
-        load();
+
+        setTimeout(()=>{
+            load();
+        }, 500)
+        
 
         const searchInput = document.getElementById("search-input");
         searchInput.value = "";
