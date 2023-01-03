@@ -44,7 +44,7 @@ function TechnicianComponentEdit(props) {
     useEffect(() => {
 
         load();
-    }, [])
+    }, [props.id])
 
     const edit = async () => {
         await axiosSetting.put('/component/' + id, {
