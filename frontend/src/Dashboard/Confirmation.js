@@ -18,13 +18,15 @@ function Confirmation(props) {
     const cartItems = props.cartItems;
     const sname = user.first_name + ' ' + user.last_name;
     const email = user.email;
+    var chosenLecturerEmail = '';
     const minPickupDate = new Date(new Date().setDate(new Date().getDate() + 5 /* ensure 3 working day */)).toISOString().split("T")[0];
     // const [newItem, setItem] = useState('')
-    const [chosenLecturerEmail, setChosenLecturerEmail] = useState('')
+    // const [chosenLecturerEmail, setChosenLecturerEmail] = useState('')
     const [chosenLecturer, setChosenLecturer] = useState('')
     const [cc, setCC] = useState('')
     const [pickupdate,setPickupdate] = useState()
     const [returndate, setReturndate] = useState()
+    const [note, setNote] = useState()
     const lname = lecturer.length > 0 ? lecturer : ['error'];
 
     useEffect(()=>{
@@ -36,7 +38,7 @@ function Confirmation(props) {
 
     const notify = () => toast.success("Sent successfully!");
 
-    console.log("cart:", cartItems)
+    // console.log("cart:", cartItems)
 
     const calMinReturn = (pickupStr) => {
         var pickupDate = new Date(pickupStr);
@@ -46,7 +48,6 @@ function Confirmation(props) {
 
     const request = async (e) => {
         e.preventDefault();
-        console.log("lname jeheskfsjkdfskfjd", lname)
         const transformedList = [];
         for(let  i = 0; i < cartItems.length; i++) {
             const item = {
@@ -54,19 +55,17 @@ function Confirmation(props) {
                 name: cartItems[i].name,
                 amount: cartItems[i].quantity,
             }
-            console.log("item:", item)
             transformedList.push(item)
         }
+        chosenLecturerEmail = (document.querySelector(".lecturer-email").innerHTML);
 
-        setChosenLecturerEmail(document.querySelector(".lecturer-email").innerHTML);
-
-        console.log("chosenLecturerEmail: " + chosenLecturerEmail);
         await axiosSetting.post('/request/', {
             pickup_date: pickupdate,
             expected_return_date: returndate,
             component_list: transformedList,
             lecturer_email: chosenLecturerEmail,
             course: cc,
+            note: note,
         }, {withCredentials: true}).catch((error) => {
             console.log(error.response)
         })
@@ -129,7 +128,7 @@ function Confirmation(props) {
                         <p><span className='bold-words' >Select pickup date&emsp;</span><input type="date" onChange={e=>setPickupdate(e.target.value + "T00:00:00+07:00")} min={minPickupDate} required ></input></p>
                         <p><span className='bold-words' >Select return date&emsp;</span><input type="date" onChange={e=>setReturndate(e.target.value + "T00:00:00+07:00")} min={(!pickupdate)? calMinReturn(minPickupDate) : calMinReturn(pickupdate)} required ></input></p>
                         <p><span className='bold-words' >Note :&emsp;</span></p>
-                        <textarea rows="4" onChange={e=>setCC(e.target.value)} className='input-box'></textarea>
+                        <textarea rows="4" onChange={e=>setNote(e.target.value)} className='input-box'></textarea>
                     </div>     
                 </Modal.Body>
                 <Modal.Footer>

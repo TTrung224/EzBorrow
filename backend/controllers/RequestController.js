@@ -126,7 +126,7 @@ class RequestController {
         try {
             // Get user input
             const { component_list, expected_return_date, 
-                pickup_date, lecturer_email, course } = req.body;
+                pickup_date, lecturer_email, course, note} = req.body;
 
             // Validate user input
             if (!(component_list && expected_return_date && pickup_date && lecturer_email && course)) {
@@ -182,6 +182,7 @@ class RequestController {
                 student_status,
                 technician_status,
                 course,
+                note,
             });
 
             // Update component borrowed number
