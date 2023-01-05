@@ -61,12 +61,12 @@ function Confirmation(props) {
         chosenLecturerEmail = (document.querySelector(".lecturer-email").innerHTML);
 
         await axiosSetting.post('/request/', {
-            pickup_date: pickupdate,
-            expected_return_date: returndate,
-            component_list: transformedList,
-            lecturer_email: chosenLecturerEmail,
-            course: cc,
-            note: note,
+                pickup_date: pickupdate,
+                expected_return_date: returndate,
+                component_list: transformedList,
+                lecturer_email: chosenLecturerEmail,
+                course: cc,
+                note: note,
         }, {withCredentials: true}).catch((error) => {
             console.log(error.response)
         });
@@ -115,7 +115,7 @@ function Confirmation(props) {
                         
                            
                         <p><span className='bold-words' >Lecturer email :&emsp;</span>{lname.map((item) => {
-                            if(item.first_name === chosenLecturer) {
+                            if((item.first_name + " " + item.last_name) === chosenLecturer) {
                                 return(<span className='lecturer-email'>{item.email}</span>);
                             } else { return null;}
                         })}</p>
