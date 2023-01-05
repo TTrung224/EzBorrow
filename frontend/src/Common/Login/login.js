@@ -38,7 +38,7 @@ export const Login = (props) => {
                         <h2>Welcome!</h2>
                     </div>
                     <div className='login-error'>
-                        <p styles={{color: "red"}}>{error}</p>
+                        <p style={{color: "red"}}>{error}</p>
                     </div>
                     <form className='login-form' onSubmit={onSubmit}>
                         <label for="username">EMAIL</label>
