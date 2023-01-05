@@ -31,14 +31,14 @@ export const Login = (props) => {
     if (isAuthenticated) navigate("/dashboard")
     
     return(
-        <div className='login-body' styles={{color: "red"}}>
+        <div className='login-body'>
             <div className='MainContainer' >
                 <div className="auth-form-container">
                     <div className='login-header'>
                         <h2>Welcome!</h2>
                     </div>
                     <div className='login-error'>
-                        <p>{error}</p>
+                        <p styles={{color: "red"}}>{error}</p>
                     </div>
                     <form className='login-form' onSubmit={onSubmit}>
                         <label for="username">EMAIL</label>
