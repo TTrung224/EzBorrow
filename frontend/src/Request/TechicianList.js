@@ -11,7 +11,8 @@ const format = 'DD MMM, yyyy';
 
 function TechnicianList() {
     const [data, setData] = useState([])
-    const [type, setType] = useState("returned") 
+    const [btnPress, setBtnPress] = useState(" ")
+    const [type, setType] = useState("current") 
     // type: "canceled" "current" "returned"
 
 
@@ -47,10 +48,14 @@ function TechnicianList() {
             const response = await axiosSetting.get('request/');
             var rawData = await response.data;
             console.log("firstload:")
-            console.log(rawData)
+            // console.log(rawData)
             dataCategorise(rawData)
         };
-        load();
+
+        setTimeout(()=>{
+            load();
+        }, 500)
+        
 
         const searchInput = document.getElementById("search-input");
         searchInput.value = "";
@@ -72,33 +77,34 @@ function TechnicianList() {
             }, 800);
         }
         searchInput.addEventListener("keyup", handleInputChange);
+        // console.log(btnPress)
 
         return () => {
             searchInput.removeEventListener('keyup', handleInputChange);
         };
-    },[type]);
+    },[type, btnPress]);
 
 
     function DisplayBtn(item){
         if(item.student_status === "waiting" && item.lecturer_status === "approved"){
             return(
                 <div className="card-btns">
-                    <button onClick={() => requestBtnHandler("cancel", item._id)} className="cancel-btn">Cancel</button>
-                    <button onClick={() => requestBtnHandler("approve", item._id)} className="approve-btn">Approve</button>
+                    <button onClick={() => {requestBtnHandler("cancel", item._id); setBtnPress("cancel"+item._id)}} className="cancel-btn">Cancel</button>
+                    <button onClick={() => {requestBtnHandler("approve", item._id); setBtnPress("approve"+item._id)}} className="approve-btn">Approve</button>
                 </div>
             )
         }
         else if(item.student_status === "ready"){
             return(
                 <div className="card-btns">
-                    <button onClick={() => requestBtnHandler("pickUp", item._id)} className="pickup-btn">Pick up</button>
+                    <button onClick={() => {requestBtnHandler("pickUp", item._id); setBtnPress("pickUp"+item._id)}} className="pickup-btn">Pick up</button>
                 </div>
             )
         }
         else if(item.student_status === "picked up"){
             return(
                 <div className="card-btns">
-                    <button onClick={() => requestBtnHandler("return", item._id)} className="return-btn">Return</button>
+                    <button onClick={() => {requestBtnHandler("return", item._id); setBtnPress("return"+item._id)}} className="return-btn">Return</button>
                 </div>
             )
         }
@@ -119,6 +125,7 @@ function TechnicianList() {
 
     return(
         <div>
+            <p>{btnPress}</p>
             <div>
                 <button className={(type==="current")?"type-btn current-requests lec-active":"type-btn current-requests"} onClick={()=>setType("current")}>Current</button>
                 <button className={(type==="returned")?"type-btn returned-requests lec-active":"type-btn returned-requests"} onClick={()=>setType("returned")}>Returned</button>
@@ -160,8 +167,6 @@ function TechnicianList() {
             </div>)}
             </div> 
         </div>
-       
-      
-        
-)}
+    )
+}
 export default TechnicianList

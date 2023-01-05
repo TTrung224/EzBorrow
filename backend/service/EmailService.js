@@ -5,9 +5,7 @@ const juice = require("juice");
 const AccountController = require("../controllers/AccountController")
 const { HOSTING_URL_BASE } = process.env 
 
-const technician_email = "technician@rmit.edu.vn";
-// const technician_email = "s3891724@rmit.edu.vn";
-const website_link = "abc.com";
+const website_link = HOSTING_URL_BASE;
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -23,8 +21,6 @@ var mailOptions = {
 
 
 class EmailService {
-    technician_email = technician_email;
-
     async readTemplate(templateName, templateVars){
 
         const templatePath = `service/emailTemplates/${templateName}.html`;
@@ -68,18 +64,21 @@ class EmailService {
     }
     
     async emailForTechnicianApprove(request){
+        const technician_emails = await AccountController.getAllTechnicians();
+        console.log(technician_emails);
         try{
-            const vars = {
-                "link": HOSTING_URL_BASE+"request",
-                "website_link": website_link,
-            }
-            const html = await this.readTemplate("technicianApprove", vars)
-
-            mailOptions['to'] = technician_email;
-            mailOptions['subject'] = "[EzBorrow] New equipment borrowing request";
-            mailOptions['html'] = html;
-            this.sendMail();
-
+            technician_emails.forEach(async technician => {
+                const vars = {
+                    "link": HOSTING_URL_BASE+"request",
+                    "website_link": website_link,
+                }
+                const html = await this.readTemplate("technicianApprove", vars)
+    
+                mailOptions['to'] = technician.email;
+                mailOptions['subject'] = "[EzBorrow] New equipment borrowing request";
+                mailOptions['html'] = html;
+                this.sendMail();
+            });
         } catch(err){
             console.log(err);
         }
@@ -99,7 +98,7 @@ class EmailService {
                 "name" : name,
                 "createdDate": createdDateString,
                 "pickupDate": pickupDateString,
-                "link": "https://www.w3schools.com/nodejs/nodejs_email.asp",
+                "link": HOSTING_URL_BASE+"request",
                 "website_link": website_link,
             }
             const html = await this.readTemplate("studentApprovedStatus", vars)
@@ -127,7 +126,7 @@ class EmailService {
                 "name" : name,
                 "createdDate": createdDateString,
                 "reason": reason,
-                "link": "https://www.w3schools.com/nodejs/nodejs_email.asp",
+                "link": HOSTING_URL_BASE+"request",
                 "website_link": website_link,
             }
             const html = await this.readTemplate("studentCancelStatus", vars)
@@ -160,7 +159,7 @@ class EmailService {
                 "name" : name,
                 "createdDate": createdDateString,
                 "expectedReturnDate": expectedReturnDateString,
-                "link": "https://www.w3schools.com/nodejs/nodejs_email.asp",
+                "link": HOSTING_URL_BASE+"request",
                 "website_link": website_link,
             }
             const html = await this.readTemplate("studentReturnRemind", vars)
@@ -192,7 +191,7 @@ class EmailService {
                 "name" : name,
                 "createdDate": createdDateString,
                 "expectedReturnDate": expectedReturnDateString,
-                "link": "https://www.w3schools.com/nodejs/nodejs_email.asp",
+                "link": HOSTING_URL_BASE+"request",
                 "website_link": website_link,
             }
             const html = await this.readTemplate("studentFineAnnounce", vars)

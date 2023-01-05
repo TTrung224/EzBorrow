@@ -7,7 +7,7 @@ import {axiosSetting} from '../Context/serverURLContext'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function TechnicianComponentEdit(props) {
+const TechnicianComponentEdit = React.forwardRef((props, ref) => {
     const [show, setShow] = useState(false);
     const id = props.id;
     const [name, setName] = useState('');
@@ -24,14 +24,34 @@ function TechnicianComponentEdit(props) {
     const handleClose2 = () => setShow2(false);
     const handleShow2 = () => setShow2(true);
     
-    const notify = () => toast.success("Updated successfully!");
+    const notify = () => {
+        toast.success("Updated successfully!");
+        setTimeout(()=>{
+            (window.location.reload(false));
+        }, 4000)
+    }
 
-    const notify1 = () => toast.success("Deleted successfully!");
+    const notify1 = () => {
+        toast.success("Deleted successfully!");
+        setTimeout(()=>{
+            (window.location.reload(false));
+        }, 4000)
+    }
+
+    const reload = () =>{
+        load();
+        console.log("reloaded:", data);
+        console.log(data.name)
+        console.log(data.permission)
+    }
+    React.useImperativeHandle(ref, () => ({
+       reload: reload
+    }));
 
     const load = async () => {
         const response = await axiosSetting.get('/component/' + id);
         const data = await response.data;
-        console.log(data);
+        // console.log(data);
         console.log("load")
         setData(data);
         setName(data.name);
@@ -44,7 +64,7 @@ function TechnicianComponentEdit(props) {
     useEffect(() => {
 
         load();
-    }, [])
+    }, [props.id])
 
     const edit = async () => {
         await axiosSetting.put('/component/' + id, {
@@ -93,12 +113,11 @@ function TechnicianComponentEdit(props) {
                     <p><span className='bold-words' >Quantity :&emsp;</span><input type="number" value={quantity} onChange={(e) => {setQuantity(e.target.value)}}></input></p>
                     <p><span className='bold-words' >Image :&emsp;</span><input type="text" value={img} onChange={(e) => {setImg(e.target.value)}}></input></p>
                     <span className='bold-words' >Permission :&emsp;</span>
-                        <select 
-                            onChange={(e) => {setPermission(e.target.value)}}>                                
-                            <option value={false}>No</option>
-                            <option value= {true}>Yes</option>
-                        </select>
-                       
+                    <select value={permission}
+                        onChange={(e) => {setPermission(e.target.value)}}>                                
+                        <option value={false}>No</option>
+                        <option value= {true}>Yes</option>
+                    </select>
                 </div>
             </Modal.Body>
             <Modal.Footer>
@@ -110,34 +129,33 @@ function TechnicianComponentEdit(props) {
                 </div>
                 <div>
                     <Button onClick={()=>{handleShow2();handleClose()}} variant='danger'>Delete</Button>
-                    
                 </div>
             </Modal.Footer>
         </Modal>
 
         
         <Modal show={show2} onHide={handleClose2} id='modal-popup'>
-        <Modal.Header closeButton>
-          <Modal.Title>Are you sure?</Modal.Title>
-        </Modal.Header>
-        <Modal.Body id='modal-popup-body'>
-        <p><span className='wordss'>Deleting will permanently remove this file from the system.</span><span className='bold-words'>This cannot be undone</span></p>
-        </Modal.Body>
-        <Modal.Footer>
-            <Button variant="danger" onClick={handleClose2}>
-                Cancel
-            </Button>
-            <div>
-            <Button variant="primary" onClick={() => {deleteComponent();notify1();}}>
-                Confirm
-            </Button>
-            <ToastContainer/>
-            </div>
-        </Modal.Footer>
+            <Modal.Header closeButton>
+                <Modal.Title>Are you sure?</Modal.Title>
+            </Modal.Header>
+            <Modal.Body id='modal-popup-body'>
+                <p><span className='wordss'>Deleting will permanently remove this file from the system.</span><span className='bold-words'>This cannot be undone</span></p>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="danger" onClick={handleClose2}>
+                    Cancel
+                </Button>
+                <div>
+                <Button variant="primary" onClick={() => {deleteComponent();notify1();}}>
+                    Confirm
+                </Button>
+                <ToastContainer/>
+                </div>
+            </Modal.Footer>
         </Modal>
         </div>
    
   )
-}
+})
 
 export default TechnicianComponentEdit

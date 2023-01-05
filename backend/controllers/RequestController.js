@@ -18,7 +18,6 @@ let checkFine = (userEmail) =>  {
 }
 
 class RequestController {
-
     // [GET] /technician-search?email=
     // search by borrower email or supervisor email
     async technicianSearch(req, res, next){
@@ -126,7 +125,7 @@ class RequestController {
         try {
             // Get user input
             const { component_list, expected_return_date, 
-                pickup_date, lecturer_email, course } = req.body;
+                pickup_date, lecturer_email, course, note} = req.body;
 
             // Validate user input
             if (!(component_list && expected_return_date && pickup_date && lecturer_email && course)) {
@@ -182,6 +181,7 @@ class RequestController {
                 student_status,
                 technician_status,
                 course,
+                note,
             });
 
             // Update component borrowed number
@@ -199,7 +199,7 @@ class RequestController {
             }; 
 
             // Send email to lecturer/technician
-            if(permission){
+            if(permission && borrower_email != lecturer_email){
                 EmailService.emailForLecturerApprove(request);
             } else {
                 EmailService.emailForTechnicianApprove(request);
@@ -244,7 +244,7 @@ class RequestController {
                     } else if(req.user.user_type == "technician"){
                         updateRequest["technician_status"] = "canceled";
                         updateRequest["student_status"] = "canceled";
-                        EmailService.emailForStudentCancelStatus(request, `by technician, please contact with technician staff [${EmailService.technician_email}] for further information or review your course's/school's policy of equipment borrowing`);
+                        EmailService.emailForStudentCancelStatus(request, `by technician, please contact with technician staff [${req.user.email}] for further information or review your course's/school's policy of equipment borrowing`);
 
                     } else if(req.user.user_type == "student"){
                         updateRequest["student_status"] = "canceled";

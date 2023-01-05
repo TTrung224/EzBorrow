@@ -1,7 +1,7 @@
 import React from 'react'
 import { AuthContext } from '../Context/loginSessionContext';
 import './TechnicianComponents.css'
-import { useState, useEffect, useContext} from 'react'
+import { useState, useEffect, useContext, useRef} from 'react'
 // import {FaEdit} from 'react-icons/fa';
 import ReactPaginate from 'react-paginate';
 // import {FaPlus} from 'react-icons/fa';
@@ -17,6 +17,7 @@ function TechnicianComponents() {
     const [data, setData] = useState([])
     // const handleClose = () => setShow(false);
     // const handleShow = () => setShow(true);
+    const childRef = useRef();
 
     const {loadUser, loadLecturer} = useContext(AuthContext);
 
@@ -80,7 +81,7 @@ function TechnicianComponents() {
                             item.description}</p>
                         <div className='product-des'>
                             <h5>Available: {item.available_amount}</h5>
-                            <TechnicianComponentEdit id = {item._id}/>               
+                            <TechnicianComponentEdit id = {item._id} ref={childRef}/>               
                         </div>
                     </div>
                 </div>
@@ -141,8 +142,8 @@ function TechnicianComponents() {
                     }
                     hrefAllControls
                     onClick={(clickEvent) => {
-                    console.log('onClick', clickEvent);
-
+                        console.log('onClick', clickEvent);
+                        childRef.current.reload();   
                     }}
                 />
             </nav>

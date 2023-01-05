@@ -11,6 +11,7 @@ const format = 'DD MMM, yyyy';
 function TeacherList() {
     
     const [data, setData] = useState([])
+    const [btnPress, setBtnPress] = useState(" ")
     const [type, setType] = useState("lecturer") 
     // type: "other" "lecturer"
 
@@ -37,8 +38,11 @@ function TeacherList() {
             // console.log(data);
             setData(data);
         };
-        load();
 
+        setTimeout(()=>{
+            load();
+        }, 500)
+        
         if(type === "other"){
             const searchInput = document.getElementById("search-input");
             searchInput.value = "";
@@ -66,15 +70,15 @@ function TeacherList() {
             };
         }
 
-    },[type]);
+    },[type, btnPress]);
 
 
     function DisplayOtherBtn(item){
         if(item.lecturer_status === "pending" && item.student_status !== "canceled"){
             return(
                 <div className="card-btns">
-                    <button onClick={() => requestBtnHandler("cancel", item._id)} className="cancel-btn">Cancel</button>
-                    <button onClick={() => requestBtnHandler("approve", item._id)} className="approve-btn">Approve</button>
+                    <button onClick={() => {requestBtnHandler("cancel", item._id); setBtnPress("cancel"+item._id)}} className="cancel-btn">Cancel</button>
+                    <button onClick={() => {requestBtnHandler("approve", item._id); setBtnPress("approve"+item._id)}} className="approve-btn">Approve</button>
                 </div>
             )
         }
@@ -84,7 +88,7 @@ function TeacherList() {
         if(!(item.technician_status === "approved" || item.technician_status === "canceled" || item.student_status === "canceled")){
             return(
                 <div className="card-btns">
-                  <button onClick={() => requestBtnHandler("cancel", item._id)} className="cancel-btn">Cancel</button>
+                  <button onClick={() => {requestBtnHandler("cancel", item._id); setBtnPress("cancel"+item._id)}} className="cancel-btn">Cancel</button>
                 </div>
             )
         }   

@@ -18,6 +18,6 @@ export function requestBtnHandler(type, id) {
         if(res.status === 500) {
             console.log("Server error");
         }
-        window.location.reload(false);
+        // window.location.reload(false);
     })
 }
