@@ -52,8 +52,8 @@ class EmailService {
         try{
             const name = await AccountController.getUserNameByEmail(request.lecturer_email);
             var tempVars = vars;
-            tempVars.name = name;
-            tempVars.link = HOSTING_URL_BASE+"request";
+            tempVars["name"] = name;
+            tempVars["link"] = HOSTING_URL_BASE+"request";
             // const vars = {
             //     "name": name,
             //     "link": HOSTING_URL_BASE+"request",
@@ -77,7 +77,7 @@ class EmailService {
         try{
             technician_emails.forEach(async technician => {
                 var tempVars = vars;
-                tempVars.link = HOSTING_URL_BASE+"request";
+                tempVars["link"] = HOSTING_URL_BASE+"request";
                 // const vars = {
                 //     "link": HOSTING_URL_BASE+"request",
                 //     "website_link": website_link,
@@ -104,10 +104,10 @@ class EmailService {
 
             const name = await AccountController.getUserNameByEmail(request.borrower_email);
             var tempVars = vars;
-            tempVars.link = HOSTING_URL_BASE+"request";
-            tempVars.name = name;
-            tempVars.createdDate = createdDateString;
-            tempVars.pickupDate = pickupDateString;
+            tempVars["link"] = HOSTING_URL_BASE+"request";
+            tempVars["name"] = name;
+            tempVars["createdDate"] = createdDateString;
+            tempVars["pickupDate"] = pickupDateString;
 
             // const vars = {
             //     "name" : name,
@@ -137,10 +137,10 @@ class EmailService {
 
             const name = await AccountController.getUserNameByEmail(request.borrower_email);
             var tempVars = vars;
-            tempVars.link = HOSTING_URL_BASE+"request";
-            tempVars.name = name;
-            tempVars.createdDate = createdDateString;
-            tempVars.reason = reason;
+            tempVars["link"] = HOSTING_URL_BASE+"request";
+            tempVars["name"] = name;
+            tempVars["createdDate"] = createdDateString;
+            tempVars["reason"] = reason;
             // const vars = {
             //     "name" : name,
             //     "createdDate": createdDateString,
@@ -174,10 +174,10 @@ class EmailService {
 
             const name = await AccountController.getUserNameByEmail(request.borrower_email);
             var tempVars = vars;
-            tempVars.link = HOSTING_URL_BASE+"request";
-            tempVars.name = name;
-            tempVars.createdDate = createdDateString;
-            tempVars.expectedReturnDate = expectedReturnDateString;
+            tempVars["link"] = HOSTING_URL_BASE+"request";
+            tempVars["name"] = name;
+            tempVars["createdDate"] = createdDateString;
+            tempVars["expectedReturnDate"] = expectedReturnDateString;
             // const vars = {
             //     "name" : name,
             //     "createdDate": createdDateString,
@@ -210,10 +210,10 @@ class EmailService {
 
             const name = await AccountController.getUserNameByEmail(request.borrower_email);
             var tempVars = vars;
-            tempVars.link = HOSTING_URL_BASE+"request";
-            tempVars.name = name;
-            tempVars.createdDate = createdDateString;
-            tempVars.expectedReturnDate = expectedReturnDateString;
+            tempVars["link"] = HOSTING_URL_BASE+"request";
+            tempVars["name"] = name;
+            tempVars["createdDate"] = createdDateString;
+            tempVars["expectedReturnDate"] = expectedReturnDateString;
             const vars = {
                 "name" : name,
                 "createdDate": createdDateString,
