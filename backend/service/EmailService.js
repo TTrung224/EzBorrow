@@ -20,10 +20,11 @@ var mailOptions = {
 };
 
 
+
 class EmailService {
     async readTemplate(templateName, templateVars){
 
-        const templatePath = `./emailTemplates/${templateName}.html`;
+        const templatePath = `${__dirname}/emailTemplates/${templateName}.html`;
         if (templateName && fs.existsSync(templatePath)) {
             const template = fs.readFileSync(templatePath, "utf-8");
             const html = ejs.render(template, templateVars);
@@ -33,14 +34,26 @@ class EmailService {
         return null;
     }
 
+    // async sendMail(){
+    //     transporter.sendMail(mailOptions, function(error, info){
+    //         if (error) {
+    //         console.log(error);
+    //         } else {
+    //         console.log('Email sent: ' + info.response);
+    //         }
+    //     });
+    // }
+
     async sendMail(){
-        transporter.sendMail(mailOptions, function(error, info){
+        await new Promise((resolve, reject) => {transporter.sendMail(mailOptions, function(error, info){
             if (error) {
-            console.log(error);
+                console.log(error);
+                reject(error);
             } else {
-            console.log('Email sent: ' + info.response);
+                console.log('Email sent: ' + info.response);
+                resolve(info);
             }
-        });
+        });})
     }
 
     async emailForLecturerApprove(request){
