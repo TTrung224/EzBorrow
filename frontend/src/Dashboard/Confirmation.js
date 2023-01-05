@@ -16,6 +16,7 @@ function Confirmation(props) {
     const {authState: {user}, lecturer, ignored} = useContext(AuthContext)
     
     const cartItems = props.cartItems;
+    const removeAll = props.removeAll;
     const sname = user.first_name + ' ' + user.last_name;
     const email = user.email;
     const minPickupDate = new Date(new Date().setDate(new Date().getDate() + 5 /* ensure 3 working day */)).toISOString().split("T")[0];
@@ -69,8 +70,9 @@ function Confirmation(props) {
             course: cc,
         }, {withCredentials: true}).catch((error) => {
             console.log(error.response)
-        })
-        
+        });
+        removeAll();
+        sessionStorage.setItem('cart-items', []);
         // return (props.onHide)
         setTimeout(() => {
             props.onHide();}, 3000);

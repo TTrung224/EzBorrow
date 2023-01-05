@@ -18,7 +18,7 @@ function UserComponents() {
     const [sum, setSum] = useState(((sessionStorage.getItem('cart-sum')) ? sessionStorage.getItem('cart-sum') : 0)*1);
     
 
-    const {loadUser, loadLecturer, ignored} = useContext(AuthContext);
+    const {loadUser} = useContext(AuthContext);
 
 
     //add quantity
@@ -229,7 +229,7 @@ function UserComponents() {
         <div className='dashboard'>
             <div className='compo-container'>
                 { <><PaginatedItems itemsPerPage={10} /></>}
-                <Cart cartItems={cartItems} onAdd={onAdd} onDesc={onDesc} onRemove={onRemove} sum={sum} removeAll={removeAll} />  
+                <Cart cartItems={cartItems} setCartItems={setCartItems} onAdd={onAdd} onDesc={onDesc} onRemove={onRemove} sum={sum} removeAll={removeAll} />  
             </div>
         </div>
     )

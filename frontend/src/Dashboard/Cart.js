@@ -3,17 +3,18 @@ import Button from 'react-bootstrap/Button';
 import CloseButton from 'react-bootstrap/CloseButton';
 import {FaPlus} from 'react-icons/fa';
 import {FaMinus} from 'react-icons/fa';
+import {AuthContext} from '../Context/loginSessionContext'
 // import {useState, useEffect} from 'react'
 
 import Confirmation from './Confirmation';
 import './Cart.css'
 
 function Cart(props) {
-  const {cartItems, onAdd, onDesc, onRemove, sum, removeAll} = props; 
+  const {cartItems, onAdd, onDesc, onRemove, sum, removeAll, setCartItems} = props; 
   // console.log(cartItems.length)
   const [modalShow, setModalShow] = React.useState(false);
   // console.log(modalShow)
-
+  const {loadUser} = React.useContext(AuthContext);
   var requestDisplay = false;
   function openCloseRequest(){
     if(!requestDisplay){
@@ -60,7 +61,7 @@ function Cart(props) {
             </div>
           ))}
         </div>
-        <Confirmation show={modalShow} onHide={() => setModalShow(false)} cartItems={cartItems} sum={sum}/>
+        <Confirmation show={modalShow} onHide={() => setModalShow(false)} cartItems={cartItems} removeAll={removeAll} sum={sum} />
         <h4> Summary </h4>
         <div className='Total'>
               <span>Total</span><span/><span id='total'>{sum}</span>
@@ -68,7 +69,7 @@ function Cart(props) {
         </div>
         <div className='buttons'>
             <Button id='clear-btn' variant='danger' onClick={removeAll}>Clear</Button>
-            <Button disabled={cartItems.length <= 0} id='request-btn' variant='success' onClick={() => setModalShow(true)}>Request</Button>
+            <Button disabled={cartItems.length <= 0} id='request-btn' variant='success' onClick={() => {loadUser();setModalShow(true);}}>Request</Button>
         </div>    
     </div>  
     </>

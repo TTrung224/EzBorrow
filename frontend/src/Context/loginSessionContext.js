@@ -127,7 +127,7 @@ const AuthContextProvider = ({children}) => {
         }
     }
 
-    const authContextData = { LoginContext, authState, Logout, lecturer, loadUser, loadLecturer, ignored };
+    const authContextData = { LoginContext, authState, Logout, lecturer, loadUser, loadLecturer, ignored, forceUpdate };
     
     return (
         <AuthContext.Provider value={authContextData}>
