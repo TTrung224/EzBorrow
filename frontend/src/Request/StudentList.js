@@ -26,7 +26,7 @@ function Studentist() {
         
         setTimeout(()=>{
             load();
-        }, 500)
+        }, 800)
     
     },[btnPress]);
 
