@@ -34,27 +34,27 @@ class EmailService {
         return null;
     }
 
-    async sendMail(){
-        transporter.sendMail(mailOptions, function(error, info){
-            if (error) {
-            console.log(error);
-            } else {
-            console.log('Email sent: ' + info.response);
-            }
-        });
-    }
-
     // async sendMail(){
-    //     await new Promise((resolve, reject) => {transporter.sendMail(mailOptions, function(error, info){
+    //     transporter.sendMail(mailOptions, function(error, info){
     //         if (error) {
-    //             console.log(error);
-    //             reject(error);
+    //         console.log(error);
     //         } else {
-    //             console.log('Email sent: ' + info.response);
-    //             resolve(info);
+    //         console.log('Email sent: ' + info.response);
     //         }
-    //     });})
+    //     });
     // }
+
+    async sendMail(){
+        await new Promise((resolve, reject) => {transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+                console.log(error);
+                reject(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+                resolve(info);
+            }
+        });})
+    }
 
     async emailForLecturerApprove(request){
         try{
