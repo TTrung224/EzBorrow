@@ -41,7 +41,7 @@ function TeacherList() {
 
         setTimeout(()=>{
             load();
-        }, 800)
+        }, 1200)
         
         if(type === "other"){
             const searchInput = document.getElementById("search-input");

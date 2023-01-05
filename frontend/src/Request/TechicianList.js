@@ -54,7 +54,7 @@ function TechnicianList() {
 
         setTimeout(()=>{
             load();
-        }, 800)
+        }, 1200)
         
 
         const searchInput = document.getElementById("search-input");
