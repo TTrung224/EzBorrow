@@ -69,7 +69,7 @@ class EmailService {
             mailOptions['to'] = request.lecturer_email;
             mailOptions['subject'] = "[EzBorrow] New equipment borrowing request";
             mailOptions['html'] = html;
-            this.sendMail();
+            await this.sendMail();
 
         } catch(err){
             console.log(err);
@@ -90,7 +90,7 @@ class EmailService {
                 mailOptions['to'] = technician.email;
                 mailOptions['subject'] = "[EzBorrow] New equipment borrowing request";
                 mailOptions['html'] = html;
-                this.sendMail();
+                await this.sendMail();
             });
         } catch(err){
             console.log(err);
@@ -119,7 +119,7 @@ class EmailService {
             mailOptions['to'] = request.borrower_email;
             mailOptions['subject'] = "[EzBorrow] Your equipment borrowing request has been approved";
             mailOptions['html'] = html;
-            this.sendMail();
+            await this.sendMail();
 
         } catch(err){
             console.log(err);
@@ -147,7 +147,7 @@ class EmailService {
             mailOptions['to'] = request.borrower_email;
             mailOptions['subject'] = "[EzBorrow] Your equipment borrowing request has been canceled";
             mailOptions['html'] = html;
-            this.sendMail();
+            await this.sendMail();
 
         } catch(err){
             console.log(err);
@@ -180,7 +180,7 @@ class EmailService {
             mailOptions['to'] = request.borrower_email;
             mailOptions['subject'] = "[EzBorrow] Equipment borrowing return reminder";
             mailOptions['html'] = html;
-            this.sendMail();
+            await this.sendMail();
 
         } catch(err){
             console.log(err);
@@ -212,7 +212,7 @@ class EmailService {
             mailOptions['to'] = request.borrower_email;
             mailOptions['subject'] = "[EzBorrow] Fine announcement due to late";
             mailOptions['html'] = html;
-            this.sendMail();
+            await this.sendMail();
 
         } catch(err){
             console.log(err);
