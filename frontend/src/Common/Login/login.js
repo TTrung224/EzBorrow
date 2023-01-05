@@ -31,7 +31,7 @@ export const Login = (props) => {
     if (isAuthenticated) navigate("/dashboard")
     
     return(
-        <div className='login-body'>
+        <div className='login-body' styles={{color: "red"}}>
             <div className='MainContainer' >
                 <div className="auth-form-container">
                     <div className='login-header'>
@@ -41,7 +41,7 @@ export const Login = (props) => {
                         <p>{error}</p>
                     </div>
                     <form className='login-form' onSubmit={onSubmit}>
-                        <label for="username">USERNAME</label>
+                        <label for="username">EMAIL</label>
                         <input type="email" placeholder="your email" id="username" name="username" onChange={(e)=>setFormData({...formData, email: e.target.value})}></input>
                         <label for="password">PASSWORD</label>
                         <input type="password" placeholder="********" id="password" name="password" onChange={(e)=>setFormData({...formData, password: e.target.value})}></input>
