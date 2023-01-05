@@ -86,7 +86,10 @@ class RequestController {
         try {
             let requests = [];
 
-            requests = await Request.find({lecturer_email: req.params.email});
+            requests = await Request.find({lecturer_email: req.params.email, borrower_email: {$ne : req.params.email}});
+            requests.forEach(()=>{
+
+            })
             res.status(201).json(requests);
         } catch (error) {
             console.log(err);
