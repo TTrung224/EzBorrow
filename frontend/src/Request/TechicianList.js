@@ -125,6 +125,7 @@ function TechnicianList() {
 
     return(
         <div>
+            <p>{btnPress}</p>
             <div>
                 <button className={(type==="current")?"type-btn current-requests lec-active":"type-btn current-requests"} onClick={()=>setType("current")}>Current</button>
                 <button className={(type==="returned")?"type-btn returned-requests lec-active":"type-btn returned-requests"} onClick={()=>setType("returned")}>Returned</button>

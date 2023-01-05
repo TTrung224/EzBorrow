@@ -20,10 +20,11 @@ var mailOptions = {
 };
 
 
+
 class EmailService {
     async readTemplate(templateName, templateVars){
 
-        const templatePath = `./emailTemplates/${templateName}.html`;
+        const templatePath = `${__dirname}/emailTemplates/${templateName}.html`;
         if (templateName && fs.existsSync(templatePath)) {
             const template = fs.readFileSync(templatePath, "utf-8");
             const html = ejs.render(template, templateVars);
@@ -33,14 +34,26 @@ class EmailService {
         return null;
     }
 
+    // async sendMail(){
+    //     transporter.sendMail(mailOptions, function(error, info){
+    //         if (error) {
+    //         console.log(error);
+    //         } else {
+    //         console.log('Email sent: ' + info.response);
+    //         }
+    //     });
+    // }
+
     async sendMail(){
-        transporter.sendMail(mailOptions, function(error, info){
+        await new Promise((resolve, reject) => {transporter.sendMail(mailOptions, function(error, info){
             if (error) {
-            console.log(error);
+                console.log(error);
+                reject(error);
             } else {
-            console.log('Email sent: ' + info.response);
+                console.log('Email sent: ' + info.response);
+                resolve(info);
             }
-        });
+        });})
     }
 
     async emailForLecturerApprove(request){
@@ -56,7 +69,7 @@ class EmailService {
             mailOptions['to'] = request.lecturer_email;
             mailOptions['subject'] = "[EzBorrow] New equipment borrowing request";
             mailOptions['html'] = html;
-            this.sendMail();
+            await this.sendMail();
 
         } catch(err){
             console.log(err);
@@ -77,7 +90,7 @@ class EmailService {
                 mailOptions['to'] = technician.email;
                 mailOptions['subject'] = "[EzBorrow] New equipment borrowing request";
                 mailOptions['html'] = html;
-                this.sendMail();
+                await this.sendMail();
             });
         } catch(err){
             console.log(err);
@@ -106,7 +119,7 @@ class EmailService {
             mailOptions['to'] = request.borrower_email;
             mailOptions['subject'] = "[EzBorrow] Your equipment borrowing request has been approved";
             mailOptions['html'] = html;
-            this.sendMail();
+            await this.sendMail();
 
         } catch(err){
             console.log(err);
@@ -134,7 +147,7 @@ class EmailService {
             mailOptions['to'] = request.borrower_email;
             mailOptions['subject'] = "[EzBorrow] Your equipment borrowing request has been canceled";
             mailOptions['html'] = html;
-            this.sendMail();
+            await this.sendMail();
 
         } catch(err){
             console.log(err);
@@ -167,7 +180,7 @@ class EmailService {
             mailOptions['to'] = request.borrower_email;
             mailOptions['subject'] = "[EzBorrow] Equipment borrowing return reminder";
             mailOptions['html'] = html;
-            this.sendMail();
+            await this.sendMail();
 
         } catch(err){
             console.log(err);
@@ -199,7 +212,7 @@ class EmailService {
             mailOptions['to'] = request.borrower_email;
             mailOptions['subject'] = "[EzBorrow] Fine announcement due to late";
             mailOptions['html'] = html;
-            this.sendMail();
+            await this.sendMail();
 
         } catch(err){
             console.log(err);
