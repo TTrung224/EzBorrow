@@ -19,11 +19,6 @@ var mailOptions = {
     from: 'ezborrow.rmit@gmail.com',
 };
 
-var vars = {
-    "website_link": website_link,
-    "app_logo": "https://res.cloudinary.com/dw725nuqc/image/upload/v1672923717/EzBorrow%20equipment/logo/icon_oabfgo.png"
-}
-
 
 class EmailService {
     async readTemplate(templateName, templateVars){
@@ -51,15 +46,12 @@ class EmailService {
     async emailForLecturerApprove(request){
         try{
             const name = await AccountController.getUserNameByEmail(request.lecturer_email);
-            var tempVars = vars;
-            tempVars["name"] = name;
-            tempVars["link"] = HOSTING_URL_BASE+"request";
-            // const vars = {
-            //     "name": name,
-            //     "link": HOSTING_URL_BASE+"request",
-            //     "website_link": website_link,
-            // }
-            const html = await this.readTemplate("lecturerApprove", tempVars)
+            const vars = {
+                "name": name,
+                "link": HOSTING_URL_BASE+"request",
+                "website_link": website_link,
+            }
+            const html = await this.readTemplate("lecturerApprove", vars)
 
             mailOptions['to'] = request.lecturer_email;
             mailOptions['subject'] = "[EzBorrow] New equipment borrowing request";
@@ -76,13 +68,11 @@ class EmailService {
         console.log(technician_emails);
         try{
             technician_emails.forEach(async technician => {
-                var tempVars = vars;
-                tempVars["link"] = HOSTING_URL_BASE+"request";
-                // const vars = {
-                //     "link": HOSTING_URL_BASE+"request",
-                //     "website_link": website_link,
-                // }
-                const html = await this.readTemplate("technicianApprove", tempVars)
+                const vars = {
+                    "link": HOSTING_URL_BASE+"request",
+                    "website_link": website_link,
+                }
+                const html = await this.readTemplate("technicianApprove", vars)
     
                 mailOptions['to'] = technician.email;
                 mailOptions['subject'] = "[EzBorrow] New equipment borrowing request";
@@ -103,20 +93,15 @@ class EmailService {
             const pickupDateString = request.pickup_date.toLocaleDateString("en-US", options);
 
             const name = await AccountController.getUserNameByEmail(request.borrower_email);
-            var tempVars = vars;
-            tempVars["link"] = HOSTING_URL_BASE+"request";
-            tempVars["name"] = name;
-            tempVars["createdDate"] = createdDateString;
-            tempVars["pickupDate"] = pickupDateString;
 
-            // const vars = {
-            //     "name" : name,
-            //     "createdDate": createdDateString,
-            //     "pickupDate": pickupDateString,
-            //     "link": HOSTING_URL_BASE+"request",
-            //     "website_link": website_link,
-            // }
-            const html = await this.readTemplate("studentApprovedStatus", tempVars)
+            const vars = {
+                "name" : name,
+                "createdDate": createdDateString,
+                "pickupDate": pickupDateString,
+                "link": HOSTING_URL_BASE+"request",
+                "website_link": website_link,
+            }
+            const html = await this.readTemplate("studentApprovedStatus", vars)
 
             mailOptions['to'] = request.borrower_email;
             mailOptions['subject'] = "[EzBorrow] Your equipment borrowing request has been approved";
@@ -136,19 +121,15 @@ class EmailService {
             const createdDateString = request.createdAt.toLocaleDateString("en-US", options);
 
             const name = await AccountController.getUserNameByEmail(request.borrower_email);
-            var tempVars = vars;
-            tempVars["link"] = HOSTING_URL_BASE+"request";
-            tempVars["name"] = name;
-            tempVars["createdDate"] = createdDateString;
-            tempVars["reason"] = reason;
-            // const vars = {
-            //     "name" : name,
-            //     "createdDate": createdDateString,
-            //     "reason": reason,
-            //     "link": HOSTING_URL_BASE+"request",
-            //     "website_link": website_link,
-            // }
-            const html = await this.readTemplate("studentCancelStatus", tempVars)
+
+            const vars = {
+                "name" : name,
+                "createdDate": createdDateString,
+                "reason": reason,
+                "link": HOSTING_URL_BASE+"request",
+                "website_link": website_link,
+            }
+            const html = await this.readTemplate("studentCancelStatus", vars)
 
             mailOptions['to'] = request.borrower_email;
             mailOptions['subject'] = "[EzBorrow] Your equipment borrowing request has been canceled";
@@ -173,19 +154,15 @@ class EmailService {
             const expectedReturnDateString = expectedReturnDate.toLocaleDateString("en-US", options);
 
             const name = await AccountController.getUserNameByEmail(request.borrower_email);
-            var tempVars = vars;
-            tempVars["link"] = HOSTING_URL_BASE+"request";
-            tempVars["name"] = name;
-            tempVars["createdDate"] = createdDateString;
-            tempVars["expectedReturnDate"] = expectedReturnDateString;
-            // const vars = {
-            //     "name" : name,
-            //     "createdDate": createdDateString,
-            //     "expectedReturnDate": expectedReturnDateString,
-            //     "link": HOSTING_URL_BASE+"request",
-            //     "website_link": website_link,
-            // }
-            const html = await this.readTemplate("studentReturnRemind", tempVars)
+
+            const vars = {
+                "name" : name,
+                "createdDate": createdDateString,
+                "expectedReturnDate": expectedReturnDateString,
+                "link": HOSTING_URL_BASE+"request",
+                "website_link": website_link,
+            }
+            const html = await this.readTemplate("studentReturnRemind", vars)
 
             mailOptions['to'] = request.borrower_email;
             mailOptions['subject'] = "[EzBorrow] Equipment borrowing return reminder";
@@ -209,11 +186,7 @@ class EmailService {
             const expectedReturnDateString = expectedReturnDate.toLocaleDateString("en-US", options);
 
             const name = await AccountController.getUserNameByEmail(request.borrower_email);
-            var tempVars = vars;
-            tempVars["link"] = HOSTING_URL_BASE+"request";
-            tempVars["name"] = name;
-            tempVars["createdDate"] = createdDateString;
-            tempVars["expectedReturnDate"] = expectedReturnDateString;
+
             const vars = {
                 "name" : name,
                 "createdDate": createdDateString,
@@ -221,7 +194,7 @@ class EmailService {
                 "link": HOSTING_URL_BASE+"request",
                 "website_link": website_link,
             }
-            const html = await this.readTemplate("studentFineAnnounce", tempVars)
+            const html = await this.readTemplate("studentFineAnnounce", vars)
 
             mailOptions['to'] = request.borrower_email;
             mailOptions['subject'] = "[EzBorrow] Fine announcement due to late";
