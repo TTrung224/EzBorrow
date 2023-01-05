@@ -21,7 +21,7 @@ async function dailyService(){
 async function returnRemindAndFine(dateNow){
     try{
         const requests = await RequestController.getPickedUp();
-        requests.map(function(request){
+        requests.map(async function(request){
             var dateExpectToReturn = request.expected_return_date;
             dateExpectToReturn.setUTCHours(0,0,0,0);
 
@@ -35,18 +35,18 @@ async function returnRemindAndFine(dateNow){
 
             if(dateNow.getTime() >= fineDate.getTime()){
                 console.log("meet fine condition");
-                AccountController.getFineStatusByEmail(request.borrower_email).then(fineStatus =>{
+                AccountController.getFineStatusByEmail(request.borrower_email).then(async fineStatus =>{
                     if(fineStatus == "NONE"){
                         console.log("start fine");
                         AccountController.fineSet("LATE_RETURN", "overdue of return date", request.borrower_email)
-                        EmailService.emailForStudentFineAnnounce(request);
+                        await EmailService.emailForStudentFineAnnounce(request);
                         console.log("fine")
                     } 
                 })
                 
             } else if(dateNow.getTime() >= remindDate.getTime()){
                 if(!request.reminded){
-                    EmailService.emailForStudentReturnRemind(request);
+                    await EmailService.emailForStudentReturnRemind(request);
                     RequestController.setReminded(request._id);
                     console.log("remind")
                 }

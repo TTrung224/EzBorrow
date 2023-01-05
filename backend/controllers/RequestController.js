@@ -203,9 +203,9 @@ class RequestController {
 
             // Send email to lecturer/technician
             if(permission && borrower_email != lecturer_email){
-                EmailService.emailForLecturerApprove(request);
+                await EmailService.emailForLecturerApprove(request);
             } else {
-                EmailService.emailForTechnicianApprove(request);
+                await EmailService.emailForTechnicianApprove(request);
             }
 
             // return new request
@@ -227,12 +227,12 @@ class RequestController {
                     if(req.user.user_type == "lecturer"){
                         updateRequest["lecturer_status"] = "approved";
                         updateRequest["technician_status"] = "pending";
-                        EmailService.emailForTechnicianApprove();
+                        await EmailService.emailForTechnicianApprove();
 
                     } else if(req.user.user_type == "technician"){
                         updateRequest["technician_status"] = "approved";
                         updateRequest["student_status"] = "ready";
-                        EmailService.emailForStudentApprovedStatus(request);
+                        await EmailService.emailForStudentApprovedStatus(request);
                     }
                     break;
                 };
@@ -242,12 +242,12 @@ class RequestController {
                         updateRequest["lecturer_status"] = "canceled";
                         updateRequest["technician_status"] = "canceled";
                         updateRequest["student_status"] = "canceled";
-                        EmailService.emailForStudentCancelStatus(request, "by your lecturer, please contact with your lecturer for further information or review your course's/school's policy of equipment borrowing");
+                        await EmailService.emailForStudentCancelStatus(request, "by your lecturer, please contact with your lecturer for further information or review your course's/school's policy of equipment borrowing");
 
                     } else if(req.user.user_type == "technician"){
                         updateRequest["technician_status"] = "canceled";
                         updateRequest["student_status"] = "canceled";
-                        EmailService.emailForStudentCancelStatus(request, `by technician, please contact with technician staff [${req.user.email}] for further information or review your course's/school's policy of equipment borrowing`);
+                        await EmailService.emailForStudentCancelStatus(request, `by technician, please contact with technician staff [${req.user.email}] for further information or review your course's/school's policy of equipment borrowing`);
 
                     } else if(req.user.user_type == "student"){
                         updateRequest["student_status"] = "canceled";
@@ -341,7 +341,7 @@ class RequestController {
         
             // minus the borrowed number of component
             var request = await Request.findOne({_id: requestId});
-            EmailService.emailForStudentCancelStatus(request, "by the system because it was waiting for approval for more than 3 days, please make a new request");
+            await EmailService.emailForStudentCancelStatus(request, "by the system because it was waiting for approval for more than 3 days, please make a new request");
 
             for (const component of request.component_list){
                 const updateReq = {
