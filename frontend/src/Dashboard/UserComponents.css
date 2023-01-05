@@ -73,18 +73,6 @@
     color: white;
 }
 
-button:disabled{
-    cursor: default;
-    background: #cddbd68c ;
-    color: white;
-}
-
-/* button:disabled:hover{
-    cursor: default;
-    background: #cddbd68c ;
-    color: white;
-} */
-
 .pagination a{
     font-size: 18px;
     font-weight: 500;
@@ -110,6 +98,18 @@ button:disabled{
     color: #00875A;
     font-weight: 700;
     background-color: #e9ecef !important;
+}
+
+button:disabled{
+    cursor: default;
+    background: #cddbd68c ;
+    color: white;
+}
+
+button:disabled:hover{
+    cursor: default;
+    background: #cddbd68c ;
+    color: white;
 }
 
 @media screen and (max-width: 1000px){
